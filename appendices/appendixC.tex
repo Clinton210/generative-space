@@ -1,0 +1,167 @@
+\chapter{Technical Lemmas for the Diagonalizer}
+
+\section{Introduction}
+
+This appendix collects the technical results used in Chapter~8 to construct the meta diagonalizer.  
+These lemmas describe how computable projections depend on finite prefixes of generative identities and how tail modifications can be used to force disagreement with projections.  
+All results assume the notation and framework developed in Chapters~6 and~8.
+
+\section{Prefix Stabilization Lemma}
+
+The first lemma formalizes the idea that computable secondary projections stabilize once a sufficiently long prefix of the input is fixed.
+
+\begin{lemma}[Prefix Stabilization]
+\label{lem:prefix-stabilization}
+Let $\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}$ be a computable projection with dependency bound $B_{\Phi}$.  
+If two effective identities $G$ and $H$ satisfy
+\[
+(M_G,D_G,K_G){\upharpoonright}B_{\Phi}(\varepsilon)
+=
+(M_H,D_H,K_H){\upharpoonright}B_{\Phi}(\varepsilon),
+\]
+then
+\[
+|\Phi(G) - \Phi(H)| < \varepsilon.
+\]
+\end{lemma}
+
+\begin{proof}
+This is immediate from the definition of dependency bound in Chapter~6.  
+The proof uses the fact that a computable approximation of $\Phi$ reads only a finite number of input symbols before producing an $\varepsilon$ approximation.
+\end{proof}
+
+\section{Uniform Stabilization for Finite Families}
+
+Finite families of projections admit a single bound that controls prefix dependence for all members simultaneously.
+
+\begin{lemma}[Uniform Stabilization]
+\label{lem:uniform-stabilization}
+Let $\mathcal{F} = \{ \Phi_1, \ldots, \Phi_m \}$ be a finite family of computable secondary projections.  
+Let $B(\varepsilon)$ be the uniform dependency bound from Proposition~\ref{prop:uniform-bound}.  
+If $G$ and $H$ agree on the first $B(\varepsilon)$ positions, then
+\[
+|\Phi_i(G) - \Phi_i(H)| < \varepsilon
+\quad \text{for all } i=1,\ldots,m.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $B(\varepsilon) = \max_i B_{\Phi_i}(\varepsilon)$, agreement on the first $B(\varepsilon)$ positions implies agreement on the prefix required for each projection in the family.  
+Lemma~\ref{lem:prefix-stabilization} completes the argument.
+\end{proof}
+
+\section{Tail Sewing Lemma}
+
+The diagonalizer repeatedly modifies a generative identity on intervals that lie beyond the uniform dependency bound.  
+The next lemma shows that these tail modifications do not affect projection values within the stabilization margin.
+
+\begin{lemma}[Tail Sewing]
+\label{lem:tail-sewing}
+Let $G$ and $H$ be effective identities, and let $L \in \mathbb{N}$.  
+Define an identity $G'$ by
+\[
+G'(n) =
+\begin{cases}
+G(n), & \text{for } n \le L,\\
+H(n), & \text{for } n > L.
+\end{cases}
+\]
+If $L \ge B(\varepsilon)$, where $B$ is the uniform dependency bound for a finite family $\mathcal{F}$, then for each $\Phi_i \in \mathcal{F}$,
+\[
+|\Phi_i(G') - \Phi_i(G)| < \varepsilon.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $G'$ agrees with $G$ on the first $L \ge B(\varepsilon)$ positions, Lemma~\ref{lem:uniform-stabilization} applies and gives the desired inequality.
+\end{proof}
+
+This lemma formalizes the principle that projections cannot detect tail modifications until they cross the region on which projections depend.
+
+\section{Adjustment Lemma}
+
+To force disagreement with a projection, the diagonalizer inserts segments of another identity $A$ into the tail.  
+The next lemma guarantees that these insertions produce controlled changes in projection values.
+
+\begin{lemma}[Adjustment Lemma]
+\label{lem:adjustment}
+Let $A$ and $H$ be effective identities.  
+Suppose $I = [N_1, N_2]$ is an interval with $N_1 > B(\varepsilon)$, and define $G'$ by
+\[
+G'(n) =
+\begin{cases}
+H(n), & n \notin I,\\
+A(n), & n \in I.
+\end{cases}
+\]
+Then for each $\Phi_i \in \mathcal{F}$,
+\[
+|\Phi_i(G') - \Phi_i(H)| \le |\Phi_i(A) - \Phi_i(H)| + \varepsilon.
+\]
+\end{lemma}
+
+\begin{proof}
+By construction, $G'$ agrees with $H$ on the first $B(\varepsilon)$ coordinates.  
+Thus Lemma~\ref{lem:uniform-stabilization} gives
+\[
+|\Phi_i(G') - \Phi_i(H')| < \varepsilon,
+\]
+where $H'$ is obtained by replacing the tail of $H$ after $B(\varepsilon)$ with itself.  
+Since $A$ is used only beyond $N_1 > B(\varepsilon)$, the projections of $G'$ differ from those of $A$ only in the stabilization margin.  
+Combining these estimates gives the desired bound.
+\end{proof}
+
+\section{Controlled Divergence Lemma}
+
+To guarantee that a projection is forced to disagree with a reference identity, we select adjustment zones and an adjustment identity $A$ so that the difference is large enough.
+
+\begin{lemma}[Controlled Divergence]
+\label{lem:controlled-divergence}
+Let $\mathcal{F} = \{ \Phi_1, \ldots, \Phi_m \}$ be a finite family of projections.  
+For each $i$, choose $\delta_i > 0$.  
+There exists an effective identity $A$ such that
+\[
+|\Phi_i(A) - \Phi_i(H)| > \delta_i
+\quad \text{for all } i.
+\]
+\end{lemma}
+
+\begin{proof}
+Since the projections are computable and the generative space contains infinitely many effective identities, one may search effectively through $\mathcal{G}_{\mathrm{eff}}$ for an identity whose projection values exceed the desired thresholds.  
+The details follow a standard dovetailing argument, using the fact that deviations in any of the layers $(M,D,K)$ can alter projection values arbitrarily.  
+\end{proof}
+
+This lemma provides the adjustment identity used in Chapter~8.
+
+\section{Diagonalization Lemma}
+
+Combining the previous lemmas yields the diagonalizer used to prove structural incompleteness.
+
+\begin{lemma}[Diagonalization]
+\label{lem:diagonalization}
+Let $\mathcal{F}$ and $H$ be as in Chapter~8.  
+There exists an effective identity $G^{*}$ such that
+\[
+\Phi_i(G^{*}) \ne \Phi_i(H)
+\quad \text{for each } \Phi_i \in \mathcal{F}.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a sequence $(\varepsilon_k)$ with $\varepsilon_k \to 0$, and let $L_k = B(\varepsilon_k)$.  
+Choose adjustment zones $I_k$ with $I_k = [N_{k,1}, N_{k,2}]$ satisfying $N_{k,1} > L_k$.  
+For each $k$, choose an adjustment identity $A_k$ using Lemma~\ref{lem:controlled-divergence} so that
+\[
+|\Phi_i(A_k) - \Phi_i(H)| > 3\varepsilon_k.
+\]
+
+Define $G^{*}$ by sewing these adjustments into the tail of $H$ using Lemmas~\ref{lem:tail-sewing} and~\ref{lem:adjustment}.  
+The resulting identity satisfies the effectiveness and prefix agreement conditions required in Chapter~8, and its projection values differ from those of $H$ by at least $\varepsilon_k$ for sufficiently large $k$.  
+Thus $\Phi_i(G^{*}) \ne \Phi_i(H)$ for all $i$.
+\end{proof}
+
+\section{Summary}
+
+These lemmas formalize the computational properties and tail manipulation arguments that the diagonalizer construction relies on.  
+They ensure that computable projections stabilize on finite prefixes, that tail modifications are undetectable below a dependency threshold, and that controlled adjustments can force projection values to diverge.  
+Together they support the Structural Incompleteness Theorem proved in Chapter~9.

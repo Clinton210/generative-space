@@ -1,0 +1,150 @@
+\chapter{A Menagerie of Secondary Coordinates}
+
+\section{Introduction}
+
+Chapter~6 introduced secondary projections as computable or continuous functionals on the generative space.  
+These projections serve as coordinate systems that summarize internal features of a generative identity.  
+Although collapse is the only primary invariant, secondary projections reveal structural patterns that classical magnitude ignores.  
+This chapter develops several families of such projections, including digit frequencies, meta frequencies, variation statistics, and mixer complexity.  
+The examples illustrate how different projections offer distinct and sometimes incompatible perspectives on the same hybrid or ghost identity.
+
+These coordinate systems are not intrinsic to the generative space.  
+Each is a choice of measurement, and distinct choices highlight different properties of a generative identity.  
+The resulting diversity of views is called the Rashomon effect, which becomes central in the diagonalizer construction of Chapter~8.
+
+\section{Frequency-Based Coordinates}
+
+Digit and meta frequencies provide simple but informative secondary coordinates.  
+They record how often each layer contributes to the canonical output.
+
+\begin{definition}[Digit Frequency Vector]
+For an identity $G = (M,D,K)$ with digit density $\eta(G) > 0$, the \emph{digit frequency vector} is
+\[
+\mathbf{f}_D(G) =
+\left(
+\lim_{n \to \infty}
+\frac{1}{n}
+\bigl| \{ 0 \le k < n : M(k)=D \text{ and } D(k)=i \} \bigr|
+\right)_{i=0}^{b-1},
+\]
+whenever the limits exist.
+\end{definition}
+
+A similar definition applies to the meta layer.
+
+\begin{definition}[Meta Frequency Vector]
+The \emph{meta frequency vector} is
+\[
+\mathbf{f}_K(G) =
+\left(
+\lim_{n \to \infty}
+\frac{1}{n}
+\bigl| \{ 0 \le k < n : M(k)=K \text{ and } K(k)=a \} \bigr|
+\right)_{a \in \Sigma}.
+\]
+\end{definition}
+
+These coordinates are continuous and computable whenever the limits are computable, and they provide natural summaries of long-term behavior in the hybrid regime.
+
+\begin{remark}
+Ghost identities, introduced in Chapter~5, often have undefined digit frequency vectors because their digit density is zero.  
+Their meta frequency vectors are typically well defined and informative.
+\end{remark}
+
+\section{Entropy and Local Variation Coordinates}
+
+Entropy-type quantities summarize the complexity of the canonical output or of the mixer pattern.  
+They capture variation rather than frequency.
+
+\begin{definition}[Block Entropy Coordinate]
+Fix $m \ge 1$.  
+The \emph{$m$-block entropy} of $G$ is
+\[
+H_m(G)
+=
+-
+\sum_{w \in A^m}
+p_G(w) \log p_G(w),
+\]
+where $A$ is the set of possible symbols in the canonical output and $p_G(w)$ is the limiting frequency of the block $w$ of length $m$, when the limit exists.
+\end{definition}
+
+Block entropy is continuous on $\mathcal{X}$ when defined and computable on $\mathcal{G}_{\mathrm{eff}}$ when the limiting frequencies are computable.  
+These coordinates often distinguish identities that have identical digit or meta frequencies.
+
+A simpler coordinate summarizes local changes.
+
+\begin{definition}[Local Variation Statistic]
+For $G = (M,D,K)$ define
+\[
+V(G) 
+=
+\limsup_{n \to \infty}
+\frac{1}{n}
+\bigl| \{ 0 \le k < n : X(G)_k \ne X(G)_{k+1} \} \bigr|.
+\]
+\end{definition}
+
+This coordinate detects switching patterns and can distinguish many hybrid identities with identical digit densities.
+
+\section{Mixer Complexity}
+
+The mixer itself carries structural information that can be measured through secondary projections.  
+These measures quantify how the mixer interleaves the digit and meta layers.
+
+\begin{definition}[Mixer Complexity Coordinate]
+Let $\chi$ be an encoding of $M$ as a binary sequence.  
+The \emph{mixer complexity} is
+\[
+C_M(G)
+=
+\limsup_{n \to \infty}
+\frac{1}{n}
+K_U(\chi{\upharpoonright}n),
+\]
+where $K_U$ denotes prefix-free Kolmogorov complexity with respect to a fixed universal machine.
+\end{definition}
+
+Although Kolmogorov complexity is not computable, bounded or monotone versions yield computable secondary projections that summarize mixer variation.  
+These projections capture algorithmic structure that frequency and entropy coordinates may miss.
+
+\begin{remark}
+Mixer complexity is often low for ghost identities and highly variable for hybrid identities.  
+This contrast becomes important in Chapter~8, where tail modifications to the mixer are used to neutralize families of projections.
+\end{remark}
+
+\section{The Rashomon Effect}
+
+Different secondary projections may give conflicting impressions of the same generative identity.  
+This phenomenon reflects the fact that each projection samples a particular aspect of the structure of $(M,D,K)$.
+
+\begin{proposition}[Rashomon Effect]
+Let $G$ be any hybrid or ghost identity.  
+There exist secondary projections $\Phi_1$ and $\Phi_2$ such that
+\[
+\Phi_1(G) \ne \Phi_2(G)
+\]
+and for which $\Phi_1$ and $\Phi_2$ emphasize incompatible aspects of $(M,D,K)$.
+\end{proposition}
+
+\begin{proof}
+Choose $\Phi_1$ to be a digit frequency vector and $\Phi_2$ to be an entropy coordinate or mixer complexity coordinate.  
+Hybrid and ghost identities can be constructed to have identical digit frequencies but distinct entropy statistics or distinct mixer complexity.  
+Conversely, identities with identical entropy may be constructed to have distinct digit frequencies.  
+Explicit examples are provided in Appendix~C.
+\end{proof}
+
+The Rashomon effect emphasizes the inherent incompleteness of any finite coordinate system.  
+Different summaries cannot be reconciled into a single invariant without discarding essential internal structure.  
+This sets the stage for the structural incompleteness results of Part~IV.
+
+\section{Case Studies and Examples}
+
+Appendix~C contains explicit examples of hybrid and ghost identities that demonstrate the contrasts among digit frequency vectors, meta frequency vectors, entropy coordinates, and mixer complexity.  
+These examples illustrate how coordinate choices reflect specific structural features of generative identities.
+
+\section{Outlook}
+
+This chapter illustrates the diversity of secondary coordinate systems and the multiplicity of perspectives they provide on collapse fibers.  
+Chapter~8 uses the finite-prefix dependency bounds from Chapter~6 and the diversity of coordinates from this chapter to construct the meta diagonalizer, which evades any finite family of secondary projections.  
+The resulting impossibility theorem in Chapter~9 formalizes structural incompleteness in $\mathcal{G}_{\mathrm{eff}}$.

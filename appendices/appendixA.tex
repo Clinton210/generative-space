@@ -1,0 +1,117 @@
+\appendix
+\chapter{Computable Analysis Background}
+
+\section{Introduction}
+
+This appendix summarizes the background from computable analysis and Type--2 computability that is used in Parts~I to~IV of the monograph.  
+The purpose is not to provide a comprehensive treatment, but to gather the definitions and standard results that justify the computability assumptions underlying the effective core $\mathcal{G}_{\mathrm{eff}}$ and the dependency bounds for secondary projections.
+
+Classical references include the work of Turing~\cite{turing1936computablenumbers}, Pour-El and Richards, and the monograph of Weihrauch~\cite{weihrauch2000computable}.  
+Only the material needed to support the generative framework is presented here.
+
+\section{Computable Sequences and Names}
+
+A sequence $s : \mathbb{N} \to A$ over a finite alphabet $A$ is \emph{computable} if there exists a total Turing machine that outputs $s(n)$ on input $n$.  
+This definition applies to each layer of a generative identity:
+\[
+M : \mathbb{N} \to \{D,K\}, \qquad
+D : \mathbb{N} \to \{0,1,\ldots,b-1\}, \qquad
+K : \mathbb{N} \to \Sigma.
+\]
+
+The product topology on the sequence space $A^{\mathbb{N}}$ is induced by finite-prefix agreement.  
+A finite prefix of $s$ is written $s{\upharpoonright}n = (s(0), \ldots, s(n-1))$.  
+All computability notions respect this topology.
+
+In computable analysis, elements of function spaces or metric spaces are often represented by infinite sequences called \emph{names}.  
+In the generative framework, elements of $\mathcal{X}$ play the role of names.  
+Collapse identifies classical real numbers with equivalence classes of these names.
+
+\section{Computable Reals}
+
+A real number $x$ is \emph{computable} if there is a Turing machine that outputs a rational approximation of $x$ to arbitrary precision.  
+Equivalently, $x$ is computable if it has a computable base-$b$ expansion.
+
+The set of computable reals is denoted $\mathbb{R}_c$.  
+It is countable and dense in $[0,1]$.  
+Chapter~2 shows that
+\[
+\pi(\mathcal{G}_{\mathrm{eff}}) = \mathbb{R}_c,
+\]
+where $\pi$ is the collapse map.
+
+\section{Computable Functionals on Sequence Spaces}
+
+Let $A^{\mathbb{N}}$ be a sequence space with the product topology.  
+A function
+\[
+\Phi : A^{\mathbb{N}} \to \mathbb{R}
+\]
+is \emph{computable} if, given a name of the input sequence, there is a Turing machine that produces rational approximations of $\Phi(s)$ to arbitrary precision.
+
+A standard result in Type--2 computability states that computable functionals depend only on finite prefixes of their input to produce an approximation within any prescribed accuracy.  
+This property is reflected in the dependency bounds defined in Chapter~6.
+
+\begin{proposition}[Finite Prefix Dependence]
+\label{prop:finite-prefix}
+Let $\Phi : A^{\mathbb{N}} \to \mathbb{R}$ be a computable functional.  
+For each rational $\varepsilon > 0$ there exists an integer $N$ such that if $s{\upharpoonright}N = t{\upharpoonright}N$ then
+\[
+|\Phi(s) - \Phi(t)| < \varepsilon.
+\]
+\end{proposition}
+
+\begin{proof}
+This is a standard consequence of the fact that a Type--2 Turing machine performing an $\varepsilon$ approximation reads only finitely many input symbols before halting.  
+See Weihrauch~\cite{weihrauch2000computable} for details.
+\end{proof}
+
+This proposition is the foundation for the dependency bounds and uniform dependency bounds used in Part~III and Part~IV.
+
+\section{Computable Projections on the Generative Space}
+
+Given $G = (M,D,K) \in \mathcal{G}_{\mathrm{eff}}$, each layer is a computable sequence.  
+A secondary projection
+\[
+\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}^k
+\]
+is computable if each of its coordinate functions is computable in the sense above.  
+The finite-prefix property applies to the concatenation of $(M,D,K)$ viewed as a single sequence over a larger finite alphabet.
+
+\begin{proposition}
+Every computable secondary projection on $\mathcal{G}_{\mathrm{eff}}$ has a dependency bound in the sense of Chapter~6.
+\end{proposition}
+
+\begin{proof}
+Combine Proposition~\ref{prop:finite-prefix} with the fact that $(M,D,K)$ can be encoded as a single computable sequence.
+\end{proof}
+
+This validates the prefix-dependent nature of all computable measurements of generative identities and supports the diagonalizer construction of Chapter~8.
+
+\section{Collapse in the TTE Framework}
+
+The collapse map
+\[
+\pi : \mathcal{X} \to [0,1]
+\]
+decodes the digit subsequence selected by the mixer.  
+In the language of computable analysis, collapse is a \emph{representation} of real numbers by names in the generative space.  
+Computability of collapse on $\mathcal{G}_{\mathrm{eff}}$ follows from the computability of digit selection and base-$b$ decoding.
+
+\begin{proposition}
+If $G \in \mathcal{G}_{\mathrm{eff}}$, then $\pi(G)$ is a computable real number.
+\end{proposition}
+
+\begin{proof}
+Both the digit subsequence and the positional evaluation are computable.
+\end{proof}
+
+This connection ensures that collapse behaves as expected under composition with computable functions on $[0,1]$, a fact used in Chapter~10.
+
+\section{Summary}
+
+This appendix provides the formal background for the computability assumptions used throughout the monograph.  
+Effective generative identities correspond to computable names in the sense of Type--2 computability.  
+Secondary projections are computable functionals on these names with finite prefix dependence.  
+Collapse extracts the classical real numbers represented by these names.  
+These definitions and results support the structural analysis developed in Parts~I to~IV.

@@ -1,0 +1,130 @@
+\chapter{Fiber Geometry of the Collapse Map}
+
+\section{Introduction}
+
+The collapse map introduced in Chapter~2 identifies the classical magnitude of a generative identity by extracting and decoding the digit subsequence selected by the mixer.  
+Many distinct mechanisms collapse to the same real number, and the structure of the set of such mechanisms is central to the generative viewpoint.  
+This chapter studies the geometry of the fibers of the collapse map, both in the full generative space and in the effective core.
+
+The fibers exhibit sharp contrasts.  
+In the full space $\mathcal{X}$ each fiber is uncountable and carries a rich product structure.  
+In the effective core $\mathcal{G}_{\mathrm{eff}}$ each fiber over a computable real is countable, yet still infinite.  
+These distinctions form the foundation for the hybrid identities developed in Chapter~4 and for the analysis of sparse digit behavior in Chapter~5.
+
+\section{Full Fibers in the Generative Space}
+
+\begin{definition}[Full Fiber]
+For $x \in [0,1]$, the \emph{full fiber} of $x$ is the set
+\[
+\mathcal{F}(x) = \{ G \in \mathcal{X} : \pi(G) = x \}.
+\]
+\end{definition}
+
+A mechanism belongs to $\mathcal{F}(x)$ if and only if the digit values selected by its mixer produce a base-$b$ expansion of $x$.  
+The meta symbols play no role in determining $\pi(G)$, and unselected digit symbols also have no influence.  
+This yields the following structural decomposition.
+
+\begin{proposition}[Product Structure of Fibers]
+Let $x \in [0,1]$ and let $(x_j)_{j \ge 0}$ be a fixed base-$b$ expansion of~$x$.  
+Then $\mathcal{F}(x)$ contains all triples $G = (M, D, K)$ such that
+\[
+D(\varphi_G(j)) = x_j \qquad \text{for all } j \ge 0,
+\]
+where $\varphi_G$ enumerates $S_D(G)$.  
+All other values of $D$ and all values of $K$ are unconstrained.
+\end{proposition}
+
+\begin{proof}
+The condition $D(\varphi_G(j)) = x_j$ ensures that the digit subsequence selected by $M$ matches the desired expansion of $x$, which is equivalent to $\pi(G)=x$.  
+No other coordinates influence $\pi(G)$.
+\end{proof}
+
+This decomposition shows that $\mathcal{F}(x)$ contains a full product of unconstrained coordinates whenever the mixer selects digits infinitely often.  
+The freedom in these unconstrained positions yields the following conclusion.
+
+\begin{corollary}
+For every $x \in [0,1]$, the full fiber $\mathcal{F}(x)$ is uncountable.
+\end{corollary}
+
+The cardinality reflects the fact that infinitely many choices of meta symbols and unselected digit symbols do not affect the collapse.
+
+\begin{remark}
+When a real number admits two base-$b$ expansions, the corresponding full fibers share substantial structure.  
+This ambiguity is similar to the non-uniqueness of binary expansions and does not affect later results.
+\end{remark}
+
+\section{Effective Fibers in the Computable Core}
+
+The structure of the fiber changes dramatically when restricted to $\mathcal{G}_{\mathrm{eff}}$.
+
+\begin{definition}[Effective Fiber]
+For $x \in \mathbb{R}_c$, the \emph{effective fiber} of $x$ is the set
+\[
+\mathcal{F}_{\mathrm{eff}}(x) = \mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}.
+\]
+If $x$ is not computable, then $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
+\end{definition}
+
+This follows immediately from the fact that collapse on the effective core maps onto the computable reals, as established in Chapter~2.
+
+\begin{proposition}
+If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is infinite.  
+If $x \notin \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
+\end{proposition}
+
+\begin{proof}
+If $x$ is computable, then its digit expansion is computable.  
+Any effective mixer that selects digits infinitely often, combined with any computable meta sequence, produces an effective identity in $\mathcal{F}(x)$.  
+Varying the effective choices of $M$ and $K$ while preserving their computability produces infinitely many such identities.  
+If $x$ is not computable, then no computable mechanism can collapse to~$x$, so the effective fiber is empty.
+\end{proof}
+
+Thus the effective fibers are countable but never trivial when $x$ is computable.  
+The freedom in choosing an effective mixer and an effective meta sequence allows for substantial internal variation.
+
+\section{Internal Degrees of Freedom}
+
+The full fiber $\mathcal{F}(x)$ contains three primary sources of variability:
+
+\begin{enumerate}
+    \item positions where the mixer selects the meta layer,
+    \item digit symbols at positions not selected by the mixer,
+    \item the meta sequence itself.
+\end{enumerate}
+
+None of these affect the decoded subsequence used in the collapse.  
+This leads to a rich combinatorial structure inside each fiber.
+
+\begin{proposition}
+If the mixer selects digits at infinitely many positions, then for any real number $x$ the fiber $\mathcal{F}(x)$ contains infinitely many elements that disagree on an infinite set of coordinates.
+\end{proposition}
+
+This proposition is a simple consequence of the product structure and anticipates the more refined geometric phenomena that appear in hybrid identities (Chapter~4) and ghost identities (Chapter~5).
+
+\begin{remark}
+The case where the mixer selects only finitely many digits is degenerate and corresponds to rationals with exceptionally constrained fibers.  
+These cases do not affect the theorems in later chapters.
+\end{remark}
+
+\section{Shift Dynamics and Fiber Structure}
+
+The full generative space $\mathcal{X}$ carries a natural shift map $\sigma$ defined by
+\[
+\sigma(M,D,K)(n) = (M(n+1), D(n+1), K(n+1)).
+\]
+This shift interacts with fibers in a non-trivial way.
+
+\begin{proposition}
+If $G \in \mathcal{F}(x)$, then $\sigma(G)$ need not lie in the same fiber.  
+However, $\sigma$ preserves the product topology and therefore acts as a continuous transformation on $\mathcal{X}$.
+\end{proposition}
+
+The shift structure highlights that mechanisms may have identical collapsed values but very different dynamical signatures under iteration.  
+Later chapters use this viewpoint to analyze hybrid and ghost patterns, which exhibit distinct frequency and density behaviors under the shift.
+
+\section{Outlook}
+
+This chapter establishes the basic geometric framework for collapse fibers.  
+Chapter~4 develops hybrid identities, which have positive density of digit selections and play a central role in both the topological and effective structures.  
+Chapter~5 explores ghost identities, where the digit density is zero and the meta layer dominates.  
+Together these chapters show the range of internal behaviors that collapse to a common real number.

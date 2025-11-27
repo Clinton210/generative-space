@@ -1,0 +1,132 @@
+\chapter{Secondary Projections and Dependency Bounds}
+
+\section{Introduction}
+
+The collapse map $\pi$ from Chapter~2 is the only invariant designated as primary in the generative framework.  
+Every other numerical quantity derived from a generative identity is understood as a secondary coordinate or projection.  
+Secondary projections summarize aspects of the internal structure of $G = (M, D, K)$ but do not recover the classical magnitude and do not uniquely determine the generative identity inside a fiber.  
+
+This chapter provides a general definition of secondary projections, establishes their computability constraints, and proves the finite-prefix dependency bounds that are essential to the diagonalizer construction of Chapter~8.  
+These constraints are a direct consequence of the topology on the generative space and the theory of computable functionals on sequence spaces, reviewed in Appendix~A.
+
+\section{Secondary Projections}
+
+Secondary projections are functions that extract numerical summaries from generative identities.  
+They may depend on any aspect of $M$, $D$, or $K$, and may take scalar or vector values.
+
+\begin{definition}[Secondary Projection]
+A \emph{secondary projection} is a function
+\[
+\Phi : \mathcal{X} \to \mathbb{R}^k
+\]
+that is continuous with respect to the product topology on $\mathcal{X}$.  
+When restricted to the effective core, a secondary projection is required to be computable:
+\[
+\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}^k.
+\]
+\end{definition}
+
+Continuity ensures that $\Phi(G)$ depends only on finitely many initial coordinates of $(M,D,K)$ up to an arbitrarily small precision.  
+Computability ensures that the dependence on these coordinates is effective when $G$ is effective.
+
+\begin{remark}
+Examples of secondary projections appear in Chapter~7, including digit frequencies, meta frequencies, entropy-type quantities, mixer complexity, and various local variation statistics.
+\end{remark}
+
+\section{Secondary Projections as Coordinates on Fibers}
+
+Secondary projections provide coordinate systems on collapse fibers.  
+Given $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains many generative identities that share the same classical magnitude but differ in their secondary coordinates.
+
+\begin{proposition}
+Secondary projections are constant on fibers only when they depend solely on collapse information.  
+In general, distinct elements of a fiber produce distinct values of $\Phi$.
+\end{proposition}
+
+\begin{proof}
+If $\Phi$ depends only on the digit subsequence selected by the mixer, then $\Phi$ factors through $\pi$ and is constant on fibers.  
+Otherwise, there exist two identities in $\mathcal{F}(x)$ that differ on meta or unselected digit positions, and continuity of $\Phi$ implies that they produce different values.
+\end{proof}
+
+Secondary projections therefore describe aspects of internal structure that the collapse does not capture.  
+This is the foundation for the Rashomon effect developed in Chapter~7.
+
+\section{Computability and Finite-Prefix Dependence}
+
+When restricted to $\mathcal{G}_{\mathrm{eff}}$, secondary projections exhibit a key structural constraint: they depend on only a finite prefix of the input when computing their output to any fixed precision.  
+This is a classical property of computable functionals on Baire space, reviewed in Appendix~A.
+
+\begin{definition}[Prefix Dependency]
+Let $\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}^k$ be a secondary projection.  
+A function $B_\Phi : \mathbb{Q}^+ \to \mathbb{N}$ is a \emph{dependency bound} for $\Phi$ if for every $\varepsilon > 0$, whenever two effective generative identities $G$ and $H$ agree on the first $B_\Phi(\varepsilon)$ coordinates of $(M,D,K)$, then
+\[
+\|\Phi(G) - \Phi(H)\| < \varepsilon.
+\]
+\end{definition}
+
+This definition captures the fact that any computable functional can only inspect a finite amount of input to produce a rational approximation of its value.
+
+\begin{proposition}[Existence of Dependency Bounds]
+Every computable secondary projection on $\mathcal{G}_{\mathrm{eff}}$ has a dependency bound.
+\end{proposition}
+
+\begin{proof}
+Computable functionals on Baire space compute their outputs via algorithms that read only finitely many input values before producing an approximation within any prescribed accuracy.  
+Since each $G \in \mathcal{G}_{\mathrm{eff}}$ is given by computable sequences for $M$, $D$, and $K$, the standard arguments in computable analysis imply the existence of a finite stage at which the algorithm halts with an $\varepsilon$ approximation.  
+The bound $B_\Phi(\varepsilon)$ is obtained by taking the maximum input position inspected by the algorithm on any effective input.  
+Background is reviewed in Appendix~A.
+\end{proof}
+
+Dependency bounds play a central role in Part~IV.  
+They allow the diagonalizer of Chapter~8 to modify a generative identity outside the region inspected by a finite family of projections and thereby evade classification.
+
+\section{Uniformity and Effective Bounds}
+
+For some families of projections it is useful to work with uniform bounds across all components.
+
+\begin{definition}[Uniform Dependency Bound]
+Let $\{ \Phi_1, \ldots, \Phi_m \}$ be a finite family of computable secondary projections.  
+A function $B : \mathbb{Q}^+ \to \mathbb{N}$ is a \emph{uniform dependency bound} if it is a dependency bound for each $\Phi_i$.
+\end{definition}
+
+Uniform bounds exist simply because the family is finite.
+
+\begin{proposition}
+Every finite family of computable secondary projections admits a uniform dependency bound.
+\end{proposition}
+
+\begin{proof}
+Let $B_{\Phi_i}$ be a dependency bound for $\Phi_i$.  
+Define $B(\varepsilon) = \max_i B_{\Phi_i}(\varepsilon)$.  
+Then $B$ is a dependency bound for each projection in the family.
+\end{proof}
+
+Uniform bounds form the core technical ingredient in the meta-diagonalizer construction that appears in Chapter~8.  
+They allow multiple projections to be simultaneously neutralized by modifying a generative identity outside their common region of inspection.
+
+\section{Secondary Projections as Arbitrary Coordinates}
+
+Secondary projections provide a wide range of possible coordinate systems on $\mathcal{G}_{\mathrm{eff}}$ and $\mathcal{X}$.  
+They reflect structural aspects of generative identities but are not intrinsic to the definition of the space.  
+This leads to the following conceptual statement.
+
+\begin{proposition}
+Beyond collapse, every coordinate system on the generative space is arbitrary.  
+No finite family of secondary projections captures the full internal structure of a generative identity.
+\end{proposition}
+
+\begin{proof}
+The proof appears in Part~IV.  
+A summary is as follows.  
+Every computable secondary projection has a finite dependency bound.  
+The meta-diagonalizer of Chapter~8 constructs an identity that agrees with a reference identity on all positions within the bound but disagrees outside it, in a manner that forces disagreement with the predictions of the projections.  
+Therefore no finite family of projections can classify $\mathcal{G}_{\mathrm{eff}}$.
+\end{proof}
+
+This result foreshadows the Structural Incompleteness Theorem of Chapter~9 and motivates the study of specific projections in Chapter~7.
+
+\section{Outlook}
+
+Chapter~7 develops concrete examples of secondary projections and illustrates how different projections give incompatible but equally legitimate perspectives on hybrid and ghost identities.  
+This phenomenon underlies the Rashomon effect in generative analysis and prepares for the diagonalizer construction in Chapter~8.  
+Dependency bounds introduced here are used throughout Part~IV and are collected with proofs in Appendix~B.

@@ -1,0 +1,119 @@
+\chapter{Ghost Reals and Sparse Digit Dynamics}
+
+\section{Introduction}
+
+Chapter~4 introduced hybrid generative identities, in which the mixer selects the digit layer with positive density.  
+Hybrids represent one of the two principal structural regimes in the generative space.  
+This chapter develops the complementary regime: ghost identities.  
+A ghost identity collapses to a classical real number but uses the digit layer so rarely that the meta layer dominates the canonical output.  
+Ghost behavior reveals the opposite extreme of internal structure and illustrates how minimal digit information can still produce a definite classical magnitude.
+
+Ghost patterns play a dual role in the generative framework.  
+They show how sparse digit mechanisms can encode classical reals, and they form contrasting examples for the hybrid patterns of Chapter~4.  
+They also prepare the ground for the study of secondary invariants in Part~III, where sparse digit signals produce coordinate systems that behave very differently from the hybrid case.
+
+\section{Digit Sparsity and Ghost Structure}
+
+We begin by formalizing the notion of a ghost identity.
+
+\begin{definition}[Ghost Generative Identity]
+A generative identity $G = (M, D, K)$ is a \emph{ghost identity} if its digit density satisfies
+\[
+\eta(G)
+=
+\liminf_{n \to \infty}
+\frac{1}{n}
+\bigl| \{ 0 \le k < n : M(k) = D \} \bigr|
+=
+0.
+\]
+\end{definition}
+
+A ghost identity may still have infinitely many digit selections, but these selections occur with vanishing frequency.  
+In this regime the meta layer dominates the canonical output, yet the sparse digit subsequence still determines the collapse.
+
+\begin{remark}
+An identity may be ghost even if it collapses to a non-trivial real number.  
+The collapse is determined entirely by the sparse digit subsequence, regardless of how infrequently it appears.
+\end{remark}
+
+\section{Existence of Ghost Identities in Every Fiber}
+
+Ghost identities occur in every full fiber of the collapse map.
+
+\begin{proposition}[Ghost Identities in Full Fibers]
+For every real number $x \in [0,1]$, the full fiber $\mathcal{F}(x)$ contains infinitely many ghost identities.
+\end{proposition}
+
+\begin{proof}
+Fix a base-$b$ expansion $(x_j)_{j \ge 0}$ of $x$.  
+Define $M$ to select the digit layer only at positions $n$ belonging to a slowly growing sequence such as $n = j^2$.  
+This guarantees that $\eta(G) = 0$.  
+Assign the digit sequence so that $D(\varphi_G(j)) = x_j$, where $\varphi_G(j)$ enumerates the selected positions in increasing order.  
+Complete $K$ arbitrarily.  
+Varying $K$ or the precise sparse pattern of $M$ produces infinitely many ghost identities in $\mathcal{F}(x)$.
+\end{proof}
+
+This proposition contrasts with the hybrid universality theorem of Chapter~4.  
+Hybrid and ghost patterns are both abundant, but they describe opposing internal behaviors.
+
+\section{Ghost Identities in the Effective Core}
+
+The situation in the effective core is more delicate.
+
+\begin{proposition}
+If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ contains effective ghost identities.  
+If $x \notin \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
+\end{proposition}
+
+\begin{proof}
+Let $(x_j)_{j \ge 0}$ be a computable expansion of $x$.  
+Define the mixer to select the digit layer on the computable sparse set $\{j^2 : j \ge 0\}$.  
+This set has density zero, so any mechanism using it for digit selection is ghost.  
+Define $D$ by $D(j^2) = x_j$, and define $K$ to be any computable sequence.  
+This produces an effective ghost identity in $\mathcal{F}_{\mathrm{eff}}(x)$.  
+The second statement follows from collapse considerations in Chapter~2.
+\end{proof}
+
+Thus ghost identities are algorithmically available for all computable real numbers, although they represent a very different internal mode of generation from the hybrid identities of Chapter~4.
+
+\section{Sparse Digit Dynamics and Shift Behavior}
+
+The sparse digit patterns that define ghost identities interact in interesting ways with the shift map $\sigma$ on $\mathcal{X}$.
+
+\begin{proposition}
+If $G$ is a ghost identity and $(S_D(G))$ is infinite, then the shifted identity $\sigma(G)$ is also ghost.
+\end{proposition}
+
+\begin{proof}
+The shift reduces the size of the prefix interval $[0,n)$ by exactly one position, which does not affect the asymptotic density of the digit selection set.  
+Therefore the density remains zero under the shift.
+\end{proof}
+
+This stability under shift dynamics complements the hybrid regime, where shift dynamics may alter or preserve digit selection frequencies depending on the mixer.  
+Sparse digit behavior is therefore structurally robust in the product topology.
+
+\section{Contrast With Hybrids}
+
+Hybrid and ghost identities form two conceptual extremes:
+
+\begin{itemize}
+    \item hybrids have $\eta(G) > 0$ and interleave the digit and meta layers on a substantial set of positions,
+    \item ghosts have $\eta(G) = 0$ and encode classical magnitude through rare digit events.
+\end{itemize}
+
+These regimes represent two distinct ways in which the generative space supports collapse to the same classical real number.  
+Chapter~7 shows that secondary invariants may emphasize or suppress different features of hybrid and ghost identities, illustrating a Rashomon effect in coordinate systems.  
+
+This contrast will also be central to the diagonalizer construction in Chapter~8, where tail modifications are used to evade a finite family of projections.
+
+\section{Examples}
+
+Explicit constructions of effective and full ghost identities for classical numbers such as $\sqrt{2}$ appear in Appendix~C.  
+These examples illustrate how sparse generators can encode real numbers using minimal digit information.
+
+\section{Outlook}
+
+Ghost identities complete the second half of the internal behavior spectrum initiated by hybrid identities in Chapter~4.  
+Together these two regimes show that collapse fibers support a wide variety of meaningful internal structures.  
+Part~III analyzes how coordinate systems interpret these structures and why finite families of projections cannot capture them in full.

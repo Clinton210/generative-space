@@ -1,0 +1,114 @@
+\documentclass[11pt]{book}
+
+% Page geometry
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+
+% Formatting and graphics
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{enumerate}
+
+% Hyperlinks
+\usepackage[hidelinks]{hyperref}
+
+% Bibliography
+\usepackage{cite}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    {\Huge\bfseries The Generative Space: Programs, Collapse, and Structural Incompleteness\par}
+    \vspace{1cm}
+    {\Large Clinton Potter\par}
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+% Abstract
+\include{abstract/abstract}
+
+% Acknowledgments
+\include{acknowledgment/acknowledgment}
+
+% Prelude
+\include{prelude/prelude}
+
+% Table of Contents
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%
+% PART I
+%%%%%%%%%%%%%%
+\part{The Generative Ontology}
+\include{partSummaries/partI}
+
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+
+%%%%%%%%%%%%%%
+% PART II
+%%%%%%%%%%%%%%
+\part{Hybridity and Dynamics}
+\include{partSummaries/partII}
+
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+
+%%%%%%%%%%%%%%
+% PART III
+%%%%%%%%%%%%%%
+\part{Secondary Coordinates}
+\include{partSummaries/partIII}
+
+\include{chapters/chapter6}
+\include{chapters/chapter7}
+
+%%%%%%%%%%%%%%
+% PART IV
+%%%%%%%%%%%%%%
+\part{Structural Incompleteness}
+\include{partSummaries/partIV}
+
+\include{chapters/chapter8}
+\include{chapters/chapter9}
+
+%%%%%%%%%%%%%%
+% PART V
+%%%%%%%%%%%%%%
+\part{Synthesis and Future Directions}
+\include{partSummaries/partV}
+
+\include{chapters/chapter10}
+\include{chapters/chapter11}
+
+%%%%%%%%%%%%%%
+% APPENDICES
+%%%%%%%%%%%%%%
+\appendix
+\include{appendices/appendixA}
+\include{appendices/appendixB}
+\include{appendices/appendixC}
+
+%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
