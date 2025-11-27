@@ -1,0 +1,48 @@
+# ============================
+# LaTeX build artifacts
+# ============================
+*.aux
+*.log
+*.toc
+*.out
+*.lof
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+*.vrb
+*.blg
+*.bbl
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+
+# ============================
+# Minted / Pygments temp
+# ============================
+*_minted*
+*/_minted*
+
+# ============================
+# Backup / temp files
+# ============================
+*~
+*.bak
+*.sav
+*.tmp
+
+# ============================
+# OS junk
+# ============================
+.DS_Store
+Thumbs.db
+
+# ============================
+# VS Code workspace junk
+# ============================
+.vscode/
+*.code-workspace
