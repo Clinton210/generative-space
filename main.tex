@@ -18,45 +18,54 @@
 % Bibliography
 \usepackage{cite}
 
-% Theorem environments
+% Theorem Definitions
 \newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
 \newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+
+\theoremstyle{definition}
 \newtheorem{definition}{Definition}[chapter]
 \newtheorem{remark}{Remark}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
 \newtheorem{example}{Example}[chapter]
 
 \begin{document}
 
-% Title Page
+%%%%%%%%%%%%%%%%%%%%%%
+% FRONT MATTER
+%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
 \begin{titlepage}
     \centering
+    \vspace*{2cm}
     {\Huge\bfseries The Generative Space: Programs, Collapse, and Structural Incompleteness\par}
-    \vspace{1cm}
+    \vspace{1.5cm}
     {\Large Clinton Potter\par}
     \vfill
     {\large \today\par}
 \end{titlepage}
 
-% Abstract
-\include{abstract/abstract}
-
-% Acknowledgments
-\include{acknowledgment/acknowledgment}
-
-% Prelude
-\include{prelude/prelude}
+% Abstract and Acknowledgment (no forced blank pages)
+\input{abstract/abstract}
+\input{acknowledgment/acknowledgment}
 
 % Table of Contents
 \tableofcontents
-\clearpage
+
+% Prelude (unnumbered chapter is OK in frontmatter)
+\input{prelude/prelude}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% MAIN MATTER
+%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
 
 %%%%%%%%%%%%%%
 % PART I
 %%%%%%%%%%%%%%
 \part{The Generative Ontology}
-\include{partSummaries/partI}
+\input{partSummaries/partI}
 
 \include{chapters/chapter1}
 \include{chapters/chapter2}
@@ -66,7 +75,7 @@
 % PART II
 %%%%%%%%%%%%%%
 \part{Hybridity and Dynamics}
-\include{partSummaries/partII}
+\input{partSummaries/partII}
 
 \include{chapters/chapter4}
 \include{chapters/chapter5}
@@ -75,7 +84,7 @@
 % PART III
 %%%%%%%%%%%%%%
 \part{Secondary Coordinates}
-\include{partSummaries/partIII}
+\input{partSummaries/partIII}
 
 \include{chapters/chapter6}
 \include{chapters/chapter7}
@@ -84,7 +93,7 @@
 % PART IV
 %%%%%%%%%%%%%%
 \part{Structural Incompleteness}
-\include{partSummaries/partIV}
+\input{partSummaries/partIV}
 
 \include{chapters/chapter8}
 \include{chapters/chapter9}
@@ -93,7 +102,7 @@
 % PART V
 %%%%%%%%%%%%%%
 \part{Synthesis and Future Directions}
-\include{partSummaries/partV}
+\input{partSummaries/partV}
 
 \include{chapters/chapter10}
 \include{chapters/chapter11}
@@ -102,13 +111,15 @@
 % APPENDICES
 %%%%%%%%%%%%%%
 \appendix
+
 \include{appendices/appendixA}
 \include{appendices/appendixB}
 \include{appendices/appendixC}
 
-%%%%%%%%%%%%%%
-% Bibliography
-%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+% BACK MATTER
+%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
 
 \bibliographystyle{plain}
 \bibliography{references}

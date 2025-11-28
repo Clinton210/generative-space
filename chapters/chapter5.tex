@@ -1,119 +1,126 @@
-\chapter{Ghost Reals and Sparse Digit Dynamics}
+\chapter{Null-Density Generators and Sparse Dynamics}
 
 \section{Introduction}
 
-Chapter~4 introduced hybrid generative identities, in which the mixer selects the digit layer with positive density.  
-Hybrids represent one of the two principal structural regimes in the generative space.  
-This chapter develops the complementary regime: ghost identities.  
-A ghost identity collapses to a classical real number but uses the digit layer so rarely that the meta layer dominates the canonical output.  
-Ghost behavior reveals the opposite extreme of internal structure and illustrates how minimal digit information can still produce a definite classical magnitude.
+Chapter~4 introduced hybrid generative identities, whose selectors choose the digit layer with positive asymptotic density.  
+Hybrid mechanisms form the dense regime of the generative space, where the information encoding classical magnitude is distributed across a nontrivial fraction of the timeline.
 
-Ghost patterns play a dual role in the generative framework.  
-They show how sparse digit mechanisms can encode classical reals, and they form contrasting examples for the hybrid patterns of Chapter~4.  
-They also prepare the ground for the study of secondary invariants in Part~III, where sparse digit signals produce coordinate systems that behave very differently from the hybrid case.
+This chapter develops the complementary regime of \emph{null-density generators}.  
+A null-density generator collapses to a classical real number using a selector that chooses the digit layer infinitely often but with asymptotic digit density equal to zero.  
+In this regime the meta layer dominates the canonical output, yet the sparse digit positions still encode a precise classical magnitude.
 
-\section{Digit Sparsity and Ghost Structure}
+Null-density behavior illustrates the extreme flexibility of the collapse map.  
+It shows that the information content of a real number can be embedded in a set of positions of vanishing density, leaving most of the mechanism unconstrained and available for additional meta-information.  
+This chapter formalizes null-density generators, proves their existence in both full and effective fibers, and connects their structure to sparse subshifts in symbolic dynamics.
 
-We begin by formalizing the notion of a ghost identity.
+\section{Digit Sparsity and Null-Density Structure}
 
-\begin{definition}[Ghost Generative Identity]
-A generative identity $G = (M, D, K)$ is a \emph{ghost identity} if its digit density satisfies
-\[
-\eta(G)
-=
-\liminf_{n \to \infty}
-\frac{1}{n}
-\bigl| \{ 0 \le k < n : M(k) = D \} \bigr|
-=
-0.
-\]
+To guarantee that a null-density generator still represents a real number, we require infinitely many digit selections, even though their density tends to zero.
+
+\begin{definition}[Null-Density Generator]
+A generative identity $G = (M,D,K)$ is a null-density generator if
+\begin{itemize}
+    \item the selector $M$ chooses the digit layer infinitely often, and
+    \item the digit density satisfies
+    \[
+    \eta(G)
+    =
+    \liminf_{n \to \infty}
+    \frac{1}{n}
+    \bigl|\{\, 0 \le k < n : M(k)=D \,\}\bigr|
+    =
+    0.
+    \]
+\end{itemize}
 \end{definition}
 
-A ghost identity may still have infinitely many digit selections, but these selections occur with vanishing frequency.  
-In this regime the meta layer dominates the canonical output, yet the sparse digit subsequence still determines the collapse.
+Thus $M$ contains arbitrarily long runs of meta selections punctuated by rare digit selections.
 
-\begin{remark}
-An identity may be ghost even if it collapses to a non-trivial real number.  
-The collapse is determined entirely by the sparse digit subsequence, regardless of how infrequently it appears.
+\begin{remark}[Connection to Symbolic Dynamics]
+From the viewpoint of symbolic dynamics, the selector sequences of null-density generators lie in subshifts of low combinatorial complexity.  
+If the gaps between digit selections grow without bound, the resulting subshift has topological entropy zero.  
+This behavior contrasts with hybrid identities, where the selector often belongs to a subshift with positive entropy.
 \end{remark}
 
-\section{Existence of Ghost Identities in Every Fiber}
+\section{Existence in Full Fibers}
 
-Ghost identities occur in every full fiber of the collapse map.
+Despite their sparse structure, null-density generators can represent any classical real number.
 
-\begin{proposition}[Ghost Identities in Full Fibers]
-For every real number $x \in [0,1]$, the full fiber $\mathcal{F}(x)$ contains infinitely many ghost identities.
+\begin{proposition}[Null-Density Generators in Full Fibers]
+For every $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains infinitely many null-density generators.
 \end{proposition}
 
 \begin{proof}
-Fix a base-$b$ expansion $(x_j)_{j \ge 0}$ of $x$.  
-Define $M$ to select the digit layer only at positions $n$ belonging to a slowly growing sequence such as $n = j^2$.  
-This guarantees that $\eta(G) = 0$.  
-Assign the digit sequence so that $D(\varphi_G(j)) = x_j$, where $\varphi_G(j)$ enumerates the selected positions in increasing order.  
-Complete $K$ arbitrarily.  
-Varying $K$ or the precise sparse pattern of $M$ produces infinitely many ghost identities in $\mathcal{F}(x)$.
+Fix a base-$b$ expansion $(x_j)$ of $x$.  
+Let $S = \{ j^2 : j \ge 1 \}$ and define the selector $M$ so that $M(n)=D$ precisely when $n \in S$.  
+Since the number of squares below $n$ is approximately $\sqrt{n}$, the density of $S$ is
+\[
+\lim_{n \to \infty} \frac{|S \cap [0,n)|}{n} = 0.
+\]
+Thus any identity using this selector is a null-density generator.
+
+Define $D(j^2) = x_j$ and assign $D(n)$ arbitrarily for $n \notin S$.  
+Choose $K$ arbitrarily.  
+Varying $K$ yields infinitely many distinct null-density generators in $\mathcal{F}(x)$.
 \end{proof}
 
-This proposition contrasts with the hybrid universality theorem of Chapter~4.  
-Hybrid and ghost patterns are both abundant, but they describe opposing internal behaviors.
+This demonstrates that the encoding of magnitude is independent of selector density.
 
-\section{Ghost Identities in the Effective Core}
+\section{Null-Density Generators in the Effective Core}
 
-The situation in the effective core is more delicate.
+The construction above is effective because the sparse selector pattern $j \mapsto j^2$ is computable.
 
 \begin{proposition}
-If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ contains effective ghost identities.  
+If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ contains effective null-density generators.  
 If $x \notin \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
 \end{proposition}
 
 \begin{proof}
-Let $(x_j)_{j \ge 0}$ be a computable expansion of $x$.  
-Define the mixer to select the digit layer on the computable sparse set $\{j^2 : j \ge 0\}$.  
-This set has density zero, so any mechanism using it for digit selection is ghost.  
-Define $D$ by $D(j^2) = x_j$, and define $K$ to be any computable sequence.  
-This produces an effective ghost identity in $\mathcal{F}_{\mathrm{eff}}(x)$.  
-The second statement follows from collapse considerations in Chapter~2.
+Let $(x_j)$ be a computable base-$b$ expansion of $x$.  
+Define $M(n)=D$ exactly when $n=j^2$ for some $j$.  
+The set of squares is computable, so $M$ is computable and has density zero.
+
+Define $D(j^2) = x_j$ and define $D(n)$ arbitrarily elsewhere.  
+Since $j \mapsto j^2$ is computable and strictly increasing, its range is recursive, so $D$ is computable.  
+Choose any computable meta sequence $K$.  
+The resulting identity $G=(M,D,K)$ is effective and collapses to $x$.
 \end{proof}
 
-Thus ghost identities are algorithmically available for all computable real numbers, although they represent a very different internal mode of generation from the hybrid identities of Chapter~4.
+\section{Sparse Dynamics and Shift Behavior}
 
-\section{Sparse Digit Dynamics and Shift Behavior}
-
-The sparse digit patterns that define ghost identities interact in interesting ways with the shift map $\sigma$ on $\mathcal{X}$.
+Null-density patterns interact predictably with the shift map $\sigma$ introduced in Chapter~3.  
+Unlike hybrid identities, whose density properties may depend on long-term stationarity, null-density behavior is shift-invariant.
 
 \begin{proposition}
-If $G$ is a ghost identity and $(S_D(G))$ is infinite, then the shifted identity $\sigma(G)$ is also ghost.
+If $G$ is a null-density generator, then $\sigma(G)$ is also a null-density generator.
 \end{proposition}
 
 \begin{proof}
-The shift reduces the size of the prefix interval $[0,n)$ by exactly one position, which does not affect the asymptotic density of the digit selection set.  
-Therefore the density remains zero under the shift.
+Let $A_n = |\{ 0 \le k < n : M(k)=D \}|$.  
+For the shifted identity $\sigma(G)$, the corresponding count is either $A_{n+1}$ or $A_{n+1}-1$.  
+Since $A_n/n \to 0$, the same holds for $(A_{n+1})/n$.  
+Thus $\eta(\sigma(G)) = 0$.
 \end{proof}
 
-This stability under shift dynamics complements the hybrid regime, where shift dynamics may alter or preserve digit selection frequencies depending on the mixer.  
-Sparse digit behavior is therefore structurally robust in the product topology.
+This invariance highlights the dynamical stability of sparse selector patterns.
 
-\section{Contrast With Hybrids}
+\section{Contrast With Hybrid Generators}
 
-Hybrid and ghost identities form two conceptual extremes:
+Hybrid and null-density identities form two structural extremes in the generative space.
 
 \begin{itemize}
-    \item hybrids have $\eta(G) > 0$ and interleave the digit and meta layers on a substantial set of positions,
-    \item ghosts have $\eta(G) = 0$ and encode classical magnitude through rare digit events.
+    \item \textbf{Hybrid identities} have $\eta(G) > 0$.  
+    They use the digit layer frequently and distribute magnitude information across many positions.
+    \item \textbf{Null-density identities} have $\eta(G)=0$.  
+    They use the digit layer rarely, allowing the meta layer to dominate the canonical output.
 \end{itemize}
 
-These regimes represent two distinct ways in which the generative space supports collapse to the same classical real number.  
-Chapter~7 shows that secondary invariants may emphasize or suppress different features of hybrid and ghost identities, illustrating a Rashomon effect in coordinate systems.  
-
-This contrast will also be central to the diagonalizer construction in Chapter~8, where tail modifications are used to evade a finite family of projections.
-
-\section{Examples}
-
-Explicit constructions of effective and full ghost identities for classical numbers such as $\sqrt{2}$ appear in Appendix~C.  
-These examples illustrate how sparse generators can encode real numbers using minimal digit information.
+These regimes illustrate the phenomenon of projective incompatibility discussed in Chapter~7.  
+A projection that summarizes digit-frequency behavior distinguishes hybrids from null-density generators, whereas a projection that measures gap growth cannot distinguish hybrids effectively.  
+This complementarity plays a key role in the diagonalizer construction of Chapter~8, which exploits tail modifications switching between high- and low-density regimes to evade finite collections of projections.
 
 \section{Outlook}
 
-Ghost identities complete the second half of the internal behavior spectrum initiated by hybrid identities in Chapter~4.  
-Together these two regimes show that collapse fibers support a wide variety of meaningful internal structures.  
-Part~III analyzes how coordinate systems interpret these structures and why finite families of projections cannot capture them in full.
+Null-density generators complete the classification of internal selector regimes initiated in Chapter~4.  
+Together, hybrid and null-density mechanisms illustrate the range of internal structure that can occur within a single collapse fiber.  
+Part~III turns to the problem of measurement: how computable coordinate systems capture fragments of this structure and why no finite family of such systems can classify generative identities.
