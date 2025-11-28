@@ -1,4 +1,4 @@
-\documentclass[11pt]{book}
+\documentclass[11pt,openany]{book}
 
 % Page geometry
 \usepackage{geometry}
@@ -6,6 +6,7 @@
 
 % Math packages
 \usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{xr-hyper}
 
 % Formatting and graphics
 \usepackage{graphicx}
@@ -14,11 +15,19 @@
 
 % Hyperlinks
 \usepackage[hidelinks]{hyperref}
-
+\makeatletter
+\newcommand*{\refundefined}{??}
+\DeclareRobustCommand{\ref}[1]{%
+  \@ifundefined{r@#1}{\refundefined}{\@nameuse{r@#1}}%
+}
+\makeatother
 % Bibliography
 \usepackage{cite}
 
+% --------------------------
 % Theorem Definitions
+% --------------------------
+\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{proposition}{Proposition}[chapter]
 \newtheorem{corollary}{Corollary}[chapter]
@@ -46,14 +55,11 @@
     {\large \today\par}
 \end{titlepage}
 
-% Abstract and Acknowledgment (no forced blank pages)
 \input{abstract/abstract}
 \input{acknowledgment/acknowledgment}
 
-% Table of Contents
 \tableofcontents
 
-% Prelude (unnumbered chapter is OK in frontmatter)
 \input{prelude/prelude}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -61,57 +67,41 @@
 %%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
 
-%%%%%%%%%%%%%%
 % PART I
-%%%%%%%%%%%%%%
 \part{The Generative Ontology}
 \input{partSummaries/partI}
-
 \include{chapters/chapter1}
 \include{chapters/chapter2}
 \include{chapters/chapter3}
 
-%%%%%%%%%%%%%%
 % PART II
-%%%%%%%%%%%%%%
 \part{Hybridity and Dynamics}
 \input{partSummaries/partII}
-
 \include{chapters/chapter4}
 \include{chapters/chapter5}
 
-%%%%%%%%%%%%%%
 % PART III
-%%%%%%%%%%%%%%
 \part{Secondary Coordinates}
 \input{partSummaries/partIII}
-
 \include{chapters/chapter6}
 \include{chapters/chapter7}
 
-%%%%%%%%%%%%%%
 % PART IV
-%%%%%%%%%%%%%%
 \part{Structural Incompleteness}
 \input{partSummaries/partIV}
-
 \include{chapters/chapter8}
 \include{chapters/chapter9}
 
-%%%%%%%%%%%%%%
 % PART V
-%%%%%%%%%%%%%%
 \part{Synthesis and Future Directions}
 \input{partSummaries/partV}
-
 \include{chapters/chapter10}
 \include{chapters/chapter11}
 
-%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
 % APPENDICES
-%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
 \appendix
-
 \include{appendices/appendixA}
 \include{appendices/appendixB}
 \include{appendices/appendixC}
@@ -120,7 +110,6 @@
 % BACK MATTER
 %%%%%%%%%%%%%%%%%%%%%%
 \backmatter
-
 \bibliographystyle{plain}
 \bibliography{references}
 
