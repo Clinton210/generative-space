@@ -1,144 +1,200 @@
-\chapter{Secondary Projections and Finite Lookahead}
+\chapter{The Lattice of Projections}
 
 \section{Introduction}
 
-The collapse map $\pi$ introduced in Chapter~2 acts as the primary invariant of the generative framework, projecting the mechanisms in the generative space $\mathcal{X}$ onto the classical continuum.  
-Every other numerical quantity derived from a generative identity is understood as a \emph{secondary projection}.
+The collapse map $\pi$ introduced in Part~I extracts a classical magnitude from a
+generative identity by reading a subsequence of its digit layer.  
+Although collapse is the primary invariant of the framework, it is only one of
+many possible ways to interpret or summarize the structure of a generative
+identity.
 
-Secondary projections summarize aspects of the internal structure of a generative identity $G = (M,D,K)$.  
-They may measure digit frequency, selector complexity, local fluctuation rates, or meta-layer behavior.  
-Unlike the collapse map, secondary projections do not uniquely identify a mechanism within its collapse fiber.
+This chapter develops a general theory of \emph{structural projections}:
+continuous maps out of the generative space that depend on only finitely many
+prefix constraints at a time.  
+Such projections formalize the notion of observation or measurement.  
+They extract partial information about a generative identity while ignoring
+other aspects of its structure.
 
-This chapter formally defines secondary projections as computable functionals.  
-The key result is the \emph{finite lookahead property}: any computable secondary projection can inspect only a finite prefix of an effective identity when producing an approximation to desired precision.  
-This generates explicit \emph{dependency bounds} that are essential to the diagonalizer construction of Chapter~8.
+The key insight is that these projections naturally form a \emph{lattice}
+ordered by information content.  
+Collapse is an extremal element of this lattice: it is the projection that
+forgets the most internal structure while still retaining classical magnitude.
 
-\section{Secondary Projections}
+The lattice-theoretic viewpoint provides the conceptual and technical
+foundation for the computable secondary projections introduced in
+Chapter~7 and the projective incompatibility phenomenon analyzed in Chapter~8.
 
-A secondary projection is any functional that extracts numerical information from a generative identity.
+\section{Prefix-Determined Observations}
 
-\begin{definition}[Secondary Projection]
-A map
+A projection represents an observer that examines the generative identity only
+through finitely many coordinates of $M$, $D$, and $K$ at any given stage.
+
+\begin{definition}[Prefix-Determined Map]
+A function $\Phi : \mathcal{X} \to Y$ into a Hausdorff space $Y$ is
+\emph{prefix-determined} if for every $G \in \mathcal{X}$ and every open
+neighborhood $U$ of $\Phi(G)$, there exists a finite prefix
+$(M{\upharpoonright}n, D{\upharpoonright}n, K{\upharpoonright}n)$ such that
+any $H \in \mathcal{X}$ agreeing with $G$ on those prefixes satisfies
+$\Phi(H) \in U$.
+\end{definition}
+
+This condition precisely characterizes continuity in the product topology of
+$\mathcal{X}$.  
+Prefix-determined maps therefore coincide with continuous maps out of the
+generative space.
+
+\begin{definition}[Structural Projection]
+A \emph{structural projection} is any continuous map
 \[
-\Phi : \mathcal{X} \to \mathbb{R}^k
+\Phi : \mathcal{X} \to Y
 \]
-is a secondary projection if it is continuous with respect to the product topology on $\mathcal{X}$ and the Euclidean topology on $\mathbb{R}^k$.
+into a metric (or Polish) space $Y$.
+\end{definition}
 
-When restricted to the effective core, $\Phi$ is additionally required to be Type--2 computable:
+Examples include:
+
+\begin{itemize}
+    \item the collapse map $\pi : \mathcal{X}^* \to [0,1]$,
+    \item digit-density maps $G \mapsto \eta(G)$ (when extended appropriately),
+    \item digit-frequency maps on selected subsequences,
+    \item meta-frequency and meta-pattern projections,
+    \item bounded dependency maps, introduced in Chapter~7.
+\end{itemize}
+
+\section{Ordering Projections by Informational Refinement}
+
+Structural projections differ in what aspects of a generative identity they
+preserve or discard.  
+This suggests a natural notion of refinement.
+
+\begin{definition}[Refinement Order]
+Let $\Phi,\Psi : \mathcal{X} \to Y$ be projections into metric spaces.
+We say that
 \[
-\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}^k_c.
+\Phi \preceq \Psi
+\quad\Longleftrightarrow\quad
+\text{for all } G,H \in \mathcal{X},\;
+\Psi(G)=\Psi(H) \implies \Phi(G)=\Phi(H).
 \]
 \end{definition}
 
-Continuity ensures stability under tail modifications of $G$.  
-Computability ensures that $\Phi(G)$ can be approximated uniformly from finite information.
+Thus $\Phi \preceq \Psi$ means that $\Psi$ distinguishes at least as many
+identities as $\Phi$ does.  
+Equivalently, $\Psi$ is at least as informative as $\Phi$.
 
 \begin{remark}
-Examples of secondary projections include digit density, block entropy of the meta layer, normalized selector complexity, and frequency-based summaries.  
-A detailed catalogue appears in Chapter~7.
+The refinement order is determined purely by the equivalence relations induced
+by the projections:
+\[
+G \sim_\Phi H \quad \Longleftrightarrow \quad \Phi(G)=\Phi(H).
+\]
+Then $\Phi \preceq \Psi$ iff $\sim_\Psi \subseteq \sim_\Phi$.
 \end{remark}
 
-\section{Projections as Coordinates on Fibers}
+\section{The Projection Lattice}
 
-Secondary projections supply coordinate systems on collapse fibers.  
-For a fixed $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains many distinct identities that share the same magnitude but differ in their secondary behavior.
+The refinement order makes the collection of structural projections into a
+lattice.  
+This lattice expresses how different projections interact and combine.
 
-\begin{proposition}
-A secondary projection $\Phi$ is constant on each fiber if and only if $\Phi$ depends only on the selected digit subsequence.  
-In general, distinct elements of $\mathcal{F}(x)$ produce distinct values of $\Phi$.
+\begin{proposition}[Existence of Infima]
+Let $\Phi$ and $\Psi$ be structural projections.  
+There exists a projection $\Phi \wedge \Psi$ satisfying:
+\[
+G \sim_{\Phi \wedge \Psi} H
+\quad\Longleftrightarrow\quad
+(G \sim_\Phi H) \text{ and } (G \sim_\Psi H).
+\]
+Moreover, $\Phi \wedge \Psi$ is the greatest lower bound of $\Phi$ and $\Psi$ in
+the refinement order.
 \end{proposition}
 
 \begin{proof}
-If $\Phi$ depends solely on the selected digit subsequence, then $\Phi$ factors through $\pi$, hence is constant on every fiber.  
-Conversely, if $\Phi$ depends on any meta or unselected digit coordinate, then by modifying those coordinates within a fiber (see Chapter~3) we obtain two fiber elements that differ on an open set mapped to distinct values in $\mathbb{R}^k$.  
-Continuity of $\Phi$ ensures these distinct values persist.
+Define $\Phi \wedge \Psi$ by mapping $G$ to the pair $(\Phi(G), \Psi(G))$
+in the product space $Y_\Phi \times Y_\Psi$.  
+Continuity follows from continuity of $\Phi$ and $\Psi$.  
+The equivalence relation induced by this projection is the intersection of the
+equivalence relations induced by $\Phi$ and $\Psi$.  
+Thus it is the infimum in the refinement order.
 \end{proof}
 
-This variability among fiber elements leads to the phenomenon of \emph{projective incompatibility}, where inequivalent projections yield conflicting descriptions of the same mechanism.
-
-\section{Finite Lookahead and Dependency Bounds}
-
-The fundamental limitation of any computable secondary projection is \emph{finite lookahead}.  
-To compute an approximation $\Phi(G)$ to precision $\varepsilon$, a Type--2 Turing machine can inspect only finitely many symbols of $M$, $D$, and $K$.  
-This limitation is formalized as follows.
-
-\begin{definition}[Dependency Bound]
-Let $\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}^k$ be a computable secondary projection.  
-A function
+\begin{proposition}[Existence of Suprema Within Observational Classes]
+Let $\{\Phi_i\}_{i \in I}$ be a family of projections.  
+There exists a least projection $\Psi$ such that $\Phi_i \preceq \Psi$ for all
+$i$, given by mapping
 \[
-B_\Phi : \mathbb{Q}^+ \to \mathbb{N}
+\Psi(G) = (\Phi_i(G))_{i \in I}.
 \]
-is a dependency bound for $\Phi$ if for every rational $\varepsilon > 0$ and for all effective identities $G$ and $H$,
-\[
-(M_G, D_G, K_G){\upharpoonright}B_\Phi(\varepsilon)
-=
-(M_H, D_H, K_H){\upharpoonright}B_\Phi(\varepsilon)
-\]
-implies
-\[
-\|\Phi(G) - \Phi(H)\| < \varepsilon.
-\]
-\end{definition}
+\end{proposition}
 
-Thus $\Phi$ cannot distinguish between two identities whose prefixes agree beyond its dependency bound.
+Thus the set of structural projections is closed under arbitrary meets and under
+joins indexed by families of observables.  
+These operations supply a rich algebra of projections representing combined or
+coarsened observation systems.
 
-\begin{proposition}[Existence of Dependency Bounds]
-Every computable secondary projection on $\mathcal{G}_{\mathrm{eff}}$ admits a computable dependency bound.
+\section{Collapse as an Extremal Projection}
+
+The collapse map sits at a special position in the lattice.
+
+\begin{proposition}[Collapse Maximizes Information Loss]
+Let $\Phi$ be any structural projection whose codomain is $[0,1]$ or any space
+encoding only classical magnitude.  
+Then
+\[
+\Phi \preceq \pi.
+\]
 \end{proposition}
 
 \begin{proof}
-By a standard result in computable analysis (see Weihrauch), any computable function from a compact represented space is effectively uniformly continuous.  
-The product space $\mathcal{X}$ is compact, and $\mathcal{G}_{\mathrm{eff}}$ inherits this representation.  
-Therefore, for each $\varepsilon > 0$, there exists an $N$ such that inspecting any input beyond $N$ cannot affect the output by more than $\varepsilon$.  
-The function that maps $\varepsilon$ to such an $N$ is computable and provides a dependency bound.
+If $\pi(G)=\pi(H)$, then $G$ and $H$ share the same classical magnitude.
+Any projection $\Phi$ depending only on magnitude cannot distinguish $G$ from
+$H$.  
+Thus $\Phi(G)=\Phi(H)$, establishing $\Phi \preceq \pi$.
 \end{proof}
 
-The dependency bound $B_\Phi(\varepsilon)$ formalizes the finite observational horizon of $\Phi$.
+Collapse is therefore the \emph{coarsest} projection that still computes
+classical real values.  
+It discards all meta information and all unselected digit positions.
 
-\section{Uniformity for Finite Families}
+In contrast, projections that detect selector properties, digit densities, meta
+patterns, or statistical features typically refine collapse.
 
-The diagonalizer of Chapter~8 must evade a \emph{finite} set of projections simultaneously, which requires a uniform horizon of observation.
+\section{Locality, Prefix Dependence, and Tail Freedom}
 
-\begin{definition}[Uniform Dependency Bound]
-Let $\mathcal{P} = \{ \Phi_1, \dots, \Phi_m \}$ be a finite family of computable secondary projections.  
-A function $B_{\mathcal{P}} : \mathbb{Q}^+ \to \mathbb{N}$ is a uniform dependency bound if it is a dependency bound for each $\Phi_i$.
-\end{definition}
+Because structural projections are prefix-determined, they are insensitive to
+arbitrarily large modifications in the tail that preserve a sufficiently long
+prefix.  
+This principle underlies the diagonalization arguments of Part~IV.
 
-\begin{proposition}
-Every finite family of computable secondary projections admits a uniform dependency bound.
+\begin{proposition}[Tail Freedom]
+Let $\Phi$ be a structural projection.  
+For any $G \in \mathcal{X}$ and any $\varepsilon>0$, there exists $n$ such that
+if $H$ agrees with $G$ on the first $n$ coordinates of each layer, then
+$\Phi(G)$ and $\Phi(H)$ lie within $\varepsilon$ in the metric on $Y$.
 \end{proposition}
 
 \begin{proof}
-Let $B_{\Phi_i}$ be a dependency bound for $\Phi_i$.  
-Define
-\[
-B_{\mathcal{P}}(\varepsilon)
-=
-\max_{1 \le i \le m} B_{\Phi_i}(\varepsilon).
-\]
-This maximum is computable and valid for all projections in the family.
+Prefix-determined maps are continuous in the product topology, which is defined
+by agreement on sufficiently long prefixes.  
+The statement is a restatement of continuity.
 \end{proof}
 
-A uniform bound means that if we modify a mechanism strictly beyond $B_{\mathcal{P}}(\varepsilon)$, then no projection in $\mathcal{P}$ can detect the modification at precision $\varepsilon$.
-
-\section{The Limit of Finite Observation}
-
-The existence of dependency bounds implies intrinsic limitations on what secondary projections can measure.
-
-\begin{proposition}[Arbitrariness of Coordinates]
-No finite family of secondary projections can fully recover the internal structure of a generative identity.  
-For every finite family $\mathcal{P}$, there exist distinct effective identities $G$ and $H$ that agree on all projections in $\mathcal{P}$ to arbitrary precision but differ at infinitely many coordinates.
-\end{proposition}
-
-\begin{proof}
-This follows from the Structural Incompleteness Theorem proved in Part~IV.  
-Given $\mathcal{P}$ and $\varepsilon > 0$, modify $G$ in the tail beyond $B_{\mathcal{P}}(\varepsilon)$ to obtain $H$ that differs infinitely often from $G$ but produces projection values within $\varepsilon$ under each $\Phi \in \mathcal{P}$.
-\end{proof}
-
-Thus secondary projections act as incomplete coordinate systems, revealing only finite fragments of the structure of effective generative identities.
+Thus structural projections have intrinsic limitations: they cannot fully
+capture differences that arise only in the distant tail.  
+This aligns with their role as \emph{observables}, not full descriptions.
 
 \section{Outlook}
 
-This chapter establishes the computational and analytical limitations of secondary projections.  
-Chapter~7 develops concrete examples such as densities, entropies, and selector-growth summaries, illustrating projective incompatibility.  
-These phenomena culminate in the diagonalizer of Chapter~8, which exploits finite lookahead to evade all finite families of projections and demonstrate structural incompleteness.
+The lattice of projections provides a structured vocabulary for describing
+observable properties of generative identities and for comparing their
+informational strength.  
+Collapse occupies an extremal position: it is the coarsest projection that still
+yields classical magnitude.
+
+Chapter~7 introduces \emph{computable} structural projections, obtained by
+imposing finite lookahead and algorithmic constraints on the observation
+process.  
+Chapter~8 develops the phenomenon of projective incompatibility, showing that
+different projection families may fundamentally disagree about the structure of
+a single collapse fiber.  
+Together, these chapters form the backbone of Part~III's measurement theory.

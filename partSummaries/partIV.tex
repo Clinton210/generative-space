@@ -1,26 +1,54 @@
-\part*{Summary of Part IV: Structural Incompleteness}
+\part{Structural Incompleteness}
 
-Part~IV develops the central impossibility results of the generative framework.
-Chapter~8 constructs the meta-diagonalizer, an effective generative identity
-designed to evade any finite family of computable secondary projections.  
-The construction relies on the finite-prefix dependency bounds established in
-Part~III: by matching a reference generator on all positions that observers can
-inspect, and altering only the unobserved tail, the diagonalizer introduces
-structural changes that no projection in the family can detect until it is too
-late.  
-Index alignment ensures that these tail modifications preserve the digit
-subsequence encoding the classical value.
+\chapter*{Summary of Part IV: Structural Incompleteness}
+\addcontentsline{toc}{chapter}{Summary of Part IV: Structural Incompleteness}
 
-Chapter~9 applies this mechanism to prove the \emph{Structural Incompleteness
-Theorem}.  
-The theorem shows that no finite collection of computable secondary projections
-can classify an effective collapse fiber or distinguish all effective
-generators that represent the same real number.  
-Collapse preserves classical magnitude, but every other computable invariant is
-limited by finite lookahead.  
-As a result, the internal structure of generative identities cannot be recovered
-or fully described by any finite coordinate system.
+Part~IV establishes the central impossibility results of the generative
+framework.  The preceding part developed a rich theory of structural
+projections—continuous and computable maps that extract partial information from
+generative identities.  This part shows that such observations, no matter how
+carefully designed or combined, are fundamentally insufficient for recovering
+the full internal structure of an effective generator.  Collapse fibers are
+simply too large, and computable observers too limited, for any finite family of
+projections to classify them.
 
-Together, these chapters establish structural incompleteness as an intrinsic
-feature of the generative space and reveal the profound information loss caused
-by the collapse map.
+\medskip
+
+\textbf{Chapter~9 constructs the meta-diagonalizer.}
+Given a computable real $x$ and a reference identity $H \in
+\mathcal{F}_{\mathrm{eff}}(x)$, the meta-diagonalizer produces an effective
+identity $G^*$ that matches $H$ on every prefix that any projection in a finite
+family can observe, while diverging in its tail structure in a controlled,
+fiber-preserving way.  
+The construction uses three core ingredients:
+\begin{itemize}
+    \item the finite lookahead of computable projections (Part~III),
+    \item uniform dependency bounds for finite families of observers,
+    \item a sewing procedure that aligns digit-selection indices to preserve
+          classical magnitude.
+\end{itemize}
+The result is a generator that is observationally identical to $H$ for all
+computable observers in the family but structurally distinct in ways they
+cannot detect.
+
+\medskip
+
+\textbf{Chapter~10 proves the Structural Incompleteness Theorem.}
+For any computable real $x$ and any finite collection of computable structural
+projections, there exist two distinct effective identities in the collapse fiber
+$\mathcal{F}_{\mathrm{eff}}(x)$ that no projection in the family can
+distinguish.  
+Equivalently, no finite computable coordinate system can classify the effective
+fiber of any computable real number.  
+Magnitude $\pi(G)$ is therefore the only invariant that fully survives collapse;
+every other computable invariant is necessarily partial.
+
+\medskip
+
+Together, Chapters~9 and~10 show that collapse fibers cannot be compressed into
+finite lists of structural coordinates.  The internal geometry of an effective
+generator always contains infinitely many degrees of freedom invisible to any
+finite observational horizon.  
+This result forms the conceptual bridge to Part~V, where the real line is
+reinterpreted as a quotient space arising from collapse, and the continuum is
+understood as a lossy image of a much richer symbolic manifold.

@@ -1,12 +1,55 @@
-\part*{Summary of Part III: Secondary Coordinates and Observational Limits}
+\part{Structural Projection Theory}
 
-Part~III examines the role of secondary projections, which provide coordinate systems for describing internal features of generative identities beyond classical magnitude.  
-Chapter~6 defines secondary projections as continuous or computable functionals on the generative space and establishes their finite-prefix dependency bounds.  
-These bounds reflect the fundamental limitation that each computable projection can inspect only a finite initial segment of an effective identity to produce any fixed-precision approximation.
+\chapter*{Summary of Part III: Structural Projection Theory}
+\addcontentsline{toc}{chapter}{Summary of Part III: Structural Projection Theory}
 
-Chapter~7 develops concrete examples of secondary coordinate systems, including digit and meta frequency vectors, entropy-type statistics, local variation measures, and mixer complexity.  
-These projections reveal distinct and sometimes incompatible aspects of hybrid and ghost identities.  
-This mismatch of perspectives is called the Rashomon effect: different projections give different views of the same generative mechanism.
+Part~III develops the mathematical theory of \emph{structural projections}:
+maps that extract partial numerical information from generative identities.
+These projections formalize the act of “observing’’ internal structure beyond
+classical magnitude.  The goal of this part is twofold: to establish the
+topological and order-theoretic foundations of projection-based measurement, and
+to determine the limits of what can be recovered from such observations.
 
-Together, these results show that secondary projections capture only partial information about internal structure.  
-Their finite dependence properties set the stage for the diagonalizer construction and the impossibility results developed in Part~IV.
+\medskip
+
+\textbf{Chapter~6 introduces the projection lattice.}
+A structural projection is defined as a continuous map
+\[
+\Phi : \mathcal{X} \to \mathbb{R}^k
+\]
+whose value depends on symbolic structure but is invariant under all
+irrelevant coordinate changes.  Classical collapse $\pi$ appears as the
+minimal projection that preserves classical magnitude and simultaneously as the
+maximally lossy projection in the entire lattice.  This lattice perspective
+establishes the conceptual separation between the \emph{geometry of values}
+encoded by $\pi$ and the \emph{geometry of structure} encoded by other
+projections.
+
+\medskip
+
+\textbf{Chapter~7 introduces computable secondary projections} by imposing
+Type--2 computability constraints.  The key result is the finite-lookahead
+principle: any computable projection can inspect only a finite prefix of an
+effective generator when producing approximations of fixed precision.  This
+leads to explicit \emph{dependency bounds} that quantify the observational
+horizon of each computable coordinate system.
+
+\medskip
+
+\textbf{Chapter~8 develops projective incompatibility.}
+Concrete families of projections—digit frequencies, meta-layer statistics,
+local-variation measures, and selector-based complexity—are shown to highlight
+mutually incompatible aspects of generative structure.  Distinct identities
+within a single collapse fiber can be simultaneously distinguished by one
+projection and indistinguishable under another.  This structural misalignment
+across projections is the first sign that generative structure cannot be
+compressed into a finite coordinate system.
+
+\medskip
+
+Together, these chapters establish the mathematical theory of structural
+projections: their lattice, their topological constraints, their computational
+limitations, and the ways in which their perspectives clash.  This prepares the
+ground for the diagonalization arguments of Part~IV, where finite families of
+computable projections are shown to be inherently incapable of classifying
+effective generative identities.

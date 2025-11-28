@@ -2,125 +2,169 @@
 
 \section{Introduction}
 
-Chapter~4 introduced hybrid generative identities, whose selectors choose the digit layer with positive asymptotic density.  
-Hybrid mechanisms form the dense regime of the generative space, where the information encoding classical magnitude is distributed across a nontrivial fraction of the timeline.
+Chapter~4 analyzed hybrid identities, whose selectors choose the digit layer on a
+set of positive lower density.  
+Hybrid mechanisms occupy the high-density end of the selector spectrum, where
+the information encoding classical magnitude is distributed across a substantial
+portion of the timeline.
 
-This chapter develops the complementary regime of \emph{null-density generators}.  
-A null-density generator collapses to a classical real number using a selector that chooses the digit layer infinitely often but with asymptotic digit density equal to zero.  
-In this regime the meta layer dominates the canonical output, yet the sparse digit positions still encode a precise classical magnitude.
+This chapter develops the complementary regime: \emph{null-density generators}.
+A null-density generator selects the digit layer infinitely often, ensuring that
+collapse is well-defined, but does so at vanishing asymptotic density.  
+In this regime the meta layer dominates the canonical output, yet the sparse
+digit positions still encode a precise classical real number.
 
-Null-density behavior illustrates the extreme flexibility of the collapse map.  
-It shows that the information content of a real number can be embedded in a set of positions of vanishing density, leaving most of the mechanism unconstrained and available for additional meta-information.  
-This chapter formalizes null-density generators, proves their existence in both full and effective fibers, and connects their structure to sparse subshifts in symbolic dynamics.
+Null-density behavior demonstrates the expressive flexibility of collapse.  
+Magnitude information can be encoded in a sparse subsequence of the timeline,
+leaving the overwhelming majority of coordinates unconstrained.  
+This allows entire regions of the mechanism to carry additional structure that is
+invisible to classical magnitude but becomes relevant for secondary invariants
+and structural projections.
+
+The goal of this chapter is to formalize null-density generation, establish its
+prevalence in both full and effective fibers, analyze its shift dynamics, and
+contrast it with hybrid behavior.  
+These results complete the classification of selector regimes that underlies
+Part~III’s projection-theoretic analysis and Part~IV’s diagonalizer.
 
 \section{Digit Sparsity and Null-Density Structure}
 
-To guarantee that a null-density generator still represents a real number, we require infinitely many digit selections, even though their density tends to zero.
+A null-density generator represents a real number through a selector that chooses
+the digit layer rarely but still infinitely often.
 
 \begin{definition}[Null-Density Generator]
-A generative identity $G = (M,D,K)$ is a null-density generator if
-\begin{itemize}
-    \item the selector $M$ chooses the digit layer infinitely often, and
-    \item the digit density satisfies
+A generative identity $G = (M,D,K)$ is a \emph{null-density generator} if
+\begin{enumerate}
+    \item $M$ selects the digit layer infinitely often, and  
+    \item its digit density satisfies
     \[
     \eta(G)
     =
-    \liminf_{n \to \infty}
+    \liminf_{n\to\infty}
     \frac{1}{n}
-    \bigl|\{\, 0 \le k < n : M(k)=D \,\}\bigr|
+    \bigl|\{\,0 \le k < n : M(k)=D \,\}\bigr|
     =
     0.
     \]
-\end{itemize}
+\end{enumerate}
 \end{definition}
 
-Thus $M$ contains arbitrarily long runs of meta selections punctuated by rare digit selections.
+Thus the distances between successive digit selections grow without bound.
+The resulting canonical output consists almost entirely of meta symbols.
 
-\begin{remark}[Connection to Symbolic Dynamics]
-From the viewpoint of symbolic dynamics, the selector sequences of null-density generators lie in subshifts of low combinatorial complexity.  
-If the gaps between digit selections grow without bound, the resulting subshift has topological entropy zero.  
-This behavior contrasts with hybrid identities, where the selector often belongs to a subshift with positive entropy.
+\begin{remark}[Symbolic-Dynamic Perspective]
+From the standpoint of symbolic dynamics, a null-density selector belongs to a
+subshift of extremely low combinatorial complexity.  
+If the gaps between digit selections diverge, the selector subshift has
+topological entropy zero.  
+This contrasts sharply with many hybrid selectors, which may belong to
+positive-entropy subshifts.
 \end{remark}
 
 \section{Existence in Full Fibers}
 
-Despite their sparse structure, null-density generators can represent any classical real number.
+Null-density behavior is compatible with any classical magnitude.
 
-\begin{proposition}[Null-Density Generators in Full Fibers]
-For every $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains infinitely many null-density generators.
+\begin{proposition}[Null-Density Generators in Fibers]
+\label{prop:nd-fiber}
+For every $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains infinitely many
+null-density generators.
 \end{proposition}
 
 \begin{proof}
-Fix a base-$b$ expansion $(x_j)$ of $x$.  
-Let $S = \{ j^2 : j \ge 1 \}$ and define the selector $M$ so that $M(n)=D$ precisely when $n \in S$.  
-Since the number of squares below $n$ is approximately $\sqrt{n}$, the density of $S$ is
-\[
-\lim_{n \to \infty} \frac{|S \cap [0,n)|}{n} = 0.
-\]
-Thus any identity using this selector is a null-density generator.
+Let $(x_j)$ be a base-$b$ expansion of $x$.  
+Let $S = \{ j^2 : j \ge 1 \}$ and define the selector $M$ by $M(n)=D$ if
+$n \in S$ and $M(n)=K$ otherwise.  
+The number of squares below $n$ satisfies $|S \cap [0,n)| \approx \sqrt{n}$, so
+$\eta(G)=0$ for any identity $G$ using this selector.
 
-Define $D(j^2) = x_j$ and assign $D(n)$ arbitrarily for $n \notin S$.  
-Choose $K$ arbitrarily.  
-Varying $K$ yields infinitely many distinct null-density generators in $\mathcal{F}(x)$.
+Define $D(j^2)=x_j$ and assign $D(n)$ arbitrarily for $n\notin S$.  
+Choose any meta sequence $K$.  
+All such mechanisms collapse to $x$, and varying $K$ yields infinitely many
+distinct null-density generators in $\mathcal{F}(x)$.
 \end{proof}
 
-This demonstrates that the encoding of magnitude is independent of selector density.
+Sparse selectors therefore impose no restriction on which real numbers may be
+represented.
 
 \section{Null-Density Generators in the Effective Core}
 
-The construction above is effective because the sparse selector pattern $j \mapsto j^2$ is computable.
+The construction above remains valid in the effective setting because the sparse
+selector pattern $n=j^2$ is computable.
 
-\begin{proposition}
-If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ contains effective null-density generators.  
-If $x \notin \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
+\begin{proposition}[Effective Null-Density Generation]
+\label{prop:nd-effective}
+If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ contains effective
+null-density generators.  
+If $x$ is not computable, $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
 \end{proposition}
 
 \begin{proof}
-Let $(x_j)$ be a computable base-$b$ expansion of $x$.  
-Define $M(n)=D$ exactly when $n=j^2$ for some $j$.  
-The set of squares is computable, so $M$ is computable and has density zero.
+Let $(x_j)$ be a computable expansion of $x$.  
+Define a selector $M$ that chooses $D$ exactly at positions $j^2$.  
+The set of squares is recursive, so $M$ is computable and satisfies $\eta(G)=0$.
 
-Define $D(j^2) = x_j$ and define $D(n)$ arbitrarily elsewhere.  
-Since $j \mapsto j^2$ is computable and strictly increasing, its range is recursive, so $D$ is computable.  
-Choose any computable meta sequence $K$.  
-The resulting identity $G=(M,D,K)$ is effective and collapses to $x$.
+Define $D(j^2)=x_j$ and set $D(n)$ arbitrarily elsewhere; this is computable
+because the map $j \mapsto j^2$ is computable and strictly increasing.  
+Let $K$ be any computable sequence.  
+Then $G = (M,D,K)$ is effective and collapses to $x$.
 \end{proof}
 
-\section{Sparse Dynamics and Shift Behavior}
+Thus null-density generators exist at both the full and effective levels.
 
-Null-density patterns interact predictably with the shift map $\sigma$ introduced in Chapter~3.  
-Unlike hybrid identities, whose density properties may depend on long-term stationarity, null-density behavior is shift-invariant.
+\section{Sparse Dynamics Under the Shift}
 
-\begin{proposition}
-If $G$ is a null-density generator, then $\sigma(G)$ is also a null-density generator.
+Null-density behavior interacts predictably with shift dynamics.
+
+\begin{proposition}[Shift Invariance of Null Density]
+If $G$ is a null-density generator, then the shifted identity $\sigma(G)$ is also
+a null-density generator.
 \end{proposition}
 
 \begin{proof}
-Let $A_n = |\{ 0 \le k < n : M(k)=D \}|$.  
-For the shifted identity $\sigma(G)$, the corresponding count is either $A_{n+1}$ or $A_{n+1}-1$.  
-Since $A_n/n \to 0$, the same holds for $(A_{n+1})/n$.  
-Thus $\eta(\sigma(G)) = 0$.
+Let
+\[
+A_n = |\{\,0 \le k < n : M(k)=D\,\}|.
+\]
+For the shifted selector, the corresponding count is either $A_{n+1}$ or
+$A_{n+1}-1$.  
+Since $A_n/n \to 0$, the same holds for $A_{n+1}/n$, and thus
+$\eta(\sigma(G))=0$.
 \end{proof}
 
-This invariance highlights the dynamical stability of sparse selector patterns.
+Null-density selectors are therefore dynamically stable under the shift, in
+contrast to certain hybrid selectors whose density properties may vary under
+block codings or local transformations.
 
 \section{Contrast With Hybrid Generators}
 
-Hybrid and null-density identities form two structural extremes in the generative space.
+Hybrid and null-density identities form two structural extremes within collapse
+fibers:
 
 \begin{itemize}
-    \item \textbf{Hybrid identities} have $\eta(G) > 0$.  
-    They use the digit layer frequently and distribute magnitude information across many positions.
-    \item \textbf{Null-density identities} have $\eta(G)=0$.  
-    They use the digit layer rarely, allowing the meta layer to dominate the canonical output.
+    \item \textbf{Hybrids ($\eta>0$):} magnitude information is distributed over
+    a positive-density set of positions; meta information is interwoven with the
+    digit layer.
+    \item \textbf{Null-density generators ($\eta=0$):} the digit layer appears
+    sparsely; almost all coordinates of the mechanism are unconstrained by
+    collapse.
 \end{itemize}
 
-These regimes illustrate the phenomenon of projective incompatibility discussed in Chapter~7.  
-A projection that summarizes digit-frequency behavior distinguishes hybrids from null-density generators, whereas a projection that measures gap growth cannot distinguish hybrids effectively.  
-This complementarity plays a key role in the diagonalizer construction of Chapter~8, which exploits tail modifications switching between high- and low-density regimes to evade finite collections of projections.
+These regimes exemplify the tension at the core of Part~III: different
+projection families respond differently to sparsity and density.  
+Digit-density projections separate hybrids from null-density generators, whereas
+other invariants may fail to do so.  
+This mismatch is a precursor to the projective incompatibility results of
+Chapter~8 and to the diagonalizer of Chapter~9, which exploits the ability to
+switch between high- and low-density patterns in the tail.
 
 \section{Outlook}
 
-Null-density generators complete the classification of internal selector regimes initiated in Chapter~4.  
-Together, hybrid and null-density mechanisms illustrate the range of internal structure that can occur within a single collapse fiber.  
-Part~III turns to the problem of measurement: how computable coordinate systems capture fragments of this structure and why no finite family of such systems can classify generative identities.
+Null-density generators complete the basic classification of selector regimes.
+Together with hybrid identities, they illustrate the full range of internal
+freedom present in collapse fibers.  
+These contrasting behaviors motivate the structural projections developed in
+Part~III, where we investigate how secondary coordinates detect or miss these
+internal patterns.  
+The expressive power and limitations of such projections form the foundation for
+the incompleteness results of Part~IV.

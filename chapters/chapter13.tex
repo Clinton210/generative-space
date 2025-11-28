@@ -1,0 +1,207 @@
+\chapter{Entropy Balance as a Secondary Invariant}
+
+\section{Introduction}
+
+Extended invariants quantify internal structure that collapse ignores.  
+The most fundamental of these invariants is the \emph{entropy balance}
+$\eta(G)$, which measures the long-term density with which the selector chooses
+the digit layer.  
+This invariant distinguishes hybrid, intermediate, and null-density behaviors
+within a single collapse fiber and provides the simplest example of a
+computable, non-collapsing generative coordinate.
+
+Entropy balance is the archetype of a secondary invariant:  
+it is prefix-determined, continuous, computable, and sensitive to the internal
+structure of the mixer.  
+This chapter formalizes entropy balance within the projection-theoretic
+framework of Chapters~6–12 and establishes its role as a canonical generative
+coordinate.
+
+\section{Digit Density and Entropy Balance}
+
+The selector $M(n)$ chooses at each position whether the digit layer or the meta
+layer contributes the symbol to the canonical output.  
+The long-term behavior of this choice determines how frequently the digit layer
+is used.
+
+\begin{definition}[Digit Density / Entropy Balance]
+For a generative identity $G=(M,D,K)$, the \emph{entropy balance} is
+\[
+\eta(G)
+=
+\liminf_{n\to\infty}
+\frac{1}{n}\, \bigl|\{\,0\le k<n : M(k)=D\,\}\bigr|.
+\]
+\]
+\end{definition}
+
+The term “entropy balance’’ reflects that a higher digit-selection frequency
+injects more base-$b$ entropy into the canonical output, while a lower frequency
+shifts structural load toward the meta layer.
+
+\begin{remark}
+The use of $\liminf$ ensures that $\eta$ is defined for all selector sequences,
+including oscillatory and irregular patterns.
+\end{remark}
+
+\section{Continuity and Prefix Dependence}
+
+Entropy balance is determined by the long-run behavior of the selector, but it
+still satisfies the continuity and prefix-determination conditions required of a
+structural projection.
+
+\begin{proposition}[Prefix-Determined Continuity]
+\label{prop:eta-continuity}
+The map $G \mapsto \eta(G)$ is continuous on $\mathcal{X}$.
+\end{proposition}
+
+\begin{proof}
+For any $\varepsilon>0$, choose $N$ such that if two selectors agree on the
+first $N$ positions, then their finite-sample digit frequencies in the first
+$N$ steps differ by at most $\varepsilon$.  
+Since $\eta(G)$ is approximated from below by such finite-sample frequencies,
+agreement on the prefix determines the $\liminf$ to within $\varepsilon$.
+\end{proof}
+
+Entropy balance is therefore a legitimate generative invariant.
+
+\section{Computability of Entropy Balance}
+
+Entropy balance is computable because:
+
+\begin{enumerate}
+    \item the selector $M$ is computable on the effective core,
+    \item digit-frequency estimates converge uniformly from below,
+    \item the $\liminf$ can be approximated by a computable sequence of rational
+    lower bounds.
+\end{enumerate}
+
+\begin{proposition}
+The entropy balance map
+\[
+\eta : \mathcal{G}_{\mathrm{eff}} \to [0,1]
+\]
+is computable in the sense of Type--2 computability.
+\end{proposition}
+
+\begin{proof}
+The prefix frequency
+\[
+F_n(G) = \frac{1}{n} \bigl|\{0\le k<n : M(k)=D\}\bigr|
+\]
+is computable from the prefix $M{\upharpoonright}n$.  
+Since $\eta(G)=\liminf_n F_n(G)$, the value of $\eta(G)$ can be approximated to
+any precision by computing a sufficiently long prefix.
+\end{proof}
+
+Thus $\eta$ is an effective secondary invariant.
+
+\section{Entropy Balance as a Structural Projection}
+
+Entropy balance fits neatly into the projection lattice introduced in
+Chapter~6.
+
+\begin{proposition}[Projection-Theoretic Interpretation]
+The map $G \mapsto \eta(G)$ is the infimum (in the projection lattice) of the
+family of finite-frequency projections
+\[
+\Phi_n(G) = \frac{1}{n} \bigl|\{0\le k<n : M(k)=D\}\bigr|.
+\]
+\]
+\end{proposition}
+
+\begin{proof}
+Each $\Phi_n$ is a structural projection depending only on the first $n$
+coordinates.  
+Their pointwise $\liminf$ is $\eta(G)$, which is the greatest lower bound of
+the family in the refinement order.
+\end{proof}
+
+This viewpoint clarifies how entropy balance captures the long-run behavior of
+the selector while respecting the finite-observation constraints of structural
+projections.
+
+\section{Behavior Inside Collapse Fibers}
+
+Entropy balance varies widely within each collapse fiber.
+
+\begin{proposition}
+For every $x \in [0,1]$, the set
+\[
+\{\eta(G) : G \in \mathcal{F}(x)\}
+\]
+is the entire interval $[0,1]$.
+\end{proposition}
+
+\begin{proof}
+For any $\alpha \in [0,1]$, construct a selector that chooses the digit layer
+with lower density $\alpha$ and align its digit-selected positions with the
+expansion of $x$.  
+This yields a generator in $\mathcal{F}(x)$ with entropy balance $\alpha$.
+\end{proof}
+
+Thus entropy balance is highly non-collapsing: it completely varies over each
+fiber.
+
+In the effective setting:
+
+\begin{proposition}
+For any computable real $x$ and any computable $\alpha \in [0,1]$, the effective
+fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains an effective generator $G$ with
+$\eta(G)=\alpha$.
+\end{proposition}
+
+\begin{proof}
+Choose a computable selector whose digit-selection density is $\alpha$ (for
+example, periodic or block-structured).  
+Assign digits and meta symbols algorithmically as in earlier constructions.
+\end{proof}
+
+Thus $\eta$ is a refining invariant in the sense of Chapter~12: it separates
+infinitely many effective identities representing the same real number.
+
+\section{Hybrid and Null-Density Structure Revisited}
+
+Entropy balance provides a unified language for the behaviors introduced in
+Part~II:
+
+\begin{itemize}
+    \item \textbf{Hybrid identities:} $\eta(G)>0$.  
+    Digit usage has positive asymptotic density.
+    \item \textbf{Null-density identities:} $\eta(G)=0$.  
+    Digit usage is sparse and dominated by the meta layer.
+\end{itemize}
+
+Both classes appear in every collapse fiber.  
+Entropy balance quantifies the spectrum between the two extremes.
+
+\section{Compatibility with the Diagonalizer}
+
+Entropy balance is sensitive to tail modifications but only within its
+prefix-determined dependency structure.  
+Thus the meta-diagonalizer can produce generators with prescribed entropy
+balances that still evade any finite family of other projections.
+
+\begin{proposition}
+Entropy balance is compatible with the diagonalizer: for any
+computable $\alpha\in[0,1]$, there exists $G^\#\in\mathcal{F}_{\mathrm{eff}}(x)$
+with $\eta(G^\#)=\alpha$ such that $G^\#$ diagonalizes against any given finite
+family of computable projections.
+\end{proposition}
+
+\begin{proof}
+Construct a tail identity $A$ with entropy balance $\alpha$ and use it as the
+tail source in the diagonalizer construction of Chapter~9.
+\end{proof}
+
+Thus entropy balance survives the incompleteness landscape as a robust extended
+coordinate.
+
+\section{Outlook}
+
+Entropy balance is the simplest non-collapsing invariant and the foundation for
+constructing higher-order generative coordinates.  
+The next chapter introduces the \emph{fluctuation index}, which measures
+irregularity and long-range variation in selector behavior.  
+This tertiary invariant refines entropy balance, providing a richer perspective
+on selector complexity within collapse fibers.

@@ -1,153 +1,195 @@
-\chapter{Projective Incompatibility}
+\chapter{Secondary Projections and Finite Lookahead}
 
 \section{Introduction}
 
-Chapter~6 introduced secondary projections as computable functionals on the generative space $\mathcal{X}$ and established their inherent limitation: each projection can observe only a finite prefix of an effective identity. While the collapse map $\pi$ reduces the entire mechanism to its classical magnitude, secondary projections provide partial coordinate systems that summarize internal structural features of a generative identity.
+Chapter~6 introduced structural projections as continuous, prefix-determined
+maps from the generative space $\mathcal{X}$ into metric spaces.  
+These projections model what an observer can discern from a generative identity
+based on finite information at each stage.  
+Among all such projections, those that are \emph{effective} or
+\emph{computationally realizable} play a central role in the structural
+incompleteness phenomenon of Part~IV.
 
-This chapter develops concrete examples of secondary projections, including frequency statistics, entropy measures, and selector-based complexity. These examples illustrate that different projections highlight different aspects of the same identity, often in mutually incompatible ways. The tension among these coordinate systems is formalized as \emph{projective incompatibility}: no single finite family of computable projections can capture the full structure of even a single collapse fiber.
+This chapter develops the theory of \emph{secondary projections}: computational
+observers that operate under finite lookahead and must decide their outputs on
+the basis of bounded prefixes of the generative identity.  
+These projections formalize the idea that a computable measurement can only
+inspect finitely many coordinates of $(M,D,K)$ before committing to an output
+value.
+
+We begin by formalizing dependency bounds, which restrict how far a projection
+may look into a mechanism.  
+We then show that secondary projections are continuous, prefix-determined maps
+that fit naturally into the projection lattice of Chapter~6.  
+Finally, we connect finite lookahead to stabilization properties that will be
+exploited by the meta-diagonalizer of Chapter~9.
+
+\section{Dependency Bounds}
+
+A computable observer cannot examine an unbounded portion of the mechanism when
+deciding its output on a given precision scale.  
+The dependency of a projection at resolution $\varepsilon$ must therefore be
+limited by a computable function.
+
+\begin{definition}[Dependency Bound]
+Let $\Phi : \mathcal{X} \to \mathbb{R}$ be a structural projection.  
+A \emph{dependency bound} for $\Phi$ is a function
+\[
+B_\Phi : (0,\infty) \to \mathbb{N}
+\]
+such that for all $G,H \in \mathcal{X}$ and all $\varepsilon > 0$, if
+\[
+(M_G{\upharpoonright}B_\Phi(\varepsilon),\,
+ D_G{\upharpoonright}B_\Phi(\varepsilon),\,
+ K_G{\upharpoonright}B_\Phi(\varepsilon))
+=
+(M_H{\upharpoonright}B_\Phi(\varepsilon),\,
+ D_H{\upharpoonright}B_\Phi(\varepsilon),\,
+ K_H{\upharpoonright}B_\Phi(\varepsilon)),
+\]
+then
+\[
+|\Phi(G) - \Phi(H)| < \varepsilon.
+\]
+\end{definition}
+
+Dependency bounds express the idea that agreement on a finite prefix suffices to
+determine the projection’s output to within a prescribed tolerance.
 
 \begin{remark}
-Informally, this phenomenon is sometimes compared to the ``Rashomon effect,'' in which different observers give incompatible accounts. In the generative framework, the incompatibility is objective: it arises from the orthogonality of computable projections and the vast size of collapse fibers.
+For computable projections, the function $B_\Phi$ must itself be computable.
+This aligns with the Type--2 framework used to analyze $\mathcal{G}_{\mathrm{eff}}$.
 \end{remark}
 
-\section{Frequency-Based Coordinates}
+\section{Computable Structural Projections}
 
-One of the simplest forms of secondary information is the asymptotic distribution of symbols. Because secondary projections must be continuous and computable, we use limsup versions of frequencies to avoid undefined limits.
+We now restrict attention to projections that can be computed with finite
+lookahead at any precision level.
 
-\begin{definition}[Digit Frequency Vector]
-Let $G = (M,D,K)$ with digit density $\eta(G) > 0$.  
-The \emph{digit frequency vector} of $G$ is the vector
-\[
-\mathbf{f}_D(G)
-=
-\left(
-\limsup_{n\to\infty}
-\frac{1}{n}
-\left|
-\{ 0 \le k < n : M(k)=D,\; D(k)=i \}
-\right|
-\right)_{i=0}^{b-1}.
-\]
-If $\eta(G)=0$, the digit frequency vector is defined to be the zero vector.
-\end{definition}
-
-\begin{definition}[Meta Frequency Vector]
-The \emph{meta frequency vector} of $G$ is
-\[
-\mathbf{f}_K(G)
-=
-\left(
-\limsup_{n\to\infty}
-\frac{1}{n}
-\left|
-\{ 0 \le k < n : M(k)=K,\; K(k)=a \}
-\right|
-\right)_{a\in\Sigma}.
-\]
-\end{definition}
-
-Both vectors are computable whenever $G$ belongs to the effective core. These coordinates measure large-scale symbol prevalence but do not distinguish between sequences with identical symbol counts arranged in different patterns.
-
-\section{Entropy and Local Variation}
-
-To detect structural differences that frequency statistics ignore, we consider entropy and variation-based projections derived from the canonical output.
-
-\begin{definition}[Block Entropy Coordinate]
-Fix $m \ge 1$.  
-Let $A$ denote the alphabet of the canonical output $X(G)$.  
-The $m$-block entropy of $G$ is
-\[
-H_m(G)
-=
--
-\sum_{w\in A^m}
-p_G(w)\,\log p_G(w),
-\]
-where $p_G(w)$ is the upper limiting frequency of the block $w$ in $X(G)$.
-\end{definition}
-
-Block entropy captures the multiplicity of admissible patterns of length $m$.  
-Hybrid and null-density generators may produce canonical outputs with dramatically different entropy profiles, even when they collapse to the same real number.
-
-\begin{definition}[Local Variation Statistic]
-The \emph{local variation} of $G$ is
-\[
-V(G)
-=
-\limsup_{n\to\infty}
-\frac{1}{n}
-\bigl|
-\{\, 0 \le k < n : X(G)_k \neq X(G)_{k+1} \,\}
-\bigr|.
-\]
-\end{definition}
-
-Variation measures the frequency of symbol changes.  
-It is sensitive to how often the selector $M$ switches between layers, making it a natural projection for distinguishing hybrids from sparse patterns.
-
-\section{Selector-Based Complexity}
-
-The selector sequence $M$ is itself a source of structural variation.  
-While Kolmogorov complexity is not computable, we can employ computable compression schemes as continuous proxies.
-
-\begin{definition}[Selector Complexity]
-Let $\mathcal{C}$ be a fixed computable compression algorithm.  
-Let $\chi_n$ be the binary encoding of $M(0),\dots,M(n-1)$.  
-The \emph{selector complexity} of $G$ is
-\[
-C_M(G)
-=
-\limsup_{n\to\infty}
-\frac{|\mathcal{C}(\chi_n)|}{n}.
-\]
-\end{definition}
-
-This coordinate discriminates between periodic, low-complexity selectors and selectors with pseudo-random or combinatorially rich structure.
-
-\begin{remark}
-Null-density generators may have low selector complexity (e.g., $M(k)=D$ only when $k=j^2$), while hybrid identities can achieve arbitrarily high selector complexity.  
-This divergence plays a key role in Chapter~8.
-\end{remark}
-
-\section{Projective Incompatibility}
-
-We now state the fundamental incompatibility theorem.  
-It articulates that although any two effective identities in a fiber can be distinguished by an appropriately chosen projection, no \emph{fixed} finite family of projections can distinguish every pair.
-
-\begin{theorem}[Projective Incompatibility]
-\label{thm:projective-incompatibility}
-Let $x\in[0,1]$ and consider the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$.
-
+\begin{definition}[Computable Structural Projection]
+A projection $\Phi : \mathcal{X} \to \mathbb{R}$ is a \emph{computable structural
+projection} if:
 \begin{enumerate}
-\item For any two distinct $G,H \in \mathcal{F}_{\mathrm{eff}}(x)$, there exists a computable secondary projection $\Phi$ such that $\Phi(G)\neq \Phi(H)$.
-
-\item For every finite family of computable secondary projections $\mathcal{P}$, there exist distinct $G',H' \in \mathcal{F}_{\mathrm{eff}}(x)$ such that
-\[
-\Phi(G') = \Phi(H') \quad\text{for all } \Phi\in\mathcal{P}.
-\]
+    \item $\Phi$ is continuous (prefix-determined), and
+    \item $\Phi$ admits a computable dependency bound $B_\Phi$.
 \end{enumerate}
-\end{theorem}
+\end{definition}
 
-The first part asserts the richness of the internal structure of a fiber: every distinction can be captured by some computable projection.  
-The second part asserts that no \emph{finite} set of projections can capture all such distinctions.  
-Together these statements formalize projective incompatibility.
-
-\begin{example}
-Let $G$ be a hybrid generator with $\eta(G)>0$ and let $H$ be a null-density generator with $\eta(H)=0$ collapsing to the same $x$.
+Examples include:
 
 \begin{itemize}
-    \item Under digit density, $G$ and $H$ are easily distinguished.
-    \item Under meta entropy, one may construct $H$ so that $H_m(G)=H_m(H)$ for several block lengths.
-    \item Under selector complexity, $G$ may exhibit high complexity while $H$ is nearly low-complexity.
+    \item digit-frequency maps that estimate the proportion of positions where
+    $M(k)=D$,
+    \item meta-frequency projections based on the limiting behavior of $K(n)$,
+    \item pattern detectors that check whether certain finite blocks occur
+    infinitely often,
+    \item maps associated with effective limit-average or limsup conventions.
 \end{itemize}
 
-These conflicting observations illustrate the structural incompatibility of projections.
+These observers represent the algorithmic analogue of the general structural
+projections introduced in Chapter~6.
+
+\section{Finite-Prefix Stabilization}
+
+A secondary projection must stabilize on any effective mechanism: once the
+prefix is long enough, the observer’s output changes only within arbitrarily
+small tolerances.
+
+\begin{proposition}[Prefix Stabilization]
+\label{prop:prefix-stabilization}
+Let $\Phi$ be a computable structural projection with dependency bound
+$B_\Phi$.  
+For any $G \in \mathcal{X}$ and any sequence $H_n \in \mathcal{X}$ satisfying
+\[
+H_n{\upharpoonright}B_\Phi(\varepsilon)
+=
+G{\upharpoonright}B_\Phi(\varepsilon)
+\]
+for all sufficiently large $n$, we have
+\[
+\Phi(H_n) \to \Phi(G).
+\]
+\end{proposition}
+
+\begin{proof}
+Fix $\varepsilon>0$.  
+By the definition of $B_\Phi$, agreement on the prefix of length
+$B_\Phi(\varepsilon)$ forces the projection values to lie within $\varepsilon$.  
+Thus $\Phi(H_n)$ lies in the $\varepsilon$-ball around $\Phi(G)$ for all
+sufficiently large $n$.  
+Since $\varepsilon$ is arbitrary, the claimed convergence follows.
+\end{proof}
+
+Prefix stabilization is the key computational constraint that the
+meta-diagonalizer exploits in Part~IV.  
+If a family of projections shares compatible dependency bounds, then they all
+stabilize on sufficiently long prefixes of a given mechanism.
+
+\section{Secondary Coordinates as Projections}
+
+Many quantities of interest in the generative framework arise as secondary
+coordinates defined via observables on the selector or meta layer.  
+These coordinates are naturally realized as computable structural projections.
+
+\begin{example}[Digit Density Estimates]
+Let $F_n(G)$ denote the digit frequency in the first $n$ positions:
+\[
+F_n(G)
+=
+\frac{1}{n}|\{\,0 \le k < n : M(k)=D\,\}|.
+\]
+For fixed $n$, the map $G \mapsto F_n(G)$ depends only on the prefix
+$M{\upharpoonright}n$ and is therefore a computable structural projection.
 \end{example}
+
+\begin{example}[Meta-Pattern Indicators]
+For a fixed block $w \in \Sigma^k$, define $\Phi_w(G)$ to be $1$ if $w$ appears
+in $K$ infinitely often and $0$ otherwise.  
+Determining $\Phi_w(G)$ requires only checking sufficiently long prefixes to
+decide whether occurrences of $w$ continue; it is therefore a secondary
+projection with a computable dependency bound.
+\end{example}
+
+These examples illustrate that secondary coordinates fit squarely into the
+projection lattice of Chapter~6, but occupy the computationally accessible
+region of that lattice.
+
+\section{Interaction with the Projection Lattice}
+
+Computable structural projections inherit the lattice operations of
+Chapter~6.  
+In particular:
+
+\begin{itemize}
+    \item the meet $\Phi \wedge \Psi$ is computable if $\Phi$ and $\Psi$ are,
+    since its output is the pair $(\Phi(G),\Psi(G))$,
+    \item finite joins of computable projections are computable,
+    \item dependency bounds combine effectively:
+    \[
+    B_{\Phi \wedge \Psi}(\varepsilon)
+    =
+    \max\{\, B_\Phi(\varepsilon), B_\Psi(\varepsilon) \,\}.
+    \]
+\end{itemize}
+
+However, unlike the full lattice, not every supremum of computable projections
+is computable: infinite joins may fail to admit a uniform computable dependency
+bound.
+
+This limitation plays an important role in the incompatibility phenomena
+developed in Chapter~8 and is a precursor to the diagonalization argument of
+Chapter~9.
 
 \section{Outlook}
 
-This chapter has introduced concrete secondary projections and demonstrated their mutual incompatibility.  
-The key structural insight is that collapse fibers are too large and too varied to be fully resolved by any finite set of computable coordinates.
+Secondary projections model the behavior of effective observers in the
+generative framework.  
+They operate with finite lookahead, stabilize on sufficiently long prefixes, and
+fit naturally into the lattice of structural projections.
 
-In Chapter~8 we construct the \emph{meta-diagonalizer}, a generative identity that exploits dependency bounds and finite lookahead to evade any finite set of projections.  
-This construction yields the Structural Incompleteness Theorem, the central result of Part~IV.
+Chapter~8 develops the phenomenon of \emph{projective incompatibility}: different
+projection families can impose incompatible prefix constraints, preventing any
+single mechanism from satisfying all of them simultaneously.  
+This conflict drives the diagonalizer of Chapter~9, which systematically evades
+finite families of computable projections by exploiting the tail freedom inherent
+in the generative space.
