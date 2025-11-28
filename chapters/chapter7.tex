@@ -1,152 +1,136 @@
 \chapter{Projective Incompatibility}
+\label{chap:projective-incompatibility}
 
 \section{Introduction}
 
-Structural projections measure different aspects of a generative identity.
-Some observe digit frequencies, others observe spacing patterns, and others
-extract classical information through collapse.  
-Although each projection examines only a finite prefix at a fixed precision,
-their requirements may conflict.  
-It may be impossible for a single finite prefix of an identity to satisfy the
-demands of multiple projections at once.
+Structural projections extract different aspects of a generative identity.
+Some measure digit frequencies, others examine spacing patterns, and others
+recover classical information through collapse. Although each projection
+depends only on a finite prefix of the generative identity at any prescribed
+precision, their finite-prefix requirements may conflict.
 
-This chapter formalizes this notion of conflict.  
-We show that distinct observers often require incompatible finite structures
-from the selector and digit streams.  
-This incompatibility is a central ingredient in the construction of the
-meta-diagonalizer in Part IV, where controlled divergence from reference
-identities is enforced by exploiting these conflicting constraints.
+This chapter develops a formal notion of such conflicts. Distinct observers
+often demand incompatible local structures from the selector or digit streams.
+These incompatibilities arise from the way dependency bounds determine the
+finite windows that observers examine, and they play a central role in the
+structural indistinguishability results of Chapter
+\texttt{\ref{chap:indistinguishability}}. They express the basic limitation
+that no finite window can satisfy all observers simultaneously.
 
-The conceptual roots of this phenomenon appear in symbolic dynamics, where
-different ergodic or combinatorial invariants may demand incompatible blocks
-to appear in a shift space.  
-Here the same idea arises in the generative setting but is applied directly to
-observational functionals rather than to subshifts.
+The phenomenon is analogous to familiar situations in symbolic dynamics, where
+different combinatorial or ergodic invariants require incompatible blocks to
+appear in a shift space. Here the same principle applies to observational
+functionals rather than to subshifts.
 
 \section{Observer Requirements}
 
 Let $\Phi$ and $\Psi$ be two structural projections with dependency bounds
-$B_\Phi$ and $B_\Psi$.  
-Fix a desired precision $\varepsilon > 0$.  
-Then any identity $G$ must satisfy:
+$B_{\Phi}$ and $B_{\Psi}$. Fix a precision $\varepsilon > 0$. To approximate
+$\Phi(G)$ and $\Psi(G)$ within $\varepsilon$, we must satisfy
 \[
-\Phi(G) \text{ determined by } G[0..B_\Phi(\varepsilon)], 
-\quad
-\Psi(G) \text{ determined by } G[0..B_\Psi(\varepsilon)].
+G[0..B_{\Phi}(\varepsilon)] \text{ determines } \Phi(G),
+\qquad
+G[0..B_{\Psi}(\varepsilon)] \text{ determines } \Psi(G).
 \]
-
-If the projections measure unrelated aspects of the identity, these
-finite prefixes may be required to contain contradictory patterns.
+If the projections extract unrelated forms of structural information, these
+finite windows may demand incompatible patterns.
 
 \subsection*{Example: density versus spacing}
 
-Digit density projections may require the initial prefix to contain many
-positions where $M(n) = D$.  
-Conversely, spacing projections (such as fluctuation observers) may require
-long runs where $M(n) = K$ in order to witness large gaps between selected
-positions.  
-A single finite block cannot simultaneously exhibit both high density and
-large gaps at the same index range.
+Let $\Phi$ be a digit density projection and let $\Psi$ be a spacing or
+fluctuation projection. To approximate $\Phi(G)$ with small error, the initial
+prefix must contain many positions where $M(n) = D$. To approximate $\Psi(G)$
+with small error, the prefix must contain a long interval in which
+$M(n)=K$, so that the gap ratio can be measured accurately. A single prefix
+cannot realize both requirements simultaneously.
 
-This tension reflects a basic fact from combinatorics on words: local
-constraints on symbol frequencies and local constraints on block lengths need
-not be simultaneously satisfiable.
+This type of conflict is common in combinatorics on words. Local constraints
+on symbol frequencies and local constraints on block lengths do not always
+admit a common finite witness.
 
 \section{Formal Definition of Incompatibility}
 
-\begin{definition}[Projective Incompatibility]
-Two projections $\Phi$ and $\Psi$ are \emph{incompatible at precision}
-$\varepsilon$ if no prefix of length
+\begin{definition}[Projective incompatibility]
+Two projections $\Phi$ and $\Psi$ are incompatible at precision $\varepsilon$
+if no prefix of length
 \[
-L = \max\{ B_\Phi(\varepsilon), B_\Psi(\varepsilon) \}
+L = \max\bigl\{ B_{\Phi}(\varepsilon), B_{\Psi}(\varepsilon) \bigr\}
 \]
-can satisfy both of the following:
-\begin{enumerate}
-    \item the prefix forces $\Phi(G)$ to lie within $\varepsilon$ of its target
-          value, and
-    \item the prefix forces $\Psi(G)$ to lie within $\varepsilon$ of its target
-          value.
-\end{enumerate}
+can simultaneously satisfy the finite-prefix requirements needed to approximate
+both projections to within $\varepsilon$ at their target values.
 \end{definition}
 
-Incompatibility expresses a structural impossibility: the observers demand
-conflicting patterns in the same finite window.
+Incompatibility therefore expresses a finite informational impossibility:
+within the window $[0..L]$ the observers demand conflicting symbolic patterns.
 
 \section{Concrete Instances}
 
-Although incompatibility is common in practice, one example illustrates the
-idea clearly.
+The density versus spacing example above is representative. Let
+$N_{\Phi} = B_{\Phi}(\varepsilon)$ and $N_{\Psi} = B_{\Psi}(\varepsilon)$.
+If we examine the prefix $[0..L]$ with
+$L = \max(N_{\Phi}, N_{\Psi})$, then a density requirement may force many
+selected positions in this interval, whereas a spacing requirement may force a
+long unselected block. These demands cannot be met by the same prefix.
 
-\subsection*{Example: Frequent selection and large gaps}
+This incompatibility is entirely local. It depends only on the finite window
+used by each observer, not on the behavior of the generative identity outside
+this window.
 
-Let $\Phi$ be the selector density projection and $\Psi$ the fluctuation
-projection.  
-Fix $\varepsilon = 0.05$.
+\section{Finite Families of Observers}
 
-To force $\Phi(G)$ within $\varepsilon$ of a positive density, the prefix must
-contain many instances of $M(n) = D$.  
-To force $\Psi(G)$ within $\varepsilon$ of a large index gap ratio, the prefix
-must contain a long contiguous run where $M(n) = K$.
-
-Let $N_\Phi = B_\Phi(\varepsilon)$ and $N_\Psi = B_\Psi(\varepsilon)$.  
-Consider the interval $[0..L]$ with $L = \max(N_\Phi, N_\Psi)$.  
-If the prefix contains the required density of selected positions for
-$\Phi$, it cannot contain the long block of unselected positions required by
-$\Psi$ within the same interval.  
-Thus the two requirements are incompatible at precision $\varepsilon$.
-
-This incompatibility is a finite-informational fact and does not depend on
-the behavior of the identity beyond the prefix.
-
-\section{Incompatibility Across a Family}
-
-Finite families of projections may also exhibit internal conflicts.
+Finite families of projections may also contain internal conflicts.
 
 \begin{proposition}
-Let $\mathcal{P}$ be a finite family of projections.  
-If $\mathcal{P}$ contains two projections that are incompatible at some
-precision $\varepsilon$, then no identity can satisfy the entire family at
-precision $\varepsilon$ using a single prefix of length $B_{\mathcal{P}}(\varepsilon)$.
+Let $\mathcal{P}$ be a finite family of projections. If $\mathcal{P}$
+contains two projections that are incompatible at precision $\varepsilon$,
+then no prefix of length
+\[
+B_{\mathcal{P}}(\varepsilon)
+=
+\max_{\Phi \in \mathcal{P}} B_{\Phi}(\varepsilon)
+\]
+can satisfy all projections in the family at precision $\varepsilon$.
 \end{proposition}
 
 \begin{proof}
-Since $B_{\mathcal{P}}(\varepsilon)$ is the maximum dependency bound for the
-family, any prefix satisfying all observers must satisfy each one
-individually.  
-If two observers impose incompatible requirements on that prefix, no such
-prefix exists.
+Any prefix satisfying the family must satisfy each member individually. If two
+members of the family impose incompatible requirements on the prefix, there is
+no prefix that satisfies all of them.
 \end{proof}
 
-This proposition explains why the diagonalizer construction can always force
-deviations.  
-Whenever a finite family of observers demands a uniform prefix, one can
-choose tails that generate divergent structures not simultaneously detectable
-by the family.
+Thus incompatibility propagates across finite families of observers.
 
-\section{Implications for Diagonalization}
+\section{Lack of Interval Structure in Projective Images}
 
-The diagonalizer of Part IV depends critically on the existence of
-projections whose finite precision requirements cannot all be realized in the
-same prefix.  
-This incompatibility creates space for controlled tail divergence.  
-Once an identity has satisfied observers up to the required prefix length, the
-unobservable tail may be modified to enforce structural differences from
-reference generators.
+In earlier versions of this chapter it was natural to expect that the image of
+a collapse fiber under a projection forms an interval. This is not the case.
+Continuous maps from zero-dimensional compact spaces can have highly
+disconnected images (see \cite{Kechris}). Therefore no general structural
+statement can be made about $\Phi(\mathcal{F}(x))$ beyond continuity.
 
-This mechanism reflects standard arguments in computable analysis, where
-different constraints on prefixes of names of real numbers may conflict.  
-Here the conflicts arise between observers on generative identities and serve
-as the engine of the incompleteness phenomenon.
+This observation reinforces the finite-prefix viewpoint: projection behavior is
+governed by dependency bounds, not by global geometric structure of the fiber.
+
+\section{Implications for Indistinguishability}
+
+Prefix incompatibility has a direct consequence for observational limits.
+Since different observers require different finite windows, the prefixes needed
+to satisfy growing families of observers also grow. This monotonic expansion
+of prefix requirements implies that observers reveal only finite structural
+information about generative identities.
+
+In Chapter \texttt{\ref{chap:indistinguishability}} we use this observation to
+construct identities that agree with a reference identity on all relevant
+prefixes for any finite family of observers, while differing in their
+tails. This shows that generative structure beyond these prefixes remains
+undetectable.
 
 \section{Summary}
 
-Different projections impose distinct finite structural requirements on
-generative identities.  
-When these requirements cannot be satisfied simultaneously in a single
-prefix, we say the projections are incompatible.  
-Such conflicts provide the combinatorial foundation for the diagonalizer,
-allowing one to satisfy observers finitely while enforcing divergence beyond
-their range of observation.
-
-In the next chapter we develop the alignment and sewing tools needed to
-exploit this incompatibility inside the effective collapse fiber.
+Different structural projections impose distinct finite-prefix constraints. When
+these constraints cannot be realized by a single prefix, the projections are
+incompatible. This incompatibility is a local symbolic phenomenon and reflects
+the fact that observers examine finite windows of the generative identity at
+finite precision. These finite-prefix effects provide the conceptual foundation
+for the indistinguishability results of Chapter
+\texttt{\ref{chap:indistinguishability}}.

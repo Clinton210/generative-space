@@ -1,220 +1,163 @@
-\chapter{Extended Invariants: Entropy Balance and Fluctuation}
+\chapter{Extended Invariants: Asymptotic Density and Fluctuation}
+\label{chap:invariants-eta-phi}
 
 \section{Introduction}
 
-The collapse map sends a generative identity to its classical real value, but
-two identities that collapse to the same number may differ significantly in
-their internal structure.  
-Part IV showed that no finite collection of continuous observers can recover
-this structure.  
-In this chapter we introduce two extended invariants that capture broad
-features of selector behavior: the entropy balance and the fluctuation index.
+The collapse map records the classical real value determined by a generative
+identity, but collapse does not reveal the internal structure of the selector
+stream. Part IV established that no finite collection of continuous observers
+can recover this structure. In this chapter we introduce two extended
+invariants that capture large scale features of selector behavior: the
+asymptotic density of exposed digits and the fluctuation index of successive
+gaps.
 
-Both invariants measure long term properties of the selector stream.  
-The entropy balance describes how frequently digits are exposed, while the
-fluctuation index measures the relative size of gaps between successive
-selected positions.  
-Neither invariant is continuous in the product topology, and this reflects a
-deeper fact: asymptotic statistical quantities on symbolic streams are rarely
-continuous unless they depend only on finite windows.  
-What can be proved, and what is sufficient for our purposes, is that these
-quantities satisfy natural semicontinuity properties.
+Both invariants depend only on the selector stream and measure its
+asymptotic behavior. They are tail dependent and therefore invisible to any
+fixed finite observer. Their extreme sensitivity to tail modification is a
+consequence of the product topology on $\mathcal{X}$: agreement on long
+prefixes imposes no restrictions on long term behavior. As a result, both
+invariants are discontinuous everywhere and take all admissible values inside
+any nonempty open set.
 
-\section{Entropy Balance}
+\section{Asymptotic Density}
 
-Let $G = (M, D, K)$ be a generative identity.  
-Define the indicator function
+Let $G = (M,D,K)$ be a generative identity. Define the indicator
 \[
-\chi_M(n)
-  =
+\chi_{M}(n)
+=
 \begin{cases}
-1 & M(n) = D,\\
-0 & M(n) = K.
+1 & \text{if } M(n)=D,\\[3pt]
+0 & \text{if } M(n)=K.
 \end{cases}
 \]
-
-The entropy balance (or simply the balance) of $G$ is the limit inferior
+The asymptotic density (or balance) of $G$ is the lower limit
 \[
 \eta(G)
-  = \liminf_{N \to \infty}
-      \frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n).
+=
+\liminf_{N\to\infty}
+\frac{1}{N}\sum_{n=0}^{N-1}\chi_{M}(n).
 \]
-
-This quantity measures the lower asymptotic density with which the selector
-exposes digits.  
-Hybrid identities have positive balance, while null density identities have
-balance zero.
+This invariant measures the long term frequency of exposed digits. Positive
+values correspond to selectors with sustained exposure, while $\eta(G)=0$
+indicates arbitrarily long intervals of nonselection.
 
 \subsection{Basic properties}
 
-The balance has two elementary properties.
-
+The quantity $\eta(G)$ has two simple features:
 \begin{itemize}
-    \item It is invariant under tail modification beyond finite prefixes.
-    \item It depends only on the selector stream $M$.
+    \item it depends only on the selector stream $M$,
+    \item it is invariant under modifications of $M$ beyond any finite prefix.
 \end{itemize}
-
-The balance is therefore an extended invariant that captures structural
-information invisible to the collapse map.
-
-\subsection{Lower semicontinuity}
-
-The balance is not continuous with respect to the product topology.  
-Small modifications to the selector can introduce arbitrarily large gaps or
-arbitrarily many selected positions within a long prefix, which can shift the
-density downward or upward.  
-However, balance satisfies a one sided estimate.
-
-\begin{proposition}[Lower Semicontinuity]
-Let $(G_k)$ converge to $G$ in the product topology.  
-Then
-\[
-\eta(G)
-  \le \liminf_{k \to \infty} \eta(G_k).
-\]
-\end{proposition}
-
-\begin{proof}
-Fix $\varepsilon > 0$.  
-Choose $N$ sufficiently large that
-\[
-\frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n)
-  < \eta(G) + \varepsilon.
-\]
-For all sufficiently large $k$, the identities $G_k$ agree with $G$ on the
-first $N$ symbols.  
-Hence
-\[
-\eta(G_k)
-  \ge \frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n)
-  > \eta(G) - \varepsilon.
-\]
-Taking the limit inferior gives the claim.
-\end{proof}
-
-The failure of full continuity is a structural fact, but lower
-semicontinuity is sufficient for all applications.
+Thus $\eta$ is an extended invariant that captures structure outside the reach
+of the collapse map.
 
 \section{Fluctuation Index}
 
-The fluctuation index measures relative gap size between selected digit
-positions.  
 Let
 \[
-n_0 < n_1 < n_2 < \cdots
+0 \le n_{0} < n_{1} < n_{2} < \dots
 \]
-be the indices at which $M(n) = D$ and define the successive gaps
+be the positions where $M(n)=D$. Define the successive gaps
 \[
-g_j = n_{j+1} - n_j.
+g_{j} = n_{j+1} - n_{j}.
 \]
-
-The fluctuation index of $G$ is the limit superior
+The fluctuation index of $G$ is the upper limit
 \[
 \phi(G)
-  = \limsup_{j \to \infty} \frac{g_j}{n_j}.
+=
+\limsup_{j\to\infty}\frac{g_{j}}{n_{j}}.
 \]
-
-The quantity $g_j$ measures the absolute size of the gap following the
-$j$th selected position, while the ratio $g_j / n_j$ measures the gap
-relative to the position in the stream.  
-High fluctuation indicates the presence of unusually large gaps between
-selected digits, relative to scale.
+The ratio $g_{j}/n_{j}$ measures the scale adjusted size of the gap following
+the $j$th selected digit. Large values indicate that the selector permits long
+intervals of nonselection relative to position.
 
 \subsection{Basic properties}
 
-The fluctuation index depends only on the selector stream and is unaffected by
-any tail modifications that do not alter the sequence of selected positions.
+Like $\eta$, the fluctuation index depends only on the selector stream and is
+unchanged by tail modifications that preserve the selected positions. Positive
+density selectors often yield small fluctuation. Sparse selectors can produce
+arbitrarily large fluctuation.
 
-The index captures the extent to which the selector allows sparse bursts of
-digit exposure.  
-Null density selectors typically have large fluctuation, while positive
-density selectors have small fluctuation in many cases.
+\section{Asymptotic Sensitivity and Nowhere Continuity}
 
-\subsection{Upper semicontinuity}
+Asymptotic invariants on symbolic streams are almost never continuous in the
+product topology. Agreement on finite prefixes places no constraints on tail
+behavior. The invariants $\eta$ and $\phi$ illustrate this phenomenon sharply:
+both are discontinuous at every point.
 
-As with $\eta$, the fluctuation index is not continuous.  
-A single large gap introduced in the tail can immediately increase the value
-of $\phi$.  
-However, the index satisfies upper semicontinuity.
-
-\begin{proposition}[Upper Semicontinuity]
-Let $(G_k)$ converge to $G$ in the product topology.  
-Then
-\[
-\phi(G)
-  \ge \limsup_{k \to \infty} \phi(G_k).
-\]
-\end{proposition}
+\begin{theorem}[Nowhere continuity of $\eta$]
+\label{thm:eta-nowhere}
+Let $U$ be a nonempty basic open set in $\mathcal{X}$. For every $\alpha$ in
+$[0,1]$ there exists an identity $G$ in $U$ with $\eta(G)=\alpha$.
+\end{theorem}
 
 \begin{proof}
-Suppose $\phi(G) < c$ for some $c$.  
-Then there exists $J$ such that
-\[
-\frac{g_j}{n_j} < c
-\quad\text{for all}\quad j \ge J.
-\]
-The selected positions $n_j$ are determined by the selector stream.  
-Agreement of $G_k$ with $G$ on sufficiently long prefixes ensures that the
-positions of the first $J$ selected digits match, and that the ratios
-$g_j / n_j$ for $j \le J$ match exactly.  
-Therefore for all sufficiently large $k$,
-\[
-\phi(G_k) < c.
-\]
-The desired inequality follows by taking the limit superior.
+Let $U$ be determined by a prefix $w$ of length $N$. Extend $w$ by constructing
+a selector tail whose asymptotic density equals $\alpha$. For rational
+$\alpha$ one may use a periodic sequence; for irrational $\alpha$ one may use
+a Sturmian sequence. The prefix contributes a bounded amount to the average,
+which vanishes as $N\to\infty$, so the full selector has asymptotic density
+$\alpha$.
 \end{proof}
 
-Upper semicontinuity reflects the fact that introducing a large gap is a
-finite event that persists under limits, while eliminating a large gap is a
-global tail operation that is not respected by the product topology.
+\begin{theorem}[Nowhere continuity of $\phi$]
+\label{thm:phi-nowhere}
+Let $U$ be a nonempty basic open set in $\mathcal{X}$. For every $\beta$ in
+$[0,\infty]$ there exists an identity $G$ in $U$ with $\phi(G)=\beta$.
+\end{theorem}
 
-\section{Selector Structure and Extended Invariants}
+\begin{proof}
+Let $U$ be determined by a prefix of length $N$. To obtain $\phi(G)=0$ select
+every position beyond $N$. To obtain a finite $\beta>0$ place selected digits
+at positions approximately satisfying $n_{j+1}\approx(1+\beta)n_{j}$. To
+obtain $\beta=\infty$ let $n_{j}=j!$ for large $j$. In all cases the prefix is
+respected and the tail determines the fluctuation index.
+\end{proof}
 
-The invariants $\eta$ and $\phi$ reveal two complementary aspects of selector
-behavior:
-\begin{itemize}
-    \item $\eta$ measures how frequently digits are exposed in a long term
-          sense,
-    \item $\phi$ measures how irregularly they are exposed relative to scale.
-\end{itemize}
-
-These quantities need not determine one another.  
-For example, a selector may have positive density but also have occasional
-large gaps, or a selector may have density zero but exhibit extremely regular
-spacing.  
-Both invariants occur densely in the generative space.
+These results show that $\eta$ and $\phi$ vary freely inside any open set.
+The invariants are asymptotically sensitive: arbitrarily small changes in the
+prefix leave room for arbitrary changes in the tail, and therefore arbitrary
+values of the invariants.
 
 \section{Extended Invariants Inside Collapse Fibers}
 
-Extended invariants vary widely inside a collapse fiber.  
-Fix a computable real $x$.  
-The fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains identities with:
+Collapse fibers contain identities with widely varying selector behavior. Fix
+a real number $x$. The fiber $\mathcal{F}(x)$ contains identities with:
 \begin{itemize}
-    \item positive balance,
-    \item zero balance,
-    \item small fluctuation indices,
-    \item arbitrarily large fluctuation indices.
+    \item every possible asymptotic density in $[0,1]$,
+    \item every possible fluctuation index in $[0,\infty]$.
 \end{itemize}
 
-This diversity follows from the fact that extended invariants depend only on
-the selector stream and are insensitive to positions where $M(n) = K$.  
-Given any selector behavior consistent with infinite digit selection, one may
-always construct an identity in the fiber by assigning the selected positions
-the digits of $x$ in the correct order.
+This follows by combining tail freedom inside collapse fibers with the
+constructions of Theorems \texttt{\ref{thm:eta-nowhere}} and
+\texttt{\ref{thm:phi-nowhere}}. Any selector stream with infinitely many
+selected positions can be combined with the canonical digits of $x$ to create
+a valid identity in the fiber. Thus extended invariant values occur densely
+throughout the fiber.
 
-Thus the fiber contains identities with all possible behaviors permitted by
-the definitions of $\eta$ and $\phi$.
+\section{Interpretation}
+
+The extended invariants $\eta$ and $\phi$ quantify aspects of generative
+structure invisible to collapse. They are determined entirely by the tail and
+are unaffected by finite-prefix perturbations. This aligns with the
+indistinguishability principle of Chapter
+\texttt{\ref{chap:indistinguishability}}: finite observers detect only finite
+prefixes and cannot see the asymptotic features described by $\eta$ and
+$\phi$.
+
+The discontinuity of these invariants therefore reflects a deep mismatch
+between the product topology and the asymptotic geometry of the selector
+stream. The product topology governs finite observation. The extended
+invariants measure infinite scale structure.
 
 \section{Summary}
 
-The entropy balance and fluctuation index extend the collapse map by assigning
-numerical values to the selector behavior of a generative identity.  
-Both invariants are discontinuous in the product topology but satisfy natural
-semicontinuity properties.  
-These quantities illustrate the diversity of selector patterns that arise
-inside collapse fibers and provide a bridge between the collapse quotient of
-Part V and the generative geometry of the next chapter.
+The asymptotic density $\eta$ and the fluctuation index $\phi$ are extended
+invariants that describe large scale features of selector behavior. Both are
+determined by the tail of the selector stream and are discontinuous at every
+point of $\mathcal{X}$. Within any open set, all admissible invariant values
+occur.
 
-In Chapter 13 we study geometric embeddings of extended invariants and discuss
-how these quantities characterize large scale features of the generative
-space.
+These invariants illustrate the asymptotic richness that survives inside
+collapse fibers and motivate the geometric study of invariant pairs in the
+next chapter.

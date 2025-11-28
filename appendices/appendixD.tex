@@ -1,42 +1,42 @@
-\chapter{Diagonalizer Construction Details}
+\chapter{Mimicry Construction Details}
+\label{appendix:mimicry}
 
 \section{Introduction}
 
-This appendix contains the full technical details of the meta diagonalizer
-constructed in the main text.  
-The purpose is to present the inductive machinery underlying the
-construction in a complete and self contained form.  
-We give precise definitions of stabilization indices, prefix bounds, and
-alignment points, and we verify the computability of the final identity.
+This appendix provides full technical details for the mimicry construction
+used in Chapter~9 to prove the Structural Indistinguishability Theorem. The
+goal is to construct a computable identity inside a collapse fiber that is
+distinct from a given reference identity but indistinguishable from it by any
+computable structural projection.
 
-Throughout, $x$ denotes a computable real number with canonical digit
-expansion $(x_j)_{j \ge 0}$, and $H$ is a fixed computable reference identity
-in the effective collapse fiber $\mathcal{F}_{\mathrm{eff}}(x)$.
+The construction uses three ingredients developed earlier in the text:
 
-We assume an enumeration of all computable structural projections
+\begin{itemize}
+    \item dependency bounds for structural projections,
+    \item alignment and sewing tools from Appendix~\ref{appendix:alignment-sewing},
+    \item the perfectness of effective collapse fibers.
+\end{itemize}
+
+Throughout, $x$ is a computable real with canonical digit expansion
+$(x_j)_{j \ge 0}$, and $H$ is a fixed computable identity in the effective
+fiber $\mathcal{F}_{\mathrm{eff}}(x)$. We assume a computable enumeration of
+all computable structural projections
 \[
 \Phi_0, \Phi_1, \Phi_2, \ldots,
 \]
-together with computable dependency bounds $B_k$ for each $\Phi_k$.
+each equipped with a computable dependency bound $B_k(\varepsilon)$.
 
 \section{Preliminaries}
 
 \subsection{Effective fibers}
 
-The set $\mathcal{F}_{\mathrm{eff}}(x)$ of computable identities that collapse
-to $x$ is a $\Pi^{0}_{1}$ class.  
-Elements of this class are represented by computable selector, digit, and meta
-streams whose canonical outputs agree with the expansion of $x$.
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
+$\Pi^{0}_{1}$ class containing all computable identities that collapse to $x$.
+It is perfect, so for any identity $H$ in the fiber and any finite prefix
+length $N$ there exists another computable identity $A$ in the fiber that
+agrees with $H$ on $[0..N]$ but differs at some later coordinate.
 
-\subsection{Divergent identities}
-
-For each $k$ and each rational $\varepsilon > 0$, the Divergence Lemma from
-Chapter~9 guarantees the existence of a computable identity $A \in
-\mathcal{F}_{\mathrm{eff}}(x)$ such that
-\[
-|\Phi_k(A) - \Phi_k(H)| > 3\varepsilon.
-\]
-This provides the source of divergence at stage $k$.
+This property supplies the tail variation needed for the mimicry construction.
 
 \subsection{Selection indices}
 
@@ -44,207 +44,193 @@ For any identity $G$, let
 \[
 n_0^{G} < n_1^{G} < n_2^{G} < \cdots
 \]
-denote the selection indices corresponding to the positions where $M(n) = D$.
+list the indices where $M(n)=D$. Sewing operations from
+Appendix~\ref{appendix:alignment-sewing} use selection indices to align the
+tails of two identities inside the same collapse fiber.
 
-\section{Inductive Construction Overview}
+\section{Overview of the Mimicry Construction}
 
 We construct a sequence
 \[
 G_0, G_1, G_2, \ldots
 \]
-of computable identities satisfying:
+with the following properties:
 
 \begin{enumerate}
     \item $G_0 = H$,
     \item $G_k \in \mathcal{F}_{\mathrm{eff}}(x)$ for all $k$,
-    \item $G_{k+1}$ extends $G_k$ on a prefix of computable length $N_{k+1}$,
-    \item $G_{k+1}$ introduces divergence on projection $\Phi_k$,
-    \item the limit identity $G^{\sharp}$ defined coordinatewise is computable.
+    \item $G_{k+1}$ extends $G_k$ on a prefix of length $N_{k+1}$,
+    \item for each $k$,
+    \[
+    |\Phi_k(G_{k+1}) - \Phi_k(H)| < \varepsilon_k,
+    \]
+    \item $G_{k+1}$ is chosen to be distinct from $H$ by varying the tail.
 \end{enumerate}
+
+The limit identity $G^{\sharp}$ will agree with $H$ on arbitrarily long
+prefixes and therefore be indistinguishable from $H$ by every computable
+projection, while still being symbolically distinct.
 
 \subsection{Tolerances}
 
-Define the sequence of tolerances
+Define the error tolerances
 \[
-\varepsilon_k = 2^{-(k+2)},
+\varepsilon_k = 2^{-(k+2)}.
 \]
-which is computable, strictly decreasing, and tends to zero.
+These form a computable, strictly decreasing sequence tending to zero.
 
 \subsection{Prefix stabilization lengths}
 
 Define
 \[
 N_0 = 0,
+\qquad
+N_{k+1} = \max \left( N_k,\, B_k(\varepsilon_k) \right) + 1.
 \]
-and inductively
-\[
-N_{k+1} = \max \left( N_k,\ B_k(\varepsilon_k) \right).
-\]
-This ensures that agreement on the first $N_{k+1}$ symbols forces
-agreement of $\Phi_k$ to within $\varepsilon_k$.
+Thus $N_{k+1}$ strictly increases and is computable. Agreement on
+$[0..N_{k+1}]$ guarantees agreement of $\Phi_k$ to within $\varepsilon_k$.
 
 \section{Inductive Step}
 
-Assume $G_k$ has been defined.  
-We construct $G_{k+1}$ in several stages.
+Assume $G_k$ has been defined.
 
-\subsection{Stage 1: Choosing the divergent identity}
+\subsection{Step 1: Preserving observer accuracy}
 
-By the Divergence Lemma, choose a computable identity
+The next identity $G_{k+1}$ must agree with $G_k$ (and therefore with $H$) on
+$[0..N_{k+1}]$. This ensures
+\[
+|\Phi_k(G_{k+1}) - \Phi_k(H)| < \varepsilon_k.
+\]
+
+\subsection{Step 2: Selecting a distinct tail inside the fiber}
+
+By perfectness of $\mathcal{F}_{\mathrm{eff}}(x)$, there exists a computable
+identity
 \[
 A_k \in \mathcal{F}_{\mathrm{eff}}(x)
 \]
 such that
 \[
-|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
+A_k[0..N_{k+1}] = H[0..N_{k+1}]
+\quad\text{and}\quad
+A_k \neq H.
 \]
 
-The identity $A_k$ will supply the tail divergence at stage $k$.
+This identity provides controlled tail variation while preserving collapse.
 
-\subsection{Stage 2: Locating an alignment index}
+\subsection{Step 3: Locating an alignment index}
 
 Let
 \[
-n_0^{G_k} < n_1^{G_k} < n_2^{G_k} < \cdots
+n_0^{G_k} < n_1^{G_k} < \cdots,
+\qquad
+n_0^{A_k} < n_1^{A_k} < \cdots
 \]
-and
-\[
-n_0^{A_k} < n_1^{A_k} < n_2^{A_k} < \cdots
-\]
-be the respective selection indices.
-
-Since $G_k$ exposes infinitely many digits, there exists $j_k$ such that
+denote the selection indices. Since both identities have infinitely many
+exposed digits, there exists $j_k$ such that
 \[
 n_{j_k}^{G_k} \ge N_{k+1}.
 \]
 
-By alignment (Lemma C.1), the digit exposed at $n_{j_k}^{G_k}$ in $G_k$ is the
-same as the digit exposed at $n_{j_k}^{A_k}$ in $A_k$, and both coincide with
-the digit $x_{j_k}$.
+By the alignment lemma in Appendix~\ref{appendix:alignment-sewing}, the digits
+exposed at these aligned positions coincide.
 
-\subsection{Stage 3: Sewing the tail}
+\subsection{Step 4: Sewing the tail}
 
-Define $G_{k+1}$ by
+Define
 \[
-G_{k+1}(n) =
+G_{k+1}(n)=
 \begin{cases}
 G_k(n) & n \le n_{j_k}^{G_k}, \\
 A_k(n - n_{j_k}^{G_k} + n_{j_k}^{A_k}) & n > n_{j_k}^{G_k}.
 \end{cases}
 \]
 
-\begin{itemize}
-    \item By construction, $G_{k+1}$ matches $G_k$ on all indices
-          $\le n_{j_k}^{G_k} \ge N_{k+1}$.
-    \item By the sewing lemma, $G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x)$.
-    \item By dependency bounds, $\Phi_k(G_{k+1})$ differs from $\Phi_k(G_k)$
-          by less than $\varepsilon_k$.
-    \item Since $A_k$ diverges by more than $3\varepsilon_k$ from $H$, the
-          final divergence of $G_{k+1}$ from $H$ remains at least
-          $\varepsilon_k$.
-\end{itemize}
+By the Full Sewing Lemma:
 
-Thus $G_{k+1}$ satisfies all inductive requirements.
+\begin{itemize}
+    \item $G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x)$,
+    \item $G_{k+1}[0..N_{k+1}] = G_k[0..N_{k+1}]$,
+    \item $\Phi_k(G_{k+1})$ lies within $\varepsilon_k$ of $\Phi_k(H)$,
+    \item $G_{k+1}$ differs from $H$ at some tail coordinate.
+\end{itemize}
 
 \section{Existence of the Limit Identity}
 
-\subsection{Coordinate stabilization}
-
-For each index $n$, there exists a stage $k$ such that
+For each index $n$, choose $k$ such that $N_k > n$. For all $m \ge k$,
 \[
-N_k > n.
+G_m(n) = G_k(n),
 \]
-Since $G_{k+1}$ and $G_k$ agree on all indices up to $N_{k+1} \ge N_k$, it
-follows that for all $m \ge k$,
+so the coordinate stabilizes. Define
 \[
-G_m(n) = G_k(n).
+G^{\sharp}(n) = \lim_{k\to\infty} G_k(n).
 \]
-Thus every coordinate stabilizes.
-
-\subsection{Definition of the limit}
-
-Define $G^{\sharp} \in \mathcal{X}^{*}$ by
-\[
-G^{\sharp}(n) = \lim_{k\to\infty} G_k(n),
-\]
-where the limit is understood as coordinatewise stabilization.
-
-The limit exists by the preceding argument.
 
 \subsection{Membership in the effective fiber}
 
-Every $G_k$ lies in $\mathcal{F}_{\mathrm{eff}}(x)$, and sewing preserves
-membership.  
-Since each $G_k$ exposes the canonical digits of $x$ at aligned positions, the
-same holds for the limit.  
-Thus
+Each $G_k$ collapses to $x$, and sewing preserves the canonical output. Thus
 \[
 G^{\sharp} \in \mathcal{F}_{\mathrm{eff}}(x).
 \]
 
-\section{Computability of the Diagonalizer}
+\subsection{Indistinguishability}
 
-\subsection{Computability of stabilization indices}
+For any computable projection $\Phi_m$, agreement of $G^\sharp$ and $H$ on
+prefixes of length at least $B_m(\varepsilon_k)$ ensures
+\[
+|\Phi_m(G^{\sharp}) - \Phi_m(H)| < \varepsilon_k
+\quad\text{for all } k \ge m.
+\]
+Therefore
+\[
+\Phi_m(G^{\sharp}) = \Phi_m(H)
+\quad\text{for all } m.
+\]
 
-The sequence $(N_k)$ is computable because:
+\subsection{Distinctness}
 
-\begin{itemize}
-    \item $B_k$ are computable dependency bounds,  
-    \item $\varepsilon_k$ is computable,  
-    \item $N_{k+1}$ depends only on $N_k$, $B_k(\varepsilon_k)$, and basic
-          arithmetic.
-\end{itemize}
+Since at each stage the tail is chosen to differ from $H$, one can ensure that
+$G^{\sharp} \neq H$ by avoiding a fixed forbidden coordinate or pattern.
 
-Thus $N_k$ is uniformly computable.
+\section{Computability}
 
-\subsection{Computing selection indices}
+\subsection{Computability of prefix bounds}
 
-For each computable identity, the selector stream is computable, so the
-selection indices are computable by scanning until the required number of
-$D$ symbols have been seen.
+The values $N_k$ are computable because the dependency bounds $B_k$ and the
+tolerances $\varepsilon_k$ are computable.
 
-Thus the indices $n_j^{G_k}$ and $n_j^{A_k}$ are computable.
+\subsection{Computability of alignment}
 
-\subsection{Computability of the sewing operation}
+Selection indices of computable identities are computable by scanning the
+selector until the $j$th exposure is found.
 
-Given $n$ and $k$, to compute $G_{k+1}(n)$:
+\subsection{Computability of sewing}
 
-\begin{itemize}
-    \item check whether $n \le n_{j_k}^{G_k}$,  
-    \item if so, return $G_k(n)$,  
-    \item otherwise, return the aligned symbol from $A_k$.
-\end{itemize}
+The sewing operation is computable coordinatewise using the computable indices
+$n_{j_k}^{G_k}$ and $n_{j_k}^{A_k}$.
 
-All needed values are computable, so $G_{k+1}$ is computable.
+\subsection{Computability of the limit}
 
-\subsection{Computability of the limit identity}
-
-For any fixed $n$, to compute $G^{\sharp}(n)$:
-
-\begin{itemize}
-    \item find $k$ such that $N_k > n$,  
-    \item output $G_k(n)$.
-\end{itemize}
-
-Since $N_k$ is computable and increasing without bound, this procedure is
-effective.
-
-Thus $G^{\sharp}$ is computable.
+To compute $G^{\sharp}(n)$, find $k$ with $N_k > n$ and output $G_k(n)$.
+Since $N_k$ grows without bound and is computable, this procedure yields a
+computable name for $G^{\sharp}$.
 
 \section{Summary}
 
-This appendix presented the full details of the diagonalizer construction:
+This appendix provided the full technical development of the mimicry
+construction:
 
 \begin{itemize}
-    \item the inductive construction of $(G_k)$,
-    \item the stabilization lengths $N_k$,
-    \item alignment indices $j_k$,
-    \item controlled sewing of tails,
-    \item preservation of collapse fibers,
-    \item computability of each $G_k$,
-    \item computability of the limit identity $G^{\sharp}$.
+    \item computation of stabilization lengths,
+    \item selection of distinct tails inside the collapse fiber,
+    \item alignment at selection indices,
+    \item sewing of tails while preserving collapse,
+    \item preservation of observer values via dependency bounds,
+    \item coordinatewise convergence,
+    \item computability of the limit identity.
 \end{itemize}
 
-These tools establish the existence of a computable identity in the collapse
-fiber of $x$ that agrees with a reference identity on all observed prefixes
-yet diverges along every computable structural projection.
+These tools establish the existence of a computable identity in
+$\mathcal{F}_{\mathrm{eff}}(x)$ that is observationally indistinguishable from
+a given identity but symbolically distinct, proving the Structural
+Indistinguishability Theorem.

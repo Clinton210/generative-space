@@ -1,156 +1,185 @@
-\chapter{Fiber Geometry and the Effective Core}
+\chapter{Collapse Fibers and Ambient Compactness}
+\label{chap:fibers}
 
-\section{Introduction}
+\section{The Ambient Generative Space}
 
-The collapse map $\pi : \mathcal{X}^* \to [0,1]$ associates to each
-digit-selecting generative identity a classical real number.  
-The purpose of this chapter is to study the structure of the fibers
+Let $\Sigma$ denote the finite alphabet used to encode the mixer, digit, and
+meta streams of a generative identity. The full generative space is the
+product
+\[
+\mathcal{X} = \Sigma^{\mathbb{N}}
+\]
+equipped with the product topology induced by the discrete topology on
+$\Sigma$. By Tychonoff's theorem, $\mathcal{X}$ is compact and metrizable. A
+convenient metric is
+\[
+d(G,G') = 2^{-N},
+\]
+where $N$ is the least index at which $G$ and $G'$ differ. This metric
+generates the product topology.
+
+We will often work with the subspace
+\[
+\mathcal{X}^{*}
+=
+\bigl\{
+G \in \mathcal{X} :
+M_G(n) = D \text{ for infinitely many } n
+\bigr\},
+\]
+consisting of identities that select infinitely many digits. The set
+$\mathcal{X}^{*}$ is a dense $G_{\delta}$ subset of $\mathcal{X}$ (see
+\cite{Kechris} or \cite{Weihrauch}). It is not closed, and therefore not
+compact.
+
+The distinction between $\mathcal{X}$ and $\mathcal{X}^{*}$ is important.
+Compactness arguments must take place in the ambient space $\mathcal{X}$.
+
+\section{Collapse Map and Closedness of Fibers}
+
+The collapse map
+\[
+\pi : \mathcal{X} \to [0,1]
+\]
+was defined in Chapter \texttt{\ref{chap:collapse}} by interpreting each identity
+as an instruction to select digits of the output real number. Since the output
+of $\pi$ depends only on the selected digits and these digits depend on finitely
+many coordinates of the generative identity when viewed at any fixed precision,
+the following fact is standard in symbolic dynamics.
+
+\begin{proposition}
+\label{prop:collapse-continuous}
+The collapse map $\pi$ is continuous with respect to the product topology on
+$\mathcal{X}$.
+\end{proposition}
+
+A proof may be found, for example, in Chapter 1 of \cite{LindMarcus} for shift
+spaces and in Section 6 of \cite{Weihrauch} for continuous operators on Cantor
+space.
+
+Since singletons in $[0,1]$ are closed, the collapse fiber
 \[
 \mathcal{F}(x) = \pi^{-1}(\{x\})
 \]
-and, in particular, their topological and effective properties.
+is a closed subset of the ambient generative space $\mathcal{X}$.
 
-A fiber contains all identities that produce the same classical value.  
-The collapse map obliterates most of the internal generative information,
-leaving behind a large space of identities sharing a single output.  
-Understanding this space is essential: the size and shape of fibers drive the
-projection theory of Part~III and the incompleteness phenomena of Part~IV.
+\begin{corollary}
+\label{cor:fiber-compact}
+For every $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is compact.
+\end{corollary}
 
-We show that each fiber is closed, uncountable, highly redundant, and
-topologically rich.  
-We then identify the \emph{effective fiber} and prove that it forms a
-nonempty $\Pi^0_1$ class.  
-This formalizes the computational structure of the identities surviving
-collapse.
+\begin{proof}
+The ambient space $\mathcal{X}$ is compact and $\mathcal{F}(x)$ is closed in
+$\mathcal{X}$, so $\mathcal{F}(x)$ is compact.
+\end{proof}
 
-\section{Fibers of the Collapse Map}
+This corrects the earlier intuition that compactness arises from
+$\mathcal{X}^{*}$. The effective subspace $\mathcal{X}^{*}$ is not compact.
+Compactness of the fiber is inherited from the ambient space $\mathcal{X}$.
 
-Fix $x \in [0,1]$ and consider the set
-\[
-\mathcal{F}(x) = \{\, G \in \mathcal{X}^* : \pi(G) = x \,\}.
-\]
-Two identities $G = (M,D,K)$ and $H = (M',D',K')$ lie in the same fiber if
-their canonical outputs agree:
-\[
-X(G) = X(H) = (x_j)_{j \ge 0},
-\]
-the base-$b$ expansion of $x$ we have fixed by convention.
+\section{The Effective Fiber and Its Position in the Ambient Space}
 
-Beyond these selected digits, the identities may differ arbitrarily.
-
-\subsection*{Closedness}
-
-Because $\pi$ is continuous and singletons $\{x\}$ are closed in $[0,1]$, each
-fiber is a closed subset of $\mathcal{X}^*$.  
-Fibers are therefore compact with respect to the product topology.
-
-\subsection*{Degrees of freedom}
-
-Let $(x_j)_{j \ge 0}$ denote the chosen expansion of $x$.  
-A generative identity $G$ belongs to $\mathcal{F}(x)$ precisely when:
-\begin{enumerate}
-    \item[(i)] the selector $M$ chooses infinitely many positions;
-    \item[(ii)] the digit stream $D$ satisfies
-          $D(n_j) = x_j$ at the selected positions;
-    \item[(iii)] the meta stream $K$ is arbitrary.
-\end{enumerate}
-
-Between successive selected positions, the identity may place any digit.  
-Similarly, at each index where $M(n) = K$, the meta-symbol $K(n)$ is free.
-Thus
-\[
-\mathcal{F}(x)
-  \cong \{D,K\}^{\mathbb{N}} \times \{0,\ldots,b-1\}^{\mathbb{N}}
-        \times \Sigma^{\mathbb{N}}
-\]
-subject to a countable collection of fixed coordinates enforcing
-$D(n_j) = x_j$.  
-The remaining coordinates form a product of Cantor spaces.
-Hence every fiber is uncountable, totally disconnected, and perfect.
-
-\section{The Effective Fiber}
-
-We now restrict attention to the effective core.  
-For $x \in [0,1]$ define the \emph{effective fiber}
+Define the effective fiber by
 \[
 \mathcal{F}_{\mathrm{eff}}(x)
-  = \mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}.
+=
+\mathcal{F}(x) \cap \mathcal{X}^{*}.
 \]
+This is the set of identities that collapse to $x$ and select infinitely many
+digits. It is a dense subset of $\mathcal{F}(x)$ in the subspace topology.
 
-In this section we show that $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
-$\Pi^0_1$ class.  
-This places the effective fibers squarely within the classical hierarchy of
-computably presented closed sets in Cantor space.
+The following subtlety is important.
 
-\subsection{Nonemptiness}
+\begin{proposition}
+\label{prop:efffiber-not-closed}
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is not closed in
+$\mathcal{X}$ and is not closed in $\mathcal{X}^{*}$.
+\end{proposition}
 
-If $x$ is computable, it has a computable expansion $(x_j)$, and the identity
-that selects all digits and sets $D(j)=x_j$ lies in $\mathcal{F}_{\mathrm{eff}}(x)$.  
-More generally, any computable selector that exposes infinitely many positions
-can be combined with the given expansion to produce an element of the
-effective fiber.
+\begin{proof}
+Consider a sequence of identities $G_k \in \mathcal{X}^{*}$ whose selectors
+place the $j$th selected digit at position $n_j^{(k)}$ with
+$n_j^{(k)} \to \infty$ as $k \to \infty$ for each fixed $j$. Pointwise limits
+of such sequences may select only finitely many digits, so the limit lies in
+$\mathcal{X} \setminus \mathcal{X}^{*}$. Since $\mathcal{F}(x)$ is closed, the
+same phenomenon occurs inside fibers.
+\end{proof}
 
-Thus $\mathcal{F}_{\mathrm{eff}}(x)$ is nonempty whenever $x$ is computable.
+Despite this lack of closedness, the effective fiber retains the same
+topological richness as the full fiber.
 
-\subsection{Computable closedness}
+\section{Perfectness and Cantor Geometry of the Fiber}
 
-To show that $\mathcal{F}_{\mathrm{eff}}(x)$ is a $\Pi^0_1$ class, we verify
-that membership can be disproved by finite evidence.
+The collapse fiber $\mathcal{F}(x)$ is totally disconnected and has no
+isolated points. This follows from standard arguments in Cantor space (see
+\cite{LindMarcus} or \cite{Kechris}). We state the result here for reference.
 
-A computable identity $G = (M,D,K)$ belongs to $\mathcal{F}_{\mathrm{eff}}(x)$
-if and only if:
-\begin{enumerate}
-    \item $M$ selects digits infinitely often, and
-    \item for each $j$, the selected digit $d_G(j)$ equals $x_j$.
-\end{enumerate}
+\begin{proposition}
+\label{prop:fiber-perfect}
+For every $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is perfect,
+totally disconnected, and uncountable.
+\end{proposition}
 
-A violation of membership occurs precisely when:
+\begin{proof}
+Total disconnectedness follows from the product structure of $\mathcal{X}$.
+Perfectness follows because arbitrary changes in the unselected coordinates or
+in the meta-information stream after any finite index preserve the collapsed
+value. Details are standard and may be found in the references above.
+\end{proof}
+
+Since the effective subspace $\mathcal{X}^{*}$ is dense in $\mathcal{X}$, the
+effective fiber inherits these properties.
+
+\begin{corollary}
+\label{cor:efffiber-perfect}
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is dense in the full fiber
+and contains no isolated points.
+\end{corollary}
+
+\section{Tail Freedom Inside Collapse Fibers}
+
+For any identity in the fiber and any finite prefix, there exist distinct
+extensions in the fiber that share the prefix and differ afterward. This
+property will be essential in later chapters.
+
+\begin{proposition}
+\label{prop:tail-freedom}
+Let $x \in [0,1]$ and let $G \in \mathcal{F}(x)$. For every $N$ there exist
+distinct identities $G'$ and $G''$ in $\mathcal{F}(x)$ such that
 \[
-d_G(j) \ne x_j
+G' \upharpoonright N
+=
+G'' \upharpoonright N
+=
+G \upharpoonright N.
 \]
-for some $j$.  
-Because $M$ and $D$ are computable, this disagreement is detected by some
-finite prefix of $(M,D)$.
+\end{proposition}
 
-Therefore:
-\[
-G \notin \mathcal{F}_{\mathrm{eff}}(x)
-\quad\Longleftrightarrow\quad
-\exists j\, [\, d_G(j) \ne x_j\,],
-\]
-and the right-hand condition is semidecidable (it is the disjunction of
-computable finite checks).  
-Hence $\mathcal{F}_{\mathrm{eff}}(x)$ is $\Pi^0_1$.
+\begin{proof}
+Modify the unselected digits or the meta stream beyond index $N$. These
+changes do not alter the collapsed value. The resulting identities remain in
+the fiber and are distinct.
+\end{proof}
 
-\section{Geometry of Effective Fibers}
-
-Viewing $\mathcal{G}_{\mathrm{eff}}$ as a subset of Baire space, the effective
-fiber inherits a rich internal structure:
-\begin{itemize}
-    \item it is infinite and compact in the subspace topology,
-    \item it contains elements of both hybrid and null-density type,
-    \item it admits arbitrary meta-information streams within the effective
-          alphabet,
-    \item it supports the tail-sewing and alignment constructions needed for
-          diagonalization.
-\end{itemize}
-
-Crucially, no effective fiber collapses to a single computable identity.
-Even after fixing the entire classical expansion of $x$, the selector stream
-may choose digits at arbitrarily sparse or dense positions, and the
-meta-information stream remains unrestricted.
-
-This degree of freedom is the foundation for the observation and
-incompatibility phenomena developed in the next part.
+Tail freedom is one of the central sources of nondeterminacy in the generative
+framework and forms the geometric basis for the indistinguishability
+construction in Chapter \texttt{\ref{chap:indistinguishability}}.
 
 \section{Summary}
 
-Each fiber of the collapse map is a large symbolic object containing every
-identity that produces a given real number.  
-The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ forms a nonempty
-$\Pi^0_1$ class and possesses significant internal structure.  
-Understanding this geometry reveals why finite observers cannot capture all
-the generative information that survives within a fiber.
+This chapter clarified the topological setting of the collapse fibers. The key
+points are:
 
-In Part~II we turn to the dynamics of selector patterns, illustrating the
-range of behaviors present among identities collapsing to the same value.
+\begin{itemize}
+    \item The ambient generative space $\mathcal{X}$ is compact.
+    \item The effective subspace $\mathcal{X}^{*}$ is dense and not compact.
+    \item Collapse fibers $\mathcal{F}(x)$ are closed subsets of $\mathcal{X}$
+    and are therefore compact.
+    \item The effective fiber is dense inside the fiber and contains no
+    isolated points.
+    \item Tail freedom allows arbitrary variations after finite prefixes.
+\end{itemize}
+
+These properties form the foundation for the structural indistinguishability
+results in Chapter \texttt{\ref{chap:indistinguishability}}.
+

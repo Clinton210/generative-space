@@ -1,202 +1,121 @@
-\chapter{Extended Invariants: Entropy Balance and Fluctuation}
+\chapter{Slice Geometry of Asymptotic Invariants}
+\label{chap:slice-geometry}
 
 \section{Introduction}
 
-Extended invariants measure large scale features of the selector stream that
-survive tail modification and reveal structure invisible to the collapse map.
-Two such invariants are the entropy balance $\eta$, which measures the lower
-asymptotic density of digit exposures, and the fluctuation index $\phi$, which
-measures the relative growth of gaps between selected positions.  
+Extended invariants provide numerical summaries of the long term behavior of
+the selector stream. Chapter \texttt{\ref{chap:invariants-eta-phi}} introduced
+the asymptotic density $\eta$ and the fluctuation index $\phi$, both of which
+depend only on the tail of the selector and therefore measure structural
+information invisible to the collapse map. These invariants are asymptotically
+sensitive and discontinuous at every point of the generative space.
 
-In this chapter we introduce these invariants, establish basic properties,
-prove semicontinuity, and place them in the slice geometry of the generative
-space.  
-Selector behavior may be analyzed through vertical slices (fixed prefixes),
-horizontal slices (fixed invariant values), and fiber slices (fixed collapsed
-value).  
-Appendix~E contains many worked examples illustrating these slices and the
-full range of possible behaviors.
+In this chapter we place the invariants in a geometric context by examining
+three natural families of slices through the generative space: vertical
+slices that fix finite prefixes, horizontal slices that fix invariant values,
+and fiber slices that fix collapsed magnitude. Together these slices describe
+how local symbolic structure, global asymptotic behavior, and classical value
+interact.
 
-\section{Entropy Balance}
-
-Let $G = (M,D,K)$ be a generative identity and write
-\[
-\chi_M(n) =
-\begin{cases}
-1 & \text{if } M(n) = D, \\
-0 & \text{otherwise}.
-\end{cases}
-\]
-
-The entropy balance is the lower asymptotic density of digit exposures:
-\[
-\eta(G)
-  = \liminf_{N\to\infty}
-      \frac{1}{N} \sum_{n < N} \chi_M(n).
-\]
-
-A selector with $\eta(G) > 0$ exposes digits frequently, while $\eta(G) = 0$
-indicates sparse exposure.  
-Balance is invariant under tail modification beyond a finite prefix and
-depends only on the selector.
-
-\subsection{Lower semicontinuity}
-
-The balance is not continuous in the product topology, but it satisfies a one
-sided bound.
-
-\begin{proposition}[Lower Semicontinuity]
-If $G_k \to G$ in the product topology, then
-\[
-\eta(G) \le \liminf_{k\to\infty} \eta(G_k).
-\]
-\end{proposition}
-
-\begin{proof}
-Fix $\varepsilon > 0$ and choose $N$ such that
-\[
-\frac{1}{N}\sum_{n<N} \chi_M(n)
-    < \eta(G) + \varepsilon.
-\]
-For $k$ large enough, $G_k$ agrees with $G$ on the first $N$ coordinates, so
-\[
-\eta(G_k)
-  \ge \frac{1}{N}\sum_{n<N} \chi_M(n)
-  > \eta(G) - \varepsilon.
-\]
-Taking the limit inferior yields the claim.
-\end{proof}
-
-\section{Fluctuation Index}
-
-Let the selection indices be
-\[
-n_0 < n_1 < n_2 < \cdots,
-\qquad
-g_j = n_{j+1} - n_j.
-\]
-
-The fluctuation index measures the growth of relative gaps:
-\[
-\phi(G)
-  = \limsup_{j\to\infty} \frac{g_j}{n_j}.
-\]
-
-Large $\phi(G)$ indicates the presence of long, infrequent bursts of digit
-exposure relative to scale.
-
-\subsection{Upper semicontinuity}
-
-\begin{proposition}[Upper Semicontinuity]
-If $G_k \to G$, then
-\[
-\phi(G) \ge \limsup_{k\to\infty} \phi(G_k).
-\]
-\end{proposition}
-
-\begin{proof}
-Suppose $\phi(G) < c$.  
-Then for sufficiently large $j$,
-\[
-g_j < c n_j.
-\]
-Agreement of $G_k$ with $G$ on a large enough prefix ensures that the first
-$J$ selected digits occur at the same positions.  
-Thus for all sufficiently large $k$,
-\[
-\phi(G_k) < c.
-\]
-Taking the limit superior proves the claim.
-\end{proof}
-
-\section{Slice Geometry of Selector Behavior}
-
-Extended invariants permit a geometric interpretation of the generative space
-through slices that constrain different aspects of selector behavior.  
-These slices provide intuition for how invariants, collapse fibers, and finite
-prefixes interact.
-
-\subsection{Vertical slices: cylinder sets}
+\section{Vertical Slices: Finite Prefix Constraints}
 
 A vertical slice fixes a finite prefix:
 \[
 \mathcal{C}(u)
-  = \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \}.
+=
+\{
+G \in \mathcal{X} : G[0..N-1]=u
+\}.
 \]
 
-These sets represent the regions observable by structural projections.  
-Dependency bounds show that each observer samples only one vertical slice at a
-time, so vertical slices encode the finite informational geometry underlying
-incompleteness.
+These sets represent the regions accessible to structural projections, since
+dependency bounds constrain each observer to examine only one vertical slice
+at a time. Vertical slices are clopen in the product topology and encode the
+finite dimensional geometry that governs observational limits and
+indistinguishability.
 
-Vertical slices impose no restriction on $\eta$ or $\phi$, and their images
-under the map $G \mapsto (\eta(G),\phi(G))$ can cover large regions of the
-invariant plane.
+Vertical slices place no constraints on the invariants $\eta$ or $\phi$. By
+the nowhere continuity results of Chapter \texttt{\ref{chap:invariants-eta-phi}},
+every value of $\eta$ and every value of $\phi$ occurs densely in each vertical
+slice.
 
-\subsection{Horizontal slices: invariant level sets}
+\section{Horizontal Slices: Invariant Level Sets}
 
-Fix $\alpha$ or $\beta$.  
-Define
+Fix $\alpha$ in $[0,1]$ or $\beta$ in $[0,\infty]$. Define the horizontal
+slices
 \[
 \mathcal{H}_{\alpha}
-  = \{ G : \eta(G) = \alpha \},
+=
+\{ G : \eta(G)=\alpha \},
 \qquad
 \mathcal{H}^{\beta}
-  = \{ G : \phi(G) = \beta \}.
+=
+\{ G : \phi(G)=\beta \}.
 \]
 
-These sets identify identities with the same long term selector behavior even
-if their finite prefixes differ.  
-Horizontal slices cut across collapse fibers and vertical slices, illustrating
-the independence of asymptotic structure from local structure.
+These sets identify identities with identical long term selector behavior even
+when their finite prefixes differ. Because $\eta$ and $\phi$ are tail
+dependent, horizontal slices cross all vertical slices densely. They cut across
+finite prefix classes and collapse fibers alike.
 
-In the invariant plane, these slices appear as vertical or horizontal lines.
+Geometrically, the map
+\[
+G \mapsto (\eta(G),\phi(G))
+\]
+projects the generative space into the invariant plane. Horizontal slices
+correspond to lines in this plane, and their dense intersection with each
+vertical slice reflects the asymptotic sensitivity of the invariants.
 
-\subsection{Fiber slices: fixing collapsed value}
+\section{Fiber Slices: Fixing Collapsed Value}
 
-Fix a real number $x$.  
-The fiber slice is
+Fix a real number $x$. The fiber slice
 \[
 \mathcal{F}(x)
-  = \{ G : \pi(G) = x \}.
+=
+\{ G : \pi(G)=x \}
 \]
+collects all identities that collapse to $x$. Since $\eta$ and $\phi$ depend
+only on the selector and not on the canonical output, the image of
+$\mathcal{F}(x)$ under the invariant map is typically a large region of the
+invariant plane.
 
-Since $\eta$ and $\phi$ depend only on the selector, not on collapse, the
-image of $\mathcal{F}(x)$ in the invariant plane typically occupies a broad
-region.  
-This illustrates how collapse conceals most of the selector structure.
+By combining tail freedom inside collapse fibers with the constructions of
+Chapter \texttt{\ref{chap:invariants-eta-phi}}, one finds that for any pair
+$(\alpha,\beta)$ with $\alpha$ in $[0,1]$ and $\beta$ in $[0,\infty]$, there
+exists an identity in $\mathcal{F}(x)$ with $\eta=\alpha$ and $\phi=\beta$.
+Thus fiber slices contain identities exhibiting the full range of invariant
+values.
 
-Appendix~E contains examples showing that for any pair $(\alpha,\beta)$, there
-exists an identity in $\mathcal{F}(x)$ with $\eta = \alpha$ and $\phi =
-\beta$.
+\section{Geometric Interpretation}
 
-\section{Selector Behavior Through Examples}
-
-Appendix~E provides detailed examples demonstrating selectors with:
+The three families of slices illustrate the independence of finite prefix
+information, asymptotic selector behavior, and collapsed magnitude.
 
 \begin{itemize}
-    \item positive balance and low fluctuation,
-    \item zero balance and bounded fluctuation,
-    \item zero balance and unbounded fluctuation,
-    \item oscillating densities,
-    \item constructed pairs $(\eta,\phi)$ with prescribed values.
+    \item Vertical slices constrain finite symbolic structure but do not
+    restrict $\eta$ or $\phi$.
+    \item Horizontal slices constrain asymptotic behavior but intersect every
+    finite prefix class.
+    \item Fiber slices constrain collapsed magnitude but allow all admissible
+    invariant values.
 \end{itemize}
 
-These examples show that extended invariants are flexible tools for describing
-large scale selector structure.  
-They also demonstrate that collapse fibers contain identities with all
-admissible invariant values.
+Together these slices show that the invariants $\eta$ and $\phi$ capture
+features orthogonal to finite observation and independent of collapse. They
+provide a geometric language for understanding which aspects of selector
+structure persist under prefix agreement and which aspects remain completely
+unobservable to continuous projections.
 
 \section{Summary}
 
-The entropy balance and fluctuation index provide numerical lenses through
-which to view long term selector behavior.  
-Their semicontinuity properties match their intuitive roles: balance is hard
-to increase by small perturbations, while fluctuation is hard to decrease.  
-Slice geometry offers a conceptual framework for understanding how vertical
-prefix constraints, horizontal invariant constraints, and fiber constraints
-interact.
+The slice geometry of vertical, horizontal, and fiber slices provides a
+geometric interpretation of the asymptotic invariants introduced in Chapter
+\texttt{\ref{chap:invariants-eta-phi}}. Vertical slices represent finite
+prefix constraints. Horizontal slices represent invariant constraints. Fiber
+slices represent collapsed value constraints. The invariants vary freely in
+all of these slices, reflecting their asymptotic nature and their insensitivity
+to prefix information.
 
-Together with the examples of Appendix~E, these tools give a geometric
-understanding of selector behavior that complements the structural and
-computational perspectives developed in earlier parts of the monograph.
+These geometric insights prepare the way for the study of joint invariant
+behavior in the next chapter. Appendix~E contains explicit examples that
+illustrate the full range of selector behaviors and invariant combinations.
