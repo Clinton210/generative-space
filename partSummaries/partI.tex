@@ -1,55 +1,30 @@
-\part{The Generative Ontology}
+\chapter*{Part I Summary}
 
-\chapter*{Summary of Part I: The Generative Ontology}
-\addcontentsline{toc}{chapter}{Summary of Part I: The Generative Ontology}
+Part I introduces the symbolic foundations of the Generative Identity
+Framework.  
+A generative identity is defined as a triple of infinite sequences
+$(M, D, K)$ consisting of a selector stream, a digit stream, and a
+meta-information stream.  
+These sequences form a product space $\mathcal{X}$ equipped with the product
+topology, and the digit selecting subspace $\mathcal{X}^*$ contains those
+identities that expose infinitely many digits.
 
-Part~I establishes the foundational setting of the generative framework.
-The central objective is to replace the classical viewpoint—where real numbers
-arise as magnitudes—with a mechanism-oriented perspective in which real
-numbers are the collapsed images of richer symbolic processes.
+The collapse map extracts the classical real value associated with a
+generative identity by selecting the digits exposed by $M$ and interpreting
+them in base $b$.  
+This map is continuous and surjective.  
+Its fibers are compact, perfect, and totally disconnected, and they contain
+many identities that differ dramatically in their internal structure while
+producing the same collapsed value.
 
-A generative identity is a triple
-\[
-G = (M, D, K),
-\]
-where the selector $M$ determines which layer contributes each symbol of the
-canonical output, the sequence $D$ supplies classical digit information, and the
-sequence $K$ carries additional meta-structure.  
-The generative space $\mathcal{X}$ is the full product of these three layers,
-equipped with the product topology.  This topology makes finite-prefix
-agreement the basic notion of nearness and places the theory squarely in the
-context of symbolic dynamics and represented spaces.
+The geometry of collapse fibers is the first indication that classical
+magnitude conceals substantial symbolic structure.  
+Fibers contain identities with dense or sparse selectors, identities with
+regular or irregular spacing patterns, and identities with arbitrary
+meta-information streams.  
+These degrees of freedom motivate the study of how much structure can be
+detected by continuous observers, which becomes the focus of Part III and the
+incompleteness phenomena of Part IV.
 
-Chapter~1 develops this ontology.  
-It defines $\mathcal{X}$, introduces the canonical output associated with each
-identity, and isolates the effective core $\mathcal{G}_{\mathrm{eff}}$, the
-subset consisting of computable generative identities.  This core plays the
-role of a computable analogue of Baire space and forms the computational
-foundation for all subsequent results.
-
-Chapter~2 introduces the collapse map $\pi : \mathcal{X}^* \to [0,1]$, the
-primary invariant of the framework.  Collapse discards nearly all of the
-symbolic structure of $G$ and preserves only the selected digits, which it
-interprets as a base-$b$ expansion.  The map is continuous, surjective, and
-computably well-behaved: it maps the full generative space onto the unit
-interval and maps the effective core precisely onto the computable real
-numbers.
-
-Chapter~3 analyzes the structure of collapse fibers
-\[
-\mathcal{F}(x) = \{\, G \in \mathcal{X}^* : \pi(G) = x \,\}.
-\]
-These fibers are closed, uncountable subsets of $\mathcal{X}$, and their
-effective counterparts $\mathcal{F}_{\mathrm{eff}}(x)$ are nontrivial
-$\Pi^0_1$ classes whenever $x$ is computable.  Each fiber contains a wide range
-of internal behaviors: selectors of varying density, digit streams with
-different unused coordinates, and a full spectrum of meta-layer structures.
-This internal abundance forms the foundational motivation for the projection
-theory and incompleteness results developed in later parts.
-
-Part~I therefore establishes the ontological core of the generative framework:
-the space of symbolic mechanisms, the collapse map that connects this space to
-the classical continuum, and the geometric and effective properties of the
-collapse fibers.  These ideas underpin the study of selector dynamics in
-Part~II, the theory of structural projections in Part~III, and the diagonal
-arguments leading to structural incompleteness in Part~IV.
+Part I therefore provides the symbolic setting, the collapse mechanism, and
+the foundational geometry that underpins the entire monograph.

@@ -1,195 +1,152 @@
-\chapter{Secondary Projections and Finite Lookahead}
+\chapter{Projective Incompatibility}
 
 \section{Introduction}
 
-Chapter~6 introduced structural projections as continuous, prefix-determined
-maps from the generative space $\mathcal{X}$ into metric spaces.  
-These projections model what an observer can discern from a generative identity
-based on finite information at each stage.  
-Among all such projections, those that are \emph{effective} or
-\emph{computationally realizable} play a central role in the structural
-incompleteness phenomenon of Part~IV.
+Structural projections measure different aspects of a generative identity.
+Some observe digit frequencies, others observe spacing patterns, and others
+extract classical information through collapse.  
+Although each projection examines only a finite prefix at a fixed precision,
+their requirements may conflict.  
+It may be impossible for a single finite prefix of an identity to satisfy the
+demands of multiple projections at once.
 
-This chapter develops the theory of \emph{secondary projections}: computational
-observers that operate under finite lookahead and must decide their outputs on
-the basis of bounded prefixes of the generative identity.  
-These projections formalize the idea that a computable measurement can only
-inspect finitely many coordinates of $(M,D,K)$ before committing to an output
-value.
+This chapter formalizes this notion of conflict.  
+We show that distinct observers often require incompatible finite structures
+from the selector and digit streams.  
+This incompatibility is a central ingredient in the construction of the
+meta-diagonalizer in Part IV, where controlled divergence from reference
+identities is enforced by exploiting these conflicting constraints.
 
-We begin by formalizing dependency bounds, which restrict how far a projection
-may look into a mechanism.  
-We then show that secondary projections are continuous, prefix-determined maps
-that fit naturally into the projection lattice of Chapter~6.  
-Finally, we connect finite lookahead to stabilization properties that will be
-exploited by the meta-diagonalizer of Chapter~9.
+The conceptual roots of this phenomenon appear in symbolic dynamics, where
+different ergodic or combinatorial invariants may demand incompatible blocks
+to appear in a shift space.  
+Here the same idea arises in the generative setting but is applied directly to
+observational functionals rather than to subshifts.
 
-\section{Dependency Bounds}
+\section{Observer Requirements}
 
-A computable observer cannot examine an unbounded portion of the mechanism when
-deciding its output on a given precision scale.  
-The dependency of a projection at resolution $\varepsilon$ must therefore be
-limited by a computable function.
-
-\begin{definition}[Dependency Bound]
-Let $\Phi : \mathcal{X} \to \mathbb{R}$ be a structural projection.  
-A \emph{dependency bound} for $\Phi$ is a function
+Let $\Phi$ and $\Psi$ be two structural projections with dependency bounds
+$B_\Phi$ and $B_\Psi$.  
+Fix a desired precision $\varepsilon > 0$.  
+Then any identity $G$ must satisfy:
 \[
-B_\Phi : (0,\infty) \to \mathbb{N}
+\Phi(G) \text{ determined by } G[0..B_\Phi(\varepsilon)], 
+\quad
+\Psi(G) \text{ determined by } G[0..B_\Psi(\varepsilon)].
 \]
-such that for all $G,H \in \mathcal{X}$ and all $\varepsilon > 0$, if
+
+If the projections measure unrelated aspects of the identity, these
+finite prefixes may be required to contain contradictory patterns.
+
+\subsection*{Example: density versus spacing}
+
+Digit density projections may require the initial prefix to contain many
+positions where $M(n) = D$.  
+Conversely, spacing projections (such as fluctuation observers) may require
+long runs where $M(n) = K$ in order to witness large gaps between selected
+positions.  
+A single finite block cannot simultaneously exhibit both high density and
+large gaps at the same index range.
+
+This tension reflects a basic fact from combinatorics on words: local
+constraints on symbol frequencies and local constraints on block lengths need
+not be simultaneously satisfiable.
+
+\section{Formal Definition of Incompatibility}
+
+\begin{definition}[Projective Incompatibility]
+Two projections $\Phi$ and $\Psi$ are \emph{incompatible at precision}
+$\varepsilon$ if no prefix of length
 \[
-(M_G{\upharpoonright}B_\Phi(\varepsilon),\,
- D_G{\upharpoonright}B_\Phi(\varepsilon),\,
- K_G{\upharpoonright}B_\Phi(\varepsilon))
-=
-(M_H{\upharpoonright}B_\Phi(\varepsilon),\,
- D_H{\upharpoonright}B_\Phi(\varepsilon),\,
- K_H{\upharpoonright}B_\Phi(\varepsilon)),
+L = \max\{ B_\Phi(\varepsilon), B_\Psi(\varepsilon) \}
 \]
-then
-\[
-|\Phi(G) - \Phi(H)| < \varepsilon.
-\]
-\end{definition}
-
-Dependency bounds express the idea that agreement on a finite prefix suffices to
-determine the projection’s output to within a prescribed tolerance.
-
-\begin{remark}
-For computable projections, the function $B_\Phi$ must itself be computable.
-This aligns with the Type--2 framework used to analyze $\mathcal{G}_{\mathrm{eff}}$.
-\end{remark}
-
-\section{Computable Structural Projections}
-
-We now restrict attention to projections that can be computed with finite
-lookahead at any precision level.
-
-\begin{definition}[Computable Structural Projection]
-A projection $\Phi : \mathcal{X} \to \mathbb{R}$ is a \emph{computable structural
-projection} if:
+can satisfy both of the following:
 \begin{enumerate}
-    \item $\Phi$ is continuous (prefix-determined), and
-    \item $\Phi$ admits a computable dependency bound $B_\Phi$.
+    \item the prefix forces $\Phi(G)$ to lie within $\varepsilon$ of its target
+          value, and
+    \item the prefix forces $\Psi(G)$ to lie within $\varepsilon$ of its target
+          value.
 \end{enumerate}
 \end{definition}
 
-Examples include:
+Incompatibility expresses a structural impossibility: the observers demand
+conflicting patterns in the same finite window.
 
-\begin{itemize}
-    \item digit-frequency maps that estimate the proportion of positions where
-    $M(k)=D$,
-    \item meta-frequency projections based on the limiting behavior of $K(n)$,
-    \item pattern detectors that check whether certain finite blocks occur
-    infinitely often,
-    \item maps associated with effective limit-average or limsup conventions.
-\end{itemize}
+\section{Concrete Instances}
 
-These observers represent the algorithmic analogue of the general structural
-projections introduced in Chapter~6.
+Although incompatibility is common in practice, one example illustrates the
+idea clearly.
 
-\section{Finite-Prefix Stabilization}
+\subsection*{Example: Frequent selection and large gaps}
 
-A secondary projection must stabilize on any effective mechanism: once the
-prefix is long enough, the observer’s output changes only within arbitrarily
-small tolerances.
+Let $\Phi$ be the selector density projection and $\Psi$ the fluctuation
+projection.  
+Fix $\varepsilon = 0.05$.
 
-\begin{proposition}[Prefix Stabilization]
-\label{prop:prefix-stabilization}
-Let $\Phi$ be a computable structural projection with dependency bound
-$B_\Phi$.  
-For any $G \in \mathcal{X}$ and any sequence $H_n \in \mathcal{X}$ satisfying
-\[
-H_n{\upharpoonright}B_\Phi(\varepsilon)
-=
-G{\upharpoonright}B_\Phi(\varepsilon)
-\]
-for all sufficiently large $n$, we have
-\[
-\Phi(H_n) \to \Phi(G).
-\]
+To force $\Phi(G)$ within $\varepsilon$ of a positive density, the prefix must
+contain many instances of $M(n) = D$.  
+To force $\Psi(G)$ within $\varepsilon$ of a large index gap ratio, the prefix
+must contain a long contiguous run where $M(n) = K$.
+
+Let $N_\Phi = B_\Phi(\varepsilon)$ and $N_\Psi = B_\Psi(\varepsilon)$.  
+Consider the interval $[0..L]$ with $L = \max(N_\Phi, N_\Psi)$.  
+If the prefix contains the required density of selected positions for
+$\Phi$, it cannot contain the long block of unselected positions required by
+$\Psi$ within the same interval.  
+Thus the two requirements are incompatible at precision $\varepsilon$.
+
+This incompatibility is a finite-informational fact and does not depend on
+the behavior of the identity beyond the prefix.
+
+\section{Incompatibility Across a Family}
+
+Finite families of projections may also exhibit internal conflicts.
+
+\begin{proposition}
+Let $\mathcal{P}$ be a finite family of projections.  
+If $\mathcal{P}$ contains two projections that are incompatible at some
+precision $\varepsilon$, then no identity can satisfy the entire family at
+precision $\varepsilon$ using a single prefix of length $B_{\mathcal{P}}(\varepsilon)$.
 \end{proposition}
 
 \begin{proof}
-Fix $\varepsilon>0$.  
-By the definition of $B_\Phi$, agreement on the prefix of length
-$B_\Phi(\varepsilon)$ forces the projection values to lie within $\varepsilon$.  
-Thus $\Phi(H_n)$ lies in the $\varepsilon$-ball around $\Phi(G)$ for all
-sufficiently large $n$.  
-Since $\varepsilon$ is arbitrary, the claimed convergence follows.
+Since $B_{\mathcal{P}}(\varepsilon)$ is the maximum dependency bound for the
+family, any prefix satisfying all observers must satisfy each one
+individually.  
+If two observers impose incompatible requirements on that prefix, no such
+prefix exists.
 \end{proof}
 
-Prefix stabilization is the key computational constraint that the
-meta-diagonalizer exploits in Part~IV.  
-If a family of projections shares compatible dependency bounds, then they all
-stabilize on sufficiently long prefixes of a given mechanism.
+This proposition explains why the diagonalizer construction can always force
+deviations.  
+Whenever a finite family of observers demands a uniform prefix, one can
+choose tails that generate divergent structures not simultaneously detectable
+by the family.
 
-\section{Secondary Coordinates as Projections}
+\section{Implications for Diagonalization}
 
-Many quantities of interest in the generative framework arise as secondary
-coordinates defined via observables on the selector or meta layer.  
-These coordinates are naturally realized as computable structural projections.
+The diagonalizer of Part IV depends critically on the existence of
+projections whose finite precision requirements cannot all be realized in the
+same prefix.  
+This incompatibility creates space for controlled tail divergence.  
+Once an identity has satisfied observers up to the required prefix length, the
+unobservable tail may be modified to enforce structural differences from
+reference generators.
 
-\begin{example}[Digit Density Estimates]
-Let $F_n(G)$ denote the digit frequency in the first $n$ positions:
-\[
-F_n(G)
-=
-\frac{1}{n}|\{\,0 \le k < n : M(k)=D\,\}|.
-\]
-For fixed $n$, the map $G \mapsto F_n(G)$ depends only on the prefix
-$M{\upharpoonright}n$ and is therefore a computable structural projection.
-\end{example}
+This mechanism reflects standard arguments in computable analysis, where
+different constraints on prefixes of names of real numbers may conflict.  
+Here the conflicts arise between observers on generative identities and serve
+as the engine of the incompleteness phenomenon.
 
-\begin{example}[Meta-Pattern Indicators]
-For a fixed block $w \in \Sigma^k$, define $\Phi_w(G)$ to be $1$ if $w$ appears
-in $K$ infinitely often and $0$ otherwise.  
-Determining $\Phi_w(G)$ requires only checking sufficiently long prefixes to
-decide whether occurrences of $w$ continue; it is therefore a secondary
-projection with a computable dependency bound.
-\end{example}
+\section{Summary}
 
-These examples illustrate that secondary coordinates fit squarely into the
-projection lattice of Chapter~6, but occupy the computationally accessible
-region of that lattice.
+Different projections impose distinct finite structural requirements on
+generative identities.  
+When these requirements cannot be satisfied simultaneously in a single
+prefix, we say the projections are incompatible.  
+Such conflicts provide the combinatorial foundation for the diagonalizer,
+allowing one to satisfy observers finitely while enforcing divergence beyond
+their range of observation.
 
-\section{Interaction with the Projection Lattice}
-
-Computable structural projections inherit the lattice operations of
-Chapter~6.  
-In particular:
-
-\begin{itemize}
-    \item the meet $\Phi \wedge \Psi$ is computable if $\Phi$ and $\Psi$ are,
-    since its output is the pair $(\Phi(G),\Psi(G))$,
-    \item finite joins of computable projections are computable,
-    \item dependency bounds combine effectively:
-    \[
-    B_{\Phi \wedge \Psi}(\varepsilon)
-    =
-    \max\{\, B_\Phi(\varepsilon), B_\Psi(\varepsilon) \,\}.
-    \]
-\end{itemize}
-
-However, unlike the full lattice, not every supremum of computable projections
-is computable: infinite joins may fail to admit a uniform computable dependency
-bound.
-
-This limitation plays an important role in the incompatibility phenomena
-developed in Chapter~8 and is a precursor to the diagonalization argument of
-Chapter~9.
-
-\section{Outlook}
-
-Secondary projections model the behavior of effective observers in the
-generative framework.  
-They operate with finite lookahead, stabilize on sufficiently long prefixes, and
-fit naturally into the lattice of structural projections.
-
-Chapter~8 develops the phenomenon of \emph{projective incompatibility}: different
-projection families can impose incompatible prefix constraints, preventing any
-single mechanism from satisfying all of them simultaneously.  
-This conflict drives the diagonalizer of Chapter~9, which systematically evades
-finite families of computable projections by exploiting the tail freedom inherent
-in the generative space.
+In the next chapter we develop the alignment and sewing tools needed to
+exploit this incompatibility inside the effective collapse fiber.

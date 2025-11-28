@@ -1,55 +1,31 @@
-\part{Structural Projection Theory}
+\chapter*{Part III Summary}
 
-\chapter*{Summary of Part III: Structural Projection Theory}
-\addcontentsline{toc}{chapter}{Summary of Part III: Structural Projection Theory}
+Part III develops the theory of structural projections, which formalize how
+continuous observers extract information from generative identities.  
+A structural projection is any continuous real valued functional on the
+generative space.  
+Such observers depend only on finite prefixes of an identity at any fixed
+precision, and this finite information principle is captured by computable
+dependency bounds.
 
-Part~III develops the mathematical theory of \emph{structural projections}:
-maps that extract partial numerical information from generative identities.
-These projections formalize the act of “observing’’ internal structure beyond
-classical magnitude.  The goal of this part is twofold: to establish the
-topological and order-theoretic foundations of projection-based measurement, and
-to determine the limits of what can be recovered from such observations.
+Dependency bounds provide explicit control over the amount of symbolic data
+required to determine the value of an observer within a given error.  
+This leads to prefix stabilization, which states that once two identities
+agree on a sufficiently long prefix, all observers in a finite family must
+agree on their values to within any chosen tolerance.  
+Tail modification beyond this prefix has no effect on the output of the
+observers.
 
-\medskip
+Different observers impose different finite constraints on generative
+identities.  
+These constraints may conflict in a single prefix, producing projective
+incompatibility.  
+For example, one observer may require frequent digit exposures, while another
+requires long gaps.  
+Such conflicts show that no finite prefix can simultaneously satisfy all
+structural demands and provide the combinatorial mechanism that allows
+controlled divergence inside collapse fibers.
 
-\textbf{Chapter~6 introduces the projection lattice.}
-A structural projection is defined as a continuous map
-\[
-\Phi : \mathcal{X} \to \mathbb{R}^k
-\]
-whose value depends on symbolic structure but is invariant under all
-irrelevant coordinate changes.  Classical collapse $\pi$ appears as the
-minimal projection that preserves classical magnitude and simultaneously as the
-maximally lossy projection in the entire lattice.  This lattice perspective
-establishes the conceptual separation between the \emph{geometry of values}
-encoded by $\pi$ and the \emph{geometry of structure} encoded by other
-projections.
-
-\medskip
-
-\textbf{Chapter~7 introduces computable secondary projections} by imposing
-Type--2 computability constraints.  The key result is the finite-lookahead
-principle: any computable projection can inspect only a finite prefix of an
-effective generator when producing approximations of fixed precision.  This
-leads to explicit \emph{dependency bounds} that quantify the observational
-horizon of each computable coordinate system.
-
-\medskip
-
-\textbf{Chapter~8 develops projective incompatibility.}
-Concrete families of projections—digit frequencies, meta-layer statistics,
-local-variation measures, and selector-based complexity—are shown to highlight
-mutually incompatible aspects of generative structure.  Distinct identities
-within a single collapse fiber can be simultaneously distinguished by one
-projection and indistinguishable under another.  This structural misalignment
-across projections is the first sign that generative structure cannot be
-compressed into a finite coordinate system.
-
-\medskip
-
-Together, these chapters establish the mathematical theory of structural
-projections: their lattice, their topological constraints, their computational
-limitations, and the ways in which their perspectives clash.  This prepares the
-ground for the diagonalization arguments of Part~IV, where finite families of
-computable projections are shown to be inherently incapable of classifying
-effective generative identities.
+Part III therefore establishes the observational limits imposed by
+continuity, provides the finite information tools that govern the behavior of
+observers, and sets the stage for the diagonalizer construction in Part IV.

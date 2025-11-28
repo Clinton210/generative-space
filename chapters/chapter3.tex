@@ -1,200 +1,156 @@
-\chapter{Fiber Geometry of the Collapse Map}
+\chapter{Fiber Geometry and the Effective Core}
 
 \section{Introduction}
 
-The collapse map introduced in Chapter~2 assigns a classical magnitude to a
-generative identity by extracting and interpreting the digit symbols selected by
-its mixer.  
-Because collapse ignores the meta layer and all unselected digit positions,
-distinct generative identities may produce the same classical value.  
-Understanding the structure of these equivalence classes is a central objective
-of the generative viewpoint.
-
-This chapter studies the \emph{collapse fibers}
+The collapse map $\pi : \mathcal{X}^* \to [0,1]$ associates to each
+digit-selecting generative identity a classical real number.  
+The purpose of this chapter is to study the structure of the fibers
 \[
-\mathcal{F}(x) = \{\, G \in \mathcal{X}^* : \pi(G) = x \,\},
+\mathcal{F}(x) = \pi^{-1}(\{x\})
 \]
-which collect all identities that collapse to a given real number $x$.
-We describe their topological, combinatorial, and effective structure.  
-The full fibers $\mathcal{F}(x)$ are closed and uncountable subsets of the
-product space $\mathcal{X}$, while the effective fibers
-$\mathcal{F}_{\mathrm{eff}}(x)$, defined for computable $x$, form
-nontrivial $\Pi^0_1$ classes.  
+and, in particular, their topological and effective properties.
 
-These results lay the groundwork for the selector regimes explored in Part~II
-and for the projection-based restrictions developed in Parts~III and~IV.
+A fiber contains all identities that produce the same classical value.  
+The collapse map obliterates most of the internal generative information,
+leaving behind a large space of identities sharing a single output.  
+Understanding this space is essential: the size and shape of fibers drive the
+projection theory of Part~III and the incompleteness phenomena of Part~IV.
 
-\section{Full Fibers in the Generative Space}
+We show that each fiber is closed, uncountable, highly redundant, and
+topologically rich.  
+We then identify the \emph{effective fiber} and prove that it forms a
+nonempty $\Pi^0_1$ class.  
+This formalizes the computational structure of the identities surviving
+collapse.
 
-\begin{definition}[Full Fiber]
-For $x \in [0,1]$, the \emph{full collapse fiber} is
+\section{Fibers of the Collapse Map}
+
+Fix $x \in [0,1]$ and consider the set
 \[
-\mathcal{F}(x)
-=
-\{\, G \in \mathcal{X}^* : \pi(G)=x \,\}.
+\mathcal{F}(x) = \{\, G \in \mathcal{X}^* : \pi(G) = x \,\}.
 \]
-\end{definition}
-
-A mechanism belongs to $\mathcal{F}(x)$ precisely when its selected digit
-subsequence equals a base-$b$ expansion of $x$.  
-The selector determines \emph{where} in the timeline these digits occur, but the
-meta symbols and all digit symbols at unselected positions are irrelevant to the
-value of $\pi(G)$.
-
-\begin{proposition}[Fibers Are Closed]
-For every $x \in [0,1]$, the fiber $\mathcal{F}(x)$ is closed in the product
-topology of $\mathcal{X}$.
-\end{proposition}
-
-\begin{proof}
-Collapse is continuous and $[0,1]$ is Hausdorff.  
-Therefore $\mathcal{F}(x) = \pi^{-1}(\{x\})$ is closed.
-\end{proof}
-
-The closedness of fibers reflects the fact that a finite-prefix violation of the
-digit constraints suffices to prove that $G \notin \mathcal{F}(x)$.
-
-\subsection*{Product Structure}
-
-To describe the internal geometry of a fiber, fix $x \in [0,1]$ with a chosen
-base-$b$ expansion $(x_j)_{j \ge 0}$.  
-For any $G = (M,D,K) \in \mathcal{X}^*$, let
+Two identities $G = (M,D,K)$ and $H = (M',D',K')$ lie in the same fiber if
+their canonical outputs agree:
 \[
-\varphi_G : \mathbb{N} \to S_M
+X(G) = X(H) = (x_j)_{j \ge 0},
 \]
-enumerate the indices where $M$ selects the digit layer.
+the base-$b$ expansion of $x$ we have fixed by convention.
 
-\begin{proposition}[Product Decomposition of Fibers]
-\label{prop:fiber-product}
-For $G \in \mathcal{X}^*$,
-\[
-G \in \mathcal{F}(x)
-\quad\Longleftrightarrow\quad
-D(\varphi_G(j)) = x_j \text{ for all } j \ge 0.
-\]
-All other coordinates of $D$ and all coordinates of $K$ are unconstrained.
-\end{proposition}
+Beyond these selected digits, the identities may differ arbitrarily.
 
-\begin{proof}
-If the selected digit subsequence is exactly $(x_j)$, the collapse value equals $x$.  
-Conversely, if $\pi(G)=x$, the selected digit positions must realize the chosen
-expansion of $x$.  
-Other coordinates do not affect collapse.
-\end{proof}
+\subsection*{Closedness}
 
-The fiber therefore has the structure of a full product:
-the selector is arbitrary (subject to selecting infinitely many digits), the
-digit layer is constrained only on selected positions, and the meta layer is
-completely free.
+Because $\pi$ is continuous and singletons $\{x\}$ are closed in $[0,1]$, each
+fiber is a closed subset of $\mathcal{X}^*$.  
+Fibers are therefore compact with respect to the product topology.
 
-\begin{corollary}
-Every fiber $\mathcal{F}(x)$ is uncountable.
-\end{corollary}
+\subsection*{Degrees of freedom}
 
-The uncountability reflects the enormous freedom present in the unconstrained
-layers.
-
-\section{Effective Fibers and \texorpdfstring{$\Pi^0_1$}{Pi-0-1} Structure}
-
-Restricting to the effective core substantially changes the descriptive nature
-of the fibers.
-
-\begin{definition}[Effective Fiber]
-If $x \in \mathbb{R}_c$, the \emph{effective fiber} is
-\[
-\mathcal{F}_{\mathrm{eff}}(x)
-=
-\mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}.
-\]
-If $x$ is not computable, this set is empty.
-\end{definition}
-
-\begin{remark}[Effective Fibers Are $\Pi^0_1$]
-Since collapse is computable, the condition $\pi(G)=x$ can be falsified by
-exhibiting a finite prefix of $G$ that violates the digit constraints.  
-Thus $\mathcal{F}_{\mathrm{eff}}(x)$ is a $\Pi^0_1$ subset of $\mathcal{X}$:
-membership requires agreement on all finite prefixes, but non-membership can be
-witnessed by a finite prefix.
-\end{remark}
-
-\begin{proposition}[Effective Fibers Are Infinite]
-If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is infinite.
-\end{proposition}
-
-\begin{proof}
-Fix a computable expansion of $x$.  
-Any computable selector that selects digits infinitely often, together with any
-computable meta sequence, yields an effective generator of $x$.  
-There are infinitely many such choices.
-\end{proof}
-
-Thus, even under computability constraints, the fiber contains many distinct
-mechanisms with the same classical value.
-
-\section{Internal Degrees of Freedom}
-
-By Proposition~\ref{prop:fiber-product}, each fiber supports three independent
-degrees of freedom:
-
+Let $(x_j)_{j \ge 0}$ denote the chosen expansion of $x$.  
+A generative identity $G$ belongs to $\mathcal{F}(x)$ precisely when:
 \begin{enumerate}
-    \item \textbf{Selector freedom:} arbitrary choice of $M$ on the positions
-    where $M$ selects the meta layer.
-
-    \item \textbf{Digit freedom:} arbitrary choice of $D(n)$ for
-    $n \notin S_M$.
-
-    \item \textbf{Meta freedom:} arbitrary choice of the entire sequence $K$.
+    \item[(i)] the selector $M$ chooses infinitely many positions;
+    \item[(ii)] the digit stream $D$ satisfies
+          $D(n_j) = x_j$ at the selected positions;
+    \item[(iii)] the meta stream $K$ is arbitrary.
 \end{enumerate}
 
-These give rise to significant structural diversity.
-
-\begin{proposition}[Infinite Divergence Within a Fiber]
-Let $x \in [0,1]$.  
-If $G \in \mathcal{X}^*$ selects digits infinitely often, then $\mathcal{F}(x)$
-contains infinitely many distinct identities that differ from $G$ on an infinite
-set of coordinates.
-\end{proposition}
-
-\begin{proof}
-Vary the meta layer on an infinite set, or vary the unselected digit coordinates
-on an infinite set, while preserving the required digit subsequence.  
-Both operations produce infinitely many distinct identities in $\mathcal{F}(x)$.
-\end{proof}
-
-This abundance of mechanisms anticipates the selector-regime dichotomy of
-Part~II: hybrid identities with positive digit density and null-density identities
-with asymptotically vanishing digit density.
-
-\section{Shift Dynamics and Fiber Geometry}
-
-The generative space carries a natural left shift:
+Between successive selected positions, the identity may place any digit.  
+Similarly, at each index where $M(n) = K$, the meta-symbol $K(n)$ is free.
+Thus
 \[
-\sigma(M,D,K)(n)
-=
-\bigl(M(n+1),\, D(n+1),\, K(n+1)\bigr).
+\mathcal{F}(x)
+  \cong \{D,K\}^{\mathbb{N}} \times \{0,\ldots,b-1\}^{\mathbb{N}}
+        \times \Sigma^{\mathbb{N}}
+\]
+subject to a countable collection of fixed coordinates enforcing
+$D(n_j) = x_j$.  
+The remaining coordinates form a product of Cantor spaces.
+Hence every fiber is uncountable, totally disconnected, and perfect.
+
+\section{The Effective Fiber}
+
+We now restrict attention to the effective core.  
+For $x \in [0,1]$ define the \emph{effective fiber}
+\[
+\mathcal{F}_{\mathrm{eff}}(x)
+  = \mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}.
 \]
 
-\begin{proposition}
-If $G \in \mathcal{F}(x)$, the shift $\sigma(G)$ need not belong to 
-$\mathcal{F}(x)$.  
-However, $\sigma$ is continuous on $\mathcal{X}$ and preserves the product
-topology.
-\end{proposition}
+In this section we show that $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
+$\Pi^0_1$ class.  
+This places the effective fibers squarely within the classical hierarchy of
+computably presented closed sets in Cantor space.
 
-The shift map reorganizes the timeline of each fiber element.
-Although collapse fibers are not invariant under $\sigma$, the shift action is a
-useful tool for understanding the long-term patterns of hybrid and null-density
-selectors.  
-In later chapters, shift-based arguments help classify selector regimes and
-analyze their structural consequences.
+\subsection{Nonemptiness}
 
-\section{Outlook}
+If $x$ is computable, it has a computable expansion $(x_j)$, and the identity
+that selects all digits and sets $D(j)=x_j$ lies in $\mathcal{F}_{\mathrm{eff}}(x)$.  
+More generally, any computable selector that exposes infinitely many positions
+can be combined with the given expansion to produce an element of the
+effective fiber.
 
-This chapter describes the basic geometry of collapse fibers: closedness,
-uncountability, effective $\Pi^0_1$ structure, and the degrees of freedom that
-generate internal diversity.  
-These fibers form the natural habitat for the selector regimes developed in
-Part~II, where we study hybrid identities (positive digit density) and
-null-density generators (asymptotically vanishing digit density).  
-The range of behaviors found within a single fiber motivates the need for
-secondary projections and structural measurement, the subject of Part~III.
+Thus $\mathcal{F}_{\mathrm{eff}}(x)$ is nonempty whenever $x$ is computable.
+
+\subsection{Computable closedness}
+
+To show that $\mathcal{F}_{\mathrm{eff}}(x)$ is a $\Pi^0_1$ class, we verify
+that membership can be disproved by finite evidence.
+
+A computable identity $G = (M,D,K)$ belongs to $\mathcal{F}_{\mathrm{eff}}(x)$
+if and only if:
+\begin{enumerate}
+    \item $M$ selects digits infinitely often, and
+    \item for each $j$, the selected digit $d_G(j)$ equals $x_j$.
+\end{enumerate}
+
+A violation of membership occurs precisely when:
+\[
+d_G(j) \ne x_j
+\]
+for some $j$.  
+Because $M$ and $D$ are computable, this disagreement is detected by some
+finite prefix of $(M,D)$.
+
+Therefore:
+\[
+G \notin \mathcal{F}_{\mathrm{eff}}(x)
+\quad\Longleftrightarrow\quad
+\exists j\, [\, d_G(j) \ne x_j\,],
+\]
+and the right-hand condition is semidecidable (it is the disjunction of
+computable finite checks).  
+Hence $\mathcal{F}_{\mathrm{eff}}(x)$ is $\Pi^0_1$.
+
+\section{Geometry of Effective Fibers}
+
+Viewing $\mathcal{G}_{\mathrm{eff}}$ as a subset of Baire space, the effective
+fiber inherits a rich internal structure:
+\begin{itemize}
+    \item it is infinite and compact in the subspace topology,
+    \item it contains elements of both hybrid and null-density type,
+    \item it admits arbitrary meta-information streams within the effective
+          alphabet,
+    \item it supports the tail-sewing and alignment constructions needed for
+          diagonalization.
+\end{itemize}
+
+Crucially, no effective fiber collapses to a single computable identity.
+Even after fixing the entire classical expansion of $x$, the selector stream
+may choose digits at arbitrarily sparse or dense positions, and the
+meta-information stream remains unrestricted.
+
+This degree of freedom is the foundation for the observation and
+incompatibility phenomena developed in the next part.
+
+\section{Summary}
+
+Each fiber of the collapse map is a large symbolic object containing every
+identity that produces a given real number.  
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ forms a nonempty
+$\Pi^0_1$ class and possesses significant internal structure.  
+Understanding this geometry reveals why finite observers cannot capture all
+the generative information that survives within a fiber.
+
+In Part~II we turn to the dynamics of selector patterns, illustrating the
+range of behaviors present among identities collapsing to the same value.

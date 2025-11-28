@@ -1,147 +1,168 @@
-\chapter{Hybrid Generative Identities}
+\chapter{Selector Patterns and Density Regimes}
 
 \section{Introduction}
 
-Hybrid generative identities are mechanisms in which the selector uses the digit
-layer on a set of positive asymptotic density.  
-Such identities represent an intermediate regime between two extremes:
+Generative identities differ not only in the symbols they carry but also in
+the \emph{rate} at which their selectors expose digits from the underlying
+digit stream.  
+This rate---the asymptotic density of positions where $M(n) = D$---governs both
+the structure of the canonical output and the degree of freedom present inside
+the collapse fiber.
 
+This chapter analyzes two fundamental regimes of selector behavior:
 \begin{itemize}
-    \item the \emph{digit-dominant} identities where the selector eventually
-    chooses the digit layer at all positions, and
-    \item the \emph{null-density} identities of Chapter~5, where the digit layer
-    appears only sparsely.
+    \item \emph{Hybrid selectors}, which expose digits with positive
+          asymptotic density, and
+    \item \emph{Null-density selectors}, which expose digits at vanishing
+          density.
 \end{itemize}
 
-Hybrid identities are fundamental for two reasons.  
-First, they are topologically abundant in the generative space $\mathcal{X}$.
-Second, every collapse fiber contains infinitely many hybrid generators, and
-every computable real number admits an effective hybrid representation.
+Although these two extremes lie on opposite ends of a broad spectrum, both
+occur densely in the generative space.  
+Understanding these regimes clarifies how generative identities with sharply
+different internal behaviors can collapse to the same real number.
 
-The purpose of this chapter is to formalize hybrid behavior, to establish its
-topological prevalence, and to prove its universality in both the full
-generative space and the effective core.  
-These results illuminate one end of the selector-regime spectrum developed in
-Part~II and prepare for the projection-theoretic analysis of Part~III.
+\section{Selector Density}
 
-\section{Digit Density and Hybrid Structure}
-
-The defining feature of a hybrid identity is the density with which the selector
-chooses the digit layer.
-
-\begin{definition}[Digit Density]
-For $G = (M,D,K) \in \mathcal{X}$, the \emph{digit density} is
+For a selector stream $M \in \{D,K\}^{\mathbb{N}}$, define the indicator
+function
 \[
-\eta(G)
-=
-\liminf_{n \to \infty}
-\frac{1}{n}
-\bigl|\{\, 0 \le k < n : M(k) = D \,\}\bigr|.
+\chi_M(n) =
+\begin{cases}
+1 & M(n) = D,\\[4pt]
+0 & M(n) = K.
+\end{cases}
 \]
-\end{definition}
 
-The $\liminf$ ensures that $\eta(G)$ is defined even when the selector is
-irregular, oscillatory, or otherwise not convergent in the usual Cesàro sense.
+The \emph{selector density} of $M$ is the lower asymptotic density
+\[
+\eta(M)
+  = \liminf_{N \to \infty}
+      \frac{1}{N}
+      \sum_{n=0}^{N-1} \chi_M(n).
+\]
 
-\begin{definition}[Hybrid Identity]
-A generative identity $G$ is \emph{hybrid} if $\eta(G) > 0$.
-\end{definition}
+If $\eta(M) > 0$, the selector exposes digits at a positive rate; if
+$\eta(M)=0$, exposure becomes increasingly sparse.
 
-Thus, in a hybrid identity, the digit layer appears with positive lower density
-in the timeline.  
-In particular, the digit layer is selected infinitely often, and both the digit
-and meta layers contribute infinitely many symbols to the canonical output.
+This density measures only the frequency of digit selections, not their
+spacing; a selector may have dense clusters of selections followed by long
+voids while still having positive or zero density.
 
-\section{Topological Abundance of Hybrid Identites}
+\section{Hybrid Selectors}
 
-Hybrid identities are topologically generic in the product topology.
+\subsection{Definition}
 
-\begin{proposition}[Density of Hybrid Identities]
-\label{prop:hybrid-dense}
-The set of hybrid identities is dense in $\mathcal{X}$.
+A generative identity $G = (M,D,K)$ is \emph{hybrid} if $\eta(M) > 0$.
+Equivalently, the indices $n$ with $M(n)=D$ have positive asymptotic density.
+
+Hybrid identities expose digits regularly enough that, in the long run, a
+non-negligible portion of the total stream contributes to the classical
+output.
+
+\subsection{Topological density}
+
+Hybrid selectors occur densely in the generative space.
+
+\begin{proposition}
+For every nonempty basic open set in $\mathcal{X}$, there exists a hybrid
+identity contained in it.
 \end{proposition}
 
 \begin{proof}
-Let $U$ be a nonempty basic open set, specified by finite prefixes of $M$, $D$,
-and $K$.  
-Extend the specified prefix of $M$ to a selector $M'$ that chooses the digit
-layer at all sufficiently large indices.  
-Define $D'$ and $K'$ arbitrarily on the remaining positions.  
-Then $G' = (M',D',K')$ lies in $U$ and satisfies $\eta(G') = 1$.  
-Hence $U$ intersects the hybrid set, proving density.
+Let the open set be determined by finite prefixes of $(M, D, K)$.  
+Extend these prefixes by placing $M(n) = D$ for all $n$ beyond the given
+prefix.  
+Then the extended identity is hybrid and remains inside the open set.  
+Thus hybrid selectors form a dense subset of $\mathcal{X}$.
 \end{proof}
 
-Hybrids may not be comeager, but they form a dense and algebraically flexible
-subset of the generative space.  
-They represent the high-density end of the selector-regime spectrum.
+\subsection{Interpretation}
 
-\section{Hybrid Elements Within Collapse Fibers}
+Hybrid identities distribute their observed digits steadily throughout the
+total stream.  
+They represent the ``typical'' behavior of selectors when little is known
+about their structure.
 
-Collapse fibers contain a vast diversity of internal structures.  
-In particular, every fiber contains infinitely many hybrid identities.
+\section{Null-Density Selectors}
 
-\begin{proposition}[Hybrid Abundance in Fibers]
-\label{prop:hybrids-in-fiber}
-For every $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains infinitely many
-hybrid identities.
-\end{proposition}
+\subsection{Definition}
 
-\begin{proof}
-Fix a base-$b$ expansion $(x_j)$ of $x$.  
-Choose any selector $M$ with $\eta(M) > 0$.  
-Let $\varphi_G$ enumerate the positions where $M$ selects the digit layer.
-Define the digit layer $D$ so that
-\[
-D(\varphi_G(j)) = x_j \quad \text{for all } j.
-\]
-Assign $K$ freely to the remaining positions.  
-Any such $G = (M,D,K)$ belongs to $\mathcal{F}(x)$.  
-Varying $M$ or $K$ produces infinitely many hybrid identities in the fiber.
-\end{proof}
+A generative identity is \emph{null-density} if its selector satisfies
+$\eta(M) = 0$.
 
-Thus the internal geometry of a fiber includes high-density selector behavior in
-addition to the sparse dynamics of Chapter~5.
+These selectors still expose infinitely many digits (since $G \in
+\mathcal{X}^*$), but they do so with asymptotically negligible frequency.
 
-\section{Effective Hybrid Generators}
+\subsection{Examples}
 
-Despite the algorithmic restrictions in the effective core, hybrid structure
-remains fully universal.
-
-\begin{theorem}[Effective Hybrid Universality]
-\label{thm:hybrid-universality}
-For every computable real $x \in \mathbb{R}_c$, there exists an effective
-hybrid generator $G \in \mathcal{F}_{\mathrm{eff}}(x)$.
-\end{theorem}
-
-\begin{proof}
-Let $(x_j)$ be a computable base-$b$ expansion of $x$.  
-Define a computable selector $M$ by
+A standard example uses the perfect squares:
 \[
 M(n) =
 \begin{cases}
-D, & \text{if $n$ \text{ is even}},\\
-K, & \text{if $n$ \text{ is odd}}.
+D & \text{if } n = k^2 \text{ for some } k,\\
+K & \text{otherwise}.
 \end{cases}
 \]
-Then $\eta(G) = \tfrac{1}{2} > 0$.  
+Since the number of squares below $N$ is $\lfloor \sqrt{N} \rfloor$, the
+density of $D$-positions is $N^{-1/2} \to 0$.
 
-Define a computable digit layer $D$ by $D(2j) = x_j$.  
-Define $K$ arbitrarily on odd positions.  
-All three components are computable, so $G$ is effective, and collapse yields
-$\pi(G)=x$.  
-Thus $G$ is an effective hybrid generator for $x$.
+More intricate examples use rapidly growing computable sequences such as
+$n_k = k!$, $n_k = 2^{2^k}$, or sparse polynomial-time patterns.
+
+\subsection{Existence in every fiber}
+
+Null-density selectors appear in every collapse fiber.
+
+\begin{proposition}
+For every $x \in [0,1]$, there exists a null-density generative identity
+$G \in \mathcal{F}_{\mathrm{eff}}(x)$.
+\end{proposition}
+
+\begin{proof}
+Fix the canonical expansion $(x_j)$ of $x$ and define a selector that exposes
+digits only at perfect-square positions.  
+At each such position $n_j$, set $D(n_j) = x_j$; elsewhere set $D$ arbitrarily.
+Let $K$ be any computable meta-stream.  
+This identity lies in $\mathcal{F}_{\mathrm{eff}}(x)$ and has density zero by
+construction.
 \end{proof}
 
-Hybrid identities therefore appear naturally even under strict computability
-constraints.
+\subsection{Interpretation}
 
-\section{Outlook}
+Null-density selectors exhibit extreme sparsity.  
+They expose infinitely many digits but at a rate too small to influence the
+asymptotic distribution of symbols in the overall generative space.  
+Such identities show that collapse fibers contain elements of dramatically
+different structural complexity.
 
-Hybrid generative identities represent the positive-density regime of selector
-behavior.  
-They are topologically dense, present in every collapse fiber, and universally
-available for computable real numbers.  
-Their behavior contrasts sharply with the null-density identities of
-Chapter~5, which sit at the opposite end of the selector-regime spectrum.  
-Together, these two extremes reveal the structural richness inside collapse
-fibers and motivate the projection-theoretic analysis of Part~III.
+\section{Selector Diversity Inside a Fiber}
+
+Hybrid and null-density identities coexist inside the same collapse fiber,
+demonstrating that the classical output $x$ places almost no restrictions on
+the internal rate of digit revelation.
+
+Given any $x$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains:
+\begin{itemize}
+    \item identities selecting digits frequently,
+    \item identities selecting digits sparsely,
+    \item identities with periodic or chaotic selection patterns,
+    \item identities with arbitrary meta-information streams.
+\end{itemize}
+
+This freedom underscores the essential distinction between internal
+generative structure and classical magnitude.
+
+\section{Summary}
+
+Selector density provides the first structural coordinate for generative
+identities.  
+Hybrid selectors expose digits with positive asymptotic density, whereas
+null-density selectors do so sparsely.  
+Both behaviors occur densely in the generative space and both appear in every
+effective collapse fiber.  
+The coexistence of such radically different regimes within a single fiber
+illustrates the vast internal variability hidden beneath the collapse.
+
+The next chapter introduces structural projections, continuous observers that
+measure generative properties without disrupting the underlying identity.

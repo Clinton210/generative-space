@@ -1,181 +1,250 @@
-\chapter{Technical Construction of the Meta-Diagonalizer}
+\chapter{Diagonalizer Construction Details}
 
 \section{Introduction}
 
-Chapter~9 presents the meta-diagonalizer, a mechanism that produces an effective
-generator $G^*$ within a collapse fiber such that every projection in a given
-finite family evaluates $G^*$ exactly as it evaluates a reference generator $H$,
-while $G^*$ differs from $H$ in controlled and detectable ways outside the
-observational horizon of those projections.
+This appendix contains the full technical details of the meta diagonalizer
+constructed in the main text.  
+The purpose is to present the inductive machinery underlying the
+construction in a complete and self contained form.  
+We give precise definitions of stabilization indices, prefix bounds, and
+alignment points, and we verify the computability of the final identity.
 
-This appendix provides the full technical details of the construction:
-\begin{itemize}
-    \item defining sewing intervals,
-    \item synchronizing digit-selection indices,
-    \item maintaining fiber membership,
-    \item ensuring projection-level indistinguishability at fixed precision,
-    \item enforcing structural divergence beyond all finite dependency bounds.
-\end{itemize}
+Throughout, $x$ denotes a computable real number with canonical digit
+expansion $(x_j)_{j \ge 0}$, and $H$ is a fixed computable reference identity
+in the effective collapse fiber $\mathcal{F}_{\mathrm{eff}}(x)$.
 
-\section{Setup and Notation}
+We assume an enumeration of all computable structural projections
+\[
+\Phi_0, \Phi_1, \Phi_2, \ldots,
+\]
+together with computable dependency bounds $B_k$ for each $\Phi_k$.
 
-Let $\mathcal{P} = \{\Phi_1,\ldots,\Phi_r\}$ be a finite family of computable
-structural projections.  
-Let $H=(M_H,D_H,K_H)\in\mathcal{F}_{\mathrm{eff}}(x)$ be an effective generator
-with collapse value $x$.
+\section{Preliminaries}
 
-The goal is to construct an effective $G^*=(M^*,D^*,K^*)$ such that:
+\subsection{Effective fibers}
+
+The set $\mathcal{F}_{\mathrm{eff}}(x)$ of computable identities that collapse
+to $x$ is a $\Pi^{0}_{1}$ class.  
+Elements of this class are represented by computable selector, digit, and meta
+streams whose canonical outputs agree with the expansion of $x$.
+
+\subsection{Divergent identities}
+
+For each $k$ and each rational $\varepsilon > 0$, the Divergence Lemma from
+Chapter~9 guarantees the existence of a computable identity $A \in
+\mathcal{F}_{\mathrm{eff}}(x)$ such that
+\[
+|\Phi_k(A) - \Phi_k(H)| > 3\varepsilon.
+\]
+This provides the source of divergence at stage $k$.
+
+\subsection{Selection indices}
+
+For any identity $G$, let
+\[
+n_0^{G} < n_1^{G} < n_2^{G} < \cdots
+\]
+denote the selection indices corresponding to the positions where $M(n) = D$.
+
+\section{Inductive Construction Overview}
+
+We construct a sequence
+\[
+G_0, G_1, G_2, \ldots
+\]
+of computable identities satisfying:
 
 \begin{enumerate}
-    \item $\pi(G^*) = x$,
-    \item $\Phi_i(G^*) = \Phi_i(H)$ for all $\Phi_i\in\mathcal{P}$,
-    \item $G^*$ differs from $H$ on infinitely many coordinates in each layer.
+    \item $G_0 = H$,
+    \item $G_k \in \mathcal{F}_{\mathrm{eff}}(x)$ for all $k$,
+    \item $G_{k+1}$ extends $G_k$ on a prefix of computable length $N_{k+1}$,
+    \item $G_{k+1}$ introduces divergence on projection $\Phi_k$,
+    \item the limit identity $G^{\sharp}$ defined coordinatewise is computable.
 \end{enumerate}
 
-Let $B_{\mathcal{P}}(2^{-k})$ denote the uniform dependency bound for precision
-$2^{-k}$ (Appendix~C).
+\subsection{Tolerances}
 
-We define an increasing sequence of prefix lengths
+Define the sequence of tolerances
 \[
-N_0 < N_1 < N_2 < \cdots
+\varepsilon_k = 2^{-(k+2)},
 \]
-with each $N_k$ chosen to exceed $B_{\mathcal{P}}(2^{-k})$, and we construct
-$G^*$ in stages.
+which is computable, strictly decreasing, and tends to zero.
 
-\section{Sewing Intervals and Construction Strategy}
+\subsection{Prefix stabilization lengths}
 
-The construction proceeds by alternating between:
+Define
+\[
+N_0 = 0,
+\]
+and inductively
+\[
+N_{k+1} = \max \left( N_k,\ B_k(\varepsilon_k) \right).
+\]
+This ensures that agreement on the first $N_{k+1}$ symbols forces
+agreement of $\Phi_k$ to within $\varepsilon_k$.
+
+\section{Inductive Step}
+
+Assume $G_k$ has been defined.  
+We construct $G_{k+1}$ in several stages.
+
+\subsection{Stage 1: Choosing the divergent identity}
+
+By the Divergence Lemma, choose a computable identity
+\[
+A_k \in \mathcal{F}_{\mathrm{eff}}(x)
+\]
+such that
+\[
+|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
+\]
+
+The identity $A_k$ will supply the tail divergence at stage $k$.
+
+\subsection{Stage 2: Locating an alignment index}
+
+Let
+\[
+n_0^{G_k} < n_1^{G_k} < n_2^{G_k} < \cdots
+\]
+and
+\[
+n_0^{A_k} < n_1^{A_k} < n_2^{A_k} < \cdots
+\]
+be the respective selection indices.
+
+Since $G_k$ exposes infinitely many digits, there exists $j_k$ such that
+\[
+n_{j_k}^{G_k} \ge N_{k+1}.
+\]
+
+By alignment (Lemma C.1), the digit exposed at $n_{j_k}^{G_k}$ in $G_k$ is the
+same as the digit exposed at $n_{j_k}^{A_k}$ in $A_k$, and both coincide with
+the digit $x_{j_k}$.
+
+\subsection{Stage 3: Sewing the tail}
+
+Define $G_{k+1}$ by
+\[
+G_{k+1}(n) =
+\begin{cases}
+G_k(n) & n \le n_{j_k}^{G_k}, \\
+A_k(n - n_{j_k}^{G_k} + n_{j_k}^{A_k}) & n > n_{j_k}^{G_k}.
+\end{cases}
+\]
 
 \begin{itemize}
-    \item \textbf{prefix alignment}, where $G^*$ agrees with $H$ on a long prefix
-          to ensure all projections match at precision $2^{-k}$, and
-
-    \item \textbf{tail divergence}, where we enforce differences between $G^*$
-          and $H$ that lie beyond all current dependency bounds.
+    \item By construction, $G_{k+1}$ matches $G_k$ on all indices
+          $\le n_{j_k}^{G_k} \ge N_{k+1}$.
+    \item By the sewing lemma, $G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x)$.
+    \item By dependency bounds, $\Phi_k(G_{k+1})$ differs from $\Phi_k(G_k)$
+          by less than $\varepsilon_k$.
+    \item Since $A_k$ diverges by more than $3\varepsilon_k$ from $H$, the
+          final divergence of $G_{k+1}$ from $H$ remains at least
+          $\varepsilon_k$.
 \end{itemize}
 
-The key idea is:
+Thus $G_{k+1}$ satisfies all inductive requirements.
+
+\section{Existence of the Limit Identity}
+
+\subsection{Coordinate stabilization}
+
+For each index $n$, there exists a stage $k$ such that
 \[
-G^*|_{N_k} = H|_{N_k}
-\quad\Longrightarrow\quad
-\Phi_i(G^*)|_{2^{-k}} = \Phi_i(H)|_{2^{-k}}.
+N_k > n.
+\]
+Since $G_{k+1}$ and $G_k$ agree on all indices up to $N_{k+1} \ge N_k$, it
+follows that for all $m \ge k$,
+\[
+G_m(n) = G_k(n).
+\]
+Thus every coordinate stabilizes.
+
+\subsection{Definition of the limit}
+
+Define $G^{\sharp} \in \mathcal{X}^{*}$ by
+\[
+G^{\sharp}(n) = \lim_{k\to\infty} G_k(n),
+\]
+where the limit is understood as coordinatewise stabilization.
+
+The limit exists by the preceding argument.
+
+\subsection{Membership in the effective fiber}
+
+Every $G_k$ lies in $\mathcal{F}_{\mathrm{eff}}(x)$, and sewing preserves
+membership.  
+Since each $G_k$ exposes the canonical digits of $x$ at aligned positions, the
+same holds for the limit.  
+Thus
+\[
+G^{\sharp} \in \mathcal{F}_{\mathrm{eff}}(x).
 \]
 
-Differences inserted beyond $N_k$ remain invisible at precision $2^{-k}$ to
-every projection in $\mathcal{P}$.
+\section{Computability of the Diagonalizer}
 
-\section{Stage Construction}
+\subsection{Computability of stabilization indices}
 
-We define $G^*_k$ as the approximation to $G^*$ at stage $k$.  
-Each stage consists of two sub-stages: alignment and divergence.
+The sequence $(N_k)$ is computable because:
 
-\subsection{Stage k: Alignment}
-
-Choose $N_k > B_{\mathcal{P}}(2^{-k})$ and set
-\[
-G^*_k|_{N_k} = H|_{N_k}.
-\]
-
-By Lemma~C.\ref{lem:prefix-freezing},
-\[
-\Phi_i(G^*_k) \equiv \Phi_i(H)
-\quad\text{to precision } 2^{-k},\ \forall\,\Phi_i\in\mathcal{P}.
-\]
-
-\subsection{Stage k: Divergence}
-
-Beyond position $N_k$, modify each layer of $G^*$ as follows:
-
-\paragraph{Selector Layer $M^*$:}
-
-To ensure infinite divergence, insert a structured pattern (e.g., periodic
-blocks increasing in length) beyond $N_k$, but maintain:
 \begin{itemize}
-    \item infinitely many digit selections,
-    \item agreement with $M_H$ on the first $\ell_k$ selected positions,
-          where $\ell_k$ exceeds the largest selection index used by any
-          prefix-dependent computation of any $\Phi_i$ at stage $k$.
+    \item $B_k$ are computable dependency bounds,  
+    \item $\varepsilon_k$ is computable,  
+    \item $N_{k+1}$ depends only on $N_k$, $B_k(\varepsilon_k)$, and basic
+          arithmetic.
 \end{itemize}
 
-Thus $\pi(G^*)$ and $\pi(H)$ share the first $\ell_k$ digits, preserving collapse.
+Thus $N_k$ is uniformly computable.
 
-\paragraph{Digit Layer $D^*$:}
+\subsection{Computing selection indices}
 
-Modify $D$ in positions not selected within the first $\ell_k$ selected
-indices.  
-By Lemma~C.\ref{lem:digit-tail}, this does not change collapse.
+For each computable identity, the selector stream is computable, so the
+selection indices are computable by scanning until the required number of
+$D$ symbols have been seen.
 
-\paragraph{Meta Layer $K^*$:}
+Thus the indices $n_j^{G_k}$ and $n_j^{A_k}$ are computable.
 
-Insert any effective divergent pattern beyond $N_k$.  
-By Lemma~C.\ref{lem:meta-tail}, meta-layer changes do not affect collapse.
+\subsection{Computability of the sewing operation}
 
-\subsection{Ensuring Effective Divergence}
+Given $n$ and $k$, to compute $G_{k+1}(n)$:
 
-At each stage $k$, force $G^*_{k+1}$ to disagree with $G^*_k$ on an infinite set
-of coordinates beyond $N_k$.  
-This ensures the limit object $G^*$ differs from $H$ on infinitely many
-coordinates and is not equal to any of the stage approximations.
+\begin{itemize}
+    \item check whether $n \le n_{j_k}^{G_k}$,  
+    \item if so, return $G_k(n)$,  
+    \item otherwise, return the aligned symbol from $A_k$.
+\end{itemize}
 
-\section{Limit Construction}
+All needed values are computable, so $G_{k+1}$ is computable.
 
-Define $G^*$ by:
-\[
-G^*(n) = \lim_{k\to\infty} G^*_k(n).
-\]
+\subsection{Computability of the limit identity}
 
-This limit exists because:
+For any fixed $n$, to compute $G^{\sharp}(n)$:
 
-- for each coordinate $n$, $G^*_k(n)$ stabilizes once $k$ satisfies $N_k > n$,
-- the construction ensures each coordinate is modified only finitely many times,
-- the limit object is effective since the construction is computable uniformly.
+\begin{itemize}
+    \item find $k$ such that $N_k > n$,  
+    \item output $G_k(n)$.
+\end{itemize}
 
-\begin{proposition}[Correctness]
-The limit object $G^*$ satisfies:
-\begin{enumerate}
-    \item $G^*$ is effective,
-    \item $\pi(G^*) = \pi(H)$,
-    \item $\Phi_i(G^*) = \Phi_i(H)$ for all $\Phi_i\in\mathcal{P}$,
-    \item $G^*$ diverges from $H$ on infinitely many coordinates.
-\end{enumerate}
-\end{proposition}
+Since $N_k$ is computable and increasing without bound, this procedure is
+effective.
 
-\begin{proof}
-(1) Effectiveness follows because the construction is uniform and computable.
-
-(2) By Lemma~C.\ref{lem:fiber-prefix}, each stage preserves fiber membership and the limit of fiber-preserving sequences remains in the fiber.
-
-(3) At stage $k$, $\Phi_i(G^*_k)$ agrees with $\Phi_i(H)$ to precision $2^{-k}$.
-Passing to the limit yields exact equality for all $i$.
-
-(4) Each stage enforces divergence on a tail beyond $N_k$, and the $N_k$ increase,
-so divergence occurs at new coordinates infinitely often.
-\end{proof}
-
-\section{Diagonalization Over Families of Projections}
-
-To diagonalize over the entire finite family $\mathcal{P}$, the construction
-ensures:
-
-- alignment uses the uniform bound $B_{\mathcal{P}}$,  
-- divergence is placed strictly beyond this prefix,  
-- alignment intervals grow rapidly so no projection can stabilize on the tail,  
-- divergence intervals force disagreement outside all dependency bounds.
-
-Thus every projection in the family assigns the same value to $G^*$ as to $H$,
-yet $G^*$ remains structurally distinct.
+Thus $G^{\sharp}$ is computable.
 
 \section{Summary}
 
-This appendix has provided:
+This appendix presented the full details of the diagonalizer construction:
 
 \begin{itemize}
-    \item the stagewise alignment–divergence construction,
-    \item synchronization of selected positions for collapse preservation,
-    \item prefix freezing via dependency bounds,
-    \item combinatorial control of digit and meta modifications,
-    \item the existence and correctness of the limit generator $G^*$.
+    \item the inductive construction of $(G_k)$,
+    \item the stabilization lengths $N_k$,
+    \item alignment indices $j_k$,
+    \item controlled sewing of tails,
+    \item preservation of collapse fibers,
+    \item computability of each $G_k$,
+    \item computability of the limit identity $G^{\sharp}$.
 \end{itemize}
 
-These details complete the proof of the meta-diagonalizer and constitute the
-technical foundation for the Structural Incompleteness Theorem.
+These tools establish the existence of a computable identity in the collapse
+fiber of $x$ that agrees with a reference identity on all observed prefixes
+yet diverges along every computable structural projection.

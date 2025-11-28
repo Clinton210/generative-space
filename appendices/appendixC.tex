@@ -1,208 +1,277 @@
-\chapter{Dependency Bounds and Tail Modification Lemmas}
+\chapter{Alignment and Sewing: Full Technical Proofs}
 
 \section{Introduction}
 
-The dependency-bound framework plays a central role in the analysis of
-computable structural projections and in the construction of the
-meta-diagonalizer.  
-A computable projection can inspect only finitely many coordinates of a
-generative identity to achieve a prescribed precision.  
-This appendix formalizes these bounds and establishes a collection of lemmas
-allowing controlled modifications of a generator’s tail without affecting the
-output of a finite family of projections.
+This appendix provides full proofs of the technical lemmas used in
+Chapter~8 and Chapter~9.  
+These results justify the alignment of selected digits, the sewing of tails,
+and the preservation of collapse fibers under controlled concatenation of
+prefixes and tails.
 
-\section{Computable Projections and Moduli of Continuity}
+The purpose of this appendix is to present these arguments in their natural
+level of detail while keeping the main text focused on conceptual structure.
 
-Let $\Phi : \mathcal{X} \to \mathbb{R}$ be a computable structural projection.
-By effective continuity (Appendix~A), for each rational precision parameter
-$\varepsilon > 0$ there exists a computable function
+\section{Canonical Output and Selection Indices}
+
+For a generative identity $G = (M,D,K)$, define its sequence of selected
+positions by
 \[
-B_\Phi(\varepsilon) \in \mathbb{N}
+n_0 < n_1 < n_2 < \cdots,
 \]
-such that if two generators $G,H\in\mathcal{X}$ agree on their first
-$B_\Phi(\varepsilon)$ coordinates, then
+where $n_j$ is the $j$th index with $M(n_j) = D$.  
+The canonical output of $G$ is the sequence
 \[
-|\Phi(G) - \Phi(H)| < \varepsilon.
+d_0, d_1, d_2, \ldots,
+\qquad\text{where } d_j = D(n_j).
 \]
+For identities in $\mathcal{X}^{*}$, this output yields a valid digit
+expansion.
 
-\begin{definition}[Dependency Bound]
-A function $B_\Phi : \mathbb{Q}^+ \to \mathbb{N}$ satisfying the above property
-is called a \emph{dependency bound} for $\Phi$.
+Two identities $H$ and $A$ lie in the same collapse fiber if and only if
+\[
+D_H(n_j^{H}) = D_A(n_j^{A}) = x_j
+\]
+for all $j$, where $n_j^{H}$ and $n_j^{A}$ are their respective selection
+indices.
+
+\section{Alignment of Selected Digits}
+
+The first lemma states that identities in the same collapse fiber expose the
+same canonical digits at potentially different positions.  
+This basic fact allows us to use selection indices as alignment points.
+
+\begin{lemma}[Alignment of Selection Indices]
+\label{lem:alignment}
+Let $H$ and $A$ be identities in the same collapse fiber
+$\mathcal{F}(x)$.  
+Let $n_j^{H}$ and $n_j^{A}$ be their respective $j$th selection indices.  
+Then the digits exposed at these positions coincide:
+\[
+D_H(n_j^{H}) = D_A(n_j^{A}) = x_j.
+\]
+\end{lemma}
+
+\begin{proof}
+By definition of the collapse fiber,
+\[
+\pi(H) = \pi(A) = x.
+\]
+The canonical output of $\pi(H)$ is the sequence of digits
+\[
+x_0, x_1, x_2, \ldots,
+\]
+and the same holds for $\pi(A)$.  
+Since $n_j^{H}$ and $n_j^{A}$ denote the $j$th positions where $H$ and $A$
+expose their digits, the exposed digits must coincide with the $j$th digit of
+$x$.  
+Therefore
+\[
+D_H(n_j^{H}) = x_j = D_A(n_j^{A}),
+\]
+as required.
+\end{proof}
+
+This lemma provides the foundation for sewing: two identities in the same
+collapse fiber may disagree on the positions where selected digits occur, but
+their canonical output digits occur in the same order.
+
+\section{Prefix Completion and Tail Extraction}
+
+The following definition formalizes the process of replacing the tail of one
+identity with the tail of another, starting at aligned selection indices.
+
+\begin{definition}[Prefix Completion and Tail Extraction]
+Let $H$ and $A$ be identities in $\mathcal{X}^{*}$ and let $j \in \mathbb{N}$.  
+Define
+\[
+h_j = n_j^{H},
+\qquad
+a_j = n_j^{A}.
+\]
+We define the identity $G = H \,\widehat{\ }_{\,j}\, A$ by
+\[
+G(n) =
+\begin{cases}
+H(n) & n \le h_j, \\
+A(n - h_j + a_j) & n > h_j.
+\end{cases}
+\]
 \end{definition}
 
-Dependency bounds quantify the finite lookahead available to computable
-projections and are foundational for all subsequent constructions.
+This construction preserves all symbols of $H$ up to the $j$th selected
+position and then reproduces the symbolic behavior of $A$ starting at the
+corresponding selected digit.
 
-\section{Uniform Bounds for Finite Families}
+\section{Sewing Preserves the Collapse Fiber}
 
-For a finite family $\mathcal{P} = \{\Phi_1,\ldots,\Phi_r\}$ of computable
-projections, define the family dependency bound
-\[
-B_{\mathcal{P}}(\varepsilon)
-=
-\max\{ B_{\Phi_1}(\varepsilon),\ldots,B_{\Phi_r}(\varepsilon) \}.
-\]
+The next lemma shows that prefix completion and tail extraction preserve the
+collapsed value when the identities lie in the same fiber.
 
-\begin{proposition}[Uniform Family Bound]
-If $G,H\in\mathcal{X}$ agree on their first $B_{\mathcal{P}}(\varepsilon)$
-coordinates, then
-\[
-|\Phi_i(G)-\Phi_i(H)| < \varepsilon
-\quad\text{for all } 1\le i\le r.
-\]
-\end{proposition}
-
-This uniformity allows one to control the behavior of all projections in the
-family simultaneously using a single prefix constraint.
-
-\section{Prefix Freezing and Tail Freedom}
-
-Dependency bounds induce a clean separation between the \emph{prefix}, which
-fully determines the projections to fixed precision, and the \emph{tail}, which
-is unconstrained from the viewpoint of the projections.
-
-\begin{lemma}[Prefix Freezing]
-\label{lem:prefix-freezing}
-Fix $\varepsilon>0$ and a finite family $\mathcal{P}$.  
-If $G$ is any effective generator, then any $H$ satisfying
-\[
-H|_{B_{\mathcal{P}}(\varepsilon)} = G|_{B_{\mathcal{P}}(\varepsilon)}
-\]
-obeys
-\[
-|\Phi(H)-\Phi(G)| < \varepsilon
-\]
-for all $\Phi\in \mathcal{P}$.
+\begin{lemma}[Tail Sewing Preserves Collapse]
+\label{lem:sewing-preserves-collapse}
+Let $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$ and let $G =
+H \,\widehat{\ }_{\,j}\, A$.  
+Then $G \in \mathcal{F}(x)$.
 \end{lemma}
 
 \begin{proof}
-Immediate from the definition of $B_{\mathcal{P}}$.
+Let $h_j$ and $a_j$ denote the $j$th selected positions of $H$ and $A$.  
+The identity $G$ agrees with $H$ on every position $n \le h_j$.  
+In particular, the first $j$ selected digits of $G$ occur at the same indices
+as in $H$ and have the same values.
+
+For $n > h_j$, the identity $G$ reproduces the behavior of $A$ starting at
+index $a_j$.  
+The $(j+1)$st selected digit in $G$ appears at the first position $m > h_j$
+with $A(m - h_j + a_j) = D$, which corresponds to the $(j+1)$st selection
+index of $A$.
+
+Thus $G$ exposes the same canonical digit sequence as $A$, namely the digit
+expansion of $x$.  
+Hence $\pi(G) = x$ and $G \in \mathcal{F}(x)$.
 \end{proof}
 
-The tail of $H$ may differ arbitrarily from the tail of $G$ without affecting
-the projections at precision $\varepsilon$.
+This result holds for every $j$ and for any choice of $A$ in the collapse
+fiber.
 
-\section{Tail Modification Lemmas}
+\section{Dependency Bounds and Controlled Sewing}
 
-We now develop tail modification tools that allow alterations to the tail of a
-generator while preserving:
+The next lemma shows how dependency bounds combine with sewing to preserve the
+values of structural projections.
 
-1. agreement on the prefix up to a dependency threshold, and  
-2. membership in a fixed collapse fiber.
-
-These lemmas are essential for the sewing procedure in the meta-diagonalizer.
-
-\subsection{Coordinatewise Tail Replacement}
-
-\begin{lemma}[Digit-Preserving Tail Replacement]
-\label{lem:digit-tail}
-Let $G=(M,D,K)\in\mathcal{X}^*$ and fix $N\in\mathbb{N}$.  
-Let $D'$ be any sequence such that
+\begin{lemma}[Controlled Sewing]
+\label{lem:controlled-sewing}
+Let $\mathcal{P}$ be a finite family of structural projections with uniform
+dependency bound
 \[
-D'(n) = D(n)\quad\text{for } n < N.
+N = B_{\mathcal{P}}(\varepsilon).
 \]
-If $M$ continues to select digits infinitely often, then replacing $D$ with $D'$
-after position $N$ yields a new generator $H$ with $\pi(H)=\pi(G)$.
-\end{lemma}
-
-\begin{proof}
-The collapse value depends only on the digits at selected positions.  
-Since $D'(n)=D(n)$ for all $n<N$, and since selected indices beyond $N$
-contribute only to tail digits of the base-$b$ expansion, their modification
-does not affect the value of the infinite series defining $\pi(G)$.
-\end{proof}
-
-\subsection{Selector-Preserving Tail Replacement}
-
-\begin{lemma}[Selector Free Tail Modification]
-\label{lem:selector-tail}
-Fix $G=(M,D,K)$ and $N\in\mathbb{N}$.  
-Let $M'$ be any selector satisfying $M'(n)=M(n)$ for $n<N$.  
-If the set of selected indices of $M'$ is infinite and agrees with $M$ on the
-first $\ell$ selected positions, then $\pi(M',D,K)=\pi(G)$.
-\end{lemma}
-
-\begin{proof}
-If the first $\ell$ selected indices coincide for $M$ and $M'$, then the first
-$\ell$ digits of the base-$b$ expansion of $\pi(G)$ and $\pi(M',D,K)$ coincide.
-Differences in later selected positions correspond only to tail digits, which
-do not change the represented real number.
-\end{proof}
-
-\subsection{Meta-Layer Modification}
-
-\begin{lemma}[Meta-Layer Freedom]
-\label{lem:meta-tail}
-Let $G=(M,D,K)$ and let $K'$ be any sequence satisfying $K'|_N = K|_N$ for some
-prefix length $N$.  
-Then for all such $K'$, we have $\pi(M,D,K') = \pi(G)$.
-\end{lemma}
-
-\begin{proof}
-The meta layer is ignored entirely by collapse.
-\end{proof}
-
-\section{Combined Tail Modification}
-
-The previous lemmas can be combined to perform joint modifications across all
-three layers.
-
-\begin{lemma}[Fiber-Preserving Prefix Agreement]
-\label{lem:fiber-prefix}
-Let $G=(M,D,K)\in\mathcal{F}(x)$ and let $N\in\mathbb{N}$.  
-For any sequences $M',D',K'$ satisfying
+Let $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$.  
+Let $j$ satisfy $h_{j} \ge N$.  
+Define $G = H \,\widehat{\ }_{\,j}\, A$.  
+Then
 \[
-(M',D',K')|_N = (M,D,K)|_N,
-\]
-and for which $M'$ selects digits infinitely often and agrees with $M$ on the
-first $\ell$ selected positions, we have
-\[
-\pi(M',D',K') = x.
+|\Phi(G) - \Phi(H)| < \varepsilon
+\quad\text{for all } \Phi \in \mathcal{P}.
 \]
 \end{lemma}
 
 \begin{proof}
-Combining Lemmas~\ref{lem:digit-tail}, \ref{lem:selector-tail}, and
-\ref{lem:meta-tail}.
+Since $G$ and $H$ agree on all coordinates $n \le h_j$ and $h_j \ge N$, the
+prefix agreement condition of the structural projections implies
+\[
+|\Phi(G) - \Phi(H)| < \varepsilon
+\]
+for each $\Phi \in \mathcal{P}$.  
+The tail of $G$ beyond $h_j$ is irrelevant, since dependency bounds imply
+that only the prefix of length $N$ influences the value of $\Phi$ to
+precision $\varepsilon$.
 \end{proof}
 
-\section{Tail Modification with Dependency Control}
+This lemma shows that sewing changes structure only beyond the observational
+reach of the projections.
 
-We now introduce the core lemma used in the meta-diagonalizer: tail
-modifications can be arranged so that, for a finite family of projections, the
-projections remain unaffected at prescribed precision.
+\section{Sewing with Dependency Bounds: A Technical Refinement}
 
-\begin{lemma}[Precision-Preserving Tail Replacement]
-\label{lem:precision-tail}
-Let $\mathcal{P}$ be a finite family of computable projections and fix
-$\varepsilon>0$.  
-Let $N = B_{\mathcal{P}}(\varepsilon)$.  
-If $H$ agrees with $G$ on the first $N$ coordinates, then:
+In the diagonalizer construction, we need an explicit estimate relating $j$,
+$N$, and the positions of selected digits.  
+The following lemma provides this relationship.
+
+\begin{lemma}[Selection Index Lower Bound]
+\label{lem:selection-index-lower-bound}
+Let $H$ be a generative identity with infinitely many selected digits.  
+For any $N \in \mathbb{N}$, there exists a $j$ such that $h_j \ge N$.  
+Moreover, if $H$ has positive selector density $\eta(H) > 0$, then
 \[
-|\Phi(H)-\Phi(G)| < \varepsilon
-\quad\text{for all } \Phi\in\mathcal{P}.
+h_j \le \frac{j}{\eta(H)}.
 \]
-Moreover, if $H$ satisfies the fiber-preservation conditions of
-Lemma~\ref{lem:fiber-prefix}, then $H\in\mathcal{F}(\pi(G))$.
 \end{lemma}
 
 \begin{proof}
-The first statement follows from Lemma~\ref{lem:prefix-freezing}; the second
-from Lemma~\ref{lem:fiber-prefix}.
+Since $H$ exposes infinitely many digits, the sequence
+\[
+h_0 < h_1 < h_2 < \cdots
+\]
+is strictly increasing and unbounded.  
+Thus for any $N$ there exists $j$ with $h_j \ge N$.
+
+If $\eta(H) > 0$, then by definition of lower density,
+\[
+\frac{j}{h_j} \to \eta(H)
+\quad\text{along a subsequence}.
+\]
+Equivalently,
+\[
+h_j \le \frac{j}{\eta(H)}
+\]
+for all sufficiently large $j$.
 \end{proof}
+
+This lemma ensures that we can always find an alignment index beyond the range
+required by the dependency bounds.
+
+\section{Full Sewing Lemma and Its Consequences}
+
+We now combine the previous results into a single statement that is used in
+the diagonalizer construction.
+
+\begin{lemma}[Full Sewing Lemma]
+\label{lem:full-sewing}
+Let $\mathcal{P}$ be a finite family of structural projections with uniform
+dependency bound $B_{\mathcal{P}}(\varepsilon) = N$.  
+Let $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$.  
+Let $j$ satisfy $h_j \ge N$.  
+Then the sewed identity $G = H \,\widehat{\ }_{\,j}\, A$ satisfies:
+\begin{enumerate}
+    \item $G \in \mathcal{F}(x)$,
+    \item $|\Phi(G) - \Phi(H)| < \varepsilon$ for all $\Phi \in \mathcal{P}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The first part follows from Lemma~\ref{lem:sewing-preserves-collapse}.  
+The second part follows from Lemma~\ref{lem:controlled-sewing}.  
+\end{proof}
+
+The Full Sewing Lemma provides the key finite information control needed for
+diagonalization: observers remain stable under changes to the identity beyond
+a sufficiently long prefix.
+
+\section{Computability of the Sewn Identity}
+
+We finish with the computability properties of the sewing operation.
+
+\begin{lemma}[Computability of Sewing]
+\label{lem:computable-sewing}
+If $H$ and $A$ are computable identities in $\mathcal{F}(x)$ and $j$ is
+computable from $H$, then $H \,\widehat{\ }_{\,j}\, A$ is a computable identity.
+\end{lemma}
+
+\begin{proof}
+Computable identities have computable selector, digit, and meta streams.
+Given $j$ and the selection indices $h_j$ and $a_j$, which are computable from
+$H$ and $A$, the definition of the sewed identity provides an explicit
+algorithm to compute $G(n)$ for each $n$.  
+Thus $G$ is computable.
+\end{proof}
+
+This lemma ensures that the diagonalizer constructed in the main text is
+computable.
 
 \section{Summary}
 
-This appendix provided the complete machinery for controlled tail modifications:
+This appendix provided full proofs of the alignment and sewing lemmas that
+support the diagonalizer construction.  
+These results show that:
 
 \begin{itemize}
-    \item dependency bounds for computable projections,
-    \item uniform bounds for finite families,
-    \item prefix freezing and tail freedom,
-    \item fiber-preserving modifications across all layers,
-    \item precision-preserving tail replacement.
+    \item identities in the same collapse fiber expose the same canonical
+          digits in the same order,
+    \item tails may be replaced freely once alignment indices are chosen,
+    \item dependency bounds ensure that observers are unaffected by tail
+          modification,
+    \item computable identities remain computable under sewing.
 \end{itemize}
 
-These tools are used in Part~III to analyze structural projections, and in
-Part~IV to construct the meta-diagonalizer and prove the Structural
-Incompleteness Theorem.
+Together, these tools form the core technical machinery used to establish the
+Structural Incompleteness Theorem.

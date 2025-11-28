@@ -1,170 +1,157 @@
-\chapter{Null-Density Generators and Sparse Dynamics}
+\chapter{Structural Projections and the Projection Lattice}
 
 \section{Introduction}
 
-Chapter~4 analyzed hybrid identities, whose selectors choose the digit layer on a
-set of positive lower density.  
-Hybrid mechanisms occupy the high-density end of the selector spectrum, where
-the information encoding classical magnitude is distributed across a substantial
-portion of the timeline.
+The collapse map extracts the classical value of a generative identity while
+discarding most of its internal structure.  
+To understand which aspects of this structure can be detected by continuous
+observers, we introduce the general notion of a \emph{structural projection}.
+These projections form a lattice under pointwise comparison and represent
+effective measurements that respect the topology of the generative space.
 
-This chapter develops the complementary regime: \emph{null-density generators}.
-A null-density generator selects the digit layer infinitely often, ensuring that
-collapse is well-defined, but does so at vanishing asymptotic density.  
-In this regime the meta layer dominates the canonical output, yet the sparse
-digit positions still encode a precise classical real number.
+The framework developed in this chapter draws on ideas from Type-2
+Effectivity, where continuous functionals on sequence spaces are understood
+through their finite information content.  
+This finite information principle, central in the work of Weihrauch and
+Pauly on represented spaces, appears here in an explicit combinatorial form.
+It allows projections to be analyzed through their dependency on finite
+prefixes and serves as the foundation for the incompleteness results proved
+later.
 
-Null-density behavior demonstrates the expressive flexibility of collapse.  
-Magnitude information can be encoded in a sparse subsequence of the timeline,
-leaving the overwhelming majority of coordinates unconstrained.  
-This allows entire regions of the mechanism to carry additional structure that is
-invisible to classical magnitude but becomes relevant for secondary invariants
-and structural projections.
+\section{Structural Projections}
 
-The goal of this chapter is to formalize null-density generation, establish its
-prevalence in both full and effective fibers, analyze its shift dynamics, and
-contrast it with hybrid behavior.  
-These results complete the classification of selector regimes that underlies
-Part~III’s projection-theoretic analysis and Part~IV’s diagonalizer.
+A \emph{structural projection} is any continuous function
+\[
+\Phi : \mathcal{X}^* \to \mathbb{R},
+\]
+where $\mathcal{X}^*$ carries the product topology defined in Part I.  
+Continuity ensures that the value $\Phi(G)$ is determined to any fixed
+precision by a finite prefix of $G$.
 
-\section{Digit Sparsity and Null-Density Structure}
+More precisely, for every $\varepsilon > 0$, continuity provides an integer
+$B_\Phi(\varepsilon)$ such that
+\[
+G[0..B_\Phi(\varepsilon)]
+  = H[0..B_\Phi(\varepsilon)]
+\quad\Longrightarrow\quad
+|\Phi(G) - \Phi(H)| < \varepsilon.
+\]
 
-A null-density generator represents a real number through a selector that chooses
-the digit layer rarely but still infinitely often.
+The function $B_\Phi$ plays the role of a computable modulus of continuity in
+the sense of Type-2 computability, which is the standard framework for
+analyzing real-valued functionals on symbolic spaces.
 
-\begin{definition}[Null-Density Generator]
-A generative identity $G = (M,D,K)$ is a \emph{null-density generator} if
-\begin{enumerate}
-    \item $M$ selects the digit layer infinitely often, and  
-    \item its digit density satisfies
-    \[
-    \eta(G)
-    =
-    \liminf_{n\to\infty}
-    \frac{1}{n}
-    \bigl|\{\,0 \le k < n : M(k)=D \,\}\bigr|
-    =
-    0.
-    \]
-\end{enumerate}
+\section{Basic Examples}
+
+Several projections arise naturally from the structure of a generative
+identity.
+
+\subsection*{Collapse}
+
+The collapse $\pi$ is the foundational projection.  
+Its continuity was established in Chapter 2 and follows from the classical
+theory of real number representations.
+
+\subsection*{Digit statistics}
+
+Fix a digit $a \in \{0,\ldots,b-1\}$.  
+Define
+\[
+\Phi_a(G)
+  = \liminf_{N \to \infty}
+      \frac{1}{N}
+      \sum_{j=0}^{N-1} \mathbf{1}[\, d_G(j) = a \,].
+\]
+This projection measures the lower asymptotic frequency of the digit $a$ in
+the canonical output.  
+Other variants include limsup frequency or empirical block frequencies.
+
+Such projections resemble classical invariants in symbolic dynamics, where
+frequency statistics determine measure-theoretic properties of subshifts.
+The exposition of Lind and Marcus provides many examples of these quantities
+in the context of shift spaces.
+
+\subsection*{Selector statistics}
+
+Define
+\[
+\Psi(G)
+  = \liminf_{N \to \infty}
+      \frac{1}{N}
+      \sum_{n=0}^{N-1} \mathbf{1}[\, M(n) = D \,].
+\]
+This projection measures the asymptotic density with which the selector
+exposes digits.  
+It coincides with the selector density studied in Chapter 4 but now viewed as
+an observer on $\mathcal{X}^*$.
+
+\section{Dependency Bounds}
+
+Dependency bounds measure the amount of information an observer requires to
+determine its output to a given precision.
+
+\begin{definition}[Dependency Bound]
+Let $\Phi : \mathcal{X}^* \to \mathbb{R}$ be continuous.  
+A function $B_\Phi : (0,1] \to \mathbb{N}$ is a \emph{dependency bound} for
+$\Phi$ if
+\[
+G[0..B_\Phi(\varepsilon)]
+  = H[0..B_\Phi(\varepsilon)]
+\quad\Longrightarrow\quad
+|\Phi(G) - \Phi(H)| < \varepsilon
+\]
+for all $\varepsilon > 0$.
 \end{definition}
 
-Thus the distances between successive digit selections grow without bound.
-The resulting canonical output consists almost entirely of meta symbols.
+If $\Phi$ is computable, classical results from Type-2 Effectivity imply that
+$B_\Phi$ can be chosen to be computable as well.  
+This follows from the fact that computable functionals on Baire space admit
+computable moduli of continuity.
 
-\begin{remark}[Symbolic-Dynamic Perspective]
-From the standpoint of symbolic dynamics, a null-density selector belongs to a
-subshift of extremely low combinatorial complexity.  
-If the gaps between digit selections diverge, the selector subshift has
-topological entropy zero.  
-This contrasts sharply with many hybrid selectors, which may belong to
-positive-entropy subshifts.
-\end{remark}
+Dependency bounds quantify the finite information content of observers and
+provide the mechanism by which projections can be frozen at finite stages in
+the diagonalizer construction of Part IV.
 
-\section{Existence in Full Fibers}
+\section{The Projection Lattice}
 
-Null-density behavior is compatible with any classical magnitude.
-
-\begin{proposition}[Null-Density Generators in Fibers]
-\label{prop:nd-fiber}
-For every $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains infinitely many
-null-density generators.
-\end{proposition}
-
-\begin{proof}
-Let $(x_j)$ be a base-$b$ expansion of $x$.  
-Let $S = \{ j^2 : j \ge 1 \}$ and define the selector $M$ by $M(n)=D$ if
-$n \in S$ and $M(n)=K$ otherwise.  
-The number of squares below $n$ satisfies $|S \cap [0,n)| \approx \sqrt{n}$, so
-$\eta(G)=0$ for any identity $G$ using this selector.
-
-Define $D(j^2)=x_j$ and assign $D(n)$ arbitrarily for $n\notin S$.  
-Choose any meta sequence $K$.  
-All such mechanisms collapse to $x$, and varying $K$ yields infinitely many
-distinct null-density generators in $\mathcal{F}(x)$.
-\end{proof}
-
-Sparse selectors therefore impose no restriction on which real numbers may be
-represented.
-
-\section{Null-Density Generators in the Effective Core}
-
-The construction above remains valid in the effective setting because the sparse
-selector pattern $n=j^2$ is computable.
-
-\begin{proposition}[Effective Null-Density Generation]
-\label{prop:nd-effective}
-If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ contains effective
-null-density generators.  
-If $x$ is not computable, $\mathcal{F}_{\mathrm{eff}}(x)$ is empty.
-\end{proposition}
-
-\begin{proof}
-Let $(x_j)$ be a computable expansion of $x$.  
-Define a selector $M$ that chooses $D$ exactly at positions $j^2$.  
-The set of squares is recursive, so $M$ is computable and satisfies $\eta(G)=0$.
-
-Define $D(j^2)=x_j$ and set $D(n)$ arbitrarily elsewhere; this is computable
-because the map $j \mapsto j^2$ is computable and strictly increasing.  
-Let $K$ be any computable sequence.  
-Then $G = (M,D,K)$ is effective and collapses to $x$.
-\end{proof}
-
-Thus null-density generators exist at both the full and effective levels.
-
-\section{Sparse Dynamics Under the Shift}
-
-Null-density behavior interacts predictably with shift dynamics.
-
-\begin{proposition}[Shift Invariance of Null Density]
-If $G$ is a null-density generator, then the shifted identity $\sigma(G)$ is also
-a null-density generator.
-\end{proposition}
-
-\begin{proof}
-Let
+Given two projections $\Phi$ and $\Psi$, define
 \[
-A_n = |\{\,0 \le k < n : M(k)=D\,\}|.
+\Phi \le \Psi
+\quad\Longleftrightarrow\quad
+\Phi(G) = \Phi(H) \text{ whenever } \Psi(G) = \Psi(H).
 \]
-For the shifted selector, the corresponding count is either $A_{n+1}$ or
-$A_{n+1}-1$.  
-Since $A_n/n \to 0$, the same holds for $A_{n+1}/n$, and thus
-$\eta(\sigma(G))=0$.
+This relation expresses that $\Psi$ distinguishes at least as much structure
+as $\Phi$.
+
+\begin{proposition}
+The set of structural projections on $\mathcal{X}^*$ ordered by $\le$ forms a
+complete lattice.
+\end{proposition}
+
+\begin{proof}
+For any family of projections $(\Phi_i)$, the pointwise supremum
+\[
+\Phi(G) = \sup_i \Phi_i(G)
+\]
+is still continuous and therefore a structural projection.  
+This projection is the least upper bound with respect to $\le$.  
+Similarly, pointwise infima provide greatest lower bounds.
 \end{proof}
 
-Null-density selectors are therefore dynamically stable under the shift, in
-contrast to certain hybrid selectors whose density properties may vary under
-block codings or local transformations.
+This algebraic structure parallels the lattice of continuous real-valued
+functionals on represented spaces and has been extensively studied in the
+context of Weihrauch degrees.  
+Here it provides the organizational framework for understanding how different
+projections capture different aspects of generative structure.
 
-\section{Contrast With Hybrid Generators}
+\section{Summary}
 
-Hybrid and null-density identities form two structural extremes within collapse
-fibers:
+Structural projections are continuous observers on the generative space.  
+Their finite dependency on prefixes gives rise to computable dependency
+bounds, and their collective structure forms a complete lattice.  
+These properties reflect classical results from Type-2 computability and
+symbolic dynamics but are here adapted to the generative identity setting.
 
-\begin{itemize}
-    \item \textbf{Hybrids ($\eta>0$):} magnitude information is distributed over
-    a positive-density set of positions; meta information is interwoven with the
-    digit layer.
-    \item \textbf{Null-density generators ($\eta=0$):} the digit layer appears
-    sparsely; almost all coordinates of the mechanism are unconstrained by
-    collapse.
-\end{itemize}
-
-These regimes exemplify the tension at the core of Part~III: different
-projection families respond differently to sparsity and density.  
-Digit-density projections separate hybrids from null-density generators, whereas
-other invariants may fail to do so.  
-This mismatch is a precursor to the projective incompatibility results of
-Chapter~8 and to the diagonalizer of Chapter~9, which exploits the ability to
-switch between high- and low-density patterns in the tail.
-
-\section{Outlook}
-
-Null-density generators complete the basic classification of selector regimes.
-Together with hybrid identities, they illustrate the full range of internal
-freedom present in collapse fibers.  
-These contrasting behaviors motivate the structural projections developed in
-Part~III, where we investigate how secondary coordinates detect or miss these
-internal patterns.  
-The expressive power and limitations of such projections form the foundation for
-the incompleteness results of Part~IV.
+In the next chapter we formalize prefix stabilization and show how the finite
+dependency of observers enables the controlled constructions that drive the
+incompleteness phenomena in Part IV.

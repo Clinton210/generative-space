@@ -1,191 +1,244 @@
-\chapter{Examples and Calculations for Extended Invariants}
+\chapter{Extended Invariants and Selector Geometry}
 
 \section{Introduction}
 
-Part~VI develops extended generative invariants such as entropy balance,
-fluctuation index, and orthogonal coordinate embeddings.  
-These invariants enrich the representation of a generative identity beyond its
-classical magnitude and partially restore structure lost under collapse.
+This appendix provides explicit examples and geometric interpretations of the
+extended invariants introduced in Part~VI.  
+These invariants measure large scale properties of the selector stream and
+reveal how generative identities distribute across the symbolic space.  
+The appendix also develops a slice based geometric viewpoint of selector
+behavior, which generalizes and formalizes earlier three dimensional intuition
+using the modern terminology of the monograph.
 
-This appendix collects explicit examples illustrating:
-\begin{itemize}
-    \item computation of entropy balance $\eta(G)$,
-    \item computation of fluctuation index $\phi(G)$,
-    \item comparison of generators with identical collapse values but distinct
-          extended coordinates,
-    \item two- and three-dimensional embeddings using $(\pi,\eta)$ and
-          $(\pi,\eta,\phi)$,
-    \item cases where extended invariants reveal structure invisible to collapse.
-\end{itemize}
-
-These examples are not required for the main results, but clarify the geometric
-interpretation of extended coordinates.
-
-\section{Entropy Balance Examples}
-
-Recall that the entropy balance of a generator is
+Throughout, $G = (M,D,K)$ denotes a generative identity with selector stream
+$M \in \{D,K\}^{\mathbb{N}}$.  
+The entropy balance is
 \[
 \eta(G)
-=
-\liminf_{n\to\infty}
-\frac{1}{n}\bigl|\{\,k<n : M(k)=D\,\}\bigr|.
+  = \liminf_{N\to\infty}
+      \frac{1}{N} \sum_{n<N} \chi_M(n),
 \]
-
-\subsection{Example 1: Pure Digit Selector}
-
-Let $M(n)=D$ for all $n$.  
-Then
+and the fluctuation index is
 \[
-\eta(G)=1
+\phi(G)
+  = \limsup_{j\to\infty} \frac{g_j}{n_j},
 \]
-for every choice of $D$ and $K$.  
-The canonical output is the digit sequence $D$ itself.
+where $n_j$ are the selection indices and $g_j = n_{j+1} - n_j$.
 
-\subsection{Example 2: Alternating Selector}
+\section{Vertical, Horizontal, and Fiber Slices}
+
+Extended invariants give rise to natural geometric slices through the
+generative space.  
+These slices provide useful conceptual pictures of selector behavior and
+clarify how collapse fibers intersect large scale invariant structure.
+
+\subsection{Vertical slices: fixing a prefix}
+
+A vertical slice is a cylinder set of the form
+\[
+\mathcal{C}(u)
+  = \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \},
+\]
+where $u$ is a finite prefix of length $N$.  
+Vertical slices represent the set of identities that agree on a finite
+segment of the selector, digit, and meta streams.
+
+Vertical slices are the regions that structural projections inspect.  
+Dependency bounds imply that a projection samples only a vertical slice, and
+prefix stabilization ensures that observers ignore all tails beyond the slice
+depth.  
+This interpretation connects directly to the incompleteness phenomena of
+Part~IV.
+
+\subsection{Horizontal slices: fixing invariant values}
+
+Fix $\alpha \in [0,1]$ or $\beta \in [0,\infty]$.  
+The horizontal slices
+\[
+\mathcal{H}_{\alpha}
+  = \{ G : \eta(G) = \alpha \},
+\qquad
+\mathcal{H}^{\beta}
+  = \{ G : \phi(G) = \beta \}
+\]
+represent level sets of extended invariants.  
+These sets group identities by long term selector behavior and cut across many
+collapse fibers.
+
+When plotted in the $(\eta,\phi)$ plane, horizontal slices correspond to
+vertical or horizontal lines.  
+They reveal the large scale organization of selector patterns and illustrate
+the diversity of possible behaviors.
+
+\subsection{Fiber slices: fixing the collapsed value}
+
+Fix a real number $x$.  
+The fiber slice
+\[
+\mathcal{F}(x)
+  = \{ G \in \mathcal{X}^{*} : \pi(G) = x \}
+\]
+represents all identities that collapse to $x$.  
+This slice is a symbolic sheet that cuts through the invariant geometry of
+the selector space.
+
+Because extended invariants depend only on the selector, not on collapse, the
+image of a fiber under the embedding
+\[
+G \mapsto (\eta(G), \phi(G))
+\]
+typically fills a large region of the $(\eta,\phi)$ plane.  
+This geometric picture illustrates how collapse conceals nearly all selector
+structure.
+
+\section{Worked Examples of Extended Invariants}
+
+\subsection{Periodic positive density example}
 
 Let
 \[
-M(n) = 
+M(n) =
 \begin{cases}
-D, & n\text{ even},\\
-K, & n\text{ odd}.
+D & \text{if } n \text{ is even},\\
+K & \text{otherwise}.
 \end{cases}
 \]
-Then
+Then half of all positions expose digits:
 \[
-\eta(G)=\tfrac12.
+\eta(G) = \frac{1}{2}.
 \]
-
-This example shows that entropy balance can be tuned easily by patterning the
-selector.
-
-\subsection{Example 3: Polynomial Sparsity}
-
-Let $M(n)=D$ exactly when $n=j^2$ for some $j\ge0$.  
-Then the number of squares $\le n$ is approximately $\sqrt{n}$, so
-\[
-\eta(G) = 
-\lim_{n\to\infty} \frac{\sqrt{n}}{n} = 0.
-\]
-
-This produces a null-density generator.
-
-\section{Fluctuation Index Examples}
-
-The fluctuation index $\phi(G)$ measures selector irregularity by quantifying
-local variation of the selector or canonical output.  
-For illustration, consider a version based on empirical switching frequency:
-\[
-\phi(G)
-=
-\limsup_{n\to\infty}
-\frac{1}{n}\bigl|\{\,k<n : M(k)\neq M(k+1)\,\}\bigr|.
-\]
-
-\subsection{Example 4: Smooth Hybrid}
-
-Let $M(n)=D$ for $n$ even and $M(n)=K$ for odd $n$.  
-Then switching occurs at every step, so
-\[
-\phi(G)=1.
-\]
-
-\subsection{Example 5: Block-Constant Selector}
-
-Define $M$ by alternating blocks of growing lengths:
-\[
-\begin{aligned}
-& \underbrace{D,D,\ldots,D}_{2^1},
-\underbrace{K,K,\ldots,K}_{2^1},
-\\
-& \underbrace{D,D,\ldots,D}_{2^2},
-\underbrace{K,K,\ldots,K}_{2^2},
-\\
-& \cdots
-\end{aligned}
-\]
-Switching occurs only at the block boundaries, producing
+The selection indices are $n_j = 2j$, so $g_j = 2$ and
 \[
 \phi(G) = 0.
 \]
-Yet the entropy balance is $\eta(G)=\tfrac12$.
+This identity represents regular, evenly spaced digit exposure.
 
-This example shows $\eta$ and $\phi$ are independent invariants.
+\subsection{Positive density with mild irregularity}
 
-\section{Generators Sharing Collapse but Not Extended Coordinates}
-
-\subsection{Example 6: Same Magnitude, Different Density}
-
-Let $x$ have base-$b$ expansion $(x_j)$.  
-Define two generators:
-
-\begin{itemize}
-    \item $G$ uses $M_G(n)=D$ for all $n$ and $D_G(n)=x_n$,
-    \item $H$ uses $M_H(n)=D$ only when $n=j^2$, and chooses $D_H(j^2)=x_j$.
-\end{itemize}
-
-Both satisfy $\pi(G)=\pi(H)=x$,  
-but
+Let $M$ be the periodic sequence obtained by repeating $DDK$.  
+Then
 \[
-\eta(G)=1,\qquad \eta(H)=0.
+\eta(G) = \frac{2}{3},
+\qquad
+\phi(G) = 0,
+\]
+even though the exposure pattern is not evenly spaced.
+
+\subsection{Zero density with bounded gaps}
+
+Let $M(n) = D$ when $n$ is prime and $K$ otherwise.  
+The density of primes is zero, so
+\[
+\eta(G) = 0.
+\]
+However, gaps grow only logarithmically, so
+\[
+\phi(G) = 0.
 \]
 
-Thus entropy balance separates these points in the extended coordinate plane.
+\subsection{Zero density with large fluctuations}
 
-\subsection{Example 7: Same Magnitude and Same Density, Different Fluctuation}
-
-Let $M_G$ alternate $D,K$ at every step, while $M_H$ alternates in growing
-blocks.  
-Both have $\eta(G)=\eta(H)=\tfrac12$,  
-but
+Select digits at factorial indices
 \[
-\phi(G)=1,\qquad \phi(H)=0.
+n_j = j!.
+\]
+Then $\eta(G) = 0$, but
+\[
+\frac{g_j}{n_j} = j,
+\quad
+\phi(G) = \infty.
 \]
 
-Thus the pair $(\eta,\phi)$ distinguishes generators that collapse to the same
-real number and share the same digit-selection density.
+\subsection{Oscillating density example}
 
-\section{Embedding Examples}
-
-\subsection{Two-Dimensional Embedding}
-
-Consider the map
+Expose digits in blocks:
 \[
-G \mapsto (\pi(G),\eta(G)).
+D^{2^0}K^{2^0}D^{2^1}K^{2^1}D^{2^2}K^{2^2}\cdots
+\]
+Then the density oscillates between values near $0$ and near $1$, and
+\[
+\eta(G) = 0,
+\qquad
+\phi(G) = \infty.
 \]
 
-Each classical real $x$ gives a vertical line
+\section{Semicontinuity Demonstrations}
+
+\subsection{Lower semicontinuity of \texorpdfstring{$\eta$}{eta}}
+
+
+Let $G$ satisfy $\eta(G) = 0$.  
+Define $G_k$ by copying the first $k$ bits of $M$ and then exposing digits
+forever.  
+Then $\eta(G_k) = 1$ for all $k$ and
 \[
-\{x\} \times [0,1] \subseteq \mathbb{R}^2.
+\eta(G)
+  \le \liminf_{k\to\infty} \eta(G_k).
 \]
 
-Generators from the same collapse fiber occupy distinct points on this line.
+\subsection{Upper semicontinuity of \texorpdfstring{$\phi$}{phi}}
 
-\subsection{Three-Dimensional Embedding}
-
-The map
+Let $G$ have evenly spaced selected digits so $\phi(G) = 0$.  
+Modify the tail of $M$ in $G_k$ by inserting a single gap of length
+$\ell_k \to \infty$.  
+Then
 \[
-G \mapsto (\pi(G),\eta(G),\phi(G))
+\limsup_{k\to\infty} \phi(G_k) = \infty,
+\qquad
+\phi(G) \ge \limsup_{k\to\infty} \phi(G_k).
 \]
-produces a three-dimensional coordinate system.  
-Generators from the same collapse fiber form a curve or surface inside the
-vertical plane $\{x\}\times \mathbb{R}^2$.
 
-This embedding emphasizes complementary structural dimensions of the generative
-space.
+\subsection{Failure of continuity}
 
-\section{Interpretation}
+Let $G_k$ select digit $D$ only at position $k$ and set $G$ to have no
+selected digits.  
+Then $G_k \to G$, but the invariants behave discontinuously.  
+This illustrates that neither $\eta$ nor $\phi$ can be continuous in the
+product topology.
 
-These examples illustrate the following themes:
+\section{Extended Invariants Inside Collapse Fibers}
 
-\begin{itemize}
-    \item Extended invariants map collapse fibers into higher-dimensional spaces.
-    \item Entropy balance and fluctuation index are independent dimensions.
-    \item Generators with identical collapse values can differ dramatically in
-          extended coordinates.
-    \item Extended invariants partially restore structure lost under collapse.
-\end{itemize}
+Since extended invariants depend only on the selector, each collapse fiber
+contains identities with arbitrary invariant values.
 
-While extended invariants do not defeat structural incompleteness, they enrich
-the generative representation and reveal systematic internal behaviors that
-collapse alone cannot express.
+\subsection{Arbitrary balance in a fiber}
+
+Given any $\alpha \in [0,1]$, construct a selector $M$ with
+\[
+\eta(G) = \alpha,
+\]
+assign the canonical digits of $x$ at selected positions, and choose any meta
+stream.  
+The resulting identity lies in $\mathcal{F}(x)$.
+
+\subsection{Arbitrary fluctuation in a fiber}
+
+Given $\beta \in [0,\infty]$, construct a selector with
+\[
+\phi(G) = \beta
+\]
+by adjusting the growth of the gap sequence.  
+Placing the digits of $x$ at selected indices yields an identity in
+$\mathcal{F}(x)$.
+
+\subsection{Simultaneous control}
+
+Given any $(\alpha,\beta)$, selectors can be built to realize
+\[
+\eta(G) = \alpha,
+\qquad
+\phi(G) = \beta,
+\]
+and the corresponding identities lie in the collapse fiber of $x$.  
+Thus fibers map to substantial regions of the invariant plane.
+
+\section{Summary}
+
+This appendix presented explicit examples illustrating the full range of
+behavior for $\eta$ and $\phi$, as well as slice based geometric
+interpretations that clarify how selectors populate the generative space.  
+Vertical slices represent finite symbolic prefixes, horizontal slices represent
+invariant level sets, and fiber slices show the richness of selector behavior
+compatible with a fixed collapsed value.  
+Together, these examples and geometric perspectives support the broader
+conclusion that collapse conceals substantial symbolic structure.

@@ -1,207 +1,141 @@
-\chapter{Collapse as the Primary Invariant}
+\chapter{The Collapse Map}
 
 \section{Introduction}
 
-Chapter~1 introduced the generative space
+A generative identity contains far more symbolic structure than is visible in
+its classical magnitude.  
+The collapse map extracts a real number from a generative identity by reading
+only the digits exposed by the selector stream.  
+This operation forgets almost all of the internal generative behavior,
+producing a single value in $[0,1]$ while leaving behind a large fiber of
+distinct identities sharing the same classical output.
+
+This chapter defines the collapse map, establishes its continuity, and shows
+that every real number---computable or otherwise---arises as the collapse of
+many different generative identities.
+
+\section{Digit Selection}
+
+Let $G = (M, D, K) \in \mathcal{X}^*$ be a digit-selecting generative identity.
+Recall that the canonical output sequence is defined by enumerating the digits
+appearing at positions where $M(n) = D$.
+
+Let
 \[
-\mathcal{X} = \{D,K\}^{\mathbb{N}} \times \{0,1,\ldots,b-1\}^{\mathbb{N}} \times \Sigma^{\mathbb{N}},
+n_0 < n_1 < n_2 < \cdots
 \]
-and its effective core $\mathcal{G}_{\mathrm{eff}}$, consisting of computable
-generative identities.  Each identity $G = (M,D,K)$ consists of a selector
-$M$, a digit layer $D$, and a meta layer $K$.  
-These mechanisms exist independently of the classical real line: no
-numerical value is associated to an identity until a prescribed
-interpretation is applied.
-
-This chapter introduces the central interpretation map of the framework:
-the \emph{collapse map}.  
-Collapse extracts the digit symbols chosen by the selector and interprets
-them as a base-$b$ expansion.  
-The result is a classical magnitude in $[0,1]$.  
-In this sense, collapse is the primary invariant of the generative space:
-it is the unique invariant studied in classical analysis, and all other
-secondary invariants are subordinate to it.
-
-Two principal facts are established:
-
-\begin{enumerate}
-    \item Collapse is \emph{surjective}: every real number in $[0,1]$ is the
-    collapsed value of some generative identity.
-    \item On the effective core, collapse is \emph{computably surjective}:
-    every computable real number arises from an effective identity.
-\end{enumerate}
-
-Collapse thus serves as the bridge between the generative
-world and the classical continuum.  
-Its fibers, studied in Chapter~3, encode all generative mechanisms that
-produce a given classical value.
-
-\section{Digit Selection and the Collapsible Subspace}
-
-The collapse map interprets only those identities whose selector chooses
-the digit layer infinitely often.  Otherwise, the extracted digit
-subsequence would be finite and would not encode a real number.
-
-\begin{definition}[Selected Digit Indices]
-For $G = (M,D,K) \in \mathcal{X}$, let
+be the increasing sequence of indices with $M(n_j) = D$, and define
 \[
-S_M = \{ n_0 < n_1 < n_2 < \cdots \}
+d_G(j) = D(n_j).
 \]
-be the (possibly finite) increasing sequence of indices such that
-$M(n_j) = D$.  
-\end{definition}
 
-\begin{definition}[Selected Digit Subsequence]
-If $S_M$ is infinite, the \emph{selected digit subsequence} of $G$ is
-\[
-d_G(j) = D(n_j) \quad (j \ge 0).
-\]
-If $S_M$ is finite, the selected digit subsequence is finite.
-\end{definition}
-
-\begin{definition}[Digit-Selecting Identities]
-The \emph{digit-selecting subspace} is
-\[
-\mathcal{X}^* = \{\, G \in \mathcal{X} : S_M \text{ is infinite} \,\}.
-\]
-\end{definition}
-
-Identities in $\mathcal{X}^*$ select digit symbols infinitely many times
-and therefore admit a classical interpretation.  
-Those outside $\mathcal{X}^*$ may still possess rich structure, but they
-do not define classical magnitudes.
+The sequence $(d_G(j))_{j \ge 0}$ is an infinite sequence in
+$\{0,1,\ldots,b-1\}^{\mathbb{N}}$ and will serve as the base-$b$ expansion of
+the collapsed value.
 
 \section{Definition of the Collapse Map}
 
-Collapse discards all meta symbols and all unselected digit symbols,
-retaining only the infinite subsequence $d_G$.  
-This subsequence is interpreted as a base-$b$ expansion.
-
-\begin{definition}[Collapse Map]
-For $G \in \mathcal{X}^*$, the \emph{collapse map}
-$\pi : \mathcal{X}^* \to [0,1]$ is defined by
+For every $G \in \mathcal{X}^*$, define the \emph{collapse map}
 \[
 \pi(G)
-=
-\sum_{j=0}^{\infty} \frac{d_G(j)}{b^{j+1}}.
+  = \sum_{j=0}^{\infty} \frac{d_G(j)}{b^{j+1}}.
 \]
-\end{definition}
 
-Thus, collapse maps the high-dimensional mechanism $G$ to the real number
-whose digits are prescribed by the selected subsequence of $D$.
+When a real number has two base-$b$ expansions (a terminating expansion and a
+repeating one), we adopt the standard convention of using the non-terminating
+representation with trailing $(b-1)$s avoided.  
+This ensures the collapse map is well defined.
 
-\begin{remark}
-Collapse is a canonical projection: it forgets nearly all of the
-mechanism.  The selector $M$ determines \emph{which}
-digits are exposed to classical interpretation, but $M$ itself does not
-affect the real number obtained.  
-The meta layer $K$ plays no role at all in determining $\pi(G)$.
-\end{remark}
+The collapse map is the primary projection from the generative space to the
+unit interval.  
+It depends only on the canonical output and therefore only on the portions of
+the digit stream selected by $M$.
 
-\section{Surjectivity and Representation of the Continuum}
+\section{Continuity of Collapse}
 
-To justify the generative framework, collapse must reach the entire
-continuum.  
-This turns out to be immediate.
+The topology on $\mathcal{X}^*$ makes $\pi$ a continuous function onto
+$[0,1]$.  
+Given $\varepsilon > 0$, choosing $N$ large enough so that
+$b^{-(N+1)} < \varepsilon$ shows that the first $N$ selected digits determine
+$\pi(G)$ to within $\varepsilon$.
 
-\begin{theorem}[Surjectivity]
-\label{thm:collapse-surjective}
-Collapse maps $\mathcal{X}^*$ onto the full unit interval:
+Since selected digits appear infinitely often, the first $N$ of them arise
+within some initial prefix of $G$.  
+Thus, for every $\varepsilon > 0$, there exists an integer $L$ such that any
+two identities agreeing on their first $L$ symbols in each stream have
+collapsed values within $\varepsilon$.
+
+Therefore \( \pi : \mathcal{X}^* \to [0,1] \) is continuous.
+
+\section{Surjectivity}
+
+Every real number in $[0,1]$ arises as the collapse of many generative
+identities.  
+Fix any real number $x$ with base-$b$ expansion
 \[
-\pi(\mathcal{X}^*) = [0,1].
+x = \sum_{j=0}^{\infty} \frac{x_j}{b^{j+1}}.
 \]
-\end{theorem}
 
-\begin{proof}
-Given any $x \in [0,1]$ with base-$b$ expansion $(x_j)$, define
+Choose a selector $M$ that always selects digits:
 \[
-M(n) = D, \qquad D(n) = x_n, \qquad K \text{ arbitrary}.
+M(n) = D \quad \text{for all } n.
 \]
-Then $S_M = \mathbb{N}$ and $d_G(j) = x_j$ for all $j$.  
-Thus $\pi(G) = x$.
-\end{proof}
+Define the digit stream $D$ by $D(n) = x_n$ for all $n$, and let $K$ be any
+meta-information sequence.
 
-The effective situation is equally straightforward.
+Then $G = (M, D, K) \in \mathcal{X}^*$ satisfies $\pi(G) = x$.  
+Varying $K$ freely shows that the fiber $\pi^{-1}(\{x\})$ is uncountable.
 
-\begin{theorem}[Effective Surjectivity]
-\label{thm:effective-surjectivity}
-Collapse maps the effective digit-selecting core onto the computable
-real numbers:
-\[
-\pi(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{X}^*) = \mathbb{R}_c.
-\]
-\end{theorem}
+\section{Effective Surjectivity}
 
-\begin{proof}
-If $G$ is effective, then $M$ and $D$ are computable.
-Thus the selected digit sequence $d_G$ is computable, and so $\pi(G)$ is
-a computable real.
-
-Conversely, if $x \in \mathbb{R}_c$, let $(x_j)$ be a computable
+The collapse map behaves correctly on the effective core.  
+A real number $x \in [0,1]$ is computable if and only if it has a computable
 base-$b$ expansion.  
-Define $M(n)=D$ and $D(n)=x_n$, with arbitrary $K$.  
-Then $G$ is effective and $\pi(G)=x$.
-\end{proof}
+Given such an expansion, the construction above produces a computable
+generative identity $G \in \mathcal{G}_{\mathrm{eff}}$ satisfying
+$\pi(G) = x$.
 
-Collapse thus provides the exact computable representation map familiar
-from Type--2 computability, via the richer structure of layered
-generative mechanisms.
+Conversely, if $G \in \mathcal{G}_{\mathrm{eff}} \cap \mathcal{X}^*$, then the
+canonical output sequence $d_G(j)$ is computable, and so $\pi(G)$ is a
+computable real.
 
-\section{Collapse Equivalence and Fibers}
-
-Collapse is highly non-injective: many distinct generative identities
-collapse to the same classical magnitude.  
-The structure of these equivalence classes is central to the rest of the
-monograph.
-
-\begin{definition}[Collapse Equivalence]
-For $G,H \in \mathcal{X}^*$,
+Thus
 \[
-G \sim_\pi H
-\quad\Longleftrightarrow\quad
-\pi(G) = \pi(H).
+\pi(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{X}^*)
+  = \mathbb{R}_c,
 \]
-\end{definition}
+the set of computable reals.
 
-\begin{definition}[Collapse Fiber]
-For $x \in [0,1]$, the \emph{collapse fiber} at $x$ is
+\section{Fibers and Structural Redundancy}
+
+The collapse map is many-to-one.  
+For any $x \in [0,1]$, the fiber
 \[
-\mathcal{F}(x)
-=
-\{\, G \in \mathcal{X}^* : \pi(G)=x \,\}.
+\mathcal{F}(x) = \pi^{-1}(\{x\})
 \]
-\end{definition}
+contains identities that may share no structural similarity beyond producing
+the same output digits.
 
-\begin{remark}
-Each fiber $\mathcal{F}(x)$ is closed in the product topology of
-$\mathcal{X}$.  
-If $x$ is computable, the effective fiber
-\[
-\mathcal{F}_{\mathrm{eff}}(x)
-    = \mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}
-\]
-is a $\Pi^0_1$ class.  
-This descriptive complexity plays a key role in the meta-diagonalizer of
-Part~IV.
-\end{remark}
+Two identities may:
+\begin{itemize}
+    \item select digits at completely different positions,
+    \item carry unrelated meta-information streams,
+    \item differ arbitrarily on unselected digits,
+\end{itemize}
+while still collapsing to the same real $x$.
 
-Fibers contain identities with radically different internal structure:
-high-density hybrids, sparse null-density generators, periodic selectors,
-pseudo-random selectors, and intricate meta-layer patterns.  
-All such behaviors are compatible with the same classical magnitude
-because collapse observes only the selected digits.
+This structural redundancy is essential for the development of the projection
+theory and the incompleteness results of later parts.
 
-\section{Outlook}
+\section{Summary}
 
-The collapse map provides the primary invariant of the generative
-framework and establishes the connection between mechanisms and classical
-values.  
-Its surjectivity guarantees that every real number has generative
-representations.  
-Its non-injectivity gives rise to the rich internal geometry of collapse
-fibers, which is the subject of Chapter~3.
+The collapse map converts the symbolic structure of a generative identity into
+a classical real number by selecting and aggregating digits according to the
+selector stream.  
+It is continuous, surjective, effectively surjective on computable identities,
+and massively non-injective.  
+The fibers of $\pi$ form the central objects of study in the Generative
+Identity Framework.
 
-These fibers form the foundational environment for the internal selector
-regimes of Part~II, the projection-based analysis of structure
-developed in Part~III, and ultimately the diagonalization and
-incompleteness results of Part~IV.
+The next chapter analyzes the internal geometry of these fibers and the
+degrees of freedom that remain invisible after collapse.

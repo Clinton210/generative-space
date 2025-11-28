@@ -19,6 +19,12 @@
 % Hyperref (always last)
 \usepackage[hidelinks]{hyperref}
 
+% Silence reference warnings during rewrite phase
+\usepackage{silence}
+\WarningFilter{latex}{Reference}
+\WarningFilter{latex}{There were undefined references}
+
+
 % Bibliography
 \usepackage{cite}
 
@@ -58,8 +64,23 @@
     {\large \today\par}
 \end{titlepage}
 
-\input{abstract/abstract}
-\input{acknowledgment/acknowledgment}
+% Define abstract environment for book class
+\newenvironment{abstract}{
+    \cleardoublepage
+    \thispagestyle{plain}
+    \begin{center}
+        {\Large\bfseries Abstract}
+    \end{center}
+    \begingroup
+}{%
+    \endgroup
+    \cleardoublepage
+}
+
+
+% Abstract and Acknowledgment now included as standalone components
+\include{abstract/abstract}
+\include{acknowledgment/acknowledgment}
 
 \tableofcontents
 
@@ -73,7 +94,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PART I — Generative Ontology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{The Generative Ontology}
 \input{partSummaries/partI}
 \include{chapters/chapter1}
 \include{chapters/chapter2}
@@ -82,7 +102,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PART II — Selector Dynamics
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{Selector Dynamics}
 \input{partSummaries/partII}
 \include{chapters/chapter4}
 \include{chapters/chapter5}
@@ -90,7 +109,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PART III — Structural Projection Theory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{Structural Projection Theory}
 \input{partSummaries/partIII}
 \include{chapters/chapter6}
 \include{chapters/chapter7}
@@ -99,7 +117,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PART IV — Structural Incompleteness
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{Structural Incompleteness}
 \input{partSummaries/partIV}
 \include{chapters/chapter9}
 \include{chapters/chapter10}
@@ -107,14 +124,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PART V — The Collapse Quotient
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{The Collapse Quotient}
 \input{partSummaries/partV}
 \include{chapters/chapter11}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PART VI — Extended Generative Coordinates
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{Extended Generative Coordinates}
 \input{partSummaries/partVI}
 \include{chapters/chapter12}
 \include{chapters/chapter13}
@@ -132,7 +147,6 @@
 \include{appendices/appendixD}
 \include{appendices/appendixE}
 \include{appendices/appendixF}
-
 
 %%%%%%%%%%%%%%%%%%%%%%
 % BACK MATTER

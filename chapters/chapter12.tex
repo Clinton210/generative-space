@@ -1,221 +1,202 @@
-\chapter{Extended Invariants and the Expansion of Generative Coordinates}
+\chapter{Extended Invariants: Entropy Balance and Fluctuation}
 
 \section{Introduction}
 
-Parts~I–V developed the generative representation of classical real numbers and
-established the Structural Incompleteness Theorem: no finite family of
-computable structural projections can classify an effective collapse fiber.
-Classical magnitude $\pi(G)$ is therefore only one coordinate of a much richer
-object; almost all internal structure of a generative identity disappears under
-collapse.
+Extended invariants measure large scale features of the selector stream that
+survive tail modification and reveal structure invisible to the collapse map.
+Two such invariants are the entropy balance $\eta$, which measures the lower
+asymptotic density of digit exposures, and the fluctuation index $\phi$, which
+measures the relative growth of gaps between selected positions.  
 
-This motivates a natural question:
+In this chapter we introduce these invariants, establish basic properties,
+prove semicontinuity, and place them in the slice geometry of the generative
+space.  
+Selector behavior may be analyzed through vertical slices (fixed prefixes),
+horizontal slices (fixed invariant values), and fiber slices (fixed collapsed
+value).  
+Appendix~E contains many worked examples illustrating these slices and the
+full range of possible behaviors.
 
-\begin{quote}
-\emph{
-If collapse discards nearly all generative structure, can we introduce
-additional invariants that capture meaningful aspects of the internal
-mechanism?
-}
-\end{quote}
+\section{Entropy Balance}
 
-Part~VI addresses this question by developing \emph{extended generative
-coordinates}—quantities such as entropy balance, fluctuation indices, and
-meta-pattern invariants that enrich the generative description of a real
-number.
-
-This chapter lays the theoretical foundation for these extended invariants.  
-We introduce the axioms, regularity conditions, and structural constraints that
-any generative coordinate must satisfy.  
-These conditions ensure that new invariants are compatible with the topology,
-computability, and tail-modification principles established earlier in the
-monograph.
-
-\section{What is a Generative Invariant?}
-
-Classical magnitude is derived from the digit subsequence selected by $M$.  
-Extended invariants generalize this idea by allowing observers to extract
-quantities from \emph{any} layer of the mechanism.
-
-\begin{definition}[Generative Invariant]
-A \emph{generative invariant} is a map
+Let $G = (M,D,K)$ be a generative identity and write
 \[
-I : \mathcal{X} \to \mathbb{R}
-\]
-satisfying:
-\begin{enumerate}
-    \item \textbf{Continuity:} $I$ is continuous in the product topology.
-    \item \textbf{Prefix dependence:} $I$ is prefix-determined:  
-    for any $\varepsilon>0$ there exists $n$ such that agreement on the first
-    $n$ coordinates ensures $|I(G)-I(H)|<\varepsilon$.
-    \item \textbf{Computable dependency (optional):}  
-    If $I$ is effective, then the prefix bound $n$ is computable as a function
-    of $\varepsilon$.
-\end{enumerate}
-\end{definition}
-
-Thus a generative invariant is precisely a structural projection of the form
-introduced in Chapter~6.  
-Extended invariants are computable structural projections specifically designed
-to quantify internal mechanisms.
-
-\section{Collapse as the Primary Invariant}
-
-Magnitude $\pi$ itself is a generative invariant and occupies a special position
-in the projection lattice:
-
-\begin{itemize}
-    \item $\pi$ is the coarsest invariant that preserves classical magnitude.
-    \item Any invariant depending only on magnitude factors through $\pi$.
-    \item $\pi$ forgets nearly all internal structure of $(M,D,K)$.
-\end{itemize}
-
-Extended invariants arise from asking: \emph{What additional coordinates can be
-defined that do not factor through collapse?}
-
-\section{Basic Requirements for Extended Invariants}
-
-To be meaningful in the generative framework, an extended invariant must satisfy
-four structural criteria.
-
-\subsection*{1. Stability under prefix extension}
-
-Since observers are limited to finite lookahead, an invariant must stabilize
-once sufficiently many coordinates of the mechanism have been observed.
-
-\begin{definition}[Stability]
-A generative invariant $I$ is \emph{stable} if for every $\varepsilon>0$ there
-exists $N$ such that for all $n \ge N$, any two identities agreeing on the
-first $n$ coordinates produce invariant values within $\varepsilon$.
-\end{definition}
-
-Stability guarantees compatibility with tail sewing and the diagonalizer
-construction.
-
-\subsection*{2. Layer sensitivity}
-
-An invariant must detect some structural aspect that collapse ignores:
-digit usage patterns, meta frequencies, selector complexity, or statistical
-regularity.
-
-\begin{definition}[Non-collapse]
-An invariant $I$ is \emph{non-collapsing} if it does not factor through the
-collapse map $\pi$.
-\end{definition}
-
-\subsection*{3. Fiber refinement}
-
-A meaningful invariant must distinguish at least some elements of each effective
-fiber.
-
-\begin{definition}[Refining Invariant]
-$I$ is a \emph{refining invariant} if for every computable real $x$,
-the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains two identities
-$G,H$ with $I(G)\neq I(H)$.
-\end{definition}
-
-\subsection*{4. Consistency with computable structure}
-
-Extended invariants must be realizable by algorithmic observers.
-
-\begin{definition}[Computable Extended Invariant]
-An extended invariant $I$ is \emph{computable} if it is a computable structural
-projection with a computable dependency bound.
-\end{definition}
-
-\section{Examples and Non-Examples}
-
-\subsection*{The Constant Invariant}
-
-$I(G)=0$ is stable, continuous, and computable, but it is collapsing and
-gets ignored by the projection lattice.  
-Thus it is not an extended invariant.
-
-\subsection*{Collapse Magnitude}
-
-$\pi(G)$ is a stable invariant but does not refine collapse fibers.  
-Therefore it is the baseline invariant but not an extended one.
-
-\subsection*{Digit-Frequency Limits}
-
-Let
-\[
-I(G) = \liminf_{n\to\infty} 
-\frac{1}{n} |\{0\le k<n : M(k)=D\}|.
-\]
-This invariant is computable, stable, and distinguishes between hybrid and
-null-density generators within the same collapse fiber.  
-It is a valid extended invariant.
-
-\subsection*{Meta-Pattern Frequencies}
-
-If $w$ is a finite meta-block, the invariant
-\[
-I_w(G) = \liminf_{n\to\infty} \frac{\#\text{occurrences of $w$ in }
-K{\upharpoonright}n}{n}
-\]
-is also a legitimate extended invariant.
-
-\section{Extended Coordinates as Higher-Dimensional Embeddings}
-
-Classical real numbers form a one-dimensional continuum.  
-Extended invariants allow us to embed generative identities into higher-dimensional
-spaces, yielding richer coordinate systems.
-
-\begin{definition}[Extended Coordinate Map]
-Given invariants $I_1,\ldots,I_r$, the extended coordinate map is
-\[
-\mathbf{I}(G) := \bigl(\pi(G),\, I_1(G),\ldots,I_r(G)\bigr).
-\]
-\end{definition}
-
-Such embeddings enlarge the representation space:
-\[
-\mathcal{X} \xrightarrow{\mathbf{I}} \mathbb{R}^{1+r}.
+\chi_M(n) =
+\begin{cases}
+1 & \text{if } M(n) = D, \\
+0 & \text{otherwise}.
+\end{cases}
 \]
 
-A key example appears in the next chapter, where the entropy balance
-$\eta(G)$ is introduced as a structured secondary invariant.
-
-\section{Limits Imposed by Incompleteness}
-
-Even with extended invariants, the Structural Incompleteness Theorem applies.
-
-\begin{proposition}
-Let $I_1,\ldots,I_m$ be finitely many computable extended invariants.
-Then there exist distinct $G,H \in \mathcal{F}_{\mathrm{eff}}(x)$ with
+The entropy balance is the lower asymptotic density of digit exposures:
 \[
-I_j(G) = I_j(H) \quad\text{for all } j.
+\eta(G)
+  = \liminf_{N\to\infty}
+      \frac{1}{N} \sum_{n < N} \chi_M(n).
+\]
+
+A selector with $\eta(G) > 0$ exposes digits frequently, while $\eta(G) = 0$
+indicates sparse exposure.  
+Balance is invariant under tail modification beyond a finite prefix and
+depends only on the selector.
+
+\subsection{Lower semicontinuity}
+
+The balance is not continuous in the product topology, but it satisfies a one
+sided bound.
+
+\begin{proposition}[Lower Semicontinuity]
+If $G_k \to G$ in the product topology, then
+\[
+\eta(G) \le \liminf_{k\to\infty} \eta(G_k).
 \]
 \end{proposition}
 
 \begin{proof}
-Each $I_j$ is a computable structural projection.  
-The claim follows from the Structural Incompleteness Theorem applied to the
-family $\{\pi, I_1,\ldots,I_m\}$.
+Fix $\varepsilon > 0$ and choose $N$ such that
+\[
+\frac{1}{N}\sum_{n<N} \chi_M(n)
+    < \eta(G) + \varepsilon.
+\]
+For $k$ large enough, $G_k$ agrees with $G$ on the first $N$ coordinates, so
+\[
+\eta(G_k)
+  \ge \frac{1}{N}\sum_{n<N} \chi_M(n)
+  > \eta(G) - \varepsilon.
+\]
+Taking the limit inferior yields the claim.
 \end{proof}
 
-Thus extended invariants enrich the generative coordinate system but cannot
-solve the classification problem for fibers.
+\section{Fluctuation Index}
 
-\section{Outlook}
+Let the selection indices be
+\[
+n_0 < n_1 < n_2 < \cdots,
+\qquad
+g_j = n_{j+1} - n_j.
+\]
 
-This chapter provided the formal apparatus for adding new structural invariants
-to the generative representation.  
-The next chapters introduce specific, mathematically significant invariants:
+The fluctuation index measures the growth of relative gaps:
+\[
+\phi(G)
+  = \limsup_{j\to\infty} \frac{g_j}{n_j}.
+\]
+
+Large $\phi(G)$ indicates the presence of long, infrequent bursts of digit
+exposure relative to scale.
+
+\subsection{Upper semicontinuity}
+
+\begin{proposition}[Upper Semicontinuity]
+If $G_k \to G$, then
+\[
+\phi(G) \ge \limsup_{k\to\infty} \phi(G_k).
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose $\phi(G) < c$.  
+Then for sufficiently large $j$,
+\[
+g_j < c n_j.
+\]
+Agreement of $G_k$ with $G$ on a large enough prefix ensures that the first
+$J$ selected digits occur at the same positions.  
+Thus for all sufficiently large $k$,
+\[
+\phi(G_k) < c.
+\]
+Taking the limit superior proves the claim.
+\end{proof}
+
+\section{Slice Geometry of Selector Behavior}
+
+Extended invariants permit a geometric interpretation of the generative space
+through slices that constrain different aspects of selector behavior.  
+These slices provide intuition for how invariants, collapse fibers, and finite
+prefixes interact.
+
+\subsection{Vertical slices: cylinder sets}
+
+A vertical slice fixes a finite prefix:
+\[
+\mathcal{C}(u)
+  = \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \}.
+\]
+
+These sets represent the regions observable by structural projections.  
+Dependency bounds show that each observer samples only one vertical slice at a
+time, so vertical slices encode the finite informational geometry underlying
+incompleteness.
+
+Vertical slices impose no restriction on $\eta$ or $\phi$, and their images
+under the map $G \mapsto (\eta(G),\phi(G))$ can cover large regions of the
+invariant plane.
+
+\subsection{Horizontal slices: invariant level sets}
+
+Fix $\alpha$ or $\beta$.  
+Define
+\[
+\mathcal{H}_{\alpha}
+  = \{ G : \eta(G) = \alpha \},
+\qquad
+\mathcal{H}^{\beta}
+  = \{ G : \phi(G) = \beta \}.
+\]
+
+These sets identify identities with the same long term selector behavior even
+if their finite prefixes differ.  
+Horizontal slices cut across collapse fibers and vertical slices, illustrating
+the independence of asymptotic structure from local structure.
+
+In the invariant plane, these slices appear as vertical or horizontal lines.
+
+\subsection{Fiber slices: fixing collapsed value}
+
+Fix a real number $x$.  
+The fiber slice is
+\[
+\mathcal{F}(x)
+  = \{ G : \pi(G) = x \}.
+\]
+
+Since $\eta$ and $\phi$ depend only on the selector, not on collapse, the
+image of $\mathcal{F}(x)$ in the invariant plane typically occupies a broad
+region.  
+This illustrates how collapse conceals most of the selector structure.
+
+Appendix~E contains examples showing that for any pair $(\alpha,\beta)$, there
+exists an identity in $\mathcal{F}(x)$ with $\eta = \alpha$ and $\phi =
+\beta$.
+
+\section{Selector Behavior Through Examples}
+
+Appendix~E provides detailed examples demonstrating selectors with:
 
 \begin{itemize}
-    \item \textbf{Chapter~13: Entropy Balance ($\eta$)} — the basic secondary
-    invariant measuring selector usage density.
-    \item \textbf{Chapter~14: Fluctuation Index ($\phi$)} — a tertiary invariant
-    measuring irregularity and long-range variation.
-    \item \textbf{Chapter~15: Orthogonal Extensions and the Complex Analogy} —
-    a conceptual embedding of the generative representation into a plane of
-    invariants, analogous to the complexification of $\mathbb{R}$.
-    \item \textbf{Chapter~16: Diminishing Returns and Final Outlook} — the
-    limiting geometry of extended coordinates.
+    \item positive balance and low fluctuation,
+    \item zero balance and bounded fluctuation,
+    \item zero balance and unbounded fluctuation,
+    \item oscillating densities,
+    \item constructed pairs $(\eta,\phi)$ with prescribed values.
 \end{itemize}
 
-Extended coordinates reveal that the generative representation is not merely an
-encoding of real numbers, but a multifaceted symbolic geometry whose structure
-extends far beyond collapse.
+These examples show that extended invariants are flexible tools for describing
+large scale selector structure.  
+They also demonstrate that collapse fibers contain identities with all
+admissible invariant values.
+
+\section{Summary}
+
+The entropy balance and fluctuation index provide numerical lenses through
+which to view long term selector behavior.  
+Their semicontinuity properties match their intuitive roles: balance is hard
+to increase by small perturbations, while fluctuation is hard to decrease.  
+Slice geometry offers a conceptual framework for understanding how vertical
+prefix constraints, horizontal invariant constraints, and fiber constraints
+interact.
+
+Together with the examples of Appendix~E, these tools give a geometric
+understanding of selector behavior that complements the structural and
+computational perspectives developed in earlier parts of the monograph.

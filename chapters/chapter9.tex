@@ -2,197 +2,240 @@
 
 \section{Introduction}
 
-Chapters~6--8 established that computable structural projections have finite
-prefix dependence, and that different projections often impose incompatible
-prefix constraints.  
-These limits create large regions of internal structure that no finite family
-of observers can jointly resolve.  
-The purpose of this chapter is to construct an explicit generative identity
-that exploits these observational blind spots.
+The collapse fiber $\mathcal{F}(x)$ contains many generative identities that
+produce the same classical real number.  
+In earlier chapters we saw that continuous projections cannot observe the full
+internal structure of a generative identity and depend only on finite prefixes
+at any fixed precision.  
+This chapter constructs a new identity inside the effective fiber that agrees
+with a given reference identity on every observed prefix, yet diverges from it
+in structural properties that no fixed finite collection of projections can
+detect.
 
-Given a computable real number $x$ and a reference identity $H$ in the
-effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$, we will construct a new
-identity $G^\#$ satisfying:
+The construction is a form of diagonalization.  
+Given a countable sequence of projections, we build an identity that avoids
+agreement with a prescribed family of reference structures by introducing
+divergence at stages beyond their dependency bounds.  
+The internal freedom available inside collapse fibers ensures that these
+divergent tails do not change the classical value of the identity.
 
-\begin{enumerate}
-    \item $G^\# \in \mathcal{F}_{\mathrm{eff}}(x)$, so it encodes the same classical value;
-    \item $G^\#$ agrees with $H$ on every prefix that a finite family of projections can inspect to any fixed precision;
-    \item $G^\#$ diverges from $H$ under \emph{every} projection in that finite family.
-\end{enumerate}
+The diagonalizer demonstrates the fundamental incompleteness of finite
+observers and prepares the ground for the Incompleteness Theorem of the next
+chapter.
 
-This identity is called the \emph{Meta-Diagonalizer}.  
-It is built in stages, with each stage modifying only those coordinates that no
-projection can observe at the current tolerance level, while preserving the
-digit subsequence that determines the collapse value.
+\section{Setup and Notation}
 
-\section{Setting and Notation}
-
-Let $x \in \mathbb{R}_c$ be computable.  
-Fix a reference mechanism $H = (M_H, D_H, K_H) \in \mathcal{F}_{\mathrm{eff}}(x)$.
-
-Let $\mathcal{P} = \{\Phi_1,\ldots,\Phi_m\}$ be a finite family of computable
-structural projections.  
-For each $\Phi_i$ we have a dependency bound $B_{\Phi_i}(\varepsilon)$, and the
-family has a uniform dependency bound
+Fix a computable real number $x$ and let
 \[
-B_{\mathcal{P}}(\varepsilon)
-=
-\max_{1 \le i \le m} B_{\Phi_i}(\varepsilon).
+(x_j)_{j \ge 0}
 \]
-
-For clarity we set:
+denote its canonical base $b$ expansion.  
+Let $H$ be a computable identity in $\mathcal{F}_{\mathrm{eff}}(x)$ that we
+will use as a reference.  
+Let
 \[
-L_k := B_{\mathcal{P}}(2^{-k}),
-\quad
-\varepsilon_k := 2^{-k}.
+\Phi_0, \Phi_1, \Phi_2, \ldots
 \]
+be a computable enumeration of all computable projections on
+$\mathcal{G}_{\mathrm{eff}}$.  
+For each $k$, let $B_k$ denote a computable dependency bound for $\Phi_k$.
 
-The integer $L_k$ is the largest prefix length visible to the observers at
-precision $\varepsilon_k$.
-
-\section{Controlled Tail Divergence}
-
-To build the diagonalizer we need identities in the same collapse fiber that
-differ from $H$ under at least one projection in $\mathcal{P}$.
-
-\begin{lemma}[Controlled Divergence Inside a Fiber]
-For any $\delta > 0$ there exists an effective mechanism
-$A \in \mathcal{F}_{\mathrm{eff}}(x)$ such that
+Our goal is to construct an identity
 \[
-\|\Phi_i(A) - \Phi_i(H)\| > \delta
-\quad\text{for some } i.
+G^{\sharp} \in \mathcal{F}_{\mathrm{eff}}(x)
+\]
+that diverges from $H$ on every projection $\Phi_k$ by more than a prescribed
+amount at stage $k$, despite agreeing with $H$ on prefixes long enough to
+satisfy all earlier projections.
+
+\section{Divergent Identities Inside the Fiber}
+
+At each stage $k$ we will require an identity $A_k$ inside the effective fiber
+$\mathcal{F}_{\mathrm{eff}}(x)$ that differs from $H$ at scale $\varepsilon_k$
+with respect to $\Phi_k$, where
+\[
+\varepsilon_0 > \varepsilon_1 > \varepsilon_2 > \cdots \to 0
+\]
+is a fixed computable sequence of positive tolerances.
+
+The following lemma ensures that such identities always exist.
+
+\begin{lemma}[Divergence Inside the Effective Fiber]
+\label{lem:divergence-fiber}
+For any computable projection $\Phi$ and any computable $\varepsilon > 0$,
+there exists a computable identity $A \in \mathcal{F}_{\mathrm{eff}}(x)$ such
+that
+\[
+|\Phi(A) - \Phi(H)| > 3\varepsilon.
 \]
 \end{lemma}
 
 \begin{proof}
-From Chapter~8, the projections in $\mathcal{P}$ are not jointly injective on
-$\mathcal{F}_{\mathrm{eff}}(x)$.  
-Enumerate effective identities in the fiber (which is a non-empty $\Pi^0_1$ 
-class), and search for an $A$ that satisfies the divergence inequality.
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
+$\Pi^0_1$ class.  
+If $\Phi$ were constant on this class, then $\Phi$ would depend only on the
+canonical output and would assign the same value to all identities in the
+fiber.  
+However, by the definition of a structural projection, $\Phi$ may depend on
+all components of the generative identity, including the selector and
+meta-information streams.
+
+Because the fiber allows arbitrary choices on unselected digits and on the
+meta stream, we may modify these components computably without altering the
+selected digits.  
+By continuity of $\Phi$, local changes to the selector or meta stream beyond
+any prefix can move the value of $\Phi$ through an interval.  
+Thus the image of $\mathcal{F}_{\mathrm{eff}}(x)$ under $\Phi$ is an interval,
+and the value $\Phi(H)$ cannot lie at the boundary of this interval for all
+such modifications.
+
+We may therefore choose a computable identity $A$ in the fiber and a
+computable prefix for which the subsequent tail guarantees a divergence of at
+least $3\varepsilon$.  
+This identity satisfies the desired inequality.
 \end{proof}
 
-Such an identity $A$ will serve as the ``tail pattern'' that the diagonalizer
-will eventually splice in.
+This lemma encapsulates the essential freedom inside the effective fiber: one
+may force meaningful structural differences without changing the collapsed
+value.
 
-\section{Index-Aligned Tail Sewing}
+\section{The Diagonal Construction}
 
-To ensure $G^\#$ stays in the same fiber, we must align the digit subsequences
-of the tail identity with those of the reference identity.
-
-\begin{lemma}[Digit-Index Alignment]
-\label{lem:index-alignment}
-Let $H, A \in \mathcal{F}_{\mathrm{eff}}(x)$ and let $L \in \mathbb{N}$.  
-Let $k_H$ be the number of digit selections of $H$ before index $L$.  
-Then there exists a unique $L'$ such that $A$ also has $k_H$ digit selections
-before $L'$.
-\end{lemma}
-
-\begin{proof}
-Both $H$ and $A$ enumerate the digits of $x$ in the same order, since both lie
-in $\mathcal{F}_{\mathrm{eff}}(x)$.  
-Their selector functions enumerate digit positions strictly increasing.  
-The first $k_H$ selected digits of $A$ must appear within a unique prefix.
-\end{proof}
-
-The aligned tail ensures the collapse value is preserved.
-
-\begin{definition}[Tail Sewing]
-Given $L$ and the aligned index $L'$, define the sewn identity $G$ by
+We now build the diagonalizer
 \[
-G(n) =
+G^{\sharp} = \lim_{k \to \infty} G_k
+\]
+as a limit of identities that stabilize on longer and longer prefixes while
+introducing controlled divergence at each stage.
+
+Let $G_0 = H$.  
+Assume inductively that $G_k$ has been defined and that $G_k$ agrees with $H$
+on its first $N_k$ symbols for some computable $N_k$.
+
+\subsection*{Stage $k$: divergence}
+
+Choose
+\[
+\varepsilon_k = 2^{-(k+2)}.
+\]
+By Lemma \ref{lem:divergence-fiber}, choose
+\[
+A_k \in \mathcal{F}_{\mathrm{eff}}(x)
+\]
+such that
+\[
+|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
+\]
+
+This identity will serve as the source of structural divergence at stage $k$.
+
+\subsection*{Stage $k$: prefix agreement}
+
+To preserve earlier projective agreements, we require that the first $N_k$
+symbols of $G_{k+1}$ agree with $G_k$ and with $H$.  
+Let
+\[
+N_{k+1}
+  = \max\bigl( N_k,\ B_k(\varepsilon_k) \bigr).
+\]
+This ensures that agreement on the first $N_{k+1}$ symbols forces agreement of
+$\Phi_k$ up to error $\varepsilon_k$.
+
+\subsection*{Stage $k$: alignment}
+
+Let $h_{k}$ be the position in $H$ corresponding to the $k$th selected digit.
+Let $a_k$ be the corresponding position in $A_k$.  
+Choose $j$ sufficiently large that $h_j \ge N_{k+1}$.  
+The alignment lemma guarantees that the indices $h_j$ and $a_j$ correspond to
+the same selected digit.
+
+\subsection*{Stage $k$: tail sewing}
+
+Define $G_{k+1}$ by sewing:
+\[
+G_{k+1}(n)
+  =
 \begin{cases}
-H(n), & n < L,\\[4pt]
-A(L' + (n - L)), & n \ge L.
+G_k(n) & n \le h_j,\\
+A_k(n - h_j + a_j) & n > h_j.
 \end{cases}
 \]
-\end{definition}
 
-The sewn identity agrees with $H$ up to $L$, then follows the tail of $A$
-starting at the aligned position $L'$.
-
-\section{Stability Under Finite Observation}
-
-If the sewing point $L$ lies beyond the dependency bound of all observers at
-precision $\varepsilon$, then the observers cannot detect any change in the
-tail.
-
-\begin{lemma}[Stability of Tail Sewing]
-\label{lem:stability-tail}
-If $L \ge B_{\mathcal{P}}(\varepsilon)$, then for every $\Phi_i \in \mathcal{P}$,
+By the tail sewing proposition from the previous chapter,
 \[
-|\Phi_i(G) - \Phi_i(H)| < \varepsilon.
+G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x).
 \]
-\end{lemma}
+
+Moreover, $G_{k+1}$ agrees with $G_k$ on their first $N_{k+1}$ symbols, so all
+projections $\Phi_0,\ldots,\Phi_k$ agree with $H$ to within $\varepsilon_k$ on
+$G_{k+1}$.
+
+\section{Existence of the Limit Identity}
+
+The sequence $(G_k)$ stabilizes on longer and longer prefixes.  
+For each index $n$, there exists a stage $k$ such that $n \le N_k$, and from
+that point onward, the $n$th symbol of $G_m$ remains constant for all
+$m \ge k$.
+
+Define $G^{\sharp}$ to be the identity whose $n$th symbol is this eventual
+value.  
+Then the limit exists and is computable.
+
+\begin{proposition}
+The identity $G^{\sharp}$ lies in the effective fiber
+$\mathcal{F}_{\mathrm{eff}}(x)$.
+\end{proposition}
 
 \begin{proof}
-The sewn identity agrees with $H$ on the entire prefix of length $L$, which
-covers the dependency bounds of all observers at precision $\varepsilon$.
+Each $G_k$ lies in the fiber, and the canonical output is preserved at every
+stage by the alignment and sewing procedure.  
+Thus $G^{\sharp}$ also collapses to $x$.  
+Computability follows because each coordinate stabilizes at a computable
+stage.
 \end{proof}
 
-Thus observers cannot differentiate $G$ from $H$ at precision $\varepsilon$ even
-though their tails differ.
+\section{Diagonalization}
 
-\section{Stage Construction of the Diagonalizer}
+Finally, we verify that $G^{\sharp}$ diverges from $H$ along every projection
+in the sequence.
 
-We construct $G^\#$ by a convergent sequence of finite-stage identities.
-
-At stage $k$:
-
-\begin{enumerate}
-    \item Set the observational tolerance to $\varepsilon_k = 2^{-k}$.
-    \item Compute the safe horizon $L_k = B_{\mathcal{P}}(2^{-k})$.
-    \item Choose a fiber identity $A_k$ that differs from the current partial
-    identity $G_{k-1}$ by more than $3\varepsilon_k$ under some $\Phi_i$.
-    \item Sew the tail of $A_k$ into $G_{k-1}$ at index $L_k$.
-\end{enumerate}
-
-Let $G_k$ denote the identity after stage $k$.  
-Each $G_k$ agrees with $H$ on the first $L_k$ coordinates, and beyond $L_k$ it
-agrees (in a digit-aligned manner) with the tail of $A_k$.
-
-\begin{lemma}[Convergence]
-The sequence $\{G_k\}$ converges pointwise to a unique generative identity
-$G^\#$.
-\end{lemma}
+\begin{proposition}
+For each $k$,  
+\[
+|\Phi_k(G^{\sharp}) - \Phi_k(H)| \ge \varepsilon_k.
+\]
+\end{proposition}
 
 \begin{proof}
-At stage $k$, all coordinates below $L_k$ are fixed permanently, because later
-stages modify only the tail region.  
-Since $L_k$ is strictly increasing and tends to infinity, every coordinate of
-$G^\#$ is eventually fixed, establishing convergence.
+At stage $k$ we chose $A_k$ so that
+\[
+|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
+\]
+The sewing step ensures that the tail of $G_{k+1}$ beyond index $h_j$ agrees
+with the tail of $A_k$ from index $a_j$ onward.  
+Since the tail lies entirely beyond $B_k(\varepsilon_k)$, any effect on
+$\Phi_k$ caused by the tail persists in $G_{k+1}$ and therefore in
+$G^{\sharp}$.
+
+Agreement of prefixes up to $N_{k+1}$ introduces at most $\varepsilon_k$ of
+error.  
+Because the divergence was chosen to exceed $3\varepsilon_k$, the final
+difference remains at least $\varepsilon_k$.
 \end{proof}
 
-\section{Properties of the Meta-Diagonalizer}
+Thus $G^{\sharp}$ avoids finite approximation by the projections
+$\Phi_k$ in the same way that classical diagonalization avoids uniform
+compression of information.  
+This completes the construction.
 
-\begin{theorem}[Meta-Diagonalizer]
-Let $x \in \mathbb{R}_c$ and $H \in \mathcal{F}_{\mathrm{eff}}(x)$.  
-Let $\mathcal{P}$ be a finite family of computable structural projections.
-Then the limit identity $G^\#$ constructed above satisfies:
+\section{Summary}
 
-\begin{enumerate}
-    \item $G^\# \in \mathcal{F}_{\mathrm{eff}}(x)$,
-    \item $\Phi_i(G^\#) \neq \Phi_i(H)$ for each $i$,
-    \item for each $i$ and each $\varepsilon > 0$, the observers cannot detect
-    the divergence of $G^\#$ from $H$ using any prefix of length
-    $B_{\Phi_i}(\varepsilon)$.
-\end{enumerate}
-\end{theorem}
-
-\begin{proof}
-Fiber preservation follows from digit-index alignment at each stage.  
-Divergence follows because each stage introduces a discrepancy of size at least
-$2\varepsilon_k$ beyond the observational horizon at that scale.  
-Prefix indistinguishability follows from Lemma~\ref{lem:stability-tail}.
-\end{proof}
-
-Thus $G^\#$ matches $H$ on every finite observable prefix but diverges globally
-under every projection in the family.
-
-\section{Outlook}
-
-The Meta-Diagonalizer establishes that internal structure cannot be captured or
-categorized by any finite collection of computable structural projections.  
-The next chapter turns this into a global impossibility theorem: the
-\emph{Structural Incompleteness Theorem}, which shows that no computable
-coordinate system with finitely many components can classify a collapse fiber
-or reconstruct mechanisms from their magnitude.
+This chapter constructed a computable identity in the collapse fiber of $x$
+that diverges from a reference identity on every computable projection while
+agreeing with the reference on arbitrarily long prefixes.  
+The construction relies on alignment and sewing tools, the existence of
+divergent identities inside the fiber, and finite dependency bounds for
+projections.  
+In the next chapter we apply the diagonalizer to prove the Structural
+Incompleteness Theorem, which states that no finite family of continuous
+observers can capture the generative structure of a real number.

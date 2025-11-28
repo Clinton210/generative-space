@@ -1,207 +1,220 @@
-\chapter{The Continuum as a Collapse Quotient}
+\chapter{Extended Invariants: Entropy Balance and Fluctuation}
 
 \section{Introduction}
 
-Collapse plays a dual role in the generative framework.  
-On one hand, it is the primary invariant that recovers classical magnitude from
-a generative identity.  
-On the other hand, it is the quotient operation that identifies entire collapse
-fibers and produces the classical continuum as the image of the generative
-space.
+The collapse map sends a generative identity to its classical real value, but
+two identities that collapse to the same number may differ significantly in
+their internal structure.  
+Part IV showed that no finite collection of continuous observers can recover
+this structure.  
+In this chapter we introduce two extended invariants that capture broad
+features of selector behavior: the entropy balance and the fluctuation index.
 
-Part~IV established that collapse is maximally information-destroying:
-no finite family of computable structural projections can classify the internal
-structure of collapse fibers, and every computable real number admits infinitely
-many observationally indistinguishable—but structurally distinct—effective
-generators.
+Both invariants measure long term properties of the selector stream.  
+The entropy balance describes how frequently digits are exposed, while the
+fluctuation index measures the relative size of gaps between successive
+selected positions.  
+Neither invariant is continuous in the product topology, and this reflects a
+deeper fact: asymptotic statistical quantities on symbolic streams are rarely
+continuous unless they depend only on finite windows.  
+What can be proved, and what is sufficient for our purposes, is that these
+quantities satisfy natural semicontinuity properties.
 
-The goal of this chapter is to interpret the classical real line as the quotient
-space obtained by modding out the generative space by collapse equivalence.  
-We show that:
+\section{Entropy Balance}
 
-\begin{enumerate}
-    \item classical magnitude is the coarsest structural invariant compatible
-    with continuity and computability;
-    \item the continuum is a quotient of the generative space by a closed
-    equivalence relation;
-    \item collapse fibers encode the entire “lost structure” of classical real
-    numbers.
-\end{enumerate}
-
-This chapter provides the conceptual bridge between the incompleteness
-phenomenon of Part~IV and the constructive viewpoint of Part~VI, where extended
-invariants enrich the generative representation beyond classical magnitude.
-
-\section{Collapse Fibers as Equivalence Classes}
-
-The collapse map $\pi:\mathcal{X}^* \to [0,1]$ assigns to each generative
-identity the classical real number encoded by its digit subsequence.  
-This induces an equivalence relation on $\mathcal{X}^*$.
-
-\begin{definition}[Collapse Equivalence]
-For $G,H \in \mathcal{X}^*$, we write
+Let $G = (M, D, K)$ be a generative identity.  
+Define the indicator function
 \[
-G \sim_\pi H
-\quad\Longleftrightarrow\quad
-\pi(G)=\pi(H).
-\]
-\end{definition}
-
-Each equivalence class is exactly a collapse fiber:
-\[
-[G]_{\sim_\pi} = \mathcal{F}(\pi(G)).
+\chi_M(n)
+  =
+\begin{cases}
+1 & M(n) = D,\\
+0 & M(n) = K.
+\end{cases}
 \]
 
-\begin{proposition}
-The relation $\sim_\pi$ is closed in the product topology on
-$\mathcal{X}^* \times \mathcal{X}^*$.
-\end{proposition}
-
-\begin{proof}
-The collapse map is continuous and $[0,1]$ is Hausdorff.  
-Thus
+The entropy balance (or simply the balance) of $G$ is the limit inferior
 \[
-\sim_\pi = (\pi \times \pi)^{-1}(\{(x,x): x\in[0,1]\})
+\eta(G)
+  = \liminf_{N \to \infty}
+      \frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n).
 \]
-is closed.
-\end{proof}
 
-The quotient space is therefore well-behaved topologically.
+This quantity measures the lower asymptotic density with which the selector
+exposes digits.  
+Hybrid identities have positive balance, while null density identities have
+balance zero.
 
-\section{The Continuum as a Quotient Space}
+\subsection{Basic properties}
 
-Taking the quotient of $\mathcal{X}^*$ by collapse equivalence produces a space
-homeomorphic to the unit interval.
-
-\begin{theorem}
-The map $\pi$ induces a homeomorphism
-\[
-\mathcal{X}^* / \!\sim_\pi \;\;\cong\;\; [0,1].
-\]
-\end{theorem}
-
-\begin{proof}
-The map $\pi$ is continuous, surjective, and constant on equivalence classes.
-Since $\sim_\pi$ is closed, the quotient is compact and Hausdorff.  
-Injectivity of the induced map follows from the definition of the relation.
-\end{proof}
-
-Thus the classical continuum emerges as the collapse-quotient of a vastly richer
-symbolic structure.
-
-\section{Effective Fibers and Computable Quotients}
-
-Restricting to the effective core produces a computable analogue:
-
-\[
-\pi(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{X}^*) = \mathbb{R}_c,
-\]
-and collapse fibers over computable reals are $\Pi^0_1$ classes.
-
-\begin{proposition}
-If $x \in \mathbb{R}_c$, the effective fiber
-$\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty $\Pi^0_1$ subset of
-$\mathcal{X}^*$.
-\end{proposition}
-
-\begin{proof}
-The collapse condition is a computable constraint on infinite sequences:
-agreement with the digit expansion of $x$ can be disproved by a finite
-violation.  
-Thus membership in $\mathcal{F}_{\mathrm{eff}}(x)$ is a co-c.e. property.
-Nonemptiness follows from effective surjectivity.
-\end{proof}
-
-This representation shows that real numbers correspond not to individual
-mechanisms, but to entire computationally closed sets of mechanisms.
-
-\section{Lost Structure and Collapse Dimension}
-
-Collapse identifies mechanisms that differ arbitrarily on:
+The balance has two elementary properties.
 
 \begin{itemize}
-    \item the unselected digit positions,
-    \item the entire meta layer,
-    \item the selection pattern $M$ except on the digit-selected indices.
+    \item It is invariant under tail modification beyond finite prefixes.
+    \item It depends only on the selector stream $M$.
 \end{itemize}
 
-The dimension of the fiber reflects the degrees of freedom that collapse
-forgets.
+The balance is therefore an extended invariant that captures structural
+information invisible to the collapse map.
 
-\begin{proposition}
-For each $x \in [0,1]$, the fiber $\mathcal{F}(x)$ contains continuum many
-pairwise distinct mechanisms.  
-If $x \in \mathbb{R}_c$, then $\mathcal{F}_{\mathrm{eff}}(x)$ is countably
-infinite.
-\end{proposition}
+\subsection{Lower semicontinuity}
 
-This disparity captures a key conceptual point:
+The balance is not continuous with respect to the product topology.  
+Small modifications to the selector can introduce arbitrarily large gaps or
+arbitrarily many selected positions within a long prefix, which can shift the
+density downward or upward.  
+However, balance satisfies a one sided estimate.
 
-\begin{quote}
-\emph{
-A classical real number has infinitely many effective generative presentations
-and uncountably many non-effective presentations.  
-Magnitude alone severely compresses the symbolic structure.
-}
-\end{quote}
-
-Magnitude retains only the digit subsequence selected by $M$; everything else is
-lost.
-
-\section{Extremality of Collapse}
-
-Chapter~6 showed that any projection that depends solely on classical magnitude
-is refined by collapse.  
-Here we establish the dual principle: among computable invariants, collapse is
-the unique projection that preserves exactly one coordinate of the generative
-structure.
-
-\begin{proposition}[Collapse is Maximally Coarse]
-If $\Phi : \mathcal{X}^* \to \mathbb{R}$ is a computable structural projection
-such that $\Phi(G)=\Phi(H)$ whenever $\pi(G)=\pi(H)$, then $\Phi$ factors through
-collapse; i.e., there exists a computable function $f$ such that
+\begin{proposition}[Lower Semicontinuity]
+Let $(G_k)$ converge to $G$ in the product topology.  
+Then
 \[
-\Phi = f \circ \pi.
+\eta(G)
+  \le \liminf_{k \to \infty} \eta(G_k).
 \]
 \end{proposition}
 
 \begin{proof}
-If $\Phi$ is constant on collapse fibers, then $\Phi$ induces a well-defined map
-on the quotient $\mathcal{X}^*/\!\sim_\pi$.  
-Since the quotient is homeomorphic to $[0,1]$, $\Phi$ factors through a map
-$f:[0,1]\to\mathbb{R}$.  
-Computability follows from the computability of the collapse map.
+Fix $\varepsilon > 0$.  
+Choose $N$ sufficiently large that
+\[
+\frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n)
+  < \eta(G) + \varepsilon.
+\]
+For all sufficiently large $k$, the identities $G_k$ agree with $G$ on the
+first $N$ symbols.  
+Hence
+\[
+\eta(G_k)
+  \ge \frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n)
+  > \eta(G) - \varepsilon.
+\]
+Taking the limit inferior gives the claim.
 \end{proof}
 
-Thus collapse is the coarsest projection that retains all classical information.
+The failure of full continuity is a structural fact, but lower
+semicontinuity is sufficient for all applications.
 
-\section{Interpretation}
+\section{Fluctuation Index}
 
-The quotient viewpoint clarifies the relationship between generative structure
-and classical structure:
+The fluctuation index measures relative gap size between selected digit
+positions.  
+Let
+\[
+n_0 < n_1 < n_2 < \cdots
+\]
+be the indices at which $M(n) = D$ and define the successive gaps
+\[
+g_j = n_{j+1} - n_j.
+\]
 
-\begin{enumerate}
-    \item The generative space captures symbolic, combinatorial, and
-    meta-information aspects of real numbers.
-    \item Collapse identifies all mechanisms that encode the same magnitude.
-    \item Classical real numbers are the result of forgetting nearly all
-    structure in the generative representation.
-\end{enumerate}
+The fluctuation index of $G$ is the limit superior
+\[
+\phi(G)
+  = \limsup_{j \to \infty} \frac{g_j}{n_j}.
+\]
 
-The continuum is therefore not a primitive object, but a collapse shadow of a
-richer generative geometry.
+The quantity $g_j$ measures the absolute size of the gap following the
+$j$th selected position, while the ratio $g_j / n_j$ measures the gap
+relative to the position in the stream.  
+High fluctuation indicates the presence of unusually large gaps between
+selected digits, relative to scale.
 
-This reinterpretation connects with classical representation theory: base-$b$
-expansions are computational encodings of magnitude, but the generative space
-models symbolic mechanisms that can produce those expansions through diverse
-internal processes.
+\subsection{Basic properties}
 
-\section{Outlook}
+The fluctuation index depends only on the selector stream and is unaffected by
+any tail modifications that do not alter the sequence of selected positions.
 
-Part~VI turns from incompleteness to construction.  
-If collapse forgets nearly all internal structure, then the natural next
-question is: \emph{what additional invariants can be introduced to recover some
-of the lost structure?}  
-The subsequent chapters show how entropy balance, fluctuation indices, and
-other extended invariants can be added as new coordinates, enriching the
-generative representation far beyond classical magnitude.
+The index captures the extent to which the selector allows sparse bursts of
+digit exposure.  
+Null density selectors typically have large fluctuation, while positive
+density selectors have small fluctuation in many cases.
+
+\subsection{Upper semicontinuity}
+
+As with $\eta$, the fluctuation index is not continuous.  
+A single large gap introduced in the tail can immediately increase the value
+of $\phi$.  
+However, the index satisfies upper semicontinuity.
+
+\begin{proposition}[Upper Semicontinuity]
+Let $(G_k)$ converge to $G$ in the product topology.  
+Then
+\[
+\phi(G)
+  \ge \limsup_{k \to \infty} \phi(G_k).
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose $\phi(G) < c$ for some $c$.  
+Then there exists $J$ such that
+\[
+\frac{g_j}{n_j} < c
+\quad\text{for all}\quad j \ge J.
+\]
+The selected positions $n_j$ are determined by the selector stream.  
+Agreement of $G_k$ with $G$ on sufficiently long prefixes ensures that the
+positions of the first $J$ selected digits match, and that the ratios
+$g_j / n_j$ for $j \le J$ match exactly.  
+Therefore for all sufficiently large $k$,
+\[
+\phi(G_k) < c.
+\]
+The desired inequality follows by taking the limit superior.
+\end{proof}
+
+Upper semicontinuity reflects the fact that introducing a large gap is a
+finite event that persists under limits, while eliminating a large gap is a
+global tail operation that is not respected by the product topology.
+
+\section{Selector Structure and Extended Invariants}
+
+The invariants $\eta$ and $\phi$ reveal two complementary aspects of selector
+behavior:
+\begin{itemize}
+    \item $\eta$ measures how frequently digits are exposed in a long term
+          sense,
+    \item $\phi$ measures how irregularly they are exposed relative to scale.
+\end{itemize}
+
+These quantities need not determine one another.  
+For example, a selector may have positive density but also have occasional
+large gaps, or a selector may have density zero but exhibit extremely regular
+spacing.  
+Both invariants occur densely in the generative space.
+
+\section{Extended Invariants Inside Collapse Fibers}
+
+Extended invariants vary widely inside a collapse fiber.  
+Fix a computable real $x$.  
+The fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains identities with:
+\begin{itemize}
+    \item positive balance,
+    \item zero balance,
+    \item small fluctuation indices,
+    \item arbitrarily large fluctuation indices.
+\end{itemize}
+
+This diversity follows from the fact that extended invariants depend only on
+the selector stream and are insensitive to positions where $M(n) = K$.  
+Given any selector behavior consistent with infinite digit selection, one may
+always construct an identity in the fiber by assigning the selected positions
+the digits of $x$ in the correct order.
+
+Thus the fiber contains identities with all possible behaviors permitted by
+the definitions of $\eta$ and $\phi$.
+
+\section{Summary}
+
+The entropy balance and fluctuation index extend the collapse map by assigning
+numerical values to the selector behavior of a generative identity.  
+Both invariants are discontinuous in the product topology but satisfy natural
+semicontinuity properties.  
+These quantities illustrate the diversity of selector patterns that arise
+inside collapse fibers and provide a bridge between the collapse quotient of
+Part V and the generative geometry of the next chapter.
+
+In Chapter 13 we study geometric embeddings of extended invariants and discuss
+how these quantities characterize large scale features of the generative
+space.
