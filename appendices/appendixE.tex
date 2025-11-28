@@ -1,0 +1,191 @@
+\chapter{Examples and Calculations for Extended Invariants}
+
+\section{Introduction}
+
+Part~VI develops extended generative invariants such as entropy balance,
+fluctuation index, and orthogonal coordinate embeddings.  
+These invariants enrich the representation of a generative identity beyond its
+classical magnitude and partially restore structure lost under collapse.
+
+This appendix collects explicit examples illustrating:
+\begin{itemize}
+    \item computation of entropy balance $\eta(G)$,
+    \item computation of fluctuation index $\phi(G)$,
+    \item comparison of generators with identical collapse values but distinct
+          extended coordinates,
+    \item two- and three-dimensional embeddings using $(\pi,\eta)$ and
+          $(\pi,\eta,\phi)$,
+    \item cases where extended invariants reveal structure invisible to collapse.
+\end{itemize}
+
+These examples are not required for the main results, but clarify the geometric
+interpretation of extended coordinates.
+
+\section{Entropy Balance Examples}
+
+Recall that the entropy balance of a generator is
+\[
+\eta(G)
+=
+\liminf_{n\to\infty}
+\frac{1}{n}\bigl|\{\,k<n : M(k)=D\,\}\bigr|.
+\]
+
+\subsection{Example 1: Pure Digit Selector}
+
+Let $M(n)=D$ for all $n$.  
+Then
+\[
+\eta(G)=1
+\]
+for every choice of $D$ and $K$.  
+The canonical output is the digit sequence $D$ itself.
+
+\subsection{Example 2: Alternating Selector}
+
+Let
+\[
+M(n) = 
+\begin{cases}
+D, & n\text{ even},\\
+K, & n\text{ odd}.
+\end{cases}
+\]
+Then
+\[
+\eta(G)=\tfrac12.
+\]
+
+This example shows that entropy balance can be tuned easily by patterning the
+selector.
+
+\subsection{Example 3: Polynomial Sparsity}
+
+Let $M(n)=D$ exactly when $n=j^2$ for some $j\ge0$.  
+Then the number of squares $\le n$ is approximately $\sqrt{n}$, so
+\[
+\eta(G) = 
+\lim_{n\to\infty} \frac{\sqrt{n}}{n} = 0.
+\]
+
+This produces a null-density generator.
+
+\section{Fluctuation Index Examples}
+
+The fluctuation index $\phi(G)$ measures selector irregularity by quantifying
+local variation of the selector or canonical output.  
+For illustration, consider a version based on empirical switching frequency:
+\[
+\phi(G)
+=
+\limsup_{n\to\infty}
+\frac{1}{n}\bigl|\{\,k<n : M(k)\neq M(k+1)\,\}\bigr|.
+\]
+
+\subsection{Example 4: Smooth Hybrid}
+
+Let $M(n)=D$ for $n$ even and $M(n)=K$ for odd $n$.  
+Then switching occurs at every step, so
+\[
+\phi(G)=1.
+\]
+
+\subsection{Example 5: Block-Constant Selector}
+
+Define $M$ by alternating blocks of growing lengths:
+\[
+\begin{aligned}
+& \underbrace{D,D,\ldots,D}_{2^1},
+\underbrace{K,K,\ldots,K}_{2^1},
+\\
+& \underbrace{D,D,\ldots,D}_{2^2},
+\underbrace{K,K,\ldots,K}_{2^2},
+\\
+& \cdots
+\end{aligned}
+\]
+Switching occurs only at the block boundaries, producing
+\[
+\phi(G) = 0.
+\]
+Yet the entropy balance is $\eta(G)=\tfrac12$.
+
+This example shows $\eta$ and $\phi$ are independent invariants.
+
+\section{Generators Sharing Collapse but Not Extended Coordinates}
+
+\subsection{Example 6: Same Magnitude, Different Density}
+
+Let $x$ have base-$b$ expansion $(x_j)$.  
+Define two generators:
+
+\begin{itemize}
+    \item $G$ uses $M_G(n)=D$ for all $n$ and $D_G(n)=x_n$,
+    \item $H$ uses $M_H(n)=D$ only when $n=j^2$, and chooses $D_H(j^2)=x_j$.
+\end{itemize}
+
+Both satisfy $\pi(G)=\pi(H)=x$,  
+but
+\[
+\eta(G)=1,\qquad \eta(H)=0.
+\]
+
+Thus entropy balance separates these points in the extended coordinate plane.
+
+\subsection{Example 7: Same Magnitude and Same Density, Different Fluctuation}
+
+Let $M_G$ alternate $D,K$ at every step, while $M_H$ alternates in growing
+blocks.  
+Both have $\eta(G)=\eta(H)=\tfrac12$,  
+but
+\[
+\phi(G)=1,\qquad \phi(H)=0.
+\]
+
+Thus the pair $(\eta,\phi)$ distinguishes generators that collapse to the same
+real number and share the same digit-selection density.
+
+\section{Embedding Examples}
+
+\subsection{Two-Dimensional Embedding}
+
+Consider the map
+\[
+G \mapsto (\pi(G),\eta(G)).
+\]
+
+Each classical real $x$ gives a vertical line
+\[
+\{x\} \times [0,1] \subseteq \mathbb{R}^2.
+\]
+
+Generators from the same collapse fiber occupy distinct points on this line.
+
+\subsection{Three-Dimensional Embedding}
+
+The map
+\[
+G \mapsto (\pi(G),\eta(G),\phi(G))
+\]
+produces a three-dimensional coordinate system.  
+Generators from the same collapse fiber form a curve or surface inside the
+vertical plane $\{x\}\times \mathbb{R}^2$.
+
+This embedding emphasizes complementary structural dimensions of the generative
+space.
+
+\section{Interpretation}
+
+These examples illustrate the following themes:
+
+\begin{itemize}
+    \item Extended invariants map collapse fibers into higher-dimensional spaces.
+    \item Entropy balance and fluctuation index are independent dimensions.
+    \item Generators with identical collapse values can differ dramatically in
+          extended coordinates.
+    \item Extended invariants partially restore structure lost under collapse.
+\end{itemize}
+
+While extended invariants do not defeat structural incompleteness, they enrich
+the generative representation and reveal systematic internal behaviors that
+collapse alone cannot express.

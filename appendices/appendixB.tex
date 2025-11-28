@@ -1,173 +1,162 @@
-\chapter{Uniform Bounds and Technical Lemmas}
+\chapter{Product Topology and Cylinder Continuity}
 
 \section{Introduction}
 
-This appendix collects the technical results that support the development of
-finite lookahead, projective incompatibility, and the meta-diagonalizer
-construction.  
-While Appendix~A summarized background from computable analysis, the results in
-this appendix are specific to the generative framework and are used throughout
-Chapters~6--9.
+The generative space $\mathcal{X}$ is a product of sequence spaces equipped with
+the product topology.  
+Continuity in this setting is determined entirely by finite prefixes, and this
+simple topological structure underlies the continuity of collapse, canonical
+output, structural projections, and the embeddings developed in Part~VI.
 
-The lemmas presented here provide uniform stabilization bounds for computable
-secondary projections, prefix agreement principles, and the key sewing and
-divergence tools used in the construction of diagonalizers.
+This appendix summarizes the background on product topology and cylinder sets
+used throughout the monograph.
 
-\section{Prefix Stabilization}
+\section{Sequence Spaces and Basic Open Sets}
 
-The first result formalizes the idea that computable observers stabilize on the
-basis of a finite prefix of the input identity.  This is a more explicit form
-of finite-prefix dependence (Appendix~A) tailored to the layered structure of
-generative identities.
+Let $A$ be a finite discrete alphabet.  
+The sequence space $A^{\mathbb{N}}$ is equipped with the product topology, whose
+basis consists of \emph{cylinder sets} determined by finite prefixes.
 
-\begin{lemma}[Prefix Stabilization]
-%\label{lem:prefix-stabilization}
-Let $\Phi : \mathcal{G}_{\mathrm{eff}} \to \mathbb{R}^k$ be a computable
-secondary projection.  
-For every rational $\varepsilon > 0$ there exists an $N$ such that if two
-effective identities $G$ and $H$ satisfy
+\begin{definition}[Cylinder Set]
+For $u \in A^k$, the cylinder determined by $u$ is
 \[
-(M_G,D_G,K_G){\upharpoonright}N
-=
-(M_H,D_H,K_H){\upharpoonright}N,
+[u] = \{\, x \in A^{\mathbb{N}} : x(0)=u_0,\ldots,x(k-1)=u_{k-1} \,\}.
 \]
-then
+\end{definition}
+
+Cylinder sets form the basis for the topology, and a map between sequence spaces
+is continuous iff agreement on sufficiently long prefixes of the input implies
+agreement on prefixes of the output.
+
+\section{The Generative Space}
+
+Recall that the generative space is the product
 \[
-\|\Phi(G) - \Phi(H)\| < \varepsilon.
+\mathcal{X}
+  = \{D,K\}^{\mathbb{N}}
+  \times \{0,1,\ldots,b-1\}^{\mathbb{N}}
+  \times \Sigma^{\mathbb{N}}.
 \]
-\end{lemma}
 
-\begin{proof}
-Encode the triple $(M,D,K)$ as a single computable sequence and apply
-Proposition~\ref{prop:finite-prefix} of Appendix~A.
-\end{proof}
+Each component space carries the cylinder topology, and $\mathcal{X}$ is given
+the product topology.  
+A basic neighborhood of $G=(M,D,K)$ is determined by finite prefixes of each
+component:
 
-\section{Uniform Bounds for Finite Families}
-
-A central ingredient in Chapter~6 is the existence of a common horizon for a
-finite family of projections.  This guarantees that any observer chosen from a
-fixed list inspects at most a bounded prefix of the generator.
-
-\begin{proposition}[Uniform Dependency Bound]
-\label{prop:uniform-bound}
-Let $\mathcal{P} = \{\Phi_1,\ldots,\Phi_m\}$ be a finite family of computable
-secondary projections.  
-For any rational $\varepsilon > 0$ there exists an integer $L$ such that for
-all $G,H \in \mathcal{G}_{\mathrm{eff}}$,
 \[
-(M_G,D_G,K_G){\upharpoonright}L
-=
-(M_H,D_H,K_H){\upharpoonright}L
-\quad\Longrightarrow\quad
-\|\Phi_i(G) - \Phi_i(H)\| < \varepsilon
+[M|_k] \times [D|_{\ell}] \times [K|_m].
 \]
-for every $1 \le i \le m$.
+
+\section{Continuity of the Canonical Output}
+
+The canonical output map
+\[
+G \mapsto X(G)
+\]
+is continuous because it is defined coordinatewise by reading either $D(n)$ or
+$K(n)$ depending on $M(n)$.  
+If two generators agree on a finite prefix of $(M,D,K)$, they agree on the
+corresponding prefix of $X(G)$.
+
+\begin{proposition}
+The canonical output map $X : \mathcal{X} \to A^{\mathbb{N}}$ is continuous in
+the product topology.
+\end{proposition}
+
+\section{Continuity of Collapse}
+
+The collapse map
+\[
+\pi : \mathcal{X}^* \to [0,1]
+\]
+is continuous because:
+
+\begin{itemize}
+    \item it depends on the selected digit subsequence,
+    \item every finite approximation of $\pi(G)$ is determined by finitely many
+          selected digit values,
+    \item those values depend on finitely many coordinates of $M$ and $D$.
+\end{itemize}
+
+\begin{proposition}
+The collapse map $\pi$ is continuous with respect to the product topology on
+$\mathcal{X}^*$ and the usual topology on $[0,1]$.
+\end{proposition}
+
+\section{Closedness of Collapse Fibers}
+
+A key fact used in Part~I is that collapse fibers
+\[
+\mathcal{F}(x) = \pi^{-1}(\{x\})
+\]
+are closed subsets of $\mathcal{X}$.
+
+\begin{proposition}
+For each $x\in[0,1]$, the fiber $\mathcal{F}(x)$ is closed in $\mathcal{X}$.
 \end{proposition}
 
 \begin{proof}
-Let $B_{\Phi_i}(\varepsilon)$ be the dependency bound for $\Phi_i$.  
-Define
-\[
-L = \max_{1 \le i \le m} B_{\Phi_i}(\varepsilon).
-\]
-The claim follows immediately from Lemma~\ref{lem:prefix-stabilization}.
+Since $\pi$ is continuous and $\{x\}$ is closed in the Hausdorff space
+$[0,1]$, the preimage $\pi^{-1}(\{x\})$ is closed.
 \end{proof}
 
-\section{Controlled Divergence Inside Fibers}
+\section{Prefix Sensitivity and Structural Projections}
 
-The next lemma shows that collapse fibers contain identities with arbitrarily
-different secondary structure.  This is the technical backbone of the existence
-of adjustment identities used in Chapter~8.
+Every structural projection $\Phi : \mathcal{X} \to \mathbb{R}^k$ used in Parts
+III–VI is continuous in the product topology.  
+This ensures:
 
-\begin{lemma}[Controlled Divergence]
-\label{lem:controlled-divergence}
-Let $x \in \mathbb{R}_c$, let $H \in \mathcal{F}_{\mathrm{eff}}(x)$, and let
-$\Phi$ be any computable secondary projection.  
-For every rational $\delta > 0$ there exists an identity
-$A \in \mathcal{F}_{\mathrm{eff}}(x)$ such that
-\[
-\|\Phi(A) - \Phi(H)\| > \delta.
-\]
-\end{lemma}
+\begin{itemize}
+    \item projections respect finite-prefix neighborhoods,
+    \item projection lattice operations preserve continuity,
+    \item dependency bounds for computable projections rely on topological prefix
+          sensitivity.
+\end{itemize}
 
-\begin{proof}
-Since collapse fibers are infinite (Chapter~3) and $\Phi$ is not injective on
-any effective fiber (Chapter~7), we may enumerate effective elements of
-$\mathcal{F}_{\mathrm{eff}}(x)$ and search for one whose projection differs
-from that of $H$ by more than $\delta$.  
-This enumeration is computable because the set of effective generators with
-collapse value $x$ is a $\Pi^0_1$ class.
-\end{proof}
-
-\section{Tail Sewing and Index Alignment}
-
-The meta-diagonalizer construction requires splicing two identities together
-while preserving the digit subsequence of the collapse.  
-The following lemma formalizes this sewing operation.
-
-\begin{lemma}[Tail Sewing]
-%\label{lem:tail-sewing}
-Let $H,A \in \mathcal{F}_{\mathrm{eff}}(x)$ and let $L \in \mathbb{N}$.  
-There exists an effective identity $G^* \in \mathcal{F}_{\mathrm{eff}}(x)$ such
-that:
-
-\begin{enumerate}
-\item $G^*{\upharpoonright}L = H{\upharpoonright}L$, and
-\item the tail of $G^*$ agrees with a time-shifted tail of $A$ chosen so that
-the selected digit indices align.
-\end{enumerate}
-
-\end{lemma}
-
-\begin{proof}
-Let $k_H$ be the number of digit selections made by $H$ before index $L$.  
-Search in $A$ for the least index $L'$ such that $A$ has made $k_H$ digit
-selections before $L'$.  
-Define $G^*$ to copy the prefix of $H$ up to $L$ and to copy the tail of $A$
-starting at $L'$.  
-Because $A \in \mathcal{F}_{\mathrm{eff}}(x)$, the shifted tail produces the
-correct remaining digit sequence.  
-Effectiveness follows from the computability of $H$ and $A$.
-\end{proof}
-
-\section{Adjustment Lemma}
-
-The final tool combines uniform bounds, controlled divergence, and tail sewing
-to guarantee the existence of a generator that evades any finite family of
-secondary projections.
-
-\begin{lemma}[Adjustment Lemma]
-\label{lem:adjustment}
-Let $\mathcal{P} = \{\Phi_1,\ldots,\Phi_m\}$ be a finite family of computable
-secondary projections and let $H \in \mathcal{F}_{\mathrm{eff}}(x)$.  
-For every rational $\varepsilon > 0$ there exists an identity
-$G^* \in \mathcal{F}_{\mathrm{eff}}(x)$ such that:
+In particular:
 
 \[
-\|\Phi_i(G^*) - \Phi_i(H)\| > \varepsilon
-\quad\text{for all } i.
+G|_k = H|_k
+\quad\Longrightarrow\quad
+\Phi(G)|_m = \Phi(H)|_m
 \]
+for suitably chosen $k$ depending on $m$.
 
-\end{lemma}
+\section{Continuity of Extended Coordinate Maps}
 
-\begin{proof}
-Let $L$ be the uniform dependency bound of
-Proposition~\ref{prop:uniform-bound} for precision $\varepsilon/3$.  
-By Lemma~\ref{lem:controlled-divergence}, choose an identity $A$ whose
-projections differ from those of $H$ by more than $\varepsilon$.  
-Apply tail sewing (Lemma~\ref{lem:tail-sewing}) beyond index $L$ to obtain
-$G^*$ that agrees with $H$ on the observable prefix and follows $A$ on the
-tail.  
-Since the switch happens beyond the uniform bound, the projections of $H$ and
-$G^*$ differ by more than $\varepsilon$.
-\end{proof}
+Secondary and tertiary invariants, such as entropy balance
+\[
+\eta(G)
+\]
+and fluctuation index
+\[
+\phi(G),
+\]
+are limits of empirical statistics computed from prefixes of the selector or
+canonical output.  
+Such invariants are continuous because:
+
+- long-run averages depend on finite prefixes for any finite precision,
+- small changes in finite prefixes change empirical frequencies only slightly.
+
+\begin{proposition}
+Entropy balance, fluctuation index, and all extended coordinate maps developed
+in Part~VI are continuous in the product topology on $\mathcal{X}$.
+\end{proposition}
 
 \section{Summary}
 
-The results in this appendix supply the technical scaffolding for the
-meta-diagonalizer and the Structural Incompleteness Theorem.  
-Prefix stabilization and uniform bounds describe the observational limits of
-computable projections, while the controlled divergence and sewing lemmas show
-that these limits can be exploited to construct identities that evade any
-finite family of observers.
+This appendix summarized the topological structure underlying the generative
+framework:
 
+\begin{itemize}
+    \item sequence spaces carry the cylinder topology,
+    \item $\mathcal{X}$ is the product of three such spaces,
+    \item collapse and structural projections are continuous,
+    \item collapse fibers are closed sets,
+    \item extended invariants are continuous limit maps.
+\end{itemize}
+
+These properties support the analysis of collapse fibers (Part~I), selector
+regimes (Part~II), the projection lattice (Part~III), and the embedding theory
+of extended coordinates (Part~VI).
