@@ -3,103 +3,82 @@
 
 \section{Introduction}
 
-Extended invariants describe large scale features of the selector stream.  
-Chapter~\ref{chap:invariants-eta-phi} introduced two tail-dependent invariants:
-the asymptotic density $\eta(G)$ and the fluctuation index $\phi(G)$.  
-Both reflect selector behavior far beyond the reach of finite-prefix
-observation, and both are discontinuous everywhere in the product topology of
-the generative space.
+Extended invariants arise as limits of observer towers in the chosen collapse representation. 
+They describe coarse symbolic behavior of the exposure mechanism and depend on tail geometry rather than finite prefixes. 
+Chapter~\ref{chap:invariants} introduced two such quantities: the asymptotic exposure density and the fluctuation index. 
+Both are Baire class 1 maps that can jump, oscillate, or take arbitrary values inside any nonempty open cylinder. 
+Their instability follows from the finite information principle underlying all observers.
 
-This chapter places these invariants in a geometric setting by examining three
-natural slice families through the generative space:
-\begin{itemize}
-    \item vertical slices, which fix finite prefixes;
-    \item horizontal slices, which fix invariant values;
-    \item fiber slices, which fix collapsed magnitude.
-\end{itemize}
-Together these slices reveal how finite symbolic structure, asymptotic selector
-behavior, and classical value interact.  
-The geometry emphasizes the independence of finite-prefix information from
-asymptotic invariants and the independence of collapse magnitude from selector
-structure.
+This chapter organizes these invariants using three coarse slicing operations on the ambient generative space. 
+The slices are not geometric in a classical metric sense. 
+Instead, they are symbolic partitions that illustrate how finite-prefix structure, asymptotic behavior, and collapse values interact under the fixed representation. 
+The goal is visualization rather than classification. 
+Everything here depends on the chosen representation and should be interpreted as a derived perspective rather than as intrinsic geometry of generative identities.
 
 \section{Vertical Slices: Finite Prefix Constraints}
 
-For a finite word $u$ of length $N$ in the generative alphabet, define the
-vertical slice
+Fix a finite word $u$ of length $N$ over the ambient symbolic alphabet. 
+Following standard practice in represented spaces and symbolic dynamics \cite{LindMarcus, PaulyRepresentedSpaces}, define the vertical slice
 \[
 \mathcal{C}(u)
 =
 \{\, G \in \mathcal{G} : G[0..N-1] = u \,\}.
 \]
 
-Vertical slices are clopen cylinder sets in the product topology.  
-Every structural projection with dependency bound at precision $\varepsilon$
-examines exactly one such slice of depth $B_{\Phi}(\varepsilon)$.  
-Thus vertical slices encode the finite-prefix geometry that constrains
-continuous observation, dependency bounds, and the indistinguishability
-results of Part~\ref{part:incompleteness}.
+Vertical slices are clopen cylinder sets in the product topology. 
+By the dependency bound of any continuous observer (Appendix~B), each projection at precision $\varepsilon$ depends only on a slice of depth $B_{\Phi}(\varepsilon)$. 
+Vertical slices therefore represent the entire visible region of an identity for any finite observer. 
+All prefix-based arguments in Part~II and Part~III, including the indistinguishability construction, take place inside such slices.
 
-Vertical slices impose no restrictions on $\eta$ or $\phi$:  
-by the nowhere continuity results of
-Chapter~\ref{chap:invariants-eta-phi}, every value of $\eta$ in $[0,1]$ and
-every value of $\phi$ in $[0,\infty]$ is realized densely in each
-$\mathcal{C}(u)$.
+Because the topology controls only finite prefixes, vertical slices impose no restrictions on asymptotic invariants. 
+By the nowhere continuity results in Chapter~\ref{chap:invariants}, every value of the density invariant and every value of the fluctuation index is realized densely inside each $\mathcal{C}(u)$. 
+This illustrates the fundamental mismatch between finite-prefix geometry and asymptotic behavior.
 
-\section{Horizontal Slices: Level Sets of Extended Invariants}
+\section{Horizontal Slices: Level Sets of Asymptotic Invariants}
 
-Fix $\alpha\in[0,1]$ and $\beta\in[0,\infty]$.  
+Fix $\alpha \in [0,1]$ and $\beta \in [0,\infty]$. 
 Define the horizontal slices
 \[
 \mathcal{H}_{\alpha}
 =
-\{\, G : \eta(G)=\alpha \,\},
+\{\, G : \eta(G) = \alpha \,\},
 \qquad
 \mathcal{H}^{\beta}
 =
-\{\, G : \phi(G)=\beta \,\}.
+\{\, G : \phi(G) = \beta \,\}.
 \]
 
-These sets collect identities with identical asymptotic selector behavior,
-regardless of their finite prefixes.  
-Because $\eta$ and $\phi$ are tail-dependent, horizontal slices intersect every
-vertical slice.  
-Horizontal slices cut across finite-prefix geometry and collapse fibers alike.
+Horizontal slices group identities by their long term exposure behavior. 
+They intersect every vertical slice because the invariants are tail dependent, and tail freedom is unconstrained in the product topology. 
+Horizontal slices therefore cut across the entire prefix structure and depend on symbolic behavior invisible to observers with finite prefix dependence.
 
-It is helpful to visualize the pair of invariants through the (discontinuous)
-mapping
+It is often convenient to view the mapping
 \[
-G \mapsto (\eta(G),\phi(G)).
+G \longmapsto \bigl(\eta(G), \phi(G)\bigr)
 \]
-Vertical slices correspond to entire regions of the invariant plane.  
-Horizontal slices correspond to lines of constant invariant value.  
-Their dense intersection reflects the asymptotic sensitivity of the invariants
-to tail behavior.
+as a coarse projection into the invariant plane. 
+Vertical slices appear as large regions in this plane, while horizontal slices correspond to level sets. 
+Because invariants are Baire class 1 maps with everywhere-discontinuous behavior, these slices have no regularity properties beyond their symbolic definition. 
+They should be viewed as coarse partitions tied to the chosen representation.
 
-\section{Fiber Slices: Fixing Collapsed Magnitude}
+\section{Fiber Slices: Fixing Collapse Values}
 
-Fix a real number $x\in[0,1]$.  
+Fix a real number $x \in [0,1]$. 
 The fiber slice
 \[
 \mathcal{F}(x)
 =
-\{\, G : \pi(G)=x \,\}
+\{\, G \in \mathcal{G}^{*} : \pi(G) = x \,\}
 \]
-collects identities with the same collapse coordinate.  
-Since $\eta$ and $\phi$ depend only on the selector stream and not on the
-collapse coordinate, the image of $\mathcal{F}(x)$ under the invariant map is
-typically the entire admissible region of the invariant plane.
+collects identities that collapse to the same classical value under the representation. 
+As established in Chapters~\ref{chap:collapse-map} and~\ref{chap:fibers}, collapse fibers are compact, perfect, and totally disconnected. 
+They admit full tail freedom by alignment and sewing (Appendices~C and~D), while the exposure domain itself is not compact.
 
-Using tail freedom inside fibers
-(Chapter~\ref{chap:alignment-sewing}) together with the constructions of
-Theorems~\ref{thm:eta-nowhere} and~\ref{thm:phi-nowhere}, one obtains the
-following fact.
+Because asymptotic invariants depend on tails rather than collapse values, their behavior in any fiber reflects the same freedom present in the ambient space.
 
 \begin{proposition}
-\label{prop:fiber-full-invariants}
-For any real $x$ and any pair $(\alpha,\beta)$ with
-$\alpha\in[0,1]$ and $\beta\in[0,\infty]$,  
-there exists an identity $G \in \mathcal{F}(x)$ with
+\label{prop:fiber-invariant-full}
+For any real number $x$, any $\alpha \in [0,1]$, and any $\beta \in [0,\infty]$, there exists $G \in \mathcal{F}(x)$ with
 \[
 \eta(G)=\alpha,
 \qquad
@@ -108,53 +87,40 @@ there exists an identity $G \in \mathcal{F}(x)$ with
 \end{proposition}
 
 \begin{proof}
-Choose a selector stream $M$ with the prescribed invariant values
-$(\alpha,\beta)$ using the constructions from
-Chapter~\ref{chap:invariants-eta-phi}.  
-Combine the selector tail with the canonical digits of $x$ using
-alignment and tail sewing
-(Chapter~\ref{chap:alignment-sewing}) to obtain a generative identity
-in $\mathcal{F}(x)$ with the desired properties.
+Start with any $H \in \mathcal{F}(x)$. 
+By the construction of Chapter~\ref{chap:invariants}, choose a symbolic tail realizing $(\alpha,\beta)$. 
+Using alignment from Appendix~C, identify a position in $H$ beyond which tail replacement preserves the exposed-value sequence. 
+Sew the constructed tail to the aligned prefix using the method of Appendix~D. 
+The resulting identity lies in $\mathcal{F}(x)$ and has the required invariant values.
 \end{proof}
 
-Thus a fixed collapsed magnitude imposes no restriction on the extended
-invariants.
+This demonstrates that collapse values constrain only the observed-value coordinate and do not restrict exposure asymptotics.
 
-\section{Geometric Interpretation}
+\section{Interpretation of the Three Slice Families}
 
-The three slice families demonstrate the independence of finite-prefix
-structure, collapse magnitude, and asymptotic selector behavior.
+The slice families illustrate the independence of the three layers in the framework’s hierarchy.
 
 \begin{itemize}
-    \item \emph{Vertical slices} constrain finite-prefix information but do not
-    restrict asymptotic invariants.  
-    Every invariant value occurs densely inside every vertical slice.
+    \item \textbf{Vertical slices} capture finite-prefix information, the only region visible to finite observers. 
+    They cannot constrain asymptotic invariants because observers have finite prefix dependence.
 
-    \item \emph{Horizontal slices} constrain asymptotic selector behavior but
-    intersect every finite-prefix class and every collapse fiber.  
-    They express global tail geometry that is invisible to finite observers.
+    \item \textbf{Horizontal slices} capture long term symbolic behavior derived from observer towers. 
+    They intersect every finite-prefix class and every fiber, showing that asymptotic invariants are independent of collapse and finite prefixes.
 
-    \item \emph{Fiber slices} constrain classical magnitude but allow all
-    possible invariant values by tail freedom.  
-    Collapse does not control selector asymptotics.
+    \item \textbf{Fiber slices} fix the collapse value but allow full tail variation. 
+    They illustrate that collapse discards nearly all symbolic structure and leaves asymptotic behavior unconstrained.
 \end{itemize}
 
-Together these slices reveal a layered geometry in the generative framework.
-Finite-prefix structure governs observation, collapse governs classical value,
-and asymptotic behavior describes global selector geometry.  
-Extended invariants lie entirely outside the reach of finite observation and
-are unaffected by collapse.
+Together these slices give a coarse visualization of how the chosen representation separates finite-prefix structure, collapse values, and asymptotic behavior. 
+They do not define an intrinsic geometry. 
+Instead, they highlight the observer limitations established in Part~III and the representation dependence discussed in Part~I.
 
 \section{Summary}
 
-Vertical slices fix finite prefixes.  
-Horizontal slices fix asymptotic invariant values.  
-Fiber slices fix classical magnitude.  
-The invariants $\eta$ and $\phi$ vary freely across all of these slice
-families, illustrating the independence of asymptotic selector behavior from
-both finite-prefix information and collapse.
+Vertical slices fix finite prefixes. 
+Horizontal slices fix asymptotic invariant values. 
+Fiber slices fix collapse values. 
+All asymptotic invariant values appear densely inside all three slice families because these invariants depend on tail behavior that cannot be constrained by finite prefixes or by collapse.
 
-This slice geometry provides the conceptual foundation for analyzing joint
-invariant behavior in the next chapter.  
-Appendix~E supplies explicit examples illustrating the full spectrum of
-selector behaviors and invariant combinations.
+These slices provide a visual framework for understanding derived invariants and prepare the ground for the joint invariant analysis developed in the next chapter. 
+Explicit examples appear in Appendix~G.

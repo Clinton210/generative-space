@@ -1,0 +1,189 @@
+\chapter{Case Studies in Invariant Behavior}
+\label{appendix:case-studies}
+
+\section{Introduction}
+
+This appendix presents detailed case studies illustrating the behavior of
+finite and asymptotic invariants under a fixed collapse representation.
+These examples complement the material in
+Chapters~\ref{chap:invariants-eta-phi} through
+\ref{chap:slice-geometry}, and they demonstrate how observer-derived limits
+can fluctuate, diverge, or stabilize in unexpected ways.
+
+The focus is on the following principles:
+
+\begin{itemize}
+    \item finite observers depend on finite prefixes,
+    \item extended invariants arise as limits or limsups of observer towers,
+    \item invariants are Baire class one functions and may fail to converge,
+    \item collapse fibers do not constrain asymptotic selector behavior.
+\end{itemize}
+
+All examples are representation specific. They illustrate the behavior of
+observer-derived limits but do not describe intrinsic structure.
+See Appendix~\ref{appendix:extended-invariants} for further geometric
+discussion.
+
+\section{Density Instabilities}
+
+This section shows that frequency based invariants can fluctuate even inside
+fixed collapse fibers. All constructions refer only to the exposure
+coordinate; digits can be assigned to place each identity inside any desired
+collapse fiber.
+
+\subsection{Oscillating lower density}
+
+Let the exposure pattern consist of alternating blocks
+\[
+D^{2^{0}}, K^{2^{0}},
+D^{2^{1}}, K^{2^{1}},
+D^{2^{2}}, K^{2^{2}}, \ldots
+\]
+The lower density is zero and the upper density is one. The finite prefix
+frequencies oscillate without approaching a limit. This illustrates that
+density as a limit need not exist. This mirrors classical constructions in
+symbolic dynamics where lower and upper block densities diverge.
+
+\subsection{Slow convergence of density approximants}
+
+Let the exposure stream be
+\[
+D^{1}, K^{1}, D^{2}, K^{2}, D^{3}, K^{3}, \ldots
+\]
+The finite approximants satisfy
+\[
+\frac{1 + 2 + \cdots + m}{2(1 + 2 + \cdots + m)}
+= \frac{1}{2},
+\]
+but convergence is slow. The density invariant is insensitive to prefix
+structure, and continuous observation cannot stabilize it in finite time.
+
+\subsection{Density instability inside a fiber}
+
+Fix a real number $x$ and place its canonical digits at the exposed
+positions. Any pattern of exposures may be used. All density behaviors remain
+available in the fiber because the exposures do not affect the collapse
+value.
+
+These examples support the general principle that density invariants cannot
+classify collapse fibers.
+
+\section{Entropy Case Studies}
+
+Although entropy is not a central invariant in the main text, finite
+approximate entropies behave analogously to frequency invariants. They serve
+as instructive examples of observer-derived irregularity.
+
+\subsection{Highly predictable exposure patterns}
+
+Consider a periodic pattern such as $DDK$. The block entropy is zero. The
+finite approximants converge rapidly because the symbolic behavior is highly
+regular. This shows that simple patterns induce stable observer values.
+
+\subsection{Increasing-block patterns}
+
+Consider blocks of the form
+\[
+D^{m}, K^{m}, \qquad m = 1,2,3,\ldots
+\]
+Finite entropies fluctuate because long deterministic blocks suppress
+diversity. As $m$ grows, longer prefixes reflect more deterministic structure.
+Finite observers cannot stabilize entropy quickly.
+
+\subsection{Entropy in sparse selectors}
+
+Selectors of zero density may have arbitrarily low empirical entropy because
+exposures become increasingly rare. This behavior, too, is compatible with any
+collapsed value.
+
+\section{Fluctuation Case Studies}
+
+The fluctuation index measures the relative size of successive gaps in the
+exposure coordinate. The following examples span its natural range.
+
+\subsection{Bounded gap growth}
+
+If exposure occurs at every second position, then the gaps are all equal to
+two. The fluctuation index is zero. This is the simplest example of bounded
+fluctuation.
+
+\subsection{Linear gap growth}
+
+Let $n_{j} = j + \lfloor \sqrt{j} \rfloor$. Then
+\[
+\frac{g_{j}}{n_{j}} \to 0,
+\]
+but the gaps increase slowly. The fluctuation index remains zero, yet the
+behavior is not bounded. This shows that bounded gap growth is not necessary
+for small fluctuation index.
+
+\subsection{Superlinear growth}
+
+Selectors with $n_{j} = j!$ satisfy
+\[
+\frac{g_{j}}{n_{j}} = j,
+\]
+and therefore have infinite fluctuation index. These identities exist in every
+collapse fiber and demonstrate that collapse magnitude places no restriction
+on the fluctuation index.
+
+\section{Mixed Invariant Behavior}
+
+This section presents examples combining density and fluctuation features to
+illustrate the independence of the two invariants.
+
+\subsection{Positive density and unbounded fluctuation}
+
+Let $M$ place exposures at positions
+\[
+n_{j} =
+\begin{cases}
+j, & \text{if $j$ is not a square},\\
+j^{2}, & \text{if $j$ is a square}.
+\end{cases}
+\]
+Most exposures occur at positions $j$, giving density one, but occasional
+square indexed exposures create very large gaps. Then
+\[
+\eta(G) = 1,
+\qquad
+\phi(G) = \infty.
+\]
+
+\subsection{Zero density and bounded fluctuation}
+
+Let exposures occur at the prime numbers. This yields zero density and zero
+fluctuation index. This shows that zero density does not imply large relative
+gaps.
+
+\subsection{Arbitrary pairs inside a fiber}
+
+Given any $(\alpha,\beta)$ in the invariant plane, selectors can be constructed
+to realize those values. Collapse freedom ensures that for any real number
+$x$, the fiber $\mathcal{F}(x)$ contains identities exhibiting that pair.
+
+\section{Invariant Non-Classifiability}
+
+These examples reinforce the main conclusions of
+Chapters~\ref{chap:invariants-eta-phi} through \ref{chap:slice-geometry}:
+
+\begin{itemize}
+    \item asymptotic invariants cannot classify collapse fibers,
+    \item every invariant value is compatible with every classical value,
+    \item invariants are derived from observer towers and inherit their
+          limitations,
+    \item fibers contain selector behavior of every asymptotic type.
+\end{itemize}
+
+Finite observation and collapse magnitude jointly constrain finite-prefix
+structure but leave asymptotic behavior free to vary.
+
+\section{Summary}
+
+The case studies presented here demonstrate that observer-derived invariants
+exhibit diverse and unstable behaviors. They may converge, oscillate, or
+diverge, and any of these behaviors can occur inside every collapse fiber.
+These examples support the structural incompleteness results of
+Part~\ref{part:incompleteness} and illustrate the independence of finite
+prefix geometry from asymptotic selector structure.
+

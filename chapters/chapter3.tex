@@ -1,169 +1,152 @@
-\chapter{Collapse Fibers and Ambient Compactness}
+\chapter{Fiber Geometry and Ambient Compactness}
 \label{chap:fibers}
 
-\section{The Ambient Generative Space}
+\section{Introduction}
 
-The ambient generative space consists of three independent symbolic layers:
-the selector layer, the digit layer, and the meta-information layer.
-Let $\Sigma$ be a finite alphabet for the meta-information layer and fix a
-base $b\geq 2$.  
-The ambient space is the product
+The collapse representation introduced in Chapter~\ref{chap:collapse-map} assigns a real value to each generative identity by exposing a sequence of digits drawn from one symbolic coordinate. 
+Identities that produce the same exposed digit sequence form a collapse fiber. 
+These fibers are the central geometric objects of the generative viewpoint. 
+They are compact, perfect, and carry substantial latent structure that is invisible to classical magnitude.
+
+This chapter develops the topology of collapse fibers and explains how they inherit structure from the ambient space. 
+A key theme is the distinction between the exposure domain, which is not compact, and individual fibers, which are compact. 
+This compactness is essential for the finite-information arguments and generative freedom constructions developed in Chapters~6 and~7.
+
+\section{Ambient Generative Space}
+
+As introduced in Chapter~\ref{chap:generative-space}, the ambient generative space is the symbolic product
 \[
 \mathcal{G}
-  =
-  \{D,K\}^{\mathbb{N}}
-  \times
-  \{0,\ldots,b-1\}^{\mathbb{N}}
-  \times
-  \Sigma^{\mathbb{N}},
+  = \Gamma_{1}^{\mathbb{N}}
+    \times \Gamma_{2}^{\mathbb{N}}
+    \times \Gamma_{3}^{\mathbb{N}}
 \]
-equipped with the product topology induced by the discrete topology on each
-alphabet.  
-By Tychonoff's theorem, $\mathcal{G}$ is compact, metrizable, and totally
-disconnected.  
-A standard compatible ultrametric is
-\[
-d(G,H) = 2^{-N},
-\]
-where $N$ is the least index at which $G$ and $H$ differ.  
-This is the classical metric used in Cantor space and shift spaces
-\cite{LindMarcus, Kechris}.
+with the product topology. 
+Each coordinate carries the discrete topology on its finite alphabet, and the product is compact by Tychonoff's theorem. 
+The metric structure is given by the usual prefix metric, where the distance between two identities is determined by the length of the longest common prefix across all coordinates.
 
-\section{Digit-Producing Subspace}
+This space is compact, totally disconnected, and perfect. 
+Such spaces form the standard setting for symbolic dynamics and descriptive set theory \cite{LindMarcus, Kechris}. 
+All collapse fibers, and all effective constructions used later, live inside this ambient product.
 
-A generative identity $G=(M,D,K)$ produces an infinite collapse coordinate when
-the selector exposes digits infinitely often.  
-The digit-producing subspace is
+\section{Exposure Domain}
+
+The collapse representation requires infinitely many exposed positions in order to produce an infinite classical expansion. 
+For each $G = (U_{1}, U_{2}, U_{3})$, the exposure mechanism described in Chapter~\ref{chap:collapse-map} determines an infinite set of positions at which the value of the observed-value coordinate $U_{2}$ is revealed.
+
+\begin{definition}[Exposure Domain]
+The exposure domain is the set
 \[
 \mathcal{G}^{*}
-=
-\{\, G \in \mathcal{G} : M(n)=D
-     \text{ for infinitely many } n \,\}.
+  = \{\, G \in \mathcal{G} : P(G) \text{ is infinite} \,\},
 \]
+where $P(G)$ is the exposure set associated to $G$.
+\end{definition}
 
-The subspace $\mathcal{G}^{*}$ is dense in $\mathcal{G}$ and closed under
-finite modifications of any layer.  
-It is not closed and therefore not compact.  
-Its density reflects the fact that any initial prefix of a generative identity
-can later be extended to expose infinitely many digits.
+The exposure domain $\mathcal{G}^{*}$ is a dense $G_{\delta}$ subset of the compact space $\mathcal{G}$. 
+It is not compact. 
+This is a crucial distinction: compactness arguments apply to fibers and to the ambient space, but not to the exposure domain as a whole.
 
-\section{Collapse Map and Compact Fibers}
+Density of $\mathcal{G}^{*}$ reflects the fact that any finite prefix of a generative identity can be extended in many ways to produce infinitely many exposed positions.
+
+\section{Collapse Map and Closed Fibers}
 
 The collapse map
 \[
 \pi : \mathcal{G}^{*} \to [0,1]
 \]
-was defined in Chapter~\ref{chap:collapse-map} by selecting digits at the
-positions where the selector layer takes the value $D$ and interpreting them
-as a base-$b$ expansion.
+assigns to each identity the real number whose base $b$ expansion is formed by the exposed values of $U_{2}$. 
+The continuity of $\pi$ was established in Chapter~\ref{chap:collapse-map}, using the fact that only finitely many exposed digits are needed to determine the value of $\pi(G)$ to any prescribed precision.
 
-Continuity of $\pi$ follows from the prefix topology: the value of $\pi(G)$
-at precision $b^{-(N+1)}$ depends only on the first $N$ selected digits, and
-these appear within some finite prefix of $G$.  
-This is the standard argument for continuity of evaluation maps on symbolic
-product spaces \cite{LindMarcus, WeihrauchComputableAnalysis}.
+A continuous map into a Hausdorff space has closed fibers.
 
 \begin{proposition}
-\label{prop:collapse-continuous}
-The collapse map $\pi$ is continuous.
-\end{proposition}
-
-Fibers of a continuous map into the Hausdorff space $[0,1]$ are closed.
-
-\begin{corollary}
-\label{cor:fiber-compact}
-For every $x \in [0,1]$, the collapse fiber
+For each real number $x \in [0,1]$, the collapse fiber
 \[
 \mathcal{F}(x)
   = \pi^{-1}(\{x\})
 \]
-is a compact subset of $\mathcal{G}$.
+is a closed subset of $\mathcal{G}$.
+\end{proposition}
+
+Since $\mathcal{G}$ is compact, each fiber is compact as well.
+
+\begin{corollary}
+For each $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is compact.
+\label{cor:fiber-compact}
 \end{corollary}
 
-\begin{proof}
-The fiber is closed in the compact space $\mathcal{G}$ and is therefore
-compact.
-\end{proof}
+Compactness is a fundamental property of fibers. 
+It ensures that limits of identities that preserve the exposed digit sequence remain within the same fiber, even if these limits fall outside the exposure domain $\mathcal{G}^{*}$. 
+This compactness is essential for the generative freedom arguments developed later.
 
-\section{The Effective Fiber}
+\section{Effective Fiber}
 
 The effective generative space
 \[
 \mathcal{G}_{\mathrm{eff}}
-=
-\{\, G \in \mathcal{G} :
-     M, D, K \text{ are computable sequences} \,\}
+  = \{\, (U_{1}, U_{2}, U_{3}) \in \mathcal{G}
+         : U_{1}, U_{2}, U_{3} \text{ are computable} \,\}
 \]
-defines the computational core of the framework.  
-The effective fiber of $x$ is
+forms the computational core of the framework. 
+The effective fiber of $x$ is the set
 \[
 \mathcal{F}_{\mathrm{eff}}(x)
-   =
-\mathcal{F}(x) \cap \mathcal{G}^{*}.
+   = \mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}.
 \]
 
-Since $\mathcal{G}^{*}$ is dense in $\mathcal{G}$, every basic open set
-intersecting a full fiber also intersects the effective fiber.  
-However, the effective fiber is never closed.
+The exposure domain intersects every open set meeting the full fiber, and therefore the effective fiber is dense in the full fiber. 
+However, unlike the full fiber, the effective fiber is not closed.
 
 \begin{proposition}
-\label{prop:efffiber-not-closed}
-For any $x \in [0,1]$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is
-not closed in $\mathcal{G}$ and not closed in $\mathcal{G}^{*}$.
+For any $x \in [0,1]$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is not closed in $\mathcal{G}$ or in $\mathcal{G}^{*}$.
 \end{proposition}
 
 \begin{proof}
-Construct a sequence of identities whose $j$th selected digit is pushed
-farther and farther out.  
-For fixed $j$, let the position $n_{j}^{(k)}$ satisfying $M(n_{j}^{(k)})=D$
-tend to infinity as $k\to\infty$.  
-Each identity lies in $\mathcal{F}_{\mathrm{eff}}(x)$, but the limit selects
-only finitely many digits and therefore lies outside $\mathcal{G}^{*}$.  
-The same construction can be performed inside any fiber $\mathcal{F}(x)$.
+Fix $x \in [0,1]$. 
+Construct a sequence of identities $G^{(k)}$ in the effective fiber by delaying the position of the $j$th exposed digit farther and farther out for each fixed $j$. 
+Each $G^{(k)}$ agrees with the target collapse coordinate, but the limit identity exposes only finitely many positions.
+Hence the limit lies outside $\mathcal{G}^{*}$ and therefore outside the effective fiber.
+This demonstrates that the effective fiber is not closed.
 \end{proof}
 
-\section{Cantor Geometry of Collapse Fibers}
+This phenomenon reflects a general feature of computable presentations: computable points need not be closed under limits.
 
-Collapse fibers inherit the structural properties of Cantor-type spaces.
-They are uncountable, totally disconnected, and contain no isolated points.
+\section{Perfectness and Total Disconnectedness}
+
+Collapse fibers inherit the structural properties of Cantor-like sets.
 
 \begin{proposition}
+For each $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is perfect, totally disconnected, and uncountable.
 \label{prop:fiber-perfect}
-For every $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is perfect,
-totally disconnected, and uncountable.
 \end{proposition}
 
 \begin{proof}
-Total disconnectedness follows from the product structure of $\mathcal{G}$.
-To show perfectness, fix $G\in\mathcal{F}(x)$ and a finite prefix length $N$.
-Modify $G$ beyond index $N$ by altering unselected digits or the meta layer.
-These changes do not affect the collapse coordinate, so the resulting points
-remain in $\mathcal{F}(x)$ and can be made arbitrarily close to $G$.  
-Thus no point is isolated.  
-Uncountability follows from the existence of infinitely many independent
-choices in the unobserved coordinates, which mirrors classical arguments for
-Cantor sets \cite{Kechris}.
+Total disconnectedness follows from the product topology on $\mathcal{G}$.
+
+To prove perfectness, fix $G \in \mathcal{F}(x)$ and a finite prefix length $N$. 
+Construct a new identity $H$ by changing the value of one of the latent coordinates at a position beyond $N$. 
+Such modifications do not affect the exposed digit sequence, so $H$ lies in $\mathcal{F}(x)$ and can be made arbitrarily close to $G$. 
+Thus $\mathcal{F}(x)$ contains no isolated points.
+
+Uncountability follows from the presence of infinitely many independent coordinates in the latent portion of each identity. 
+Classical arguments for Cantor sets apply \cite{Kechris}.
 \end{proof}
 
-The effective fiber inherits these geometric properties through density.
+Since the effective fiber is dense within the full fiber, it also has no isolated points.
 
 \begin{corollary}
-\label{cor:efffiber-perfect}
-The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is dense in the full
-fiber and has no isolated points.
+For any $x \in [0,1]$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is dense in the full fiber and contains no isolated points.
 \end{corollary}
 
-\section{Tail Freedom}
+\section{Topological Generative Freedom}
 
-Collapse depends only on the sequence of selected digits, not on the positions
-at which they occur or on the values of unselected digits and meta symbols.
-This leads to complete freedom to modify the symbolic structure after any
-finite prefix.
+Collapse fibers permit unrestricted modification of latent coordinates beyond any fixed prefix, as long as the exposed digits remain unchanged. 
+This freedom reflects the infinite-dimensional nature of the ambient space.
 
 \begin{proposition}
-\label{prop:tail-freedom}
-Let $G \in \mathcal{F}(x)$ and let $N\in\mathbb{N}$.  
-There exist distinct $G'$ and $G''$ in $\mathcal{F}(x)$ such that
+Let $G \in \mathcal{F}(x)$ and let $N \in \mathbb{N}$. 
+There exist distinct identities $G'$ and $G''$ in $\mathcal{F}(x)$ such that
 \[
 G' \upharpoonright N
   = G'' \upharpoonright N
@@ -172,33 +155,23 @@ G' \upharpoonright N
 \end{proposition}
 
 \begin{proof}
-Make two different modifications to either the unselected digits or the
-meta-information layer beyond index $N$.  
-Neither modification affects the collapse coordinate, so both identities
-remain in $\mathcal{F}(x)$.
+Fix $N$. 
+Modify the latent coordinates of $G$ at any position larger than $N$ to obtain two distinct identities $G'$ and $G''$. 
+Since such changes do not alter the exposed digit sequence, both remain in the fiber $\mathcal{F}(x)$.
 \end{proof}
 
-Tail freedom is the structural foundation for the alignment and sewing
-constructions developed in Part~\ref{part:incompleteness}, where fiber
-geometry interacts with observer behavior.
+This topological generative freedom forms the basis for the sewing and diagonalizer constructions developed in Appendices~C and~D and used in Chapters~6 and~7.
 
 \section{Summary}
 
-Collapse fibers display the following geometric features.
+Collapse fibers have a rich and flexible internal structure.
 
 \begin{itemize}
-    \item The ambient generative space $\mathcal{G}$ is compact and totally
-    disconnected.
-    \item The digit-producing subspace $\mathcal{G}^{*}$ is dense but not
-    compact.
-    \item Each collapse fiber $\mathcal{F}(x)$ is compact, perfect, and
-    uncountable.
-    \item The effective fiber is dense in the full fiber and has no isolated
-    points.
-    \item Symbolic structure may vary freely beyond any finite prefix without
-    altering collapse.
+    \item The ambient generative space is compact, perfect, and totally disconnected.
+    \item The exposure domain $\mathcal{G}^{*}$ is a dense $G_{\delta}$ set but not compact.
+    \item Each collapse fiber $\mathcal{F}(x)$ is compact, perfect, and uncountable.
+    \item The effective fiber is dense in the full fiber and has no isolated points.
+    \item Latent coordinates may be modified freely beyond any finite prefix while keeping the exposed digit sequence fixed.
 \end{itemize}
 
-These properties form the geometric backbone of collapse theory and prepare
-the ground for the alignment and indistinguishability phenomena studied in
-later chapters.
+These properties establish the geometric foundation for generative freedom and for the incompleteness results that arise from finite-information observation in later chapters.

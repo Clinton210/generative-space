@@ -1,0 +1,195 @@
+\chapter{Observer Towers and Derived Limits}
+\label{appendix:observer-towers}
+
+\section{Introduction}
+
+This appendix develops the technical background for observer towers and the
+derived limits that appear throughout the invariant tier of the framework.
+Observer towers consist of computable families of continuous real valued
+functions on the ambient generative space. Each function in the family has a
+finite prefix dependence bound, and these bounds organize the family into a
+scale of finite information tests.
+
+Derived limits, such as limits of prefix based averages or limsup constructions,
+are obtained from these towers. They are Baire class one maps that inherit
+instability from the tail freedom present in collapse fibers. The main text
+uses these facts in the analysis of asymptotic invariants. This appendix gives
+the formal statements and proofs.
+
+\section{Observer Towers}
+
+\subsection{Definition of a tower}
+
+A sequence of structural projections
+\[
+\Phi_{0}, \Phi_{1}, \Phi_{2}, \ldots
+\]
+is an observer tower if each $\Phi_{k}$ is continuous on the ambient space and
+each has a prefix dependence bound $B_{k}$. Such towers arise from finite
+prefix statistics, empirical averages, and other prefix based quantities.
+
+\begin{definition}[Observer Tower]
+A sequence $(\Phi_{k})_{k\in\mathbb{N}}$ of continuous real valued maps on the
+ambient generative space is an observer tower if for each $\varepsilon>0$ and
+each $k$ there exists $N$ such that agreement on $[0..N]$ forces
+\[
+|\Phi_{k}(G)-\Phi_{k}(H)| < \varepsilon.
+\]
+\end{definition}
+
+The effective content of a tower is controlled by the uniform computability of
+the dependence bounds $B_{k}$. Appendix~\ref{appendix:tte} contains background
+on moduli of continuity and computable maps in Type 2 Effectivity.
+
+\subsection{Prefix synchronization inside a tower}
+
+For a fixed $k$, the dependence bound $B_{k}$ determines the prefix depth that
+controls the observable behavior of $\Phi_{k}$. For all $m\le k$, the joint
+prefix depth
+\[
+N_{k} = \max\{B_{0}(\varepsilon_{0}),\ldots,B_{k}(\varepsilon_{k})\}
+\]
+synchronizes the first $k$ observers.
+
+Prefix synchronization plays a central role in the finite information arguments
+used in the incompleteness tier. The same principle appears in the sewing and
+diagonalization results proven in Appendices~\ref{appendix:alignment-sewing}
+and~\ref{appendix:mimicry}.
+
+\section{Derived Limit Maps}
+
+Derived limits arise from observing the outputs of a tower and passing to
+limits along the index. These limits measure long range behavior of prefixes,
+not of the full identity.
+
+\subsection{Pointwise limits}
+
+Let $(\Phi_{k})$ be an observer tower. The pointwise limit
+\[
+\Lambda(G) = \lim_{k\to\infty} \Phi_{k}(G)
+\]
+may fail to exist for some identities. When the limit exists, it depends only
+on the tail of the selector structure but is determined through finite prefix
+tests applied at larger depths. This makes $\Lambda$ a typical Baire class one
+map.
+
+\begin{lemma}[Baire Class One]
+\label{lem:bc1}
+If $(\Phi_{k})$ is an observer tower, then the set of identities where
+$\Lambda(G)$ exists is a $G_{\delta}$ set, and the map $\Lambda$ is Baire class
+one on its domain.
+\end{lemma}
+
+\begin{proof}
+For each rational interval $(a,b)$, the preimage
+\[
+\Lambda^{-1}((a,b))
+=
+\bigcup_{m} \bigcap_{k\ge m} \Phi_{k}^{-1}((a,b))
+\]
+is $G_{\delta}$ because each $\Phi_{k}$ is continuous. This shows that
+$\Lambda$ is Baire class one.
+\end{proof}
+
+This regularity is the strongest continuity property available, since tail
+freedom inside fibers creates discontinuity at every point for most derived
+limits. See the examples in Appendix~\ref{appendix:extended-invariants}.
+
+\subsection{Limsup and liminf}
+
+Limsup based maps are even less regular. For a tower $(\Phi_{k})$ define
+\[
+\Lambda^{*}(G) = \limsup_{k\to\infty} \Phi_{k}(G),
+\qquad
+\Lambda_{*}(G) = \liminf_{k\to\infty} \Phi_{k}(G).
+\]
+
+\begin{lemma}[Upper and Lower Semicontinuity]
+The map $\Lambda^{*}$ is upper semicontinuous and $\Lambda_{*}$ is lower
+semicontinuous.
+\end{lemma}
+
+\begin{proof}
+If $\Lambda^{*}(G) < r$ then there exists $m$ such that for all $k\ge m$,
+$\Phi_{k}(G) < r$. By continuity of each $\Phi_{k}$, this persists on a
+neighborhood of $G$, proving upper semicontinuity. The argument for
+$\Lambda_{*}$ is similar.
+\end{proof}
+
+These semicontinuity properties reflect the prefix based nature of the tower.
+They also explain the instability of asymptotic invariants.
+
+\section{Tail Freedom and Instability}
+
+Derived limits inherit discontinuity from the symbolic tail. In collapse fibers
+the tail may be changed freely while all finite prefixes are held fixed. This
+produces strong instability for any limit that depends on infinitely many
+prefix levels.
+
+\begin{lemma}[Instability Under Tail Modification]
+\label{lem:tail-instability}
+Let $(\Phi_{k})$ be an observer tower. If tail modification leaves all finite
+prefixes unchanged, then for any identity $G$ and for any real $r$ in the range
+of $\Phi_{k}$ there exists an identity $G'$ agreeing with $G$ on all finite
+prefixes but satisfying $\Lambda^{*}(G') = r$.
+\end{lemma}
+
+\begin{proof}
+Fix $G$ and $r$. For each $k$ choose a tail extension that forces
+$\Phi_{k}(G')$ to be within $1/k$ of $r$ using the prefix freedom in the fiber.
+This is possible because each $\Phi_{k}$ depends only on a finite prefix. Then
+$\Lambda^{*}(G')=r$.
+\end{proof}
+
+This shows that derived limits cannot classify identities in a fiber. This
+result is an early form of the incompleteness principle proved in full in
+Chapter~7 and Appendix~\ref{appendix:mimicry}.
+
+\section{Uniform Bounds and Derived Stability}
+
+In some constructions it is necessary to control derived limits for a finite
+family of towers. Uniform prefix bounds provide such control.
+
+\begin{definition}[Uniform Dependence for a Family]
+Let $\mathcal{T}=\{(\Phi^{(i)}_{k})_{k\in\mathbb{N}} : i=1,\ldots,m\}$ be a
+finite collection of observer towers. A function $B_{\mathcal{T}}$ is a uniform
+dependence bound if agreement on $[0..B_{\mathcal{T}}(\varepsilon)]$ forces
+\[
+|\Phi^{(i)}_{k}(G)-\Phi^{(i)}_{k}(H)| < \varepsilon
+\]
+for all $i$ and all $k$.
+\end{definition}
+
+\begin{lemma}[Uniform Prefix Stabilization]
+If $G$ and $H$ agree on $[0..B_{\mathcal{T}}(\varepsilon)]$ then
+\[
+|\Lambda(G)-\Lambda(H)| < \varepsilon
+\]
+for any derived limit $\Lambda$ formed from the towers in the family.
+\end{lemma}
+
+\begin{proof}
+Agreement on the synchronized prefix forces agreement for each $\Phi^{(i)}_{k}$
+beyond the dependence bound. Taking limits gives the result.
+\end{proof}
+
+Uniform stabilization is used in controlled constructions where multiple limit
+quantities must be preserved while manipulating the tail. This appears in the
+sewing arguments of Appendix~\ref{appendix:alignment-sewing} and in the mimicry
+procedure of Appendix~\ref{appendix:mimicry}.
+
+\section{Summary}
+
+This appendix formalized the structure of observer towers and the derived
+limits that arise from them. The key points are:
+
+\begin{itemize}
+    \item each observer in a tower has finite prefix dependence,
+    \item pointwise limits of observer towers are Baire class one,
+    \item limsup and liminf maps are semicontinuous but unstable,
+    \item tail freedom inside collapse fibers produces maximal instability,
+    \item uniform prefix bounds control derived limits for finite families.
+\end{itemize}
+
+These results justify the analysis of finite and asymptotic invariants in the
+main text and highlight their fundamental limitations.

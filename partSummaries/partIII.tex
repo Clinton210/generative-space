@@ -1,30 +1,31 @@
 \chapter*{Part III Summary}
 
-Part III develops the theory of structural projections, which formalize how
-continuous observers extract information from generative identities. A
-structural projection is a continuous real valued functional on the generative
-space. Such observers depend only on finite symbolic information at any fixed
-precision, and this finite information principle is expressed through
-computable dependency bounds.
+Part III establishes the incompleteness and indistinguishability phenomena that
+lie at the heart of the Generative Identity Framework. The central theme is
+that finite continuous observation cannot recover the symbolic structure of a
+generative identity. Continuous observers depend only on finite prefixes, while
+collapse conceals all tail structure. These limitations combine to produce a
+strong form of structural indistinguishability inside every effective collapse
+fiber.
 
-A dependency bound specifies how long a prefix must be inspected in order to
-guarantee a desired accuracy. This yields prefix stabilization. Whenever two
-identities agree on a prefix that is long enough for a family of observers,
-their values under all observers in that family differ by less than the
-prescribed tolerance. Changes made beyond that prefix are invisible to every
-observer in the family.
+The technical backbone of Part III consists of the alignment and sewing
+constructions. Identities in the same collapse fiber expose the same canonical
+digits, though at different selector positions. Alignment identifies matching
+selection indices across identities, and sewing replaces the tail of one
+identity with the tail of another while preserving the collapsed value. When
+combined with dependency bounds, these tools allow observers to be frozen on
+any finite window while the tail is modified freely.
 
-Different projections impose different prefix requirements. These requirements
-may be incompatible when combined. One observer may force exposure of digits
-at regular intervals, while another may require periods of suppression to
-achieve its value. Such incompatibilities demonstrate that finite prefix
-constraints cannot fully control the internal structure of identities inside a
-collapse fiber. The symbolic freedom that remains outside these constraints is
-what allows controlled divergence of identities while preserving classical
-value.
+Using these ideas, Part III constructs a computable identity that mimics a
+reference identity on every prefix required by a finite family of observers yet
+diverges on infinitely many coordinates. Taking limits across an effective
+enumeration of observers yields the Structural Indistinguishability Theorem:
+for any computable identity in the effective fiber of a computable real number,
+there exists a distinct computable identity that is observationally
+indistinguishable from it for all computable structural projections.
 
-Part III establishes the fundamental limits of continuous observation. It
-presents the dependency bound machinery, develops prefix stabilization, and
-identifies the sources of projective incompatibility. These tools form the
-technical foundation for the mimicry and diagonalization arguments carried out
-in Part IV.
+This result shows that no finite or computable family of continuous observers,
+even when combined with collapsed magnitude, can reconstruct the generative
+identity that produced a given real number. The incompleteness of observation
+is thus intrinsic to the topology of the generative space and to the finite
+information constraints governing continuous functionals.

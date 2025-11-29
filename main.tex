@@ -16,14 +16,13 @@
 \usepackage{bm}
 \usepackage{enumerate}
 
-% Hyperref (always last)
+% Hyperref (load last)
 \usepackage[hidelinks]{hyperref}
 
-% Silence reference warnings during rewrite phase
+% Silence warnings about missing references (during rewrite phase)
 \usepackage{silence}
 \WarningFilter{latex}{Reference}
 \WarningFilter{latex}{There were undefined references}
-
 
 % Bibliography
 \usepackage{cite}
@@ -77,13 +76,14 @@
     \cleardoublepage
 }
 
-
-% Abstract and Acknowledgment now included as standalone components
+% Abstract + Acknowledgments
 \include{abstract/abstract}
 \include{acknowledgment/acknowledgment}
 
+% Table of contents
 \tableofcontents
 
+% Prelude
 \input{prelude/prelude}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -92,7 +92,7 @@
 \mainmatter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PART I — Generative Ontology
+% PART I – Generative Space and Collapse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{partSummaries/partI}
 \include{chapters/chapter1}
@@ -100,35 +100,35 @@
 \include{chapters/chapter3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PART II — Selector Dynamics
+% PART II – Structural Projections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{partSummaries/partII}
 \include{chapters/chapter4}
 \include{chapters/chapter5}
+\include{chapters/chapter6}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PART III — Structural Projection Theory
+% PART III – Alignment and Incompleteness
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{partSummaries/partIII}
-\include{chapters/chapter6}
 \include{chapters/chapter7}
 \include{chapters/chapter8}
+\include{chapters/chapter9}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PART IV — Structural Incompleteness
+% PART IV – The Collapse Quotient
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{partSummaries/partIV}
-\include{chapters/chapter9}
 \include{chapters/chapter10}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PART V — The Collapse Quotient
+% PART V – Asymptotic Invariants
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{partSummaries/partV}
 \include{chapters/chapter11}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PART VI — Extended Generative Coordinates
+% PART VI – Slice Geometry and Invariant Behavior
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{partSummaries/partVI}
 \include{chapters/chapter12}
@@ -143,7 +143,9 @@
 \include{appendices/appendixC}
 \include{appendices/appendixD}
 \include{appendices/appendixE}
-
+\include{appendices/appendixF}
+\include{appendices/appendixG}
+\include{appendices/appendixH}
 
 %%%%%%%%%%%%%%%%%%%%%%
 % BACK MATTER

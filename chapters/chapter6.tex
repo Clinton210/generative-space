@@ -3,163 +3,141 @@
 
 \section{Introduction}
 
-Structural projections observe generative identities through finite windows.
-For any fixed precision level, a projection requires information from only a
-finite prefix of the selector, digit, and meta-information layers.  
-This finite-information principle is classical in Type-2 computability, where
-continuous real-valued functionals on Baire or Cantor space admit computable
-moduli of continuity  
-\cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}.
+Structural projections observe generative identities through finite symbolic windows. 
+For any fixed precision, an observer needs to inspect only a finite prefix of each coordinate in order to approximate its value. 
+This finite-information principle is classical in the theory of represented spaces, where continuous real-valued functionals on Baire or Cantor space admit moduli of continuity that quantify the required prefix length \cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}.
 
-In the generative setting, these moduli appear as \emph{dependency bounds}.  
-They express how many coordinates an observer must inspect to approximate its
-value at a specified precision.  
-Dependency bounds are the structural backbone of alignment, tail sewing, and
-the diagonalization arguments of Part~\ref{part:incompleteness}.  
-This chapter formalizes these bounds and develops the principle of \emph{prefix
-stabilization}, which asserts that once a projection has read enough symbols,
-the remainder of the identity becomes irrelevant at that precision.
+In the generative setting, these moduli appear as dependency bounds. 
+A dependency bound describes how far into a generative identity an observer must read to determine its value to a given precision. 
+Dependency bounds form the analytical backbone of all controlled constructions in Parts~\ref{part:incompleteness} and~\ref{part:invariants}. 
+They allow observers to be synchronized on finite prefixes, while the tail of the identity remains completely free for alignment, sewing, or diagonalization.
+
+This chapter formalizes dependency bounds and develops the principle of prefix stabilization, which asserts that once an observer has read sufficiently many symbols, further changes to the identity do not alter the observer's value at the chosen precision. 
+The technical refinements associated with dependency bounds appear in Appendix~B, while prefix-based alignment and divergence methods are developed in Appendices~C and~D.
 
 \section{Finite Information and Dependency Bounds}
 
-Let $\Phi:\mathcal{G}^*\to\mathbb{R}$ be a structural projection.  
-Continuity in the product topology implies that for each $\varepsilon>0$ there
-exists $N$ such that agreement on the first $N$ coordinates forces agreement
-of the outputs within $\varepsilon$:
-\[
-G[0..N] = H[0..N]
-  \quad\Longrightarrow\quad
-|\Phi(G) - \Phi(H)| < \varepsilon.
-\]
+Let $\Phi : \mathcal{G}^{*} \to \mathbb{R}$ be a structural projection, where $\mathcal{G}^{*}$ is the exposure domain introduced in Chapter~\ref{chap:collapse-map}. 
+Since $\Phi$ is continuous and $\mathcal{G}^{*}$ carries the product topology inherited from the compact space $\mathcal{G}$, it follows that $\Phi$ is uniformly continuous on every compact subset of $\mathcal{G}^{*}$. 
+This yields finite prefix dependence.
 
 \begin{definition}[Dependency Bound]
-A function $B_\Phi:(0,1]\to\mathbb{N}$ satisfying
+A function $B_{\Phi} : (0,1] \to \mathbb{N}$ is a dependency bound for $\Phi$ if for all $\varepsilon > 0$,
 \[
-G[0..B_\Phi(\varepsilon)]
-  = 
-H[0..B_\Phi(\varepsilon)]
+G \upharpoonright B_{\Phi}(\varepsilon)
+=
+H \upharpoonright B_{\Phi}(\varepsilon)
 \quad\Longrightarrow\quad
-|\Phi(G) - \Phi(H)| < \varepsilon
+|\Phi(G) - \Phi(H)| < \varepsilon.
 \]
-is called a \emph{dependency bound} for $\Phi$.
 \end{definition}
 
-When $\Phi$ is computable, classical results in represented-space theory imply
-that $B_\Phi$ may be chosen to be computable  
-\cite{WeihrauchComputableAnalysis}.  
-This computability is essential for effective constructions, where observers
-must be controlled explicitly at finite stages.
+The existence of dependency bounds for continuous projections follows from standard compactness arguments for product spaces of discrete alphabets \cite{PaulyRepresentedSpaces}. 
+Appendix~B develops these bounds in effective detail.
+
+\begin{lemma}
+Every structural projection admits a dependency bound.
+\end{lemma}
+
+\begin{proof}
+Since $\Phi$ is continuous and $\mathcal{G}$ is compact, $\Phi$ is uniformly continuous on any compact subset of $\mathcal{G}^{*}$. 
+Fix $\varepsilon > 0$ and choose $\delta > 0$ witnessing uniform continuity. 
+Because the prefix metric generates the product topology on $\mathcal{G}$, there exists an integer $N$ such that any two identities with matching prefixes of length $N$ lie within $\delta$. 
+This $N$ satisfies the dependency condition for $\varepsilon$, giving the desired bound.
+\end{proof}
+
+Dependency bounds encode the fundamental limitation shared by all observers: they cannot see beyond their finite window of inspection.
 
 \section{Uniform Bounds for Finite Families}
 
-Many arguments require the simultaneous control of several observers.
+Many constructions require simultaneous control of several observers. 
+For a finite family, a collective dependency bound can be formed by taking a maximum.
 
 \begin{definition}[Uniform Dependency Bound]
-Let
+Let $\mathcal{P} = \{\Phi_{1}, \ldots, \Phi_{k}\}$ be a finite family of structural projections. 
+A function $B_{\mathcal{P}} : (0,1] \to \mathbb{N}$ is a uniform dependency bound for $\mathcal{P}$ if for all $\varepsilon > 0$,
 \[
-\mathcal{P} = \{\Phi_1,\ldots,\Phi_k\}
-\]
-be a finite family of structural projections.  
-A function $B_{\mathcal{P}}:(0,1]\to\mathbb{N}$ is a \emph{uniform dependency
-bound} if
-\[
-G[0..B_{\mathcal{P}}(\varepsilon)]
-   =
-H[0..B_{\mathcal{P}}(\varepsilon)]
+G \upharpoonright B_{\mathcal{P}}(\varepsilon)
+=
+H \upharpoonright B_{\mathcal{P}}(\varepsilon)
 \quad\Longrightarrow\quad
-|\Phi_i(G)-\Phi_i(H)|<\varepsilon
+|\Phi_{i}(G) - \Phi_{i}(H)| < \varepsilon
+\quad\text{for all } i.
 \]
-for all $i$.
 \end{definition}
 
-Since the family is finite, we may take
+\begin{lemma}
+A uniform dependency bound for $\mathcal{P}$ is given by
 \[
 B_{\mathcal{P}}(\varepsilon)
-  = \max_{1\le i\le k} B_{\Phi_i}(\varepsilon).
+=
+\max_{1 \leq i \leq k} B_{\Phi_{i}}(\varepsilon).
 \]
+\end{lemma}
 
-Uniform bounds allow an entire collection of observers to be frozen at the
-same prefix depth.  
-This is used repeatedly in alignment and sewing, where families of projections
-must be held stable while the identity tail is manipulated.
+\begin{proof}
+If $G$ and $H$ agree on the first $B_{\mathcal{P}}(\varepsilon)$ symbols, then in particular they agree on the first $B_{\Phi_{i}}(\varepsilon)$ symbols for each $i$. 
+The dependency bound for $\Phi_{i}$ ensures that the outputs differ by less than $\varepsilon$. 
+Thus each projection in the family is synchronized at precision $\varepsilon$, establishing the claim.
+\end{proof}
+
+Uniform bounds allow an entire collection of observers to be simultaneously stabilized at a finite prefix, a fact that is essential in controlled sewing constructions.
 
 \section{Prefix Stabilization}
 
-Prefix stabilization is the fundamental principle that observers do not
-respond to information beyond their dependency bound.
+Prefix stabilization describes the point at which an observer becomes insensitive to further changes in the identity.
 
-\begin{proposition}[Prefix Stabilization]
-Let $\Phi$ be a structural projection, fix $\varepsilon>0$, and set
-$N=B_\Phi(\varepsilon)$.  
-If $G[0..N]=H[0..N]$, then
+\begin{theorem}[Prefix Stabilization]
+Let $\Phi$ be a structural projection and let $\varepsilon > 0$. 
+Set $N = B_{\Phi}(\varepsilon)$. 
+If $G$ and $H$ agree on their first $N$ symbols, then
 \[
-|\Phi(G)-\Phi(H)| < \varepsilon.
+|\Phi(G) - \Phi(H)| < \varepsilon.
 \]
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
-This follows directly from continuity in the product topology, where basic
-neighborhoods are determined by finite prefixes.
+This is precisely the statement of the dependency bound: if two identities agree on the prefix of length $N$, then they lie within the $\delta$-neighborhood obtained from uniform continuity, and therefore the images under $\Phi$ differ by less than $\varepsilon$.
 \end{proof}
 
-Prefix stabilization isolates the portion of the generative identity that
-matters to an observer at a chosen precision level.  
-The remainder of the identity becomes “invisible” to $\Phi$ at that scale.
+Prefix stabilization isolates the portion of the identity that determines $\Phi(G)$ to a given precision. 
+Beyond this prefix, the structure of the identity becomes irrelevant for the purposes of $\Phi$ at the chosen scale.
 
 \section{Stability Under Tail Modification}
 
-Tail modification replaces the part of an identity beyond some index with an
-arbitrary tail.  
-Such modifications are central to both alignment and divergence.
+Tail modification replaces the portion of a generative identity beyond some index with arbitrary symbolic data. 
+Such modifications are possible due to the infinite-dimensional nature of the ambient space and the compactness of collapse fibers.
 
-\begin{proposition}[Tail Stability]
-Let $\Phi$ be a structural projection, let $\varepsilon>0$, and set
-$N=B_\Phi(\varepsilon)$.  
-If $G$ and $H$ agree on $[0..N]$, then the identity $\tilde G$ obtained from
-$G$ by replacing its tail beyond $N$ with the tail of $H$ satisfies
+\begin{theorem}[Tail Stability]
+Let $\Phi$ be a structural projection, let $\varepsilon > 0$, and let $N = B_{\Phi}(\varepsilon)$. 
+If $G$ and $H$ agree on their first $N$ symbols, then forming an identity $\widetilde{G}$ by replacing the tail of $G$ beyond position $N$ with the tail of $H$ yields
 \[
-|\Phi(\tilde G) - \Phi(G)| < \varepsilon.
+|\Phi(\widetilde{G}) - \Phi(G)| < \varepsilon.
 \]
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
-The identities $\tilde G$ and $G$ agree on $[0..N]$, so the result is an
-immediate consequence of prefix stabilization.
+The identities $\widetilde{G}$ and $G$ agree on the prefix of length $N$. 
+By the definition of the dependency bound, this agreement implies that the images under $\Phi$ differ by less than $\varepsilon$.
 \end{proof}
 
-Tail stability shows that observers may be frozen at a finite stage while the
-tail remains completely free for later use.  
-This property is the cornerstone of the sewing arguments developed in
-Part~\ref{part:incompleteness}.
+Tail stability is the key mechanism that allows observers to be frozen at finite stages while the remainder of the identity remains free. 
+This principle is essential to alignment and sewing; see Appendices~C and~D for the technical development.
 
-\section{Selector-Dependent Bounds}
+\section{Coordinate-Relative Dependence}
 
-Many projections depend only on the collapse coordinate rather than the raw
-indexing of the layers.  
-For such observers, the relevant prefix is determined by the \emph{selector
-positions} where $M(n)=D$, not by the absolute position $n$.
+Although dependency bounds are stated in terms of the raw index of the ambient product, many observers examine derived symbolic coordinates. 
+For example, observers that act on the exposed digit sequence depend on the representation chosen in Chapter~\ref{chap:collapse-map}. 
+Such observers read the observed-value coordinate at the exposed positions rather than at the raw index, but the principle remains identical.
 
-Thus if the first $N$ selected digits agree, the observer may already be
-stable even when the prefix lengths in the raw indexing differ.  
-Selector-dependent bounds appear naturally when controlling:
-\begin{itemize}
-    \item density observers,
-    \item fluctuation-type invariants,
-    \item block-frequency observers on the collapse coordinate.
-\end{itemize}
-
-Although the indexing differs, the principle remains identical: each observer
-has a finite window of dependence at each precision.
+Whenever an observer acts on a derived coordinate, its dependency bound is computed relative to the exposure mechanism, not the absolute index. 
+Nevertheless, the observer still inspects only a finite number of underlying symbols at each precision. 
+The distinction between raw and derived index plays an important role in the alignment steps of the diagonalizer, discussed in Chapter~7.
 
 \section{Summary}
 
-Dependency bounds encode the finite information requirements of continuous
-observers on the generative space.  
-Prefix stabilization ensures that observers become insensitive to changes
-beyond their dependency bounds, and stability under tail modification permits
-arbitrary symbolic variation in the unobserved region.  
-These tools make it possible to coordinate families of observers, freeze their
-behavior at finite stages, and then use the remaining freedom in the tail for
-alignment and diagonalization.  
-The next chapter develops these ideas by introducing explicit alignment
-constructions.
+Dependency bounds express the finite-information content of continuous observers. 
+Prefix stabilization ensures that once enough of a generative identity has been examined, the observer becomes insensitive to changes in the tail. 
+Uniform dependency bounds allow families of observers to be synchronized at finite precision, and tail stability guarantees that the unobserved portion of the identity can be freely modified without affecting the observer within the chosen margin.
+
+These tools form the technical foundation for effective generative freedom and the incompleteness theorem developed in the next chapter.

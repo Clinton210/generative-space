@@ -1,164 +1,173 @@
-\chapter{The Collapse Map}
+\chapter{Collapse as a Representation of the Real Line}
 \label{chap:collapse-map}
 
 \section{Introduction}
 
-A generative identity contains layers of symbolic structure that extend far
-beyond its classical magnitude.  
-The collapse map extracts a real number by reading only those digits revealed
-by the selector stream.  
-This operation discards most of the internal structure and identifies large
-families of generative identities whose collapse coordinates agree.  
-These families are the collapse fibers, and they form the central geometric
-objects of collapse theory.
+Generative identities inhabit an ambient symbolic space with several independent coordinates, each given by an infinite sequence over a finite alphabet. 
+These coordinates are neutral and carry no intrinsic semantic meaning.
+To assign a classical real value to each generative identity, we fix a representation that exposes a sequence of digits drawn from one of the coordinates. 
+This exposed sequence becomes the classical expansion of a real number.
+The resulting mapping is the collapse map.
 
-This chapter defines the collapse map, establishes its continuity, and
-describes the structure of its fibers.  
-The presentation relies on the topological properties of the generative space
-introduced in Chapter~\ref{chap:generative-space} and parallels standard ideas
-in symbolic dynamics \cite{LindMarcus} and computable analysis
-\cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}.
+The goal of this chapter is to define the collapse mechanism, establish its continuity, and describe the geometry of its fibers. 
+A collapse fiber consists of all identities that produce the same real value under this representation.
+These fibers play the central role in the generative framework, and they form the setting for the freedom and incompleteness phenomena explored in later chapters.
 
-\section{Digit Extraction}
+The presentation follows the treatment of infinite sequences and representations in computable analysis and symbolic dynamics \cite{LindMarcus, WeihrauchComputableAnalysis, PaulyRepresentedSpaces}. 
+It also connects to the finite-information perspective emphasized throughout this monograph.
 
-Let $G = (M,D,K) \in \mathcal{G}^*$ be a digit-producing generative identity.
-List the indices at which the selector exposes a digit:
+\section{Representation of Exposed Positions}
+
+Let $\Gamma_{1}, \Gamma_{2}, \Gamma_{3}$ be finite alphabets as in Chapter~\ref{chap:generative-space}. 
+To define collapse, we choose one coordinate to serve as the observed-value coordinate and another coordinate to serve as the exposure mechanism.
+
+For each $G = (U_{1}, U_{2}, U_{3}) \in \mathcal{G}$, the exposure mechanism is specified by a sequence
 \[
-n_0 < n_1 < n_2 < \cdots,
-\qquad M(n_j) = D.
+E(G) = (e_{n})_{n=0}^{\infty} \in \{0,1\}^{\mathbb{N}},
+\]
+where $e_{n} = 1$ indicates that the representation reveals the value of $U_{2}$ at position $n$. 
+The positions at which $e_{n} = 1$ determine the index set of exposed digits.
+
+\begin{definition}[Exposed Positions]
+For any $G \in \mathcal{G}$, define
+\[
+P(G)
+  = \{\, n \in \mathbb{N} : e_{n} = 1 \,\},
+\]
+the set of positions where the representation exposes the value of the observed-value coordinate $U_{2}$.
+\end{definition}
+
+The collapse representation requires infinitely many exposed positions in order to produce an infinite classical expansion.
+
+\begin{definition}[Exposure Domain]
+The exposure domain is the set
+\[
+\mathcal{G}^{*} = \{\, G \in \mathcal{G} : P(G) \text{ is infinite} \,\}.
+\]
+\end{definition}
+
+The set $\mathcal{G}^{*}$ is a dense $G_{\delta}$ subset of $\mathcal{G}$. 
+It is not compact. 
+This distinction plays an important role when studying collapse fibers, which are compact even though $\mathcal{G}^{*}$ is not. 
+This compactness property is discussed later in this chapter.
+
+\section{Collapse Coordinate}
+
+For $G = (U_{1}, U_{2}, U_{3}) \in \mathcal{G}^{*}$, list the exposed positions in increasing order,
+\[
+n_{0} < n_{1} < n_{2} < \cdots.
 \]
 
 \begin{definition}[Collapse Coordinate]
 The collapse coordinate of $G$ is the sequence
 \[
-X(G) = \bigl(D(n_j)\bigr)_{j=0}^\infty
-    \in \{0,\ldots,b-1\}^{\mathbb{N}}.
+X(G) = \bigl( U_{2}(n_{j}) \bigr)_{j=0}^{\infty},
 \]
+which records the values of the observed-value coordinate at the exposed positions.
 \end{definition}
 
-Only the selector and digit layers influence $X(G)$.  
-The meta-information layer does not contribute to the classical value, a fact
-that later underlies the richness of collapse fibers.
+Only the exposure mechanism and the observed-value coordinate influence the collapse coordinate.
+The remaining coordinate carries latent structure that does not affect the classical expansion.
+This asymmetry underlies the structural redundancy of collapse fibers and motivates much of the analysis in Parts~II and~III.
 
 \section{Definition of the Collapse Map}
 
-The collapse map translates the collapse coordinate into a real number.
+To translate the collapse coordinate into a real number, choose a base $b \geq 2$ and treat $X(G)$ as the base $b$ expansion of a real in the unit interval.
 
 \begin{definition}[Collapse Map]
-For each $G \in \mathcal{G}^*$,
+For each $G \in \mathcal{G}^{*}$,
 \[
 \pi(G)
-  = \sum_{j=0}^{\infty} \frac{X(G)_j}{b^{j+1}}.
+  = \sum_{j=0}^{\infty} \frac{X(G)_{j}}{b^{j+1}}.
 \]
 \end{definition}
 
-When a real number has two base-$b$ expansions, we adopt the usual convention
-of avoiding the terminating representation with trailing $(b-1)$s.  
-This ensures that $\pi$ is single-valued.
+When a real number admits two expansions, we avoid the terminating representation to ensure that the collapse map is single valued.
+
+This collapse representation is not intrinsic to the generative space. 
+It is a design choice, one example of how symbolic coordinates may be interpreted as classical values. 
+Different representations lead to different fibers, but the structural redundancy created by a finite-information representation is unavoidable in any naming system for real numbers.
 
 \section{Continuity}
 
-The collapse map is continuous with respect to the product topology on
-$\mathcal{G}^*$.
+The collapse map is continuous on the exposure domain. 
+Its continuity follows from the finite prefix nature of the representation.
 
 \begin{proposition}
-The map $\pi : \mathcal{G}^* \to [0,1]$ is continuous.
+The map $\pi : \mathcal{G}^{*} \to [0,1]$ is continuous.
 \end{proposition}
 
 \begin{proof}
-Fix $\varepsilon > 0$ and choose $N$ so that $b^{-(N+1)} < \varepsilon$.  
-Two identities produce collapse values within $\varepsilon$ whenever their
-first $N$ selected digits agree.  
-Since $G \in \mathcal{G}^*$ selects digits infinitely often, there exists
-some $L$ such that the first $N$ selected digits lie within the first $L$
-entries of the three streams.
+Fix $\varepsilon > 0$ and choose $N$ such that $b^{-(N+1)} < \varepsilon$. 
+Two collapse values differ by less than $\varepsilon$ whenever the first $N$ exposed digits of the two identities coincide.
+Since $P(G)$ is infinite, there exists an integer $L$ such that the first $N$ exposed positions lie below $L$.
 
-If two identities agree on their prefixes of length $L$ in each layer, then
-their first $N$ selected digits coincide.  
-Therefore their collapse values differ by less than $\varepsilon$, proving
-continuity.
+If two identities agree on their prefixes of length $L$ in all coordinates, then their first $N$ exposed digits match, which ensures that their collapse values differ by less than $\varepsilon$. 
+This proves continuity.
 \end{proof}
 
-The proof uses the fact that basic open sets of the product topology are
-determined by finite prefixes, a feature common to subshifts of finite type
-and other Cantor-like symbolic systems \cite{LindMarcus}.
+This argument parallels classical results for maps defined on Cantor space and subshifts in symbolic dynamics \cite{LindMarcus}.
 
 \section{Surjectivity}
 
-Every real number admits many generative descriptions.
+Every real number arises as the collapse of many generative identities.
 
 \begin{proposition}
 The collapse map $\pi$ is surjective.
 \end{proposition}
 
 \begin{proof}
-Let $x \in [0,1]$ have base-$b$ expansion $(x_j)_{j\geq 0}$ in the
-non-terminating form.  
-Define the selector $M$ by $M(n)=D$ for all $n$.  
-Set $D(n)=x_n$ for all $n$ and let $K$ be any sequence in $\Sigma^{\mathbb{N}}$.
-Then $G=(M,D,K)$ lies in $\mathcal{G}^*$ and satisfies $\pi(G)=x$.
+Let $x \in [0,1]$ have a non-terminating base $b$ expansion $(x_{j})_{j \geq 0}$. 
+Define $e_{n} = 1$ for all $n$, so that all positions are exposed. 
+Set $U_{2}(n) = x_{n}$ for all $n$, and allow $U_{1}$ and $U_{3}$ to vary freely.
+Then $G = (U_{1},U_{2},U_{3})$ lies in $\mathcal{G}^{*}$ and satisfies $\pi(G) = x$.
 \end{proof}
 
-By varying the meta-information layer and the unused digit positions
-arbitrarily, we see that each point of $[0,1]$ has an uncountable collapse
-fiber.
+Because the auxiliary coordinates can vary arbitrarily, each real number has an uncountable collapse fiber.
 
 \section{Effective Surjectivity}
 
-Collapse behaves correctly on the effective core.
+The collapse map interacts well with computability.
 
 \begin{proposition}
-A real number is computable if and only if it is the collapse of some
-identity in $\mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^*$.
+A real number is computable if and only if it is the collapse of some identity in $\mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^{*}$.
 \end{proposition}
 
 \begin{proof}
-If $x$ is computable, then its base-$b$ expansion is computable.  
-Using the construction above with computable streams yields
-$G \in \mathcal{G}_{\mathrm{eff}}$ satisfying $\pi(G)=x$.
+If $x$ is computable, its base $b$ expansion is computable. 
+Define $G$ as in the preceding proof, using computable sequences for all coordinates. 
+Then $\pi(G)=x$ and $G$ lies in $\mathcal{G}_{\mathrm{eff}}$.
 
-Conversely, if $G \in \mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^*$, then
-the collapse coordinate $X(G)$ is computable, so the series defining $\pi(G)$
-computes a real number.  
-Hence $\pi(G)$ is computable.
+Conversely, if $G \in \mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^{*}$, then $X(G)$ is computable, and the series defining $\pi(G)$ is a computable function of a computable sequence. 
+Thus $\pi(G)$ is computable.
 \end{proof}
 
-Thus
+Hence
 \[
-\pi(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^*)
-  = \mathbb{R}_c,
+\pi\bigl(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^{*}\bigr)
+  = \mathbb{R}_{c},
 \]
-the set of computable real numbers.
+the set of computable reals.
 
 \section{Collapse Fibers}
 
-For $x \in [0,1]$, the collapse fiber
+For any real number $x \in [0,1]$, the collapse fiber
 \[
 \mathcal{F}(x)
   = \pi^{-1}(\{x\})
 \]
-contains all identities with collapse coordinate equal to the base-$b$
-expansion of $x$.
+consists of all generative identities that expose the same base $b$ digit sequence under the collapse representation.
 
-These identities may differ arbitrarily on:
-\begin{itemize}
-    \item the pattern of selector positions,
-    \item unselected digits,
-    \item the meta-information layer.
-\end{itemize}
+Although $\mathcal{G}^{*}$ is not compact, each collapse fiber $\mathcal{F}(x)$ is compact. 
+This is because the exposed positions determine the collapse coordinate uniquely, and any limit of identities that respect these exposed digits must respect them in the limit.
+Thus the fiber inherits compactness even though the domain does not.
 
-Only the selected digits influence the classical value.  
-This structural redundancy forms the foundation for the projection theory of
-Part~\ref{part:selector-geometry} and the incompleteness results of
-Part~\ref{part:incompleteness}.
+Collapse fibers serve as the primary geometric objects in the generative viewpoint. 
+They contain arbitrarily rich latent structure, and their internal geometry is studied in Chapters~3 through~7.
 
 \section{Summary}
 
-The collapse map projects generative identities to real numbers by reading the
-collapse coordinate determined by the selector and digit layers.  
-It is continuous, surjective, and effectively surjective onto the computable
-reals.  
-Its fibers are large symbolic families that share the same classical
-magnitude.  
-These fibers are the central geometric objects of collapse theory and will be
-analyzed in detail in the next chapter.
+The collapse map provides a fixed representation of the real line using symbolic coordinates from the generative space. 
+It is continuous, surjective, and interacts cleanly with computability. 
+Although the exposure domain is not compact, each collapse fiber is compact and contains many identities that share the same classical value.
+These fibers form the foundation for the generative freedom and incompleteness phenomena developed in later parts of this monograph.

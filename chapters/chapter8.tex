@@ -1,183 +1,179 @@
-\chapter{Alignment and Tail Sewing Inside Collapse Fibers}
-\label{chap:alignment-sewing}
+\chapter{Finite-N Invariants}
+\label{chap:finite-n-invariants}
 
 \section{Introduction}
 
-Collapse fibers contain a vast collection of generative identities that share
-the same collapse coordinate.  
-Inside a fiber, the selector, digit, and meta-information layers may vary
-freely so long as they preserve the ordered list of selected digits.  
-The diagonalizer constructed in the next chapter exploits this freedom to
-produce identities that agree with a reference identity on all observed
-prefixes while diverging arbitrarily on their unobserved tails.
+Observer towers summarize finite information from generative identities. 
+A structural projection depends on only a finite prefix of the identity at each precision. 
+Finite-N invariants formalize this principle by assigning a numerical value to each identity based on the inspection of the first N entries in the chosen representation. 
+These quantities are continuous in the ambient topology, computable when N is fixed, and form the basic building blocks of all asymptotic invariants studied in the next chapter.
 
-To accomplish this, we need two technical tools:
+Finite-N invariants do not capture structural information about the full generative identity. 
+They record only prefix behavior and therefore belong to the observer layer in the hierarchy from Chapter~\ref{chap:incompleteness}. 
+They are continuous structural projections, and their dependency bounds coincide with their finite observation radius. 
+Appendix~B contains the general theory of dependency bounds used throughout this chapter.
+
+\section{Definition of Finite-N Invariants}
+
+We fix the collapse representation introduced in Chapter~\ref{chap:collapse-map}. 
+For each generative identity $G \in \mathcal{G}^{*}$, let $X(G)$ denote the collapse coordinate. 
+Finite-N invariants evaluate simple empirical quantities based on the first N entries of $X(G)$ or other prefix-limited features of the identity.
+
+\begin{definition}[Finite-N Invariant]
+A finite-N invariant is a continuous function
+\[
+I_{N} : \mathcal{G}^{*} \to \mathbb{R}
+\]
+of the form
+\[
+I_{N}(G) = F\bigl(X(G)\!\upharpoonright\! N,\, G\!\upharpoonright\! N\bigr)
+\]
+where $F$ is a computable function depending only on the prefix of length N.
+\end{definition}
+
+Finite-N invariants include quantities such as:
 
 \begin{itemize}
-    \item \emph{alignment}, which identifies corresponding selection indices
-    across identities in the same fiber, and
-
-    \item \emph{tail sewing}, which replaces the tail of one identity with the
-    tail of another without leaving the fiber.
+    \item empirical digit frequencies in $X(G)$,
+    \item block-frequency counts,
+    \item partial sums of deviations,
+    \item local fluctuation measures,
+    \item prefix complexity indices defined on raw symbolic coordinates.
 \end{itemize}
 
-These tools rely on the fact that identities in a collapse fiber have identical
-collapse coordinates, even if their selector positions differ.  
-Similar alignment ideas appear in the study of synchronized and coded shift
-spaces in symbolic dynamics \cite{LindMarcus}, though here the setting is
-simpler and more rigid.  
-Alignment and tail sewing provide the structural freedom necessary for
-controlled constructions inside the fiber.
+All such objects are well defined for any fixed N and are continuous in the product topology.
 
-\section{Alignment of Selected Digits}
+\section{Continuity of Finite-N Invariants}
 
-Let $H, A \in \mathcal{F}(x)$ be two identities in the collapse fiber of a
-real number $x$.  
-Let
-\[
-X(H) = (x_0, x_1, x_2,\ldots)
-\qquad \text{and} \qquad
-X(A) = (x_0, x_1, x_2,\ldots)
-\]
-be their collapse coordinates.  
-Since both collapse to $x$, these sequences coincide.
+Finite-N invariants are continuous because they depend on a finite number of coordinates. 
+The argument is straightforward.
 
-Let
-\[
-h_0 < h_1 < h_2 < \cdots
-\qquad\text{and}\qquad
-a_0 < a_1 < a_2 < \cdots
-\]
-be the indices at which $H$ and $A$ expose digits.  
-By definition of collapse, the identity $H$ produces digit $x_k$ at position
-$h_k$, and $A$ produces the same digit at $a_k$.
-
-\begin{proposition}[Index Alignment]
-\label{prop:index-alignment}
-For every $k\in\mathbb{N}$, both $H$ and $A$ expose the $k$th digit of the
-collapse coordinate at the positions $h_k$ and $a_k$.  
-Thus any identity obtained by taking the prefix of $H$ through $h_k$ and the
-tail of $A$ starting at $a_k$ preserves the collapse coordinate.
+\begin{proposition}
+Every finite-N invariant is a structural projection.
 \end{proposition}
 
 \begin{proof}
-Since $H$ and $A$ lie in $\mathcal{F}(x)$, both expose the digit $x_k$ at
-their respective $k$th selection indices.  
-Thus $h_k$ and $a_k$ exist and correspond to the same position in the collapse
-coordinate.
+Fix $N$. 
+If two identities $G$ and $H$ agree on the first $N$ coordinates, then both
+\[
+X(G)\!\upharpoonright\! N = X(H)\!\upharpoonright\! N
+\quad\text{and}\quad
+G\!\upharpoonright\! N = H\!\upharpoonright\! N.
+\]
+Since $I_{N}$ depends only on these prefixes, we have $I_{N}(G) = I_{N}(H)$. 
+This implies continuity in the product topology, where finite agreement implies arbitrarily small distance.
 \end{proof}
 
-This alignment property ensures that splicing the two identities at matched
-selection indices preserves the entire collapse coordinate.
+Thus each finite-N invariant lies inside the structural projection layer defined in Chapter~\ref{chap:structural-projections}. 
+Its dependency bound is exactly $B_{I_{N}}(\varepsilon) = N$ for all sufficiently small $\varepsilon$.
 
-\section{Tail Sewing Inside a Fiber}
+\section{Examples of Finite-N Invariants}
 
-Given alignment indices $h_k$ and $a_k$, we may splice the beginning of $H$
-to the tail of $A$ to obtain a new identity.
+Finite-N invariants are neutral with respect to coordinate meaning. 
+They record only symbolic behavior in the fixed representation.
 
-\begin{proposition}[Tail Sewing]
-\label{prop:tail-sewing}
-Fix $k\in\mathbb{N}$.  
-Define an identity $G$ by
+\subsection*{Digit frequency approximants}
+
+Let $a$ be a value in the observed-value alphabet. 
+Define
 \[
-G(n) =
-\begin{cases}
-H(n), & n \le h_k,\\
-A(n - h_k + a_k), & n > h_k.
-\end{cases}
+I_{N}^{(a)}(G)
+=
+\frac{1}{N}\sum_{j < N} \mathbf{1}\bigl[X(G)_{j} = a\bigr].
 \]
-Then $G \in \mathcal{F}(x)$.
+This counts the empirical frequency of $a$ in the first N observed digits of $X(G)$.
+
+\subsection*{Block frequency approximants}
+
+For a finite block $w$ of observed symbols, define
+\[
+I_{N}^{(w)}(G)
+=
+\frac{1}{N}\sum_{j < N} 
+\mathbf{1}\bigl[X(G)\!\upharpoonright\! |w| = w\bigr]_{j},
+\]
+where $[\,\cdot\,]_{j}$ denotes an indicator of $w$ occurring at position $j$. 
+These are classical block frequency statistics as used in symbolic dynamics \cite{LindMarcus}.
+
+\subsection*{Deviation or fluctuation approximants}
+
+For example,
+\[
+I_{N}(G)
+=
+\frac{1}{N} \sum_{j< N} 
+\bigl|X(G)_{j} - \tfrac{1}{b}\sum_{a} a\bigr|.
+\]
+These quantify deviations from the average value of the observed alphabet.
+
+\subsection*{Prefix-complexity approximants}
+
+Let $K_{N}(G)$ denote the prefix complexity of $X(G)\!\upharpoonright\! N$, using any fixed universal machine. 
+Define
+\[
+I_{N}(G) = \frac{K_{N}(G)}{N}.
+\]
+This is computable relative to $X(G)\!\upharpoonright\! N$ and is continuous as a finite-N observer.
+
+All these follow the same pattern: an N-limited, continuous functional.
+
+\section{Dependency Bounds and Prefix Behavior}
+
+Because finite-N invariants explicitly depend only on the first N positions, their dependency bounds are trivial:
+
+\[
+B_{I_{N}}(\varepsilon) = N \quad \text{for all } 0 < \varepsilon < 1.
+\]
+
+Prefix stabilization from Chapter~\ref{chap:prefix-stabilization} therefore states:
+if $G$ and $H$ agree on the first N coordinates, then
+\[
+|I_{N}(G) - I_{N}(H)| = 0.
+\]
+
+Finite-N invariants therefore occupy the simplest part of the structural projection layer. 
+They are the primary inputs to observer towers.
+
+\section{Finite-N Invariants as Observer Towers}
+
+An observer tower is a sequence
+\[
+(\Phi_{0}, \Phi_{1}, \Phi_{2}, \ldots),
+\]
+where each $\Phi_{n}$ is a structural projection with a computable dependency bound. 
+Finite-N invariants naturally form such towers by defining
+\[
+\Phi_{n}(G) = I_{n}(G)
+\]
+for a chosen invariant template.
+
+\begin{proposition}
+Let $(I_{N})_{N\in\mathbb{N}}$ be any sequence of finite-N invariants. 
+Then $(I_{N})$ is a computable observer tower.
 \end{proposition}
 
 \begin{proof}
-The identity $G$ agrees with $H$ through the $k$th selected digit, which
-occurs at $h_k$.  
-Beyond that point it reproduces the $(k+1)$st, $(k+2)$nd, and all later
-selected digits from $A$ in the correct order.  
-Since $A$ and $H$ have identical collapse coordinates, $G$ reproduces this same
-sequence.  
-Therefore $\pi(G)=x$.
+Each $I_{N}$ is continuous, and for fixed N the evaluation of $I_{N}(G)$ depends only on the prefix $G\!\upharpoonright\! N$. 
+Thus $I_{N}$ has dependency bound $B_{I_{N}}(\varepsilon) = N$ and is computable from this prefix. 
+Therefore the sequence $(I_{N})$ is a computable family of structural projections with uniformly computable dependency bounds.
 \end{proof}
 
-Tail sewing shows that once an initial segment of the collapse coordinate has
-been fixed, the remainder of the generative identity may be replaced freely by
-another tail from the same fiber.
+Finite-N invariants therefore ground the entire observer-based viewpoint of Part~\ref{part:invariants}: asymptotic invariants will be defined as limits of these prefix-limited observers.
 
-\section{Controlled Tail Replacement via Dependency Bounds}
+\section{Interpretation in the Observer Hierarchy}
 
-In diagonalization we must ensure that the sewn identity preserves not only
-the collapse coordinate but also the values of a finite family of observers
-up to a chosen precision.  
-Dependency bounds make this possible.
+Finite-N invariants occupy the lowest level of the invariant layer. 
+They provide coarse summaries of the prefix through simple statistics, finite block counts, local deviations, and other computable quantities. 
+They do not reveal tail structure or infinite-dimensional features of the generative identity. 
+Their behavior is fully determined by the fixed representation, and they are incapable of distinguishing identities that diverge only in the unobserved tail.
 
-Let $\mathcal{P}=\{\Phi_1,\ldots,\Phi_m\}$ be a finite family of structural
-projections.  
-Let $B_{\mathcal{P}}$ be the uniform dependency bound:
-\[
-B_{\mathcal{P}}(\varepsilon)
-  = \max_{1\le i\le m} B_{\Phi_i}(\varepsilon).
-\]
-
-Fix $\varepsilon>0$ and set
-\[
-N = B_{\mathcal{P}}(\varepsilon).
-\]
-If two identities agree on the first $N$ coordinates, then every projection in
-$\mathcal{P}$ evaluates them within $\varepsilon$.
-
-\begin{proposition}[Controlled Tail Sewing]
-\label{prop:controlled-tail-sewing}
-Let $H,A\in\mathcal{F}(x)$ and let $\mathcal{P}$ be a finite family of
-projections.  
-Fix $\varepsilon>0$ and let $N=B_{\mathcal{P}}(\varepsilon)$.  
-Choose $k$ such that $h_k \ge N$.  
-Let $G$ be obtained by sewing the prefix of $H$ through $h_k$ to the tail of
-$A$ from $a_k$ onward.  
-Then for every $\Phi\in\mathcal{P}$,
-\[
-|\Phi(G)-\Phi(H)| < \varepsilon.
-\]
-\end{proposition}
-
-\begin{proof}
-Since $G$ and $H$ agree on $[0..h_k]$ and $h_k\ge N$, they agree on the first
-$N$ coordinates.  
-By the definition of $B_{\mathcal{P}}$, this agreement implies
-$|\Phi(G)-\Phi(H)|<\varepsilon$ for every $\Phi\in\mathcal{P}$.
-\end{proof}
-
-Thus, once the observers are satisfied on a sufficiently long prefix, the tail
-may be freely replaced without affecting any projection in the family at the
-chosen precision.
-
-\section{Alignment and Sewing as Fiber Geometry}
-
-Alignment and sewing formalize two structural freedoms inside collapse fibers:
-
-\begin{itemize}
-    \item \emph{prefix determination}: the first $k$ selected digits may be
-    fixed using any identity in the fiber;
-
-    \item \emph{tail freedom}: after a matched alignment index, the remainder
-    of the identity may be replaced arbitrarily by another fiber member.
-\end{itemize}
-
-Together with prefix stabilization, these tools allow observers to be frozen
-at finite stages while the tail remains open for divergence.  
-This is the operational core of the meta-diagonalizer built in the next
-chapter.
+The Structural Incompleteness Theorem of Chapter~\ref{chap:incompleteness} implies that even the full tower $(I_{N})_{N\in\mathbb{N}}$ cannot classify any collapse fiber. 
+Finite-N invariants are therefore best understood as tools for summarizing prefix behavior, not as structural invariants of generative identities.
 
 \section{Summary}
 
-Identities inside a collapse fiber share the same collapse coordinate, even
-though their selector and meta-information layers may differ dramatically.  
-Index alignment identifies the matching positions at which the same collapse
-digit is exposed in different identities.  
-Tail sewing uses this alignment to splice identities together while remaining
-inside the fiber.
+Finite-N invariants are continuous, computable, finite-prefix observers that summarize the initial segment of a generative identity under the fixed collapse representation. 
+They form computable observer towers and serve as the foundation for asymptotic invariants, which appear as limits of these prefix-limited quantities in the next chapter.
 
-When combined with dependency bounds and prefix stabilization, alignment and
-sewing enable the construction of identities that satisfy any finite family of
-observers on long prefixes while differing arbitrarily in their tails.  
-These constructions form the technical foundation for the indistinguishability
-and diagonalization arguments of the next chapter.
+The transition from finite-N invariants to asymptotic invariants mirrors the transition from finite observation to idealized infinite observation. 
+This shift introduces discontinuities and oscillatory behavior characteristic of Baire class 1 functions, which is the central focus of Chapter~\ref{chap:asymptotic-invariants}.

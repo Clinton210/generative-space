@@ -1,0 +1,163 @@
+\chapter{Mixed Exposure Patterns Under a Specific Representation}
+\label{appendix:mixed-exposure}
+
+\section{Introduction}
+
+This appendix presents examples of mixed exposure patterns that arise under a
+fixed collapse representation. These patterns combine regular and irregular
+behavior in the exposure coordinate and illustrate how the representation
+permits a wide range of asymptotic features inside every collapse fiber.
+The purpose is illustrative. None of the phenomena described here are
+structural. They reflect the chosen naming system rather than intrinsic
+properties of generative identities.
+
+The examples support the results of
+Chapters~\ref{chap:invariants-eta-phi} through \ref{chap:slice-geometry} and
+demonstrate the following principles:
+
+\begin{itemize}
+    \item mixed exposure patterns can create complex finite prefix behavior,
+    \item asymptotic invariant values remain representation dependent,
+    \item collapse does not restrict mixed patterns,
+    \item continuous observers cannot classify mixed behavior.
+\end{itemize}
+
+Additional case studies appear in Appendix~\ref{appendix:case-studies}.
+
+\section{Representation Setup}
+
+Throughout this appendix we fix a collapse representation in which one symbolic
+coordinate determines exposure positions and another determines the observed
+values. The remaining coordinates are auxiliary and do not influence the
+collapsed real number. This setup aligns with the representation framework
+described in Chapters~\ref{chap:ambient-generative-space} and
+\ref{chap:collapse-map}.
+
+Under this representation, exposure patterns determine where the collapse
+mechanism reads values. By modifying the exposure coordinate while preserving
+the observed-value coordinate, we obtain families of generative identities that
+collapse to the same real number but exhibit different asymptotic and finite
+prefix behavior.
+
+\section{Mixed Exposure Examples}
+
+The following examples illustrate how mixed patterns combine regularity and
+irregularity in the exposure coordinate. These behaviors are representation
+dependent and serve as demonstrations of the breadth of collapse fibers.
+
+\subsection{Alternating deterministic and sparse regimes}
+
+Define the exposure sequence by alternating long deterministic blocks with
+increasingly sparse blocks:
+\[
+\underbrace{D D D \cdots D}_{m}
+\quad
+\underbrace{K K K \cdots K}_{m}
+\quad
+\underbrace{D D D \cdots D}_{m^{2}}
+\quad
+\underbrace{K K K \cdots K}_{m^{2}}
+\quad
+\cdots
+\]
+The deterministic blocks induce strong finite prefix structure, while the
+sparser blocks create large gaps. The resulting behavior oscillates between
+high exposure frequency and near absence of exposure. This produces strong
+finite prefix variability and significant irregularity in asymptotic
+statistics.
+
+\subsection{Coupled window patterns}
+
+Let each exposure decision depend on a preceding window of length
+\[
+w_{m} = 2^{m}.
+\]
+Within each window the pattern is deterministic, but windows grow so quickly
+that the global exposure pattern shows substantial variation. The exposure
+frequency within each window may be fixed, yet the transition between windows
+creates sharp jumps in finite prefix characteristics. This yields examples in
+which window based structure dominates short scale behavior while long scale
+behavior appears sparse or irregular.
+
+\subsection{Periodic base with irregular inserts}
+
+Let the exposure coordinate be periodic except for irregular inserts at rapidly
+growing indices:
+\[
+D K D K D K \cdots
+\quad\text{with inserts at positions}\quad
+n_{j} = j^{3}.
+\]
+Each insert may be a short block of either exposures or non-exposures. These
+inserts disrupt periodicity but only at widely separated scales. The mixed
+pattern creates stable short-range statistics and unstable long-range
+statistics. Such examples demonstrate that finite observers may register strong
+regularity even when asymptotic invariants vary widely.
+
+\section{Invariant Behavior in Mixed Patterns}
+
+Mixed exposure patterns produce a range of behaviors for finite and asymptotic
+invariants. The examples in this section illustrate how these behaviors depend
+on the representation and how invariants respond to changes in mixed patterns.
+See Appendix~\ref{appendix:extended-invariants} for further examples of
+density and fluctuation behavior.
+
+\subsection{Density behavior}
+
+In alternating block patterns, the lower density can approach any value in
+\([0,1]\) depending on how block lengths grow. For instance, in the mixed
+alternating example, if the deterministic blocks grow faster than the sparse
+blocks, the density tends to one. If the sparse blocks dominate, the density
+tends to zero. Balanced growth yields oscillation with no limit.
+
+\subsection{Fluctuation behavior}
+
+Mixed patterns often create large relative gaps. Window based patterns produce
+gaps of size approximately \(2^{m}\) at the end of each window, which push the
+fluctuation index toward infinity. Periodic base patterns with sparse inserts
+tend to have bounded fluctuation on short scales but unbounded fluctuation on
+large scales.
+
+\subsection{Finite observer instability}
+
+Finite observers detect prefix structure only within fixed windows. In a mixed
+pattern, windows may stabilize early behavior but fail to predict behavior in
+later windows. This leads to instability in observer derived finite invariants.
+Mixed exposure patterns therefore serve as examples of prefix dependent
+complexity that finite observers cannot summarize.
+
+\section{Why Mixed Patterns Do Not Classify Fibers}
+
+Mixed exposure patterns illustrate the limitations of classification by
+asymptotic invariants or finite observers.
+
+\begin{itemize}
+    \item Collapse fixes only the observed values at exposure positions and does
+          not restrict the exposure schedule.
+    \item Asymptotic invariants such as density and fluctuation depend only on
+          the exposure coordinate and therefore vary freely within each collapse
+          fiber.
+    \item Mixed patterns demonstrate that finite prefix structure does not imply
+          asymptotic structure, and asymptotic structure does not imply finite
+          prefix behavior.
+    \item Continuous observers have finite prefix dependence and therefore
+          cannot detect long range features created by mixed patterns.
+\end{itemize}
+
+Thus mixed exposure patterns reinforce the Structural Incompleteness Theorem of
+Chapter~\ref{chap:indistinguishability}. No set of finite observers, and no
+derived asymptotic invariant, can classify identities in a collapse fiber.
+
+\section{Summary}
+
+Mixed exposure patterns provide non-structural case studies that demonstrate
+the complexity permitted by collapse representations. These patterns combine
+deterministic and irregular regimes, create sharp contrasts between finite
+prefix and asymptotic behavior, and exhibit invariant values spanning the full
+admissible range. They highlight the representation dependence of invariants,
+the freedom present inside collapse fibers, and the inherent limitations of
+finite observers.
+
+These examples complement the invariant case studies of
+Appendix~\ref{appendix:case-studies} and help clarify the scope of the
+incompleteness principles developed in the main text.

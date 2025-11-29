@@ -1,199 +1,232 @@
-\chapter{Symbolic Dynamics Essentials}
-\label{appendix:symbolic-dynamics}
+\chapter{Dependency Bounds and Finite Prefix Principles}
+\label{appendix:dependency-bounds}
 
 \section{Introduction}
 
-This appendix summarizes the symbolic dynamics concepts that appear implicitly
-throughout the monograph. Although the generative identity framework uses
-selector streams rather than general symbolic blocks, many structural features
-of selector behavior are naturally expressed in symbolic terms. The purpose of
-this appendix is to outline these tools and indicate how they interact with
-the generative space and with the asymptotic invariants developed in
-Part~VI.
+This appendix presents the technical background for dependency bounds,
+prefix stabilization, and finite prefix analysis used throughout
+Parts II and III. These ideas originate in Type 2 computability and
+represented space theory as developed by Weihrauch and Pauly.
+They explain why continuous observers examine only finite portions
+of a generative identity and why tail regions can be modified freely
+once the observer requirements have been met.
 
-We begin with full shift spaces and the product topology. We then describe
-densities, gap statistics, and block structures, and conclude with a brief
-discussion of residual sets and typicality in symbolic dynamics.
+The results in this appendix support structural projections,
+observer families, alignment methods, and the diagonalizer
+construction. They should be read together with Appendix~A,
+which treats effective closed sets and Pi zero one classes.
 
-\section{Shift Spaces and the Product Topology}
+\section{Continuous Maps on Product Spaces}
 
-\subsection{Full shifts}
+Let $X$ be a product of discrete alphabets equipped with the product
+topology and basic cylinders determined by finite prefixes. The ambient
+generative space used in the main text is of this form.
 
-Let $\mathcal{A}$ be a finite alphabet. The full shift is the space
+A function
 \[
-\mathcal{A}^{\mathbb{N}}
+\Phi : X \to \mathbb{R}
+\]
+is continuous exactly when its value at any point can be approximated
+to any chosen precision using only a finite initial prefix.
+
+\begin{lemma}
+\label{lem:basic-continuity}
+Let $\Phi : X \to \mathbb{R}$ be continuous. For every
+$\varepsilon > 0$ there exists $N \in \mathbb{N}$ such that
+\[
+G[0..N] = H[0..N]
+\quad \Longrightarrow \quad
+|\Phi(G) - \Phi(H)| < \varepsilon.
+\]
+\end{lemma}
+
+\begin{proof}
+Continuity at each point implies the existence of a basic open
+neighborhood on which $\Phi$ varies by less than $\varepsilon$.
+Since cylinder sets form a basis of the topology, one may take
+a finite prefix defining such a neighborhood and use its length
+as $N$.
+\end{proof}
+
+The integer $N$ witnessing Lemma~\ref{lem:basic-continuity} is the
+finite amount of symbolic information needed to evaluate the map at
+precision $\varepsilon$.
+
+\section{Dependency Bounds}
+
+\begin{definition}
+\label{def:dependency-bound}
+A dependency bound for a continuous map
+$\Phi : X \to \mathbb{R}$ is a function
+$B_{\Phi} : (0,1] \to \mathbb{N}$ such that
+\[
+G[0..B_{\Phi}(\varepsilon)]
 =
-\{\, x_0 x_1 x_2 \cdots : x_n \in \mathcal{A} \,\}.
+H[0..B_{\Phi}(\varepsilon)]
+\quad \Longrightarrow \quad
+|\Phi(G) - \Phi(H)| < \varepsilon
 \]
-Basic open sets are cylinders
+for all $\varepsilon$ in $(0,1]$.
+\end{definition}
+
+Dependency bounds quantify the finite information principle.  
+Every observer can see only a finite portion of a generative identity
+at a chosen scale. This is the source of prefix stabilization
+and controlled tail manipulation used in the main text.
+
+When $\Phi$ is computable in the sense of represented space theory,
+a computable bound exists. See Appendix~A for the general framework.
+
+\begin{lemma}
+\label{lem:computable-bound}
+If $\Phi$ is computable, then it admits a computable
+dependency bound.
+\end{lemma}
+
+\begin{proof}
+A Type 2 machine computing $\Phi$ examines only finitely many input
+symbols in order to produce an approximation to precision $\varepsilon$.
+The number of inspected symbols provides a computable choice of
+$B_{\Phi}(\varepsilon)$.
+\end{proof}
+
+\section{Uniform Dependency Bounds}
+
+Many arguments require simultaneous control of several observers.
+
+\begin{definition}
+\label{def:uniform-bound}
+Let $\mathcal{P} = \{\Phi_1, \ldots, \Phi_k\}$ be a finite family of
+continuous maps $X \to \mathbb{R}$.
+A uniform dependency bound is a function
+$B_{\mathcal{P}} : (0,1] \to \mathbb{N}$ such that
 \[
-[x_0 x_1 \cdots x_{k-1}]
+G[0..B_{\mathcal{P}}(\varepsilon)]
 =
-\{\, y : y_i = x_i \text{ for } 0 \le i < k \,\}.
+H[0..B_{\mathcal{P}}(\varepsilon)]
+\quad \Longrightarrow \quad
+|\Phi_i(G) - \Phi_i(H)| < \varepsilon
 \]
+for all $i$.
+\end{definition}
 
-The product topology makes $\mathcal{A}^{\mathbb{N}}$ compact, totally
-disconnected, and metrizable. These properties hold for the ambient generative
-space $\mathcal{X}$, which is also a full shift on a finite alphabet. The
-subspace $\mathcal{X}^{*}$, which requires infinitely many digit exposures, is
-dense but not compact. This distinction is important in the analysis of
-collapse fibers and convergence.
-
-\subsection{The shift map}
-
-The shift map
+\begin{lemma}
+\label{lem:uniform-bound}
+A uniform dependency bound exists for every finite family
+$\mathcal{P}$, and one may take
 \[
-\sigma(x)_n = x_{n+1}
-\]
-is continuous, surjective, and preserves cylinder sets. Although the shift is
-not used as a dynamical map in the monograph, it provides structural
-intuition. Properties such as densities, recurrence, and gap growth are
-shift-invariant features.
-
-Selectors are sequences in $\{D,K\}^{\mathbb{N}}$, and shifting corresponds
-to advancing the decision of which positions expose digits. This perspective
-connects the generative setting to classical symbolic tools.
-
-\subsection{Subshifts}
-
-A subshift is a closed, shift invariant subset of $\mathcal{A}^{\mathbb{N}}$.
-Such sets arise by forbidding finite blocks. Families of selectors with
-additional constraints (such as prescribed asymptotic density or regular gap
-control) form natural subshifts. These subshifts offer a symbolic framework
-for describing structured selector behavior.
-
-\section{Densities and Gap Structure}
-
-\subsection{Lower and upper densities}
-
-For $x \in \mathcal{A}^{\mathbb{N}}$ and $a \in \mathcal{A}$, define
-\[
-\underline{d}_{a}(x)
+B_{\mathcal{P}}(\varepsilon)
 =
-\liminf_{N \to \infty}
-\frac{1}{N}
-\left|\{ 0 \le n < N : x_n = a \}\right|,
+\max_{1 \le i \le k} B_{\Phi_i}(\varepsilon).
 \]
+\end{lemma}
+
+\begin{proof}
+If the first $B_{\Phi_i}(\varepsilon)$ coordinates of $G$ and $H$
+coincide, then $\Phi_i(G)$ and $\Phi_i(H)$ differ by less than
+$\varepsilon$. Taking the maximum ensures that all such conditions
+hold simultaneously.
+\end{proof}
+
+Uniform bounds play a central role in freezing observer families
+during alignment and sewing, as used in the construction of the
+diagonalizer in Chapter~\ref{chap:incompleteness}.
+
+\section{Prefix Stabilization}
+
+The finite prefix behavior encoded by dependency bounds implies that
+observers become insensitive to all symbolic information beyond their
+dependency horizon.
+
+\begin{proposition}
+\label{prop:prefix-stabilization}
+Let $\Phi$ be continuous and let $N = B_{\Phi}(\varepsilon)$.
+If $G$ and $H$ agree on $[0..N]$, then
 \[
-\overline{d}_{a}(x)
-=
-\limsup_{N \to \infty}
-\frac{1}{N}
-\left|\{ 0 \le n < N : x_n = a \}\right|.
+|\Phi(G) - \Phi(H)| < \varepsilon.
 \]
+\end{proposition}
 
-For selectors $M \in \{D,K\}^{\mathbb{N}}$, the asymptotic density
+\begin{proof}
+This is immediate from the definition of a dependency bound and
+Lemma~\ref{lem:basic-continuity}.
+\end{proof}
+
+Prefix stabilization is used repeatedly when controlling observers at
+finite stages while allowing full freedom in the tail.
+
+\section{Tail Stability Under Modification}
+
+Once the dependency bound has been satisfied, the remainder of the
+identity can be altered without changing the observer output beyond the
+chosen precision.
+
+\begin{proposition}
+\label{prop:tail-stability}
+Let $\Phi$ be continuous, let $\varepsilon > 0$, and let
+$N = B_{\Phi}(\varepsilon)$. If $\widetilde{G}$ is obtained from $G$ by
+replacing all coordinates strictly beyond index $N$ with any other tail,
+then
 \[
-\eta(G) = \underline{d}_{D}(M)
+|\Phi(\widetilde{G}) - \Phi(G)| < \varepsilon.
 \]
-plays the role of the lower frequency of digit exposures. Chapter
-\texttt{\ref{chap:invariants-eta-phi}} analyzes $\eta$ as an asymptotic
-invariant and shows that it is discontinuous at every point of the generative
-space.
+\end{proposition}
 
-\subsection{Gap sequences}
+\begin{proof}
+By construction, $\widetilde{G}$ and $G$ agree on $[0..N]$.
+The result follows from Proposition~\ref{prop:prefix-stabilization}.
+\end{proof}
 
-List the indices at which $x_n = a$ as
+This fact is the key engine behind controlled tail divergence:
+beyond the observer horizon, identities can be modified freely.
+Appendix~D applies this principle in the sewing method.
+
+\section{Observer Families and Synchronization}
+
+In the main text, observer towers appear as computable sequences
 \[
-n_0 < n_1 < n_2 < \cdots.
+\Phi_0, \Phi_1, \Phi_2, \ldots
 \]
-The gap sequence is $g_j = n_{j+1} - n_j$. The relative gap growth is
+each with a dependency bound. The construction of the diagonalizer relies
+on the ability to choose prefix lengths that satisfy these bounds for each
+observer in turn.
+
+\begin{lemma}
+\label{lem:observer-sync}
+Let $(\Phi_k)$ be a computable sequence of observers with computable
+dependency bounds $B_k$. For each $k$ and each $\varepsilon_k$ in
+$(0,1]$ one can compute an index $N_k$ such that for all $j \le k$,
 \[
-\phi(x)
-=
-\limsup_{j \to \infty}
-\frac{g_j}{n_j},
+N_k \ge B_j(\varepsilon_j).
 \]
-which is the fluctuation index in the main text. Large values of $\phi$
-correspond to sporadic occurrences of $a$ relative to scale.
+\end{lemma}
 
-Gap sequences and related statistics are classical tools for studying sparse
-occurrences in symbolic sequences. In the generative framework, they describe
-the long range behavior of selectors.
-
-\subsection{Recurrence}
-
-A symbol $a$ is recurrent in $x$ if it appears infinitely often. For selectors
-in $\mathcal{X}^{*}$, the requirement that $D$ be recurrent corresponds to the
-obligation that digits be exposed infinitely many times in order to produce a
-complete canonical expansion. Selectors of zero density admit arbitrarily long
-gaps, while positive density selectors exhibit more regular spacing.
-
-\section{Block Structures and Empirical Measures}
-
-\subsection{Blocks}
-
-A block of length $k$ is an element of $\mathcal{A}^{k}$. The set of blocks
-appearing in a symbolic sequence $x$ is
+\begin{proof}
+Since the sequence of bounds is computable, the finite maximum
 \[
-\mathcal{L}(x)
-=
-\bigcup_{k \ge 0}
-\{\, x_n x_{n+1} \cdots x_{n+k-1} : n \in \mathbb{N} \,\}.
+\max_{j \le k} B_j(\varepsilon_j)
 \]
+is computable. Set $N_k$ equal to this maximum.
+\end{proof}
 
-Selector block structures in $\{D,K\}^{k}$ describe finite patterns of
-exposures and suppressions. These local patterns determine fine scale features
-that are not captured by invariants such as $\eta$ or $\phi$.
+This synchronization lemma is used in Appendix~C to build the
+prefix alignment tools and in Appendix~D to construct the sewing
+procedure.
 
-\subsection{Empirical measures}
+\section{Summary}
 
-Given $u \in \mathcal{A}^{k}$, the empirical frequency is
-\[
-\mathrm{freq}_{N}(u,x)
-=
-\frac{1}{N}
-\left|
-\{\, 0 \le n < N-k+1 : x_n x_{n+1} \cdots x_{n+k-1}=u \,\}
-\right|.
-\]
-
-Empirical frequency ideas motivate possible higher order invariants, such as
-block frequencies or empirical measures on selector streams. These quantities
-extend the geometric framework of extended invariants discussed in Part~VI.
-
-\section{Residual Structure and Irregularity}
-
-Residual sets, or dense $G_{\delta}$ subsets, describe typical behavior in the
-sense of Baire category. In classical symbolic dynamics, many forms of
-irregularity are residual:
+Dependency bounds formalize the finite information principle that
+underlies the behavior of all continuous observers. Each observer is
+limited to a finite prefix at any chosen precision, and families of
+observers admit uniform bounds. These tools yield prefix stabilization,
+tail stability, and observer synchronization. They are indispensable in:
 
 \begin{itemize}
-    \item unbounded fluctuations in gap growth,
-    \item oscillating symbol frequencies,
-    \item absence of limiting densities.
+    \item the alignment and sewing constructions,
+    \item the effective generative freedom arguments,
+    \item the structural incompleteness theorem,
+    \item the analysis of derived invariants.
 \end{itemize}
 
-Although the generative identity framework does not rely directly on residual
-genericity, the prevalence of irregular symbolic behavior demonstrates that
-collapse fibers contain identities with extreme or pathological selector
-patterns. This supports the structural indistinguishability results.
-
-\section{Interaction with the Generative Identity Framework}
-
-Symbolic dynamics interacts with the generative framework in several ways.
-
-\begin{itemize}
-    \item Selector streams are symbolic sequences in a full shift space, and
-          their long term behavior determines the asymptotic invariants
-          $\eta$ and $\phi$.
-
-    \item Density and gap statistics describe tail behavior of selectors,
-          which is central to invariant analysis and prefix indistinguishability.
-
-    \item Block structures and empirical frequency ideas motivate refined
-          invariants beyond those studied in the monograph and suggest future
-          directions for generative geometry.
-
-    \item The product topology on symbolic sequences is the same topology used
-          to define continuity of structural projections and to obtain
-          dependency bounds.
-
-    \item The irregularity typical of symbolic sequences helps explain why
-          collapse fibers contain identities with many distinct selector
-          patterns.
-\end{itemize}
-
-Symbolic dynamics therefore provides a natural mathematical language for
-describing selector behavior, asymptotic invariants, and the geometry of the
-generative space.
+Together, these principles provide the computational and topological
+foundation for the observer layer of the generative identity framework.

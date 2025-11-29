@@ -1,67 +1,56 @@
-\chapter{Extended Invariants: Asymptotic Density and Fluctuation}
-\label{chap:invariants-eta-phi}
+\chapter{Extended Invariants and Asymptotic Behavior}
+\label{chap:invariants}
 
 \section{Introduction}
 
-The collapse map records only the classical real value determined by a
-generative identity.  
-It does not reveal the large scale structure of the selector stream.  
-Part II established that continuous observers depend on finite prefixes at any
-fixed precision, and Part IV showed that this restriction prevents observers
-from detecting tail-dependent behavior.
+Finite observers access only finite prefixes of a generative identity, and their behavior is governed by dependency bounds as described in Part~II. 
+Limits and limsup constructions taken along observer towers, however, can define coarse quantities that measure global tail behavior. 
+These quantities do not arise from collapse or from any single finite observer. 
+Instead, they are derived from the long term behavior of the exposure mechanism inside the fixed collapse representation.
 
-In this chapter we introduce two extended invariants that describe global
-aspects of selector geometry:
+This chapter introduces two extended invariants that represent typical end-stage outputs of observer towers:
 
 \begin{itemize}
-    \item the asymptotic density $\eta(G)$ of selected digits, and
-    \item the fluctuation index $\phi(G)$, which measures the relative scale of
-    successive gaps between selected positions.
+    \item the asymptotic exposure density, which measures the long run frequency of exposure events, and
+    \item the fluctuation index, which measures the relative scale of successive gaps between exposures.
 \end{itemize}
 
-Both invariants depend only on the selector layer.  
-They ignore finite prefixes and are sensitive only to tail behavior.  
-Consequently they are discontinuous everywhere in the product topology of
-$\mathcal{G}$ and take all admissible values inside every nonempty open set.
-These invariants illustrate the asymptotic freedom that survives inside collapse
-fibers and that remains invisible to any finite observer.
+Both invariants depend on tail geometry rather than finite prefixes. 
+They are discontinuous everywhere in the product topology and can vary arbitrarily within any nonempty open set. 
+Their instability reflects the fact that asymptotic invariants sit at the final tier of the framework’s three-level hierarchy: generative identities, collapse values, and observer-derived invariants.
 
-\section{Asymptotic Density}
+For background on effective closedness of fibers used in later lemmas, see Appendix~A. 
+For prefix stabilization and dependency bounds, see Appendix~B. 
+For alignment and sewing constructions used to build examples inside a fiber, see Appendices~C and~D.
 
-Let $G=(M,D,K)$ be a generative identity.  
-Define the indicator
+\section{Asymptotic Exposure Density}
+
+Let $G$ be a generative identity in the ambient symbolic space. 
+The representation includes an exposure mechanism that determines which positions contribute to the collapse coordinate. 
+Define an indicator
 \[
-\chi_{M}(n)
+\chi(n)
 =
 \begin{cases}
-1 & \text{if } M(n)=D,\\[3pt]
-0 & \text{if } M(n)=K.
+1 & \text{if position $n$ is exposed},\\
+0 & \text{otherwise}.
 \end{cases}
 \]
-The asymptotic density of $G$ is the lower limit
+
+\begin{definition}[Asymptotic Exposure Density]
+The asymptotic exposure density of $G$ is
 \[
 \eta(G)
 =
 \liminf_{N\to\infty}
-\frac{1}{N}\sum_{n=0}^{N-1}\chi_{M}(n).
+\frac{1}{N}
+\sum_{n=0}^{N-1} \chi(n).
 \]
+\end{definition}
 
-This quantity measures how frequently digits are exposed in the long run.
-Positive density indicates persistent exposure, while $\eta(G)=0$ signals that
-arbitrarily long intervals of nonexposure occur.
-
-\subsection{Basic properties}
-
-The invariant $\eta(G)$ has two basic features:
-
-\begin{itemize}
-    \item it depends only on the selector stream $M$,
-    \item it is unchanged by modifying $M$ beyond any finite index.
-\end{itemize}
-
-Thus $\eta$ is a tail invariant.  
-It captures large scale structure that cannot be detected by collapse or by any
-finite family of continuous observers.
+This invariant describes the long term frequency of exposures relative to position. 
+Positive values correspond to persistent exposure, while $\eta(G)=0$ indicates sparse exposure. 
+Since the definition depends only on the tail of the exposure pattern, the quantity is unchanged by modifying any finite prefix.
 
 \section{Fluctuation Index}
 
@@ -69,119 +58,111 @@ Let
 \[
 0 \le n_0 < n_1 < n_2 < \cdots
 \]
-be the indices at which $M$ exposes digits.  
+denote the increasing sequence of exposure positions. 
 Define the successive gaps
 \[
 g_j = n_{j+1} - n_j.
 \]
 
-The fluctuation index of $G$ is the quantity
+\begin{definition}[Fluctuation Index]
+The fluctuation index of $G$ is
 \[
 \phi(G)
 =
 \limsup_{j\to\infty} \frac{g_j}{n_j}.
 \]
+\end{definition}
 
-The ratio $g_j/n_j$ measures the size of the next gap relative to position.
-A large value indicates that the selector allows long stretches of inactivity.
-Finite values arise when gaps grow at most linearly, while $\phi(G)=\infty$
-occurs when gaps grow superlinearly.
+The ratio $g_j / n_j$ measures the size of the next gap relative to the current scale. 
+Finite values indicate at most linear gap growth, while $\phi(G)=\infty$ arises when gaps grow faster than linearly. 
+As with $\eta(G)$, this invariant depends solely on tail behavior.
 
-\subsection{Basic properties}
+\section{Discontinuity of Extended Invariants}
 
-Like $\eta$, the invariant $\phi$ depends only on the selector layer.
-Tail modification that preserves the selected positions eventually leaves
-$\phi$ unchanged.  
-Sparse selectors (for example $n_j = j!$ or $n_j = 2^{2^j}$) can produce
-arbitrarily large fluctuation indices.
+The product topology on the ambient space constrains only finitely many coordinates at a time. 
+Within any basic open set determined by a finite prefix, the tail remains unrestricted. 
+This full tail freedom implies that both extended invariants are discontinuous everywhere.
 
-\section{Asymptotic Sensitivity and Nowhere Continuity}
-
-The product topology on $\mathcal{G}$ constrains only finite prefixes.  
-The tail may vary arbitrarily inside any nonempty open set.  
-As a result, asymptotic invariants such as $\eta$ and $\phi$ are discontinuous
-everywhere.
-
-\begin{theorem}[Nowhere continuity of $\eta$]
-\label{thm:eta-nowhere}
-Let $U$ be a nonempty basic open set in $\mathcal{G}$.  
-For every $\alpha\in[0,1]$ there exists an identity $G\in U$ such that
-$\eta(G)=\alpha$.
+\begin{theorem}[Nowhere continuity of exposure density]
+\label{thm:density-nowhere}
+Let $U$ be a nonempty basic open set in the ambient space. 
+For every $\alpha \in [0,1]$ there exists $G \in U$ with $\eta(G)=\alpha$.
 \end{theorem}
 
 \begin{proof}
-Let $U$ be determined by a selector prefix $w$ of length $N$.  
-Extend $w$ by appending a tail with asymptotic density $\alpha$.  
-A periodic tail yields rational $\alpha$; a Sturmian or balanced sequence yields
-irrational $\alpha$.  
-The prefix contributes $O(1/N)$ to the average, which vanishes in the limit.
-Thus the full selector has density $\alpha$.
+Let $U$ be determined by a finite prefix of length $N$. 
+Fix $\alpha \in [0,1]$. 
+Extend the prefix with a symbolic tail whose exposure frequency has limiting lower density $\alpha$. 
+A periodic pattern gives rational $\alpha$, and balanced or Sturmian sequences produce irrational $\alpha$. 
+The contribution of the fixed prefix is negligible in the limit. 
+Thus the extended identity lies in $U$ and satisfies $\eta(G)=\alpha$.
 \end{proof}
 
-\begin{theorem}[Nowhere continuity of $\phi$]
-\label{thm:phi-nowhere}
-Let $U$ be a nonempty basic open set in $\mathcal{G}$.  
-For every $\beta\in[0,\infty]$ there exists an identity $G\in U$ with
-$\phi(G)=\beta$.
+\begin{theorem}[Nowhere continuity of fluctuation index]
+\label{thm:fluctuation-nowhere}
+Let $U$ be a nonempty basic open set. 
+For every $\beta \in [0,\infty]$ there exists $G \in U$ with $\phi(G)=\beta$.
 \end{theorem}
 
 \begin{proof}
-Let $U$ be determined by a prefix of length $N$.  
-To obtain $\phi(G)=0$, expose every position beyond $N$.  
-For finite $\beta>0$, choose $(n_j)$ satisfying
-$n_{j+1}\approx(1+\beta)n_j$.  
-To obtain $\beta=\infty$, set $n_j=j!$ for large $j$.  
-In each case the prefix is preserved and the tail determines the fluctuation
-index.
+Let $U$ be specified by a finite prefix of length $N$. 
+Fix $\beta$. 
+If $\beta=0$, expose all positions beyond $N$. 
+If $\beta$ is finite and positive, choose a sequence $(n_j)$ satisfying $n_{j+1}\approx (1+\beta)n_j$ for large $j$. 
+If $\beta=\infty$, choose $n_j = j!$ or another superlinear sequence. 
+These constructions determine the tail and keep the prefix fixed, so the resulting identity lies in $U$ and has the desired fluctuation index.
 \end{proof}
 
-Both invariants therefore realize all admissible values inside any nonempty
-open set.  
-Their sensitivity to tail structure reflects the fundamental disconnect between
-finite-prefix topology and asymptotic geometry.
+Both results express that asymptotic invariants are unstable under the product topology and that finite-prefix constraints do not restrict their long term values. 
+This instability is characteristic of Baire class 1 functions arising as limits of continuous observers, as described in Chapter~\ref{chap:asymptotic-observers}.
 
-\section{Extended Invariants Inside Collapse Fibers}
+\section{Behavior Inside Collapse Fibers}
 
-Collapse fibers contain identities with arbitrarily varied selector behavior.
-Fix $x\in[0,1]$.  
-The fiber $\mathcal{F}(x)$ contains identities with:
+Fix a real number $x$. 
+The collapse fiber $\mathcal{F}(x)$ consists of all identities whose exposed-value coordinate realizes the chosen representation of $x$. 
+Fibers possess full tail freedom by construction, and alignment with sewing (Appendices~C and~D) allows arbitrary tail patterns to be grafted onto a fixed prefix without leaving the fiber.
 
-\begin{itemize}
-    \item every asymptotic density $\alpha\in[0,1]$,
-    \item every fluctuation index $\beta\in[0,\infty]$.
-\end{itemize}
+\begin{theorem}[Extended invariant variation inside fibers]
+\label{thm:fiber-variation}
+Let $x \in [0,1]$. 
+For any $\alpha \in [0,1]$ and any $\beta \in [0,\infty]$ there exists $G \in \mathcal{F}(x)$ such that
+\[
+\eta(G)=\alpha,
+\qquad
+\phi(G)=\beta.
+\]
+\end{theorem}
 
-To see this, combine tail freedom inside the fiber
-(Chapter~\ref{chap:alignment-sewing}) with the constructions of
-Theorems~\ref{thm:eta-nowhere} and \ref{thm:phi-nowhere}.  
-Given any selector tail achieving the desired invariant value, alignment and
-tail sewing allow it to be combined with the collapse coordinate of $x$ while
-preserving membership in the fiber.
+\begin{proof}
+Begin with any reference identity $H \in \mathcal{F}(x)$. 
+Using alignment (Appendix~C), identify an exposure index sufficiently far along the collapse coordinate so that modifying the tail preserves the observed-value sequence. 
+Construct a tail realizing the desired density or fluctuation value using the methods of Theorems~\ref{thm:density-nowhere} and~\ref{thm:fluctuation-nowhere}. 
+Sew this tail to the aligned prefix using the method of Appendix~D. 
+The resulting identity lies in the fiber and has the specified invariant values.
+\end{proof}
 
-Thus extended invariants vary freely inside collapse fibers.
+This theorem shows that extended invariants do not classify collapse fibers. 
+Every fiber contains identities with the full range of asymptotic behavior.
 
 \section{Interpretation}
 
-The invariants $\eta$ and $\phi$ measure large scale selector behavior and are
-invisible to finite observers.  
-They depend exclusively on tail geometry.  
-Their nowhere continuity expresses the fact that the product topology governs
-finite observation, while these invariants measure infinite scale structure.
+Extended invariants arise as limits or limsup values of observer towers rather than as quantities accessible to finite observers. 
+They sit one level beyond continuous projections in the framework’s hierarchy. 
+Their instability reflects this derived nature:
 
-This aligns with the indistinguishability theorem of
-Chapter~\ref{chap:indistinguishability}.  
-Finite observers see only finite prefixes and cannot detect the asymptotic
-features encoded by $\eta$ and $\phi$.
+\begin{itemize}
+    \item they depend on tail geometry invisible to any finite-prefix observer,
+    \item they are not continuous and are sensitive to arbitrarily small changes in the tail, and
+    \item they cannot classify collapse fibers because fibers contain full tail freedom.
+\end{itemize}
+
+Thus the invariants measure coarse asymptotic structure but do not recover the identity. 
+Their behavior illustrates the limitations of representation-based observation and justifies treating them as shadows of the observer layer rather than as intrinsic coordinates.
 
 \section{Summary}
 
-The asymptotic density $\eta$ and fluctuation index $\phi$ are extended
-invariants that detect global selector geometry beyond the reach of collapse
-and continuous observation.  
-Both are tail dependent, both are discontinuous everywhere, and both take all
-admissible values inside any open set.  
-Collapse fibers contain identities with arbitrary extended invariant values,
-demonstrating the asymptotic richness of generative structure.
+Extended invariants such as asymptotic exposure density and fluctuation index quantify large scale symbolic behavior in the chosen collapse representation. 
+They are tail dependent, discontinuous everywhere, and vary freely inside any nonempty basic open set. 
+Collapse fibers contain identities with every possible invariant value, illustrating that these quantities cannot classify generative structure.
 
-These invariants prepare the ground for the geometric study of invariant pairs
-developed in the next chapter.
+These observations motivate the study of invariant pairs and other derived summaries developed in the next chapter.
