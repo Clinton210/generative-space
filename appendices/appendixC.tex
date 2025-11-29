@@ -1,277 +1,203 @@
 \chapter{Alignment and Sewing: Full Technical Proofs}
+\label{appendix:alignment-sewing}
 
 \section{Introduction}
 
-This appendix provides full proofs of the technical lemmas used in
-Chapter~8 and Chapter~9.  
-These results justify the alignment of selected digits, the sewing of tails,
-and the preservation of collapse fibers under controlled concatenation of
-prefixes and tails.
+This appendix gives detailed proofs of the alignment and sewing principles that
+underlie the finite–information constructions in the incompleteness tier of the
+framework. These results verify that:
 
-The purpose of this appendix is to present these arguments in their natural
-level of detail while keeping the main text focused on conceptual structure.
+\begin{itemize}
+    \item identities in the same collapse fiber expose the same canonical digits,
+    \item tails may be replaced once digits are aligned,
+    \item dependency bounds ensure observers are unaffected by tail changes,
+    \item computable sewing preserves membership in effective fibers.
+\end{itemize}
+
+The proofs formalize the finite–prefix reasoning used in the alignment and sewing
+chapter and supply the technical foundation for the mimicry diagonalizer.
 
 \section{Canonical Output and Selection Indices}
 
-For a generative identity $G = (M,D,K)$, define its sequence of selected
-positions by
+For a generative identity $G = (M,D,K)$, the selected positions form an
+increasing sequence
 \[
 n_0 < n_1 < n_2 < \cdots,
 \]
-where $n_j$ is the $j$th index with $M(n_j) = D$.  
+where $n_j$ is the $j$th index such that $M(n)=D$.
+
 The canonical output of $G$ is the sequence
 \[
 d_0, d_1, d_2, \ldots,
-\qquad\text{where } d_j = D(n_j).
+\qquad d_j = D(n_j).
 \]
-For identities in $\mathcal{X}^{*}$, this output yields a valid digit
-expansion.
+For identities in $\mathcal{X}^{*}$ this is a valid digit expansion of a point
+in $[0,1]$.
 
-Two identities $H$ and $A$ lie in the same collapse fiber if and only if
+Two identities $H$ and $A$ lie in the same collapse fiber if and only if their
+canonical outputs agree digit by digit. Thus for all $j$,
 \[
-D_H(n_j^{H}) = D_A(n_j^{A}) = x_j
+D_H(n_j^{H}) = D_A(n_j^{A}) = x_j,
 \]
-for all $j$, where $n_j^{H}$ and $n_j^{A}$ are their respective selection
-indices.
+where $(x_j)$ is the expansion of the collapsed value.
 
 \section{Alignment of Selected Digits}
 
-The first lemma states that identities in the same collapse fiber expose the
-same canonical digits at potentially different positions.  
-This basic fact allows us to use selection indices as alignment points.
-
 \begin{lemma}[Alignment of Selection Indices]
 \label{lem:alignment}
-Let $H$ and $A$ be identities in the same collapse fiber
-$\mathcal{F}(x)$.  
-Let $n_j^{H}$ and $n_j^{A}$ be their respective $j$th selection indices.  
-Then the digits exposed at these positions coincide:
+If $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$ and
+$n_j^{H}$, $n_j^{A}$ are their $j$th selection indices, then
 \[
 D_H(n_j^{H}) = D_A(n_j^{A}) = x_j.
 \]
 \end{lemma}
 
 \begin{proof}
-By definition of the collapse fiber,
-\[
-\pi(H) = \pi(A) = x.
-\]
-The canonical output of $\pi(H)$ is the sequence of digits
-\[
-x_0, x_1, x_2, \ldots,
-\]
-and the same holds for $\pi(A)$.  
-Since $n_j^{H}$ and $n_j^{A}$ denote the $j$th positions where $H$ and $A$
-expose their digits, the exposed digits must coincide with the $j$th digit of
-$x$.  
-Therefore
-\[
-D_H(n_j^{H}) = x_j = D_A(n_j^{A}),
-\]
-as required.
+Membership in the fiber means $\pi(H)=\pi(A)=x$. The canonical output of $x$ is
+the sequence $(x_j)_{j\ge 0}$. Since $n_j^{H}$ and $n_j^{A}$ pick out the $j$th
+selected digit of $H$ and $A$, the exposed digits must equal $x_j$.
 \end{proof}
 
-This lemma provides the foundation for sewing: two identities in the same
-collapse fiber may disagree on the positions where selected digits occur, but
-their canonical output digits occur in the same order.
+Alignment ensures that although selector positions may differ, the symbolic
+content of the selected digits is synchronized across the fiber. This allows
+tails to be replaced after matching selected digits.
 
 \section{Prefix Completion and Tail Extraction}
 
-The following definition formalizes the process of replacing the tail of one
-identity with the tail of another, starting at aligned selection indices.
-
-\begin{definition}[Prefix Completion and Tail Extraction]
-Let $H$ and $A$ be identities in $\mathcal{X}^{*}$ and let $j \in \mathbb{N}$.  
-Define
+\begin{definition}[Sewing at the $j$th Selection Index]
+Let $H$ and $A$ be identities in $\mathcal{X}^{*}$ and let
 \[
-h_j = n_j^{H},
-\qquad
-a_j = n_j^{A}.
+h_j = n_j^{H}, \qquad a_j = n_j^{A}.
 \]
-We define the identity $G = H \,\widehat{\ }_{\,j}\, A$ by
+The sewed identity $G = H \,\widehat{\ }_{j}\, A$ is defined by
 \[
 G(n) =
 \begin{cases}
-H(n) & n \le h_j, \\
+H(n) & n \le h_j,\\
 A(n - h_j + a_j) & n > h_j.
 \end{cases}
 \]
 \end{definition}
 
-This construction preserves all symbols of $H$ up to the $j$th selected
-position and then reproduces the symbolic behavior of $A$ starting at the
-corresponding selected digit.
+This construction keeps the prefix of $H$ up to its $j$th selected digit and then
+continues with the symbolic pattern of $A$ beginning at its corresponding
+selection index.
 
-\section{Sewing Preserves the Collapse Fiber}
-
-The next lemma shows that prefix completion and tail extraction preserve the
-collapsed value when the identities lie in the same fiber.
+\section{Sewing Preserves Collapse}
 
 \begin{lemma}[Tail Sewing Preserves Collapse]
 \label{lem:sewing-preserves-collapse}
-Let $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$ and let $G =
-H \,\widehat{\ }_{\,j}\, A$.  
-Then $G \in \mathcal{F}(x)$.
+If $H,A \in \mathcal{F}(x)$ and $G = H \,\widehat{\ }_{j}\, A$, then
+$G \in \mathcal{F}(x)$.
 \end{lemma}
 
 \begin{proof}
-Let $h_j$ and $a_j$ denote the $j$th selected positions of $H$ and $A$.  
-The identity $G$ agrees with $H$ on every position $n \le h_j$.  
-In particular, the first $j$ selected digits of $G$ occur at the same indices
-as in $H$ and have the same values.
-
-For $n > h_j$, the identity $G$ reproduces the behavior of $A$ starting at
-index $a_j$.  
-The $(j+1)$st selected digit in $G$ appears at the first position $m > h_j$
-with $A(m - h_j + a_j) = D$, which corresponds to the $(j+1)$st selection
-index of $A$.
-
-Thus $G$ exposes the same canonical digit sequence as $A$, namely the digit
-expansion of $x$.  
-Hence $\pi(G) = x$ and $G \in \mathcal{F}(x)$.
+Up to index $h_j$ the identity $G$ agrees with $H$, so their first $j$ selected
+digits coincide. For $n>h_j$, the definition of $G$ reproduces the behavior of
+$A$ starting at $a_j$, so the $(j+1)$st and subsequent selected digits appear in
+the same order and with the same values as in $A$. Thus $G$ and $A$ share the
+same canonical output, namely the expansion of $x$.
 \end{proof}
 
-This result holds for every $j$ and for any choice of $A$ in the collapse
-fiber.
+Thus sewing modifies the symbolic tail without affecting the collapsed real.
 
 \section{Dependency Bounds and Controlled Sewing}
-
-The next lemma shows how dependency bounds combine with sewing to preserve the
-values of structural projections.
 
 \begin{lemma}[Controlled Sewing]
 \label{lem:controlled-sewing}
 Let $\mathcal{P}$ be a finite family of structural projections with uniform
-dependency bound
-\[
-N = B_{\mathcal{P}}(\varepsilon).
-\]
-Let $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$.  
-Let $j$ satisfy $h_{j} \ge N$.  
-Define $G = H \,\widehat{\ }_{\,j}\, A$.  
-Then
+dependency bound $N = B_{\mathcal{P}}(\varepsilon)$. If $H,A \in \mathcal{F}(x)$
+and $j$ is such that $h_j \ge N$, then the identity $G = H \,\widehat{\ }_{j}\, A$
+satisfies
 \[
 |\Phi(G) - \Phi(H)| < \varepsilon
-\quad\text{for all } \Phi \in \mathcal{P}.
+\qquad\text{for all } \Phi \in \mathcal{P}.
 \]
 \end{lemma}
 
 \begin{proof}
-Since $G$ and $H$ agree on all coordinates $n \le h_j$ and $h_j \ge N$, the
-prefix agreement condition of the structural projections implies
-\[
-|\Phi(G) - \Phi(H)| < \varepsilon
-\]
-for each $\Phi \in \mathcal{P}$.  
-The tail of $G$ beyond $h_j$ is irrelevant, since dependency bounds imply
-that only the prefix of length $N$ influences the value of $\Phi$ to
-precision $\varepsilon$.
+Since $G$ and $H$ agree on all coordinates up to $h_j$ and $h_j \ge N$, the
+prefix stabilization condition for the uniform dependency bound yields the
+desired inequality for each $\Phi\in\mathcal{P}$.
 \end{proof}
 
-This lemma shows that sewing changes structure only beyond the observational
-reach of the projections.
+Thus sewing modifies only the unobserved tail and leaves all observers stable at
+the required precision.
 
-\section{Sewing with Dependency Bounds: A Technical Refinement}
+\section{A Selection Index Lower Bound}
 
-In the diagonalizer construction, we need an explicit estimate relating $j$,
-$N$, and the positions of selected digits.  
-The following lemma provides this relationship.
-
-\begin{lemma}[Selection Index Lower Bound]
+\begin{lemma}[Selection Index Growth]
 \label{lem:selection-index-lower-bound}
-Let $H$ be a generative identity with infinitely many selected digits.  
-For any $N \in \mathbb{N}$, there exists a $j$ such that $h_j \ge N$.  
-Moreover, if $H$ has positive selector density $\eta(H) > 0$, then
-\[
-h_j \le \frac{j}{\eta(H)}.
-\]
-\end{lemma}
+Let $H$ expose infinitely many digits with selection indices $h_j$. Then:
 
-\begin{proof}
-Since $H$ exposes infinitely many digits, the sequence
-\[
-h_0 < h_1 < h_2 < \cdots
-\]
-is strictly increasing and unbounded.  
-Thus for any $N$ there exists $j$ with $h_j \ge N$.
-
-If $\eta(H) > 0$, then by definition of lower density,
-\[
-\frac{j}{h_j} \to \eta(H)
-\quad\text{along a subsequence}.
-\]
-Equivalently,
-\[
-h_j \le \frac{j}{\eta(H)}
-\]
-for all sufficiently large $j$.
-\end{proof}
-
-This lemma ensures that we can always find an alignment index beyond the range
-required by the dependency bounds.
-
-\section{Full Sewing Lemma and Its Consequences}
-
-We now combine the previous results into a single statement that is used in
-the diagonalizer construction.
-
-\begin{lemma}[Full Sewing Lemma]
-\label{lem:full-sewing}
-Let $\mathcal{P}$ be a finite family of structural projections with uniform
-dependency bound $B_{\mathcal{P}}(\varepsilon) = N$.  
-Let $H$ and $A$ lie in the collapse fiber $\mathcal{F}(x)$.  
-Let $j$ satisfy $h_j \ge N$.  
-Then the sewed identity $G = H \,\widehat{\ }_{\,j}\, A$ satisfies:
 \begin{enumerate}
-    \item $G \in \mathcal{F}(x)$,
-    \item $|\Phi(G) - \Phi(H)| < \varepsilon$ for all $\Phi \in \mathcal{P}$.
+    \item For every $N$ there exists $j$ such that $h_j \ge N$.
+    \item If $\eta(H)>0$, then for all sufficiently large $j$,
+    \[
+    h_j \le \frac{j}{\eta(H)}.
+    \]
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-The first part follows from Lemma~\ref{lem:sewing-preserves-collapse}.  
-The second part follows from Lemma~\ref{lem:controlled-sewing}.  
+The first claim follows because $(h_j)$ is strictly increasing without bound.
+The second follows from the definition of lower density:
+\[
+\liminf_{N\to\infty} \frac{1}{N} \bigl|\{0\le n < N : M(n)=D\}\bigr| = \eta(H),
+\]
+which implies $\frac{j}{h_j}\to \eta(H)$ along a subsequence.
 \end{proof}
 
-The Full Sewing Lemma provides the key finite information control needed for
-diagonalization: observers remain stable under changes to the identity beyond
-a sufficiently long prefix.
+This lemma guarantees the existence of alignment indices beyond any required
+dependency bound.
 
-\section{Computability of the Sewn Identity}
+\section{Full Sewing Lemma}
 
-We finish with the computability properties of the sewing operation.
+\begin{lemma}[Full Sewing Lemma]
+\label{lem:full-sewing}
+Let $\mathcal{P}$ be a finite family of structural projections with uniform
+dependency bound $N = B_{\mathcal{P}}(\varepsilon)$. Let $H,A \in
+\mathcal{F}(x)$ and choose $j$ such that $h_j \ge N$. Then the sewed identity
+$G = H \,\widehat{\ }_{j}\, A$ satisfies:
 
-\begin{lemma}[Computability of Sewing]
-\label{lem:computable-sewing}
-If $H$ and $A$ are computable identities in $\mathcal{F}(x)$ and $j$ is
-computable from $H$, then $H \,\widehat{\ }_{\,j}\, A$ is a computable identity.
+\begin{enumerate}
+    \item $G \in \mathcal{F}(x)$,
+    \item $|\Phi(G) - \Phi(H)| < \varepsilon$ for every $\Phi\in\mathcal{P}$.
+\end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Computable identities have computable selector, digit, and meta streams.
-Given $j$ and the selection indices $h_j$ and $a_j$, which are computable from
-$H$ and $A$, the definition of the sewed identity provides an explicit
-algorithm to compute $G(n)$ for each $n$.  
-Thus $G$ is computable.
+Collapse preservation follows from Lemma~\ref{lem:sewing-preserves-collapse}.
+Observer stability follows from Lemma~\ref{lem:controlled-sewing}.
 \end{proof}
 
-This lemma ensures that the diagonalizer constructed in the main text is
-computable.
+This is the key finite–information lemma underlying the mimicry construction.
+
+\section{Computability of Sewing}
+
+\begin{lemma}[Computable Sewing]
+\label{lem:computable-sewing}
+If $H$ and $A$ are computable identities in $\mathcal{F}(x)$ and $j$ is
+computable from $H$, then $H \,\widehat{\ }_{j}\, A$ is computable.
+\end{lemma}
+
+\begin{proof}
+The selection indices $(h_j)$ and $(a_j)$ are computable from $H$ and $A$. Given
+$j$, the definition of sewing is an explicit rule computing $G(n)$ from $H$ and
+$A$. Thus $G$ is computable as a coordinatewise effective sequence.
+\end{proof}
 
 \section{Summary}
 
-This appendix provided full proofs of the alignment and sewing lemmas that
-support the diagonalizer construction.  
-These results show that:
+This appendix formalized the technical facts used in the alignment and sewing
+arguments:
 
 \begin{itemize}
-    \item identities in the same collapse fiber expose the same canonical
-          digits in the same order,
-    \item tails may be replaced freely once alignment indices are chosen,
-    \item dependency bounds ensure that observers are unaffected by tail
-          modification,
-    \item computable identities remain computable under sewing.
+    \item alignment synchronizes selected digits of identities in the same fiber,
+    \item sewing replaces tails while preserving collapse,
+    \item dependency bounds ensure observers see only prefixes,
+    \item sewing is computable and preserves effective fibers.
 \end{itemize}
 
-Together, these tools form the core technical machinery used to establish the
-Structural Incompleteness Theorem.
+These results supply the structural and computational backbone of the diagonal
+mimicry method used to establish structural indistinguishability.

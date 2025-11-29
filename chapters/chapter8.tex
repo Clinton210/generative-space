@@ -1,157 +1,183 @@
-\chapter{Alignment and Tail Sewing Inside Fibers}
+\chapter{Alignment and Tail Sewing Inside Collapse Fibers}
+\label{chap:alignment-sewing}
 
 \section{Introduction}
 
-The collapse fiber $\mathcal{F}(x)$ contains a vast collection of generative
-identities that all yield the same classical real number.  
-The diagonalizer developed in the next chapter constructs a new identity
-inside the effective fiber that matches a reference identity on all observed
-prefixes while diverging arbitrarily in its unobserved tail.  
-To carry out this construction, we need two technical tools.
+Collapse fibers contain a vast collection of generative identities that share
+the same collapse coordinate.  
+Inside a fiber, the selector, digit, and meta-information layers may vary
+freely so long as they preserve the ordered list of selected digits.  
+The diagonalizer constructed in the next chapter exploits this freedom to
+produce identities that agree with a reference identity on all observed
+prefixes while diverging arbitrarily on their unobserved tails.
 
-The first tool is an alignment procedure.  
-Since the collapse depends only on the sequence of selected digits in the
-order they appear, we must ensure that when we splice the tail of one
-identity onto the prefix of another, the resulting identity produces the same
-canonical output.  
-The second tool is a sewing procedure, which replaces the tail of one
-identity with the tail of another while retaining membership in the same
-collapse fiber.
+To accomplish this, we need two technical tools:
 
-These constructions rely on the fact that identities in a fiber agree on
-their selected digits when listed in order, even though the positions of
-these digits in the raw sequence may differ.  
-This kind of alignment appears in various areas of symbolic dynamics, in
-particular in the study of synchronized shift spaces, but here it plays a
-more basic role.  
-The alignment and sewing tools allow us to replace long tails without
-changing the collapsed value.
+\begin{itemize}
+    \item \emph{alignment}, which identifies corresponding selection indices
+    across identities in the same fiber, and
+
+    \item \emph{tail sewing}, which replaces the tail of one identity with the
+    tail of another without leaving the fiber.
+\end{itemize}
+
+These tools rely on the fact that identities in a collapse fiber have identical
+collapse coordinates, even if their selector positions differ.  
+Similar alignment ideas appear in the study of synchronized and coded shift
+spaces in symbolic dynamics \cite{LindMarcus}, though here the setting is
+simpler and more rigid.  
+Alignment and tail sewing provide the structural freedom necessary for
+controlled constructions inside the fiber.
 
 \section{Alignment of Selected Digits}
 
-Let $H$ and $A$ be two identities in the fiber $\mathcal{F}(x)$, and let
+Let $H, A \in \mathcal{F}(x)$ be two identities in the collapse fiber of a
+real number $x$.  
+Let
 \[
-d_H(0), d_H(1), d_H(2), \ldots
-\quad\text{and}\quad
-d_A(0), d_A(1), d_A(2), \ldots
+X(H) = (x_0, x_1, x_2,\ldots)
+\qquad \text{and} \qquad
+X(A) = (x_0, x_1, x_2,\ldots)
 \]
-be their canonical output sequences.  
-Since $H$ and $A$ lie in the same fiber, these sequences are identical and
-represent the expansion of $x$.
+be their collapse coordinates.  
+Since both collapse to $x$, these sequences coincide.
 
 Let
 \[
 h_0 < h_1 < h_2 < \cdots
-\quad\text{and}\quad
+\qquad\text{and}\qquad
 a_0 < a_1 < a_2 < \cdots
 \]
-be the indices at which $H$ and $A$ select digits.  
-For any $k$, both identities expose the $k$th digit of $x$ at their
-respective indices $h_k$ and $a_k$.
+be the indices at which $H$ and $A$ expose digits.  
+By definition of collapse, the identity $H$ produces digit $x_k$ at position
+$h_k$, and $A$ produces the same digit at $a_k$.
 
 \begin{proposition}[Index Alignment]
-For any $k$, there exist positions in $H$ and $A$ at which the $k$th canonical
-digit is selected, namely $h_k$ and $a_k$.  
-Thus an identity obtained by taking the prefix of $H$ up to $h_k$ and the tail
-of $A$ beginning at $a_k$ produces the same canonical output as $H$.
+\label{prop:index-alignment}
+For every $k\in\mathbb{N}$, both $H$ and $A$ expose the $k$th digit of the
+collapse coordinate at the positions $h_k$ and $a_k$.  
+Thus any identity obtained by taking the prefix of $H$ through $h_k$ and the
+tail of $A$ starting at $a_k$ preserves the collapse coordinate.
 \end{proposition}
 
 \begin{proof}
-Since both identities lie in $\mathcal{F}(x)$, the value of the $k$th selected
-digit in each must be $x_k$.  
-Therefore the alignment indices $h_k$ and $a_k$ exist by definition of the
-canonical output.
+Since $H$ and $A$ lie in $\mathcal{F}(x)$, both expose the digit $x_k$ at
+their respective $k$th selection indices.  
+Thus $h_k$ and $a_k$ exist and correspond to the same position in the collapse
+coordinate.
 \end{proof}
 
-This proposition ensures that splicing the two identities at matching digit
-indices preserves the canonical output sequence.
+This alignment property ensures that splicing the two identities at matched
+selection indices preserves the entire collapse coordinate.
 
-\section{Sewing of Tails}
+\section{Tail Sewing Inside a Fiber}
 
-Given two identities $H$ and $A$ in the same fiber, consider the identity
-$\tilde{G}$ that agrees with $H$ up to $h_k$ and with $A$ beyond $a_k$.  
-Alignment ensures that the canonical output of $\tilde{G}$ equals that of
-$H$, so $\tilde{G}$ lies in $\mathcal{F}(x)$.
+Given alignment indices $h_k$ and $a_k$, we may splice the beginning of $H$
+to the tail of $A$ to obtain a new identity.
 
 \begin{proposition}[Tail Sewing]
-Fix $k \in \mathbb{N}$.  
-Let $G$ be the identity defined by
+\label{prop:tail-sewing}
+Fix $k\in\mathbb{N}$.  
+Define an identity $G$ by
 \[
 G(n) =
 \begin{cases}
-H(n) & n \le h_k,\\
-A(n - h_k + a_k) & n > h_k.
+H(n), & n \le h_k,\\
+A(n - h_k + a_k), & n > h_k.
 \end{cases}
 \]
 Then $G \in \mathcal{F}(x)$.
 \end{proposition}
 
 \begin{proof}
-The identity $G$ agrees with $H$ on the prefix containing the first $k$ selected
-digits.  
-Beyond that prefix it reproduces the $(k+1)$st, $(k+2)$nd, and all later
-selected digits of $A$ in order.  
-Since $A$ and $H$ have the same canonical output, $G$ reproduces this same
+The identity $G$ agrees with $H$ through the $k$th selected digit, which
+occurs at $h_k$.  
+Beyond that point it reproduces the $(k+1)$st, $(k+2)$nd, and all later
+selected digits from $A$ in the correct order.  
+Since $A$ and $H$ have identical collapse coordinates, $G$ reproduces this same
 sequence.  
-Therefore $\pi(G) = x$.
+Therefore $\pi(G)=x$.
 \end{proof}
 
-This construction replaces the tail of one identity with that of another
-without altering the canonical output.  
-The ability to modify the tail freely inside the fiber is one of the key
-structural freedoms used in the diagonalizer.
+Tail sewing shows that once an initial segment of the collapse coordinate has
+been fixed, the remainder of the generative identity may be replaced freely by
+another tail from the same fiber.
 
-\section{Controlled Tail Replacement}
+\section{Controlled Tail Replacement via Dependency Bounds}
 
-In diagonalization, we do not splice tails arbitrarily.  
-Instead, we choose $A$ to satisfy a specific structural property that we want
-the final identity to inherit, and we sew its tail onto a reference identity
-$H$ after a sufficiently long prefix.
+In diagonalization we must ensure that the sewn identity preserves not only
+the collapse coordinate but also the values of a finite family of observers
+up to a chosen precision.  
+Dependency bounds make this possible.
 
-Let $\mathcal{P}$ be a finite family of projections that we wish to match up
-to precision $\varepsilon$.  
-Let $N = B_{\mathcal{P}}(\varepsilon)$ be the uniform dependency bound.  
-If $H$ and $A$ agree on their first $N$ symbols, then sewing the tail of $A$
-onto the prefix of $H$ at any alignment point beyond $N$ preserves the
-projections to within $\varepsilon$.
+Let $\mathcal{P}=\{\Phi_1,\ldots,\Phi_m\}$ be a finite family of structural
+projections.  
+Let $B_{\mathcal{P}}$ be the uniform dependency bound:
+\[
+B_{\mathcal{P}}(\varepsilon)
+  = \max_{1\le i\le m} B_{\Phi_i}(\varepsilon).
+\]
+
+Fix $\varepsilon>0$ and set
+\[
+N = B_{\mathcal{P}}(\varepsilon).
+\]
+If two identities agree on the first $N$ coordinates, then every projection in
+$\mathcal{P}$ evaluates them within $\varepsilon$.
 
 \begin{proposition}[Controlled Tail Sewing]
-Let $\mathcal{P}$ be a finite family of projections with uniform dependency
-bound $B_{\mathcal{P}}$.  
-Fix $\varepsilon > 0$ and set $N = B_{\mathcal{P}}(\varepsilon)$.  
-Let $h_k$ be the $k$th selection index for $H$, and choose $k$ such that
-$h_k \ge N$.  
-Similarly, let $a_k$ be the $k$th selection index for $A$.  
-Define $G$ by sewing the prefix of $H$ up to $h_k$ to the tail of $A$ from
-$a_k$ onward.  
-Then for every $\Phi \in \mathcal{P}$,
+\label{prop:controlled-tail-sewing}
+Let $H,A\in\mathcal{F}(x)$ and let $\mathcal{P}$ be a finite family of
+projections.  
+Fix $\varepsilon>0$ and let $N=B_{\mathcal{P}}(\varepsilon)$.  
+Choose $k$ such that $h_k \ge N$.  
+Let $G$ be obtained by sewing the prefix of $H$ through $h_k$ to the tail of
+$A$ from $a_k$ onward.  
+Then for every $\Phi\in\mathcal{P}$,
 \[
-|\Phi(G) - \Phi(H)| < \varepsilon.
+|\Phi(G)-\Phi(H)| < \varepsilon.
 \]
 \end{proposition}
 
 \begin{proof}
-Since $G$ and $H$ agree on their first $h_k$ symbols and $h_k \ge N$, we have
-agreement on the first $N$ symbols.  
-By definition of $B_{\mathcal{P}}$, agreement on the first $N$ symbols ensures
-agreement of all projections in the family to within $\varepsilon$.
+Since $G$ and $H$ agree on $[0..h_k]$ and $h_k\ge N$, they agree on the first
+$N$ coordinates.  
+By the definition of $B_{\mathcal{P}}$, this agreement implies
+$|\Phi(G)-\Phi(H)|<\varepsilon$ for every $\Phi\in\mathcal{P}$.
 \end{proof}
 
-This shows that once observers are satisfied on the prefix of length $N$, the
-tail may be replaced freely without altering their outputs at the chosen
-precision.  
-This powerful freedom is the main technical ingredient of the diagonalizer.
+Thus, once the observers are satisfied on a sufficiently long prefix, the tail
+may be freely replaced without affecting any projection in the family at the
+chosen precision.
+
+\section{Alignment and Sewing as Fiber Geometry}
+
+Alignment and sewing formalize two structural freedoms inside collapse fibers:
+
+\begin{itemize}
+    \item \emph{prefix determination}: the first $k$ selected digits may be
+    fixed using any identity in the fiber;
+
+    \item \emph{tail freedom}: after a matched alignment index, the remainder
+    of the identity may be replaced arbitrarily by another fiber member.
+\end{itemize}
+
+Together with prefix stabilization, these tools allow observers to be frozen
+at finite stages while the tail remains open for divergence.  
+This is the operational core of the meta-diagonalizer built in the next
+chapter.
 
 \section{Summary}
 
-Alignment of selected digits ensures that identities in the same fiber expose
-their canonical digits in a coherent order.  
-Tail sewing uses this alignment to replace the entire tail of one identity
-with the tail of another while remaining inside the collapse fiber.
+Identities inside a collapse fiber share the same collapse coordinate, even
+though their selector and meta-information layers may differ dramatically.  
+Index alignment identifies the matching positions at which the same collapse
+digit is exposed in different identities.  
+Tail sewing uses this alignment to splice identities together while remaining
+inside the fiber.
 
-When combined with dependency bounds and prefix stabilization, these tools
-allow us to construct identities that satisfy any finite family of observers
-on arbitrarily long prefixes while diverging freely in the unobserved tail.
-The next chapter uses these tools to build the meta-diagonalizer, which
-demonstrates the impossibility of recovering generative structure from any
-finite collection of continuous observers.
+When combined with dependency bounds and prefix stabilization, alignment and
+sewing enable the construction of identities that satisfy any finite family of
+observers on long prefixes while differing arbitrarily in their tails.  
+These constructions form the technical foundation for the indistinguishability
+and diagonalization arguments of the next chapter.

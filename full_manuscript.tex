@@ -59,46 +59,45 @@
 
 
 \clearpage{}\begin{abstract}
-This monograph develops the Generative Identity Framework, a structural approach
-to real numbers based on symbolic generative mechanisms.  
-A generative identity is a triple $(M, D, K)$ of infinite sequences: a selector
-stream, a digit stream, and a meta-information stream.  
-The classical real number associated with an identity is obtained by a
-continuous collapse map that reads only the digits exposed by the selector.
-Collapse is surjective and highly non-injective, and each collapsed value $x$
-corresponds to a large symbolic fiber $\mathcal{F}(x)$ containing many
-generative identities.
+This monograph develops the Generative Identity Framework, a structural
+approach to real numbers based on symbolic generative mechanisms. A generative
+identity is a triple $(M,D,K)$ of infinite sequences consisting of a selector,
+a digit stream, and a meta-information stream. The classical real associated
+with an identity is obtained by a continuous collapse map that reads only the
+digits exposed by the selector. Collapse is surjective and highly
+non-injective. Each real number $x$ corresponds to a symbolic fiber
+$\mathcal{F}(x)$ containing many generative identities that share the same
+canonical output.
 
-We study the internal structure of these fibers through continuous
-observers.  
-A structural projection is any continuous real-valued functional on the
-generative space, and its dependence on finite prefixes is controlled by
-computable dependency bounds in the sense of Type-2 Effectivity.  
-These bounds imply prefix stabilization and tail invariance, which together
-give a finite-information description of all continuous observers.
+The internal structure of these fibers is studied through continuous
+observers. A structural projection is any continuous real valued functional on
+the generative space. Dependency bounds from Type-2 Effectivity control the
+finite prefix on which each observer depends. These bounds yield prefix
+stabilization and tail invariance and show that every continuous observer
+extracts only finitely many symbols at any fixed precision.
 
 Using these tools, we construct a computable identity inside the effective
-fiber of a computable real $x$ that agrees with a reference identity on
-arbitrarily long prefixes, yet diverges along every computable structural
-projection.  
-This diagonalizer yields the Structural Incompleteness Theorem: no finite
-family of continuous observers, even when combined with the collapsed value,
-can recover the generative identity.  
-Finite observation cannot capture the symbolic structure hidden beneath
+collapse fiber of a computable real $x$ that agrees with a reference identity
+on arbitrarily long prefixes and is indistinguishable from it by every
+computable structural projection. This yields the Indistinguishability
+Theorem, which states that no finite family of continuous observers, even when
+combined with the collapsed value, can determine the underlying generative
+identity. Finite observation cannot recover the symbolic structure concealed by
 collapse.
 
-Finally, we introduce extended invariants that measure large-scale selector
-behavior.  
-The entropy balance $\eta$ (lower asymptotic density of digit exposures) is
-lower semicontinuous, and the fluctuation index $\phi$ (relative gap growth)
-is upper semicontinuous.  
-Although discontinuous, these invariants provide coarse geometric embeddings
-of generative identities and illustrate the diversity that persists inside
-each collapse fiber.
+The monograph then introduces robust asymptotic invariants that measure
+large scale selector behavior. The entropy balance $\eta$ describes the lower
+asymptotic density of digit exposures, and the fluctuation index $\phi$
+describes relative gap growth between selected positions. These invariants are
+tail invariant and therefore robust under finite modification, but they are
+everywhere discontinuous in the product topology. Their images provide coarse
+geometric embeddings of selector behavior and illustrate the diversity that
+persists inside each collapse fiber.
 
 The framework offers a unified structural, computational, and geometric view
-of real numbers, revealing the continuum as a quotient of a rich symbolic
-space and exposing intrinsic limits on what any finite process can observe.
+of real numbers. It presents the continuum as a quotient of a rich symbolic
+space and establishes intrinsic limitations on what any finite observational
+process can recover about generative structure.
 \end{abstract}
 \clearpage{}
 \clearpage{}\chapter*{Acknowledgments}
@@ -122,77 +121,69 @@ Their confidence made this work possible.
 \chapter*{Prelude}
 
 Real numbers are usually described by their magnitudes and by the symbolic
-expansions that represent them.  
-This monograph develops a different perspective.  
-Instead of viewing a real number as a static point on the continuum, we regard
-it as the collapsed output of a symbolic generative mechanism.  
-Such a mechanism consists of a selector stream, a digit stream, and a
-meta-information stream, all evolving in parallel.  
-Only a small portion of this structure survives the collapse to a classical
-real value.  
-The remainder forms an extensive symbolic landscape that is invisible to
-classical analysis.
+expansions that represent them. This monograph develops a different
+perspective. Instead of viewing a real number as a static point on the
+continuum, we regard it as the collapsed output of a symbolic generative
+mechanism. Such a mechanism consists of a selector stream, a digit stream, and
+a meta-information stream, all evolving in parallel. Only the digits exposed
+by the selector survive the collapse to a classical real value. The remaining
+symbolic structure forms a rich landscape that is invisible to classical
+analysis.
 
 The guiding idea of the Generative Identity Framework is that classical
-magnitude hides substantial internal structure.  
-A real number can have many generative identities, all of which produce the
-same digit sequence under collapse but differ in how those digits are exposed,
-how gaps are distributed, and what symbolic information is carried in
-unobserved layers.  
-These differences do not affect the collapsed value, yet they play a central
-role in the behavior of observers that act on the generative representation.
+magnitude hides substantial internal structure. A single real number may have
+many generative identities that all produce the same digit sequence under
+collapse but differ in how those digits are exposed, how gaps are distributed,
+and what symbolic information is carried in unobserved layers. These
+differences do not affect the collapsed value, yet they play a central role in
+the behavior of observers that act on the generative representation.
 
-The first part of the monograph introduces the generative space, the collapse
-map, and the geometry of collapse fibers.  
-Each fiber contains many identities that collapse to the same real number.
-These identities may have selector streams of positive density, zero density,
-or highly irregular structure.  
-The fiber therefore records a large amount of structure that collapse cannot
-recover.
+Part I introduces the generative space, the collapse map, and the geometry of
+collapse fibers. A collapse fiber collects all identities that produce the
+same real number. These fibers are closed subsets of the ambient symbolic
+space, and they contain identities with selector streams of positive density,
+zero density, regular spacing, or extreme irregularity. The fiber therefore
+records structure that collapse alone cannot access.
 
-The second and third parts develop projection theory.  
-A structural projection is a continuous observer that assigns a real value to a
-generative identity based only on finite symbolic information.  
-Dependency bounds formalize this finite information principle, and prefix
-stabilization shows that observers eventually ignore the tail of the identity
-at any fixed precision.  
-These tools provide a precise way to analyze the limits of finite observation.
+Parts II and III develop the finite observation theory. A structural
+projection is a continuous observer that assigns a real value to a generative
+identity based only on finite symbolic information. Dependency bounds
+formalize this finite information principle by specifying which prefix an
+observer must inspect to achieve a desired precision. Prefix stabilization
+shows that once a long enough prefix is fixed, observers ignore the tail of
+the identity. These tools provide a precise description of what finite
+observation can and cannot detect.
 
-Part IV presents the central technical result.  
-A meta-diagonalizer is constructed inside any effective collapse fiber.  
-This identity agrees with a reference identity on arbitrarily long prefixes,
-yet diverges from it along every computable structural projection.  
-The resulting Structural Incompleteness Theorem states that no finite family
-of observers, even when combined with the collapsed value, can recover the
-generative identity.  
-Finite observation is inherently limited by the topology of the generative
-space.
+Part IV establishes the central incompleteness phenomenon. Using alignment and
+sewing methods that operate within a collapse fiber, a mimicry construction
+produces a computable identity that agrees with a reference identity on every
+prefix required by a given family of observers, yet differs from it in its
+tail. This leads to the Structural Incompleteness Theorem, which states that
+no finite family of continuous observers, even when combined with the
+collapsed value, can recover the generative identity. Finite observation is
+inherently limited by the topology of the generative space.
 
-Part V describes the continuum as a quotient of the generative space under
-collapse.  
-This quotient view clarifies why collapse conceals nearly all symbolic
-structure.  
-It also connects the framework to classical ideas in computable analysis and
-represented spaces, where names of real numbers form equivalence classes under
-continuous maps.
+Part V describes the real continuum as a quotient of the generative space
+under collapse. This quotient view clarifies why most symbolic structure is
+invisible to classical magnitude and connects the framework to represented
+spaces in computable analysis, where real numbers arise as equivalence classes
+of symbolic descriptions.
 
 Part VI introduces extended invariants that measure large scale features of
-the selector stream.  
-The entropy balance and fluctuation index detect long term frequency and gap
-behavior.  
-These invariants are discontinuous but semicontinuous, and they give rise to
-natural geometric embeddings of generative identities.  
-Such embeddings reveal the diversity of selector behavior inside each collapse
-fiber and illustrate the breadth of structure hidden beneath classical
-magnitude.
+selector behavior. The entropy balance and fluctuation index capture
+asymptotic density and relative gap growth. These invariants are nowhere
+continuous in the product topology, reflecting the gap between asymptotic
+structure and finite observation. Geometric embeddings based on these
+invariants reveal the diversity of selector behavior inside collapse fibers
+and illustrate how generative identities distribute across large scale
+coordinates.
 
 The Generative Identity Framework unifies symbolic, computational, and
-geometric viewpoints on real numbers.  
-It shows that real numbers are not merely magnitudes but are shadows of
-complex symbolic identities.  
-This perspective opens many directions for further research, including higher
-order invariants, geometric embeddings, connections to symbolic dynamics, and
-interactions with randomness and computability.
+geometric viewpoints on real numbers. It shows that a real number is not only
+a magnitude but also the shadow of a richer symbolic identity. The framework
+opens many directions for further study, including higher order invariants,
+geometric embeddings, connections to symbolic dynamics, and interactions with
+computability and randomness.
 
 The chapters that follow develop these ideas systematically, beginning with
 the foundations of the generative space and culminating in the structural
@@ -203,33 +194,32 @@ incompleteness of finite observation.
 \chapter*{Part I Summary}
 
 Part I introduces the symbolic foundations of the Generative Identity
-Framework.  
-A generative identity is defined as a triple of infinite sequences
-$(M, D, K)$ consisting of a selector stream, a digit stream, and a
-meta-information stream.  
-These sequences form a product space $\mathcal{X}$ equipped with the product
-topology, and the digit selecting subspace $\mathcal{X}^*$ contains those
-identities that expose infinitely many digits.
+Framework. A generative identity is defined as a triple of infinite sequences
+$(M,D,K)$ consisting of a selector stream, a digit stream, and a meta
+information stream. These sequences form a full product space $\mathcal{X}$
+equipped with the product topology, and the digit selecting subspace
+$\mathcal{X}^{*}$ contains those identities whose selector exposes infinitely
+many digits.
 
 The collapse map extracts the classical real value associated with a
-generative identity by selecting the digits exposed by $M$ and interpreting
-them in base $b$.  
-This map is continuous and surjective.  
-Its fibers are compact, perfect, and totally disconnected, and they contain
-many identities that differ dramatically in their internal structure while
-producing the same collapsed value.
+generative identity by reading the digits exposed by $M$ and interpreting them
+as a base $b$ expansion. This map is continuous and surjective. Its fibers are
+closed, perfect, and totally disconnected subsets of the generative space, and
+each fiber contains many identities that differ sharply in their selector
+behavior, spacing patterns, and meta streams while producing the same collapsed
+value.
 
-The geometry of collapse fibers is the first indication that classical
-magnitude conceals substantial symbolic structure.  
-Fibers contain identities with dense or sparse selectors, identities with
-regular or irregular spacing patterns, and identities with arbitrary
-meta-information streams.  
-These degrees of freedom motivate the study of how much structure can be
-detected by continuous observers, which becomes the focus of Part III and the
-incompleteness phenomena of Part IV.
+The geometry of these fibers provides the first indication that classical
+magnitude conceals substantial symbolic structure. Fibers contain identities
+with dense or sparse selectors, identities with regular or highly irregular
+spacing, and identities with freely chosen meta information. These degrees of
+freedom motivate the central question of the monograph: how much of this
+structure can be detected by continuous observers that operate on finite
+prefixes?
 
-Part I therefore provides the symbolic setting, the collapse mechanism, and
-the foundational geometry that underpins the entire monograph.
+Part I therefore establishes the symbolic setting, the collapse mechanism, and
+the foundational fiber geometry that support the analysis of structural
+observers in Part III and the incompleteness phenomena developed in Part IV.
  \clearpage{}\chapter{The Generative Space}
 
 \section{Introduction}
@@ -543,193 +533,220 @@ Identity Framework.
 The next chapter analyzes the internal geometry of these fibers and the
 degrees of freedom that remain invisible after collapse.
 \clearpage{}
-\clearpage{}\chapter{Fiber Geometry and the Effective Core}
+\clearpage{}\chapter{Collapse Fibers and Ambient Compactness}
+\label{chap:fibers}
 
-\section{Introduction}
+\section{The Ambient Generative Space}
 
-The collapse map $\pi : \mathcal{X}^* \to [0,1]$ associates to each
-digit-selecting generative identity a classical real number.  
-The purpose of this chapter is to study the structure of the fibers
+Let $\Sigma$ denote the finite alphabet used to encode the mixer, digit, and
+meta streams of a generative identity. The full generative space is the
+product
+\[
+\mathcal{X} = \Sigma^{\mathbb{N}}
+\]
+equipped with the product topology induced by the discrete topology on
+$\Sigma$. By Tychonoff's theorem, $\mathcal{X}$ is compact and metrizable. A
+convenient metric is
+\[
+d(G,G') = 2^{-N},
+\]
+where $N$ is the least index at which $G$ and $G'$ differ. This metric
+generates the product topology.
+
+We will often work with the subspace
+\[
+\mathcal{X}^{*}
+=
+\bigl\{
+G \in \mathcal{X} :
+M_G(n) = D \text{ for infinitely many } n
+\bigr\},
+\]
+consisting of identities that select infinitely many digits. The set
+$\mathcal{X}^{*}$ is a dense $G_{\delta}$ subset of $\mathcal{X}$ (see
+\cite{Kechris} or \cite{Weihrauch}). It is not closed, and therefore not
+compact.
+
+The distinction between $\mathcal{X}$ and $\mathcal{X}^{*}$ is important.
+Compactness arguments must take place in the ambient space $\mathcal{X}$.
+
+\section{Collapse Map and Closedness of Fibers}
+
+The collapse map
+\[
+\pi : \mathcal{X} \to [0,1]
+\]
+was defined in Chapter \texttt{\ref{chap:collapse}} by interpreting each identity
+as an instruction to select digits of the output real number. Since the output
+of $\pi$ depends only on the selected digits and these digits depend on finitely
+many coordinates of the generative identity when viewed at any fixed precision,
+the following fact is standard in symbolic dynamics.
+
+\begin{proposition}
+\label{prop:collapse-continuous}
+The collapse map $\pi$ is continuous with respect to the product topology on
+$\mathcal{X}$.
+\end{proposition}
+
+A proof may be found, for example, in Chapter 1 of \cite{LindMarcus} for shift
+spaces and in Section 6 of \cite{Weihrauch} for continuous operators on Cantor
+space.
+
+Since singletons in $[0,1]$ are closed, the collapse fiber
 \[
 \mathcal{F}(x) = \pi^{-1}(\{x\})
 \]
-and, in particular, their topological and effective properties.
+is a closed subset of the ambient generative space $\mathcal{X}$.
 
-A fiber contains all identities that produce the same classical value.  
-The collapse map obliterates most of the internal generative information,
-leaving behind a large space of identities sharing a single output.  
-Understanding this space is essential: the size and shape of fibers drive the
-projection theory of Part~III and the incompleteness phenomena of Part~IV.
+\begin{corollary}
+\label{cor:fiber-compact}
+For every $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is compact.
+\end{corollary}
 
-We show that each fiber is closed, uncountable, highly redundant, and
-topologically rich.  
-We then identify the \emph{effective fiber} and prove that it forms a
-nonempty $\Pi^0_1$ class.  
-This formalizes the computational structure of the identities surviving
-collapse.
+\begin{proof}
+The ambient space $\mathcal{X}$ is compact and $\mathcal{F}(x)$ is closed in
+$\mathcal{X}$, so $\mathcal{F}(x)$ is compact.
+\end{proof}
 
-\section{Fibers of the Collapse Map}
+This corrects the earlier intuition that compactness arises from
+$\mathcal{X}^{*}$. The effective subspace $\mathcal{X}^{*}$ is not compact.
+Compactness of the fiber is inherited from the ambient space $\mathcal{X}$.
 
-Fix $x \in [0,1]$ and consider the set
-\[
-\mathcal{F}(x) = \{\, G \in \mathcal{X}^* : \pi(G) = x \,\}.
-\]
-Two identities $G = (M,D,K)$ and $H = (M',D',K')$ lie in the same fiber if
-their canonical outputs agree:
-\[
-X(G) = X(H) = (x_j)_{j \ge 0},
-\]
-the base-$b$ expansion of $x$ we have fixed by convention.
+\section{The Effective Fiber and Its Position in the Ambient Space}
 
-Beyond these selected digits, the identities may differ arbitrarily.
-
-\subsection*{Closedness}
-
-Because $\pi$ is continuous and singletons $\{x\}$ are closed in $[0,1]$, each
-fiber is a closed subset of $\mathcal{X}^*$.  
-Fibers are therefore compact with respect to the product topology.
-
-\subsection*{Degrees of freedom}
-
-Let $(x_j)_{j \ge 0}$ denote the chosen expansion of $x$.  
-A generative identity $G$ belongs to $\mathcal{F}(x)$ precisely when:
-\begin{enumerate}
-    \item[(i)] the selector $M$ chooses infinitely many positions;
-    \item[(ii)] the digit stream $D$ satisfies
-          $D(n_j) = x_j$ at the selected positions;
-    \item[(iii)] the meta stream $K$ is arbitrary.
-\end{enumerate}
-
-Between successive selected positions, the identity may place any digit.  
-Similarly, at each index where $M(n) = K$, the meta-symbol $K(n)$ is free.
-Thus
-\[
-\mathcal{F}(x)
-  \cong \{D,K\}^{\mathbb{N}} \times \{0,\ldots,b-1\}^{\mathbb{N}}
-        \times \Sigma^{\mathbb{N}}
-\]
-subject to a countable collection of fixed coordinates enforcing
-$D(n_j) = x_j$.  
-The remaining coordinates form a product of Cantor spaces.
-Hence every fiber is uncountable, totally disconnected, and perfect.
-
-\section{The Effective Fiber}
-
-We now restrict attention to the effective core.  
-For $x \in [0,1]$ define the \emph{effective fiber}
+Define the effective fiber by
 \[
 \mathcal{F}_{\mathrm{eff}}(x)
-  = \mathcal{F}(x) \cap \mathcal{G}_{\mathrm{eff}}.
+=
+\mathcal{F}(x) \cap \mathcal{X}^{*}.
 \]
+This is the set of identities that collapse to $x$ and select infinitely many
+digits. It is a dense subset of $\mathcal{F}(x)$ in the subspace topology.
 
-In this section we show that $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
-$\Pi^0_1$ class.  
-This places the effective fibers squarely within the classical hierarchy of
-computably presented closed sets in Cantor space.
+The following subtlety is important.
 
-\subsection{Nonemptiness}
+\begin{proposition}
+\label{prop:efffiber-not-closed}
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is not closed in
+$\mathcal{X}$ and is not closed in $\mathcal{X}^{*}$.
+\end{proposition}
 
-If $x$ is computable, it has a computable expansion $(x_j)$, and the identity
-that selects all digits and sets $D(j)=x_j$ lies in $\mathcal{F}_{\mathrm{eff}}(x)$.  
-More generally, any computable selector that exposes infinitely many positions
-can be combined with the given expansion to produce an element of the
-effective fiber.
+\begin{proof}
+Consider a sequence of identities $G_k \in \mathcal{X}^{*}$ whose selectors
+place the $j$th selected digit at position $n_j^{(k)}$ with
+$n_j^{(k)} \to \infty$ as $k \to \infty$ for each fixed $j$. Pointwise limits
+of such sequences may select only finitely many digits, so the limit lies in
+$\mathcal{X} \setminus \mathcal{X}^{*}$. Since $\mathcal{F}(x)$ is closed, the
+same phenomenon occurs inside fibers.
+\end{proof}
 
-Thus $\mathcal{F}_{\mathrm{eff}}(x)$ is nonempty whenever $x$ is computable.
+Despite this lack of closedness, the effective fiber retains the same
+topological richness as the full fiber.
 
-\subsection{Computable closedness}
+\section{Perfectness and Cantor Geometry of the Fiber}
 
-To show that $\mathcal{F}_{\mathrm{eff}}(x)$ is a $\Pi^0_1$ class, we verify
-that membership can be disproved by finite evidence.
+The collapse fiber $\mathcal{F}(x)$ is totally disconnected and has no
+isolated points. This follows from standard arguments in Cantor space (see
+\cite{LindMarcus} or \cite{Kechris}). We state the result here for reference.
 
-A computable identity $G = (M,D,K)$ belongs to $\mathcal{F}_{\mathrm{eff}}(x)$
-if and only if:
-\begin{enumerate}
-    \item $M$ selects digits infinitely often, and
-    \item for each $j$, the selected digit $d_G(j)$ equals $x_j$.
-\end{enumerate}
+\begin{proposition}
+\label{prop:fiber-perfect}
+For every $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is perfect,
+totally disconnected, and uncountable.
+\end{proposition}
 
-A violation of membership occurs precisely when:
+\begin{proof}
+Total disconnectedness follows from the product structure of $\mathcal{X}$.
+Perfectness follows because arbitrary changes in the unselected coordinates or
+in the meta-information stream after any finite index preserve the collapsed
+value. Details are standard and may be found in the references above.
+\end{proof}
+
+Since the effective subspace $\mathcal{X}^{*}$ is dense in $\mathcal{X}$, the
+effective fiber inherits these properties.
+
+\begin{corollary}
+\label{cor:efffiber-perfect}
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is dense in the full fiber
+and contains no isolated points.
+\end{corollary}
+
+\section{Tail Freedom Inside Collapse Fibers}
+
+For any identity in the fiber and any finite prefix, there exist distinct
+extensions in the fiber that share the prefix and differ afterward. This
+property will be essential in later chapters.
+
+\begin{proposition}
+\label{prop:tail-freedom}
+Let $x \in [0,1]$ and let $G \in \mathcal{F}(x)$. For every $N$ there exist
+distinct identities $G'$ and $G''$ in $\mathcal{F}(x)$ such that
 \[
-d_G(j) \ne x_j
+G' \upharpoonright N
+=
+G'' \upharpoonright N
+=
+G \upharpoonright N.
 \]
-for some $j$.  
-Because $M$ and $D$ are computable, this disagreement is detected by some
-finite prefix of $(M,D)$.
+\end{proposition}
 
-Therefore:
-\[
-G \notin \mathcal{F}_{\mathrm{eff}}(x)
-\quad\Longleftrightarrow\quad
-\exists j\, [\, d_G(j) \ne x_j\,],
-\]
-and the right-hand condition is semidecidable (it is the disjunction of
-computable finite checks).  
-Hence $\mathcal{F}_{\mathrm{eff}}(x)$ is $\Pi^0_1$.
+\begin{proof}
+Modify the unselected digits or the meta stream beyond index $N$. These
+changes do not alter the collapsed value. The resulting identities remain in
+the fiber and are distinct.
+\end{proof}
 
-\section{Geometry of Effective Fibers}
-
-Viewing $\mathcal{G}_{\mathrm{eff}}$ as a subset of Baire space, the effective
-fiber inherits a rich internal structure:
-\begin{itemize}
-    \item it is infinite and compact in the subspace topology,
-    \item it contains elements of both hybrid and null-density type,
-    \item it admits arbitrary meta-information streams within the effective
-          alphabet,
-    \item it supports the tail-sewing and alignment constructions needed for
-          diagonalization.
-\end{itemize}
-
-Crucially, no effective fiber collapses to a single computable identity.
-Even after fixing the entire classical expansion of $x$, the selector stream
-may choose digits at arbitrarily sparse or dense positions, and the
-meta-information stream remains unrestricted.
-
-This degree of freedom is the foundation for the observation and
-incompatibility phenomena developed in the next part.
+Tail freedom is one of the central sources of nondeterminacy in the generative
+framework and forms the geometric basis for the indistinguishability
+construction in Chapter \texttt{\ref{chap:indistinguishability}}.
 
 \section{Summary}
 
-Each fiber of the collapse map is a large symbolic object containing every
-identity that produces a given real number.  
-The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ forms a nonempty
-$\Pi^0_1$ class and possesses significant internal structure.  
-Understanding this geometry reveals why finite observers cannot capture all
-the generative information that survives within a fiber.
+This chapter clarified the topological setting of the collapse fibers. The key
+points are:
 
-In Part~II we turn to the dynamics of selector patterns, illustrating the
-range of behaviors present among identities collapsing to the same value.
+\begin{itemize}
+    \item The ambient generative space $\mathcal{X}$ is compact.
+    \item The effective subspace $\mathcal{X}^{*}$ is dense and not compact.
+    \item Collapse fibers $\mathcal{F}(x)$ are closed subsets of $\mathcal{X}$
+    and are therefore compact.
+    \item The effective fiber is dense inside the fiber and contains no
+    isolated points.
+    \item Tail freedom allows arbitrary variations after finite prefixes.
+\end{itemize}
+
+These properties form the foundation for the structural indistinguishability
+results in Chapter \texttt{\ref{chap:indistinguishability}}.
+
 \clearpage{}
 
 \chapter*{Part II Summary}
 
-Part II examines the behavior of selector streams, which play a central role
-in the generative identity.  
-The selector determines which digits of the digit stream contribute to the
-canonical output and therefore shapes both the internal structure of an
-identity and its interaction with observers.
+Part II analyzes the behavior of selector streams, which determine when digits
+of the digit stream are exposed and thus shape the symbolic structure of a
+generative identity. The selector governs both the internal geometry of an
+identity and the finite-information view available to continuous observers.
 
-Two fundamental regimes of selector behavior are analyzed.  
-Hybrid selectors expose digits with positive asymptotic density, while
-null density selectors expose digits at vanishing density but still do so
-infinitely often.  
-Both regimes occur densely in the generative space, and both appear inside
-every collapse fiber.  
-This shows that the collapse operation imposes almost no constraint on the
-rate at which digits are revealed.
+Two broad regimes of selector behavior are examined. Hybrid selectors expose
+digits with positive asymptotic frequency, while null-density selectors expose
+digits only sporadically, yet still infinitely often. Both regimes occur
+densely in the generative space and in every collapse fiber. This shows that
+collapse places essentially no constraint on how rapidly or irregularly digits
+may be revealed.
 
-Selector diversity inside collapse fibers underscores a key theme of the
-framework.  
-Identities that collapse to the same real number may differ widely in how
-their canonical digits are exposed.  
-Some identities reveal digits frequently and regularly, while others reveal
-them sparsely or with large irregular gaps.  
-This structural variability motivates the question of how much information can
-be extracted from a generative identity by continuous observers.
+The analysis in Part II emphasizes that selector patterns vary widely even
+among identities sharing the same collapsed value. Within a single fiber one
+finds identities with regular, evenly spaced exposures, as well as identities
+with extreme sparsity or highly irregular gap growth. These differences are
+structural: they persist regardless of how the digit or meta streams behave,
+and they are invisible to classical magnitude.
 
-Part II provides a detailed description of selector regimes and prepares the
-ground for projection theory in Part III, where continuous observers are used
-to measure and compare generative identities.
+This structural diversity motivates the central themes of Parts III and IV.
+Continuous observers examine only finite prefixes, and selector behavior
+demonstrates how much long-term structure can lie beyond finite
+observational reach. Part II therefore lays the groundwork for projection
+theory and for the incompleteness phenomena that arise when observers attempt
+to measure identities using only finite information.
  \clearpage{}\chapter{Selector Patterns and Density Regimes}
 
 \section{Introduction}
@@ -1236,157 +1253,141 @@ technical tools for the alignment and sewing constructions that begin in the
 next chapter and culminate in the meta-diagonalizer of Part IV.
 \clearpage{}
 \clearpage{}\chapter{Projective Incompatibility}
+\label{chap:projective-incompatibility}
 
 \section{Introduction}
 
-Structural projections measure different aspects of a generative identity.
-Some observe digit frequencies, others observe spacing patterns, and others
-extract classical information through collapse.  
-Although each projection examines only a finite prefix at a fixed precision,
-their requirements may conflict.  
-It may be impossible for a single finite prefix of an identity to satisfy the
-demands of multiple projections at once.
+Structural projections extract different aspects of a generative identity.
+Some measure digit frequencies, others examine spacing patterns, and others
+recover classical information through collapse. Although each projection
+depends only on a finite prefix of the generative identity at any prescribed
+precision, their finite-prefix requirements may conflict.
 
-This chapter formalizes this notion of conflict.  
-We show that distinct observers often require incompatible finite structures
-from the selector and digit streams.  
-This incompatibility is a central ingredient in the construction of the
-meta-diagonalizer in Part IV, where controlled divergence from reference
-identities is enforced by exploiting these conflicting constraints.
+This chapter develops a formal notion of such conflicts. Distinct observers
+often demand incompatible local structures from the selector or digit streams.
+These incompatibilities arise from the way dependency bounds determine the
+finite windows that observers examine, and they play a central role in the
+structural indistinguishability results of Chapter
+\texttt{\ref{chap:indistinguishability}}. They express the basic limitation
+that no finite window can satisfy all observers simultaneously.
 
-The conceptual roots of this phenomenon appear in symbolic dynamics, where
-different ergodic or combinatorial invariants may demand incompatible blocks
-to appear in a shift space.  
-Here the same idea arises in the generative setting but is applied directly to
-observational functionals rather than to subshifts.
+The phenomenon is analogous to familiar situations in symbolic dynamics, where
+different combinatorial or ergodic invariants require incompatible blocks to
+appear in a shift space. Here the same principle applies to observational
+functionals rather than to subshifts.
 
 \section{Observer Requirements}
 
 Let $\Phi$ and $\Psi$ be two structural projections with dependency bounds
-$B_\Phi$ and $B_\Psi$.  
-Fix a desired precision $\varepsilon > 0$.  
-Then any identity $G$ must satisfy:
+$B_{\Phi}$ and $B_{\Psi}$. Fix a precision $\varepsilon > 0$. To approximate
+$\Phi(G)$ and $\Psi(G)$ within $\varepsilon$, we must satisfy
 \[
-\Phi(G) \text{ determined by } G[0..B_\Phi(\varepsilon)], 
-\quad
-\Psi(G) \text{ determined by } G[0..B_\Psi(\varepsilon)].
+G[0..B_{\Phi}(\varepsilon)] \text{ determines } \Phi(G),
+\qquad
+G[0..B_{\Psi}(\varepsilon)] \text{ determines } \Psi(G).
 \]
-
-If the projections measure unrelated aspects of the identity, these
-finite prefixes may be required to contain contradictory patterns.
+If the projections extract unrelated forms of structural information, these
+finite windows may demand incompatible patterns.
 
 \subsection*{Example: density versus spacing}
 
-Digit density projections may require the initial prefix to contain many
-positions where $M(n) = D$.  
-Conversely, spacing projections (such as fluctuation observers) may require
-long runs where $M(n) = K$ in order to witness large gaps between selected
-positions.  
-A single finite block cannot simultaneously exhibit both high density and
-large gaps at the same index range.
+Let $\Phi$ be a digit density projection and let $\Psi$ be a spacing or
+fluctuation projection. To approximate $\Phi(G)$ with small error, the initial
+prefix must contain many positions where $M(n) = D$. To approximate $\Psi(G)$
+with small error, the prefix must contain a long interval in which
+$M(n)=K$, so that the gap ratio can be measured accurately. A single prefix
+cannot realize both requirements simultaneously.
 
-This tension reflects a basic fact from combinatorics on words: local
-constraints on symbol frequencies and local constraints on block lengths need
-not be simultaneously satisfiable.
+This type of conflict is common in combinatorics on words. Local constraints
+on symbol frequencies and local constraints on block lengths do not always
+admit a common finite witness.
 
 \section{Formal Definition of Incompatibility}
 
-\begin{definition}[Projective Incompatibility]
-Two projections $\Phi$ and $\Psi$ are \emph{incompatible at precision}
-$\varepsilon$ if no prefix of length
+\begin{definition}[Projective incompatibility]
+Two projections $\Phi$ and $\Psi$ are incompatible at precision $\varepsilon$
+if no prefix of length
 \[
-L = \max\{ B_\Phi(\varepsilon), B_\Psi(\varepsilon) \}
+L = \max\bigl\{ B_{\Phi}(\varepsilon), B_{\Psi}(\varepsilon) \bigr\}
 \]
-can satisfy both of the following:
-\begin{enumerate}
-    \item the prefix forces $\Phi(G)$ to lie within $\varepsilon$ of its target
-          value, and
-    \item the prefix forces $\Psi(G)$ to lie within $\varepsilon$ of its target
-          value.
-\end{enumerate}
+can simultaneously satisfy the finite-prefix requirements needed to approximate
+both projections to within $\varepsilon$ at their target values.
 \end{definition}
 
-Incompatibility expresses a structural impossibility: the observers demand
-conflicting patterns in the same finite window.
+Incompatibility therefore expresses a finite informational impossibility:
+within the window $[0..L]$ the observers demand conflicting symbolic patterns.
 
 \section{Concrete Instances}
 
-Although incompatibility is common in practice, one example illustrates the
-idea clearly.
+The density versus spacing example above is representative. Let
+$N_{\Phi} = B_{\Phi}(\varepsilon)$ and $N_{\Psi} = B_{\Psi}(\varepsilon)$.
+If we examine the prefix $[0..L]$ with
+$L = \max(N_{\Phi}, N_{\Psi})$, then a density requirement may force many
+selected positions in this interval, whereas a spacing requirement may force a
+long unselected block. These demands cannot be met by the same prefix.
 
-\subsection*{Example: Frequent selection and large gaps}
+This incompatibility is entirely local. It depends only on the finite window
+used by each observer, not on the behavior of the generative identity outside
+this window.
 
-Let $\Phi$ be the selector density projection and $\Psi$ the fluctuation
-projection.  
-Fix $\varepsilon = 0.05$.
+\section{Finite Families of Observers}
 
-To force $\Phi(G)$ within $\varepsilon$ of a positive density, the prefix must
-contain many instances of $M(n) = D$.  
-To force $\Psi(G)$ within $\varepsilon$ of a large index gap ratio, the prefix
-must contain a long contiguous run where $M(n) = K$.
-
-Let $N_\Phi = B_\Phi(\varepsilon)$ and $N_\Psi = B_\Psi(\varepsilon)$.  
-Consider the interval $[0..L]$ with $L = \max(N_\Phi, N_\Psi)$.  
-If the prefix contains the required density of selected positions for
-$\Phi$, it cannot contain the long block of unselected positions required by
-$\Psi$ within the same interval.  
-Thus the two requirements are incompatible at precision $\varepsilon$.
-
-This incompatibility is a finite-informational fact and does not depend on
-the behavior of the identity beyond the prefix.
-
-\section{Incompatibility Across a Family}
-
-Finite families of projections may also exhibit internal conflicts.
+Finite families of projections may also contain internal conflicts.
 
 \begin{proposition}
-Let $\mathcal{P}$ be a finite family of projections.  
-If $\mathcal{P}$ contains two projections that are incompatible at some
-precision $\varepsilon$, then no identity can satisfy the entire family at
-precision $\varepsilon$ using a single prefix of length $B_{\mathcal{P}}(\varepsilon)$.
+Let $\mathcal{P}$ be a finite family of projections. If $\mathcal{P}$
+contains two projections that are incompatible at precision $\varepsilon$,
+then no prefix of length
+\[
+B_{\mathcal{P}}(\varepsilon)
+=
+\max_{\Phi \in \mathcal{P}} B_{\Phi}(\varepsilon)
+\]
+can satisfy all projections in the family at precision $\varepsilon$.
 \end{proposition}
 
 \begin{proof}
-Since $B_{\mathcal{P}}(\varepsilon)$ is the maximum dependency bound for the
-family, any prefix satisfying all observers must satisfy each one
-individually.  
-If two observers impose incompatible requirements on that prefix, no such
-prefix exists.
+Any prefix satisfying the family must satisfy each member individually. If two
+members of the family impose incompatible requirements on the prefix, there is
+no prefix that satisfies all of them.
 \end{proof}
 
-This proposition explains why the diagonalizer construction can always force
-deviations.  
-Whenever a finite family of observers demands a uniform prefix, one can
-choose tails that generate divergent structures not simultaneously detectable
-by the family.
+Thus incompatibility propagates across finite families of observers.
 
-\section{Implications for Diagonalization}
+\section{Lack of Interval Structure in Projective Images}
 
-The diagonalizer of Part IV depends critically on the existence of
-projections whose finite precision requirements cannot all be realized in the
-same prefix.  
-This incompatibility creates space for controlled tail divergence.  
-Once an identity has satisfied observers up to the required prefix length, the
-unobservable tail may be modified to enforce structural differences from
-reference generators.
+In earlier versions of this chapter it was natural to expect that the image of
+a collapse fiber under a projection forms an interval. This is not the case.
+Continuous maps from zero-dimensional compact spaces can have highly
+disconnected images (see \cite{Kechris}). Therefore no general structural
+statement can be made about $\Phi(\mathcal{F}(x))$ beyond continuity.
 
-This mechanism reflects standard arguments in computable analysis, where
-different constraints on prefixes of names of real numbers may conflict.  
-Here the conflicts arise between observers on generative identities and serve
-as the engine of the incompleteness phenomenon.
+This observation reinforces the finite-prefix viewpoint: projection behavior is
+governed by dependency bounds, not by global geometric structure of the fiber.
+
+\section{Implications for Indistinguishability}
+
+Prefix incompatibility has a direct consequence for observational limits.
+Since different observers require different finite windows, the prefixes needed
+to satisfy growing families of observers also grow. This monotonic expansion
+of prefix requirements implies that observers reveal only finite structural
+information about generative identities.
+
+In Chapter \texttt{\ref{chap:indistinguishability}} we use this observation to
+construct identities that agree with a reference identity on all relevant
+prefixes for any finite family of observers, while differing in their
+tails. This shows that generative structure beyond these prefixes remains
+undetectable.
 
 \section{Summary}
 
-Different projections impose distinct finite structural requirements on
-generative identities.  
-When these requirements cannot be satisfied simultaneously in a single
-prefix, we say the projections are incompatible.  
-Such conflicts provide the combinatorial foundation for the diagonalizer,
-allowing one to satisfy observers finitely while enforcing divergence beyond
-their range of observation.
-
-In the next chapter we develop the alignment and sewing tools needed to
-exploit this incompatibility inside the effective collapse fiber.
+Different structural projections impose distinct finite-prefix constraints. When
+these constraints cannot be realized by a single prefix, the projections are
+incompatible. This incompatibility is a local symbolic phenomenon and reflects
+the fact that observers examine finite windows of the generative identity at
+finite precision. These finite-prefix effects provide the conceptual foundation
+for the indistinguishability results of Chapter
+\texttt{\ref{chap:indistinguishability}}.
 \clearpage{}
 \clearpage{}\chapter{Alignment and Tail Sewing Inside Fibers}
 
@@ -1550,659 +1551,571 @@ finite collection of continuous observers.
 \chapter*{Part IV Summary}
 
 Part IV establishes the central incompleteness phenomenon of the Generative
-Identity Framework.  
-Although the collapse map determines the classical real number associated with
-a generative identity, it discards most of the symbolic structure carried by
-the selector, digit, and meta streams.  
-This part shows that no finite collection of continuous observers can recover
-that structure.
+Identity Framework. The collapse map determines the classical real value
+associated with a generative identity, but it reveals only a small portion of
+the symbolic structure encoded by the selector, digit, and meta streams. This
+part shows that no finite collection of continuous observers can recover the
+hidden generative identity from its collapsed value.
 
 The first chapter develops the alignment and sewing tools that operate inside
-collapse fibers.  
-Identities in the same fiber expose the same digits in the same order, even
-when their selector positions differ.  
-This permits alignment of selected digits and controlled replacement of the
-tail of one identity by the tail of another without changing the collapsed
-value.  
-These symbolic operations make it possible to preserve observer agreement on
-finite prefixes while introducing divergence in unobserved tails.
+collapse fibers. Identities in the same fiber expose the canonical digits of
+their collapsed value in the same order, even when the positions of those
+exposures differ. This shared output allows selected digits to be aligned,
+after which the tail of one identity may be replaced with the tail of another
+without affecting the collapsed value. These operations ensure that finite
+prefix agreement can always be preserved while symbolic differences are
+introduced beyond the reach of observers.
 
-The second chapter constructs the meta diagonalizer.  
-Given an enumeration of all computable structural projections, the
-construction produces a computable identity that agrees with a reference
-identity on all observed prefixes but diverges from it along each projection
-at a scale that eventually exceeds the tolerance assigned to that projection.
-The diagonalizer is built inductively, using dependency bounds to satisfy
-observer constraints at each stage and using tail sewing to introduce the
-desired divergence.
+The second chapter presents the mimicry construction. Given an enumeration of
+computable structural projections, the construction builds a computable
+identity that agrees with a reference identity on all prefixes required by the
+observers, yet differs from the reference in its tail. Dependency bounds
+guarantee that this agreement on finite prefixes forces observers to assign
+identical values, even though the two identities are structurally distinct.
+This yields a computable identity that is observationally indistinguishable
+from the reference while not being equal to it.
 
-The final chapter of the part proves the Structural Incompleteness Theorem.
-For any computable real number $x$ and any finite family of computable
-observers, there exist distinct identities in the collapse fiber
-$\mathcal{F}_{\mathrm{eff}}(x)$ that agree on the values of all observers in
-the family.  
-Finite observation cannot recover the generative identity.  
-This establishes an inherent limit on what any finite analytical process can
-detect about the internal structure of generative representations.
+The final chapter proves the Structural Incompleteness Theorem. For any
+computable real number $x$ and any finite family of computable continuous
+observers, there exist distinct identities in the effective collapse fiber
+$\mathcal{F}_{\mathrm{eff}}(x)$ that produce the same observations for every
+observer in the family. Observers cannot distinguish these identities because
+their measurements depend only on finite prefixes, while the symbolic
+differences lie entirely beyond those prefixes.
 
-Part IV therefore demonstrates that generative structure is fundamentally
-incomplete with respect to finite continuous observation.  
-This incompleteness is not a consequence of randomness or approximation, but
-arises from the topology and symbolic architecture of the generative space.
- \clearpage{}\chapter{The Meta-Diagonalizer}
+Part IV therefore shows that generative structure is fundamentally invisible
+to finite continuous observation. This incompleteness arises from the topology
+of the generative space and the finite information inherent in continuous
+functionals, not from randomness or approximation.
+ \clearpage{}\chapter{Structural Indistinguishability}
+\label{chap:indistinguishability}
 
 \section{Introduction}
 
-The collapse fiber $\mathcal{F}(x)$ contains many generative identities that
-produce the same classical real number.  
-In earlier chapters we saw that continuous projections cannot observe the full
-internal structure of a generative identity and depend only on finite prefixes
-at any fixed precision.  
-This chapter constructs a new identity inside the effective fiber that agrees
-with a given reference identity on every observed prefix, yet diverges from it
-in structural properties that no fixed finite collection of projections can
-detect.
+Collapse fibers $\mathcal{F}(x)$ contain uncountably many generative identities
+that encode the same classical real number. Earlier chapters established that
+computable structural projections---the observers of the framework---depend
+only on finitely many generative coordinates when queried at any fixed
+precision. Each observer sees only a finite window into an identity.
 
-The construction is a form of diagonalization.  
-Given a countable sequence of projections, we build an identity that avoids
-agreement with a prescribed family of reference structures by introducing
-divergence at stages beyond their dependency bounds.  
-The internal freedom available inside collapse fibers ensures that these
-divergent tails do not change the classical value of the identity.
+This chapter proves the central incompleteness phenomenon of the generative
+framework: \emph{finite observation cannot recover generative structure}.
+We construct a computable identity inside the effective fiber of a computable
+real $x$ that is generically different from a fixed reference identity, yet
+simulates it so precisely that no computable structural projection can
+distinguish them.
 
-The diagonalizer demonstrates the fundamental incompleteness of finite
-observers and prepares the ground for the Incompleteness Theorem of the next
-chapter.
+Unlike classical diagonalization---which builds an object designed to
+\emph{evade} a list of properties---our construction builds an object that
+\emph{mimics} a given reference. By satisfying the finite-prefix requirements
+of every observer in an effective enumeration, we show that internal
+generative information (selector geometry, meta-information, tail structure)
+is fundamentally invisible to finitary analysis.
 
-\section{Setup and Notation}
+\section{Setup}
 
-Fix a computable real number $x$ and let
+Fix a computable real number $x$ and a computable identity
 \[
-(x_j)_{j \ge 0}
+H \in \mathcal{F}_{\mathrm{eff}}(x)
 \]
-denote its canonical base $b$ expansion.  
-Let $H$ be a computable identity in $\mathcal{F}_{\mathrm{eff}}(x)$ that we
-will use as a reference.  
+that will serve as our reference.  
 Let
 \[
-\Phi_0, \Phi_1, \Phi_2, \ldots
+\{\Phi_k\}_{k \in \mathbb{N}}
 \]
-be a computable enumeration of all computable projections on
-$\mathcal{G}_{\mathrm{eff}}$.  
-For each $k$, let $B_k$ denote a computable dependency bound for $\Phi_k$.
+be an effective enumeration of all computable secondary projections on
+$\mathcal{G}_{\mathrm{eff}}$, each equipped with a computable dependency bound
+$B_k(\varepsilon)$ as in Chapter~\ref{chap:dependency-bounds}.
 
-Our goal is to construct an identity
+Our goal is to construct a computable identity
 \[
-G^{\sharp} \in \mathcal{F}_{\mathrm{eff}}(x)
+G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x),
+\qquad
+G^\sharp \neq H,
 \]
-that diverges from $H$ on every projection $\Phi_k$ by more than a prescribed
-amount at stage $k$, despite agreeing with $H$ on prefixes long enough to
-satisfy all earlier projections.
-
-\section{Divergent Identities Inside the Fiber}
-
-At each stage $k$ we will require an identity $A_k$ inside the effective fiber
-$\mathcal{F}_{\mathrm{eff}}(x)$ that differs from $H$ at scale $\varepsilon_k$
-with respect to $\Phi_k$, where
+such that for every $k$,
 \[
-\varepsilon_0 > \varepsilon_1 > \varepsilon_2 > \cdots \to 0
+\lim_{k \to \infty}
+\bigl|\Phi_k(G^\sharp) - \Phi_k(H)\bigr| = 0.
 \]
-is a fixed computable sequence of positive tolerances.
 
-The following lemma ensures that such identities always exist.
-
-\begin{lemma}[Divergence Inside the Effective Fiber]
-\label{lem:divergence-fiber}
-For any computable projection $\Phi$ and any computable $\varepsilon > 0$,
-there exists a computable identity $A \in \mathcal{F}_{\mathrm{eff}}(x)$ such
-that
+In fact, we will achieve the stronger property
 \[
-|\Phi(A) - \Phi(H)| > 3\varepsilon.
+\bigl|\Phi_k(G^\sharp) - \Phi_k(H)\bigr|
+< \varepsilon_k,
+\qquad
+\varepsilon_k = 2^{-(k+1)},
+\]
+for each $k$.
+
+Thus $G^\sharp$ lies arbitrarily close to $H$ from the perspective of every
+computable observer, yet differs from $H$ at infinitely many positions.
+
+\section{Distinctness in the Effective Fiber}
+
+A key structural fact is that collapse fibers have no isolated points.
+
+\begin{lemma}[Effective Non-Isolation]
+\label{lem:distinct}
+For every computable identity $H \in \mathcal{F}_{\mathrm{eff}}(x)$ and every
+prefix length $N$, there exists a computable identity $A \in \mathcal{F}_{\mathrm{eff}}(x)$ such that
+\[
+A \upharpoonright N = H \upharpoonright N
+\quad\text{and}\quad
+A \neq H.
 \]
 \end{lemma}
 
 \begin{proof}
-The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
-$\Pi^0_1$ class.  
-If $\Phi$ were constant on this class, then $\Phi$ would depend only on the
-canonical output and would assign the same value to all identities in the
-fiber.  
-However, by the definition of a structural projection, $\Phi$ may depend on
-all components of the generative identity, including the selector and
-meta-information streams.
-
-Because the fiber allows arbitrary choices on unselected digits and on the
-meta stream, we may modify these components computably without altering the
-selected digits.  
-By continuity of $\Phi$, local changes to the selector or meta stream beyond
-any prefix can move the value of $\Phi$ through an interval.  
-Thus the image of $\mathcal{F}_{\mathrm{eff}}(x)$ under $\Phi$ is an interval,
-and the value $\Phi(H)$ cannot lie at the boundary of this interval for all
-such modifications.
-
-We may therefore choose a computable identity $A$ in the fiber and a
-computable prefix for which the subsequent tail guarantees a divergence of at
-least $3\varepsilon$.  
-This identity satisfies the desired inequality.
+Collapse fibers are closed subsets of the ambient Cantor product space, and by
+the alignment and sewing lemmata from Chapter~\ref{chap:alignment}, one may
+modify any generative tail beyond index $N$ while preserving membership in
+$\mathcal{F}(x)$. Since the modifications can be carried out effectively,
+$A$ may be chosen computable.
 \end{proof}
 
-This lemma encapsulates the essential freedom inside the effective fiber: one
-may force meaningful structural differences without changing the collapsed
-value.
+This lemma guarantees that we can always introduce genuine generative
+differences beyond any fixed prefix while keeping the collapse value $x$
+unchanged.
 
-\section{The Diagonal Construction}
+\section{Mimicry Construction}
 
-We now build the diagonalizer
+We construct a sequence
 \[
-G^{\sharp} = \lim_{k \to \infty} G_k
+G_0, G_1, G_2, \dots
 \]
-as a limit of identities that stabilize on longer and longer prefixes while
-introducing controlled divergence at each stage.
+of identities in $\mathcal{F}_{\mathrm{eff}}(x)$ converging to the desired
+limit identity $G^\sharp$.
 
-Let $G_0 = H$.  
-Assume inductively that $G_k$ has been defined and that $G_k$ agrees with $H$
-on its first $N_k$ symbols for some computable $N_k$.
+\subsection{Initialization}
 
-\subsection*{Stage $k$: divergence}
+Let $G_0 = H$ and $N_0 = 0$.  
+Set $\varepsilon_k = 2^{-(k+1)}$.
 
-Choose
+\subsection{Inductive Step}
+
+Assume $G_k$ and $N_k$ are defined.
+
+\paragraph{Step 1: Update the dependency horizon.}
+To ensure that $G_{k+1}$ and $H$ agree with respect to observer $\Phi_k$ at
+precision $\varepsilon_k$, compute
 \[
-\varepsilon_k = 2^{-(k+2)}.
-\]
-By Lemma \ref{lem:divergence-fiber}, choose
-\[
-A_k \in \mathcal{F}_{\mathrm{eff}}(x)
-\]
-such that
-\[
-|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
-\]
-
-This identity will serve as the source of structural divergence at stage $k$.
-
-\subsection*{Stage $k$: prefix agreement}
-
-To preserve earlier projective agreements, we require that the first $N_k$
-symbols of $G_{k+1}$ agree with $G_k$ and with $H$.  
-Let
-\[
-N_{k+1}
-  = \max\bigl( N_k,\ B_k(\varepsilon_k) \bigr).
-\]
-This ensures that agreement on the first $N_{k+1}$ symbols forces agreement of
-$\Phi_k$ up to error $\varepsilon_k$.
-
-\subsection*{Stage $k$: alignment}
-
-Let $h_{k}$ be the position in $H$ corresponding to the $k$th selected digit.
-Let $a_k$ be the corresponding position in $A_k$.  
-Choose $j$ sufficiently large that $h_j \ge N_{k+1}$.  
-The alignment lemma guarantees that the indices $h_j$ and $a_j$ correspond to
-the same selected digit.
-
-\subsection*{Stage $k$: tail sewing}
-
-Define $G_{k+1}$ by sewing:
-\[
-G_{k+1}(n)
-  =
-\begin{cases}
-G_k(n) & n \le h_j,\\
-A_k(n - h_j + a_j) & n > h_j.
-\end{cases}
+L_k = B_k(\varepsilon_k),
+\qquad
+N_{k+1} = \max(N_k, L_k) + 1.
 \]
 
-By the tail sewing proposition from the previous chapter,
+\paragraph{Step 2: Freeze the prefix.}
+Require
 \[
-G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x).
+G_{k+1} \upharpoonright N_{k+1}
+=
+H \upharpoonright N_{k+1}.
+\]
+Any extension of this prefix automatically satisfies
+\[
+\bigl|\Phi_k(G_{k+1}) - \Phi_k(H)\bigr| < \varepsilon_k.
 \]
 
-Moreover, $G_{k+1}$ agrees with $G_k$ on their first $N_{k+1}$ symbols, so all
-projections $\Phi_0,\ldots,\Phi_k$ agree with $H$ to within $\varepsilon_k$ on
-$G_{k+1}$.
+\paragraph{Step 3: Force distinctness.}
+Apply Lemma~\ref{lem:distinct} to obtain a computable identity
+$A_k \in \mathcal{F}_{\mathrm{eff}}(x)$ with the same prefix but
+$A_k \neq H$.  
+Set $G_{k+1} = A_k$.
 
-\section{Existence of the Limit Identity}
+This ensures both conditions:
+\[
+G_{k+1} \upharpoonright N_{k+1} =
+H \upharpoonright N_{k+1},
+\qquad
+G_{k+1} \neq H.
+\]
 
-The sequence $(G_k)$ stabilizes on longer and longer prefixes.  
-For each index $n$, there exists a stage $k$ such that $n \le N_k$, and from
-that point onward, the $n$th symbol of $G_m$ remains constant for all
-$m \ge k$.
+\subsection{Existence of the Limit}
 
-Define $G^{\sharp}$ to be the identity whose $n$th symbol is this eventual
-value.  
-Then the limit exists and is computable.
+Since $N_{k+1} > N_k$ and $G_{k+1}$ agrees with $G_k$ on coordinates
+$0,\dots,N_k$, the sequence $(G_k)$ stabilizes coordinatewise and therefore
+converges in the product topology to a limit identity $G^\sharp$.
 
-\begin{proposition}
-The identity $G^{\sharp}$ lies in the effective fiber
-$\mathcal{F}_{\mathrm{eff}}(x)$.
-\end{proposition}
+Each $G_k$ belongs to $\mathcal{F}_{\mathrm{eff}}(x)$, and the fiber is closed
+in the ambient product, so
+\[
+G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x).
+\]
+
+By construction, $G^\sharp$ differs from $H$ at infinitely many coordinates.
+
+\section{The Structural Indistinguishability Theorem}
+
+\begin{theorem}[Structural Indistinguishability]
+\label{thm:indistinguishability}
+Let $x$ be a computable real number and $H \in \mathcal{F}_{\mathrm{eff}}(x)$
+a fixed computable identity.  
+Then there exists a computable identity
+\[
+G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x),
+\qquad
+G^\sharp \neq H,
+\]
+such that for every computable secondary projection $\Phi$,
+\[
+\Phi(G^\sharp) = \Phi(H).
+\]
+\end{theorem}
 
 \begin{proof}
-Each $G_k$ lies in the fiber, and the canonical output is preserved at every
-stage by the alignment and sewing procedure.  
-Thus $G^{\sharp}$ also collapses to $x$.  
-Computability follows because each coordinate stabilizes at a computable
-stage.
+Fix any computable projection $\Phi_m$.  
+For every $k \ge m$, the construction guarantees that
+\[
+G_k \upharpoonright N_k = H \upharpoonright N_k
+\quad\text{with}\quad
+N_k \ge B_m(\varepsilon_k).
+\]
+Hence
+\[
+\bigl|\Phi_m(G_k) - \Phi_m(H)\bigr| < \varepsilon_k.
+\]
+Taking limits yields
+\[
+\Phi_m(G^\sharp) = \Phi_m(H).
+\]
+Since $m$ was arbitrary, this equality holds for every computable observer.
+Distinctness follows from the fact that the disagreement positions were forced
+to diverge to infinity.
 \end{proof}
 
-\section{Diagonalization}
+\section{Interpretation}
 
-Finally, we verify that $G^{\sharp}$ diverges from $H$ along every projection
-in the sequence.
+The theorem shows that collapse fibers contain identities that are
+\emph{observationally indistinguishable} from one another under any finite or
+computably infinite battery of observers.
 
-\begin{proposition}
-For each $k$,  
+Observers operate through finite windows; generative differences appear only in
+tails. Thus no finite observation protocol---no matter how extensive the menu
+of computable structural projections---can recover the full generative
+structure of an identity.
+
+In classical analysis, the slogan is:
 \[
-|\Phi_k(G^{\sharp}) - \Phi_k(H)| \ge \varepsilon_k.
+\text{continuous observers separate points.}
 \]
-\end{proposition}
-
-\begin{proof}
-At stage $k$ we chose $A_k$ so that
+In the generative framework, the slogan is reversed:
 \[
-|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
+\text{finite observers see only finite prefixes.}
 \]
-The sewing step ensures that the tail of $G_{k+1}$ beyond index $h_j$ agrees
-with the tail of $A_k$ from index $a_j$ onward.  
-Since the tail lies entirely beyond $B_k(\varepsilon_k)$, any effect on
-$\Phi_k$ caused by the tail persists in $G_{k+1}$ and therefore in
-$G^{\sharp}$.
+The collapse map destroys structure; structure can be \emph{simulated}
+arbitrarily well inside the fiber.
 
-Agreement of prefixes up to $N_{k+1}$ introduces at most $\varepsilon_k$ of
-error.  
-Because the divergence was chosen to exceed $3\varepsilon_k$, the final
-difference remains at least $\varepsilon_k$.
-\end{proof}
-
-Thus $G^{\sharp}$ avoids finite approximation by the projections
-$\Phi_k$ in the same way that classical diagonalization avoids uniform
-compression of information.  
-This completes the construction.
-
-\section{Summary}
-
-This chapter constructed a computable identity in the collapse fiber of $x$
-that diverges from a reference identity on every computable projection while
-agreeing with the reference on arbitrarily long prefixes.  
-The construction relies on alignment and sewing tools, the existence of
-divergent identities inside the fiber, and finite dependency bounds for
-projections.  
-In the next chapter we apply the diagonalizer to prove the Structural
-Incompleteness Theorem, which states that no finite family of continuous
-observers can capture the generative structure of a real number.
+This establishes the fundamental incompleteness principle of the framework:
+generative information exists in a strict sense but lies beyond the reach of
+classical analytic observation.
 \clearpage{}
 \clearpage{}\chapter{The Continuum as a Collapse Quotient}
+\label{chap:quotient}
 
 \section{Introduction}
 
-The collapse map sends every generative identity to a real number by selecting
-and interpreting the digits exposed by its selector stream.  
-This chapter examines the relationship between the generative space
-$\mathcal{X}^*$ and the classical continuum $[0,1]$, viewed as the image of
-the collapse map.  
-We present a quotient perspective in which real numbers arise by identifying
-all identities in the same collapse fiber.  
-This perspective reveals that the continuum is a coarse shadow of a much
-richer symbolic space.
+The collapse map sends a generative identity to a real number by selecting and
+interpreting the digits exposed by its selector stream. This chapter examines
+the relationship between the ambient generative space $\mathcal{X}$ and the
+classical continuum $[0,1]$, viewed through the lens of the collapse map. The
+continuum arises as a quotient of $\mathcal{X}$ in which all identities that
+produce the same canonical output are identified. This viewpoint highlights the
+fact that classical magnitude is a coarse shadow of a richer symbolic space.
 
-The quotient interpretation is familiar in computable analysis and in the
-theory of represented spaces, where classical objects are obtained as
-equivalence classes of names.  
-Here the equivalence relation is induced by the canonical output mechanism,
-and the resulting quotient map is continuous, surjective, and highly
-non-injective.
+The quotient interpretation matches standard constructions in computable
+analysis and represented space theory. There a real number is given by an
+equivalence class of names. Here the equivalence relation is induced by the
+canonical output mechanism defined in Chapter \texttt{\ref{chap:collapse}}.
 
 \section{The Collapse Equivalence Relation}
 
-The collapse map $\pi : \mathcal{X}^* \to [0,1]$ induces an equivalence
-relation
+The collapse map $\pi : \mathcal{X} \to [0,1]$ induces an equivalence relation
 \[
 G \sim H
 \quad\Longleftrightarrow\quad
 \pi(G) = \pi(H).
 \]
-The equivalence class of $G$ under this relation is its collapse fiber
-$\mathcal{F}(\pi(G))$.
-
-Thus the classical real number $\pi(G)$ may be viewed as the equivalence class
+The equivalence class of $G$ is the collapse fiber
 \[
-[\![G]\!] = \mathcal{F}(\pi(G)).
+[\![G]\!]
+=
+\mathcal{F}(\pi(G)).
 \]
 
-Two identities lie in the same class precisely when they produce the same
-canonical digit sequence, and this sequence determines the real number under
-the usual base $b$ interpretation.
+Two identities lie in the same class exactly when they generate the same
+canonical digit sequence, and this sequence determines the collapsed real
+number in the usual base $b$ interpretation.
 
 \section{The Quotient Map}
 
-Endow $\mathcal{X}^*$ with the product topology and $[0,1]$ with the usual
-Euclidean topology.  
-Then the collapse map is continuous and surjective.  
-The induced quotient map
+We equip $\mathcal{X}$ with the product topology and $[0,1]$ with the Euclidean
+topology. By Proposition \texttt{\ref{prop:collapse-continuous}} the collapse
+map $\pi$ is continuous and surjective. The induced quotient map
 \[
-\mathcal{X}^* \longrightarrow \mathcal{X}^*/{\sim}
+q : \mathcal{X} \to \mathcal{X}/\!\sim
 \]
-is continuous in the quotient topology, and the space $\mathcal{X}^*/{\sim}$
-is homeomorphic to $[0,1]$.
+is continuous in the quotient topology. The quotient $\mathcal{X}/\!\sim$
+inherits compactness from $\mathcal{X}$, since the domain is compact and the
+equivalence relation is closed. These are standard facts from general topology
+(see \cite{Kechris}).
+
+A classical result then yields the following.
 
 \begin{proposition}
-The quotient $\mathcal{X}^*/{\sim}$ is compact, totally disconnected, and
-metrizable, and it is homeomorphic to the closed interval $[0,1]$.
+\label{prop:quotient-homeo}
+The quotient space $\mathcal{X}/\!\sim$ is homeomorphic to the closed interval
+$[0,1]$.
 \end{proposition}
 
 \begin{proof}
-The space $\mathcal{X}^*$ is compact and totally disconnected since it is a
-product of compact discrete spaces.  
-The quotient of a compact space by a closed equivalence relation is compact.
-The equivalence classes are closed because the collapse map is continuous and
-singletons in $[0,1]$ are closed.  
-Standard results from general topology imply that the quotient is compact and
-metrizable.  
-Finally, the collapse map is continuous and surjective, and the usual
-base $b$ representation provides an explicit homeomorphism between the
-quotient and $[0,1]$.
+The map $\pi$ is a continuous surjection and identifies exactly the elements
+of each fiber. Its universal property shows that $\pi$ factors through the
+quotient map $q$, and the induced map $\tilde{\pi} : \mathcal{X}/\!\sim \to [0,1]$
+is continuous and bijective. Since the domain is compact and the codomain is
+Hausdorff, $\tilde{\pi}$ is a homeomorphism.
 \end{proof}
 
-Although the quotient is topologically simple, the structure of individual
-fibers is highly complex.  
-The quotient space collapses intricate symbolic data into a one dimensional
-object.
+Although the quotient has the simple topology of an interval, the equivalence
+classes are highly structured. The quotient construction collapses complex
+symbolic data into a single classical value.
 
-\section{Topological Interpretation of Collapse Fibers}
+\section{Structure of Collapse Fibers}
 
-Each fiber is a compact, perfect, totally disconnected subspace of
-$\mathcal{X}^*$, and typically a product of Cantor sets with additional
-structure imposed by the selected digit constraints.  
-This rich internal structure contrasts with the simplicity of the collapsed
-value.
+Each collapse fiber is a compact, perfect, and totally disconnected subset of
+$\mathcal{X}$. These properties were established in Chapter
+\texttt{\ref{chap:fibers}}. The selector and meta-information streams may vary
+freely beyond any finite index without altering the collapsed value, so the
+fiber typically resembles a product of Cantor-like sets with additional
+constraints arising from the selection mechanism.
 
-The diagonalizer constructed in Part IV exploits this complexity by using
-symbolic freedom inside the fiber to generate structural divergence while
-keeping the classical value fixed.  
-The quotient viewpoint therefore provides natural language for describing why
-finite observers cannot reconstruct a generative identity from its collapsed
-value.
+This internal richness plays a central role in the structural
+indistinguishability theorem of Chapter \texttt{\ref{chap:indistinguishability}}.
+Finite observers examine only finitely many coordinates and therefore cannot
+recover tail structure inside a fiber. The quotient viewpoint makes this
+limitation explicit.
 
 \section{Computability Perspective}
 
-From the viewpoint of computable analysis, the collapse equivalence classes
-correspond to sets of names for real numbers.  
-Every computable real number $x$ has a computable identity in the fiber
-$\mathcal{F}_{\mathrm{eff}}(x)$, and this identity serves as a computable name
-in the sense of Type-2 Effectivity.
+From the viewpoint of computable analysis, the equivalence classes induced by
+the collapse map correspond to sets of names for real numbers. If $x$ is a
+computable real number, then the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$
+contains a computable identity. Such an identity serves as a computable name
+for $x$ in the sense of Type-2 Effectivity (see \cite{Weihrauch}).
 
-Conversely, noncomputable reals correspond to fibers with no computable
-elements.  
-Such fibers may still have rich internal structure, but none of their
-identities can serve as effective names.
+Conversely, if $x$ is not computable, then $\mathcal{F}_{\mathrm{eff}}(x)$
+contains no computable elements. The fiber may still have complicated
+structure, but none of its identities provide an effective name.
 
-This perspective aligns the generative identity framework with classical
-represented space theory while emphasizing that the generative space contains
-significantly more structure than a conventional naming system.
+This connection aligns the generative framework with classical represented
+space theory while emphasizing that the generative space contains far more
+structure than standard naming systems. The quotient collapses this structure,
+retaining only classical magnitude.
 
 \section{Summary}
 
-Classical real numbers arise as equivalence classes of generative identities
-under the collapse map.  
-The quotient map from the generative space to the continuum is continuous and
-surjective, and it identifies identities that agree on their canonical output.
-Each fiber is a large symbolic set containing many identities with the same
-classical value.  
-This quotient interpretation explains why generative structure cannot be
-recovered from magnitude and prepares the groundwork for the study of extended
-invariants in the next part.
+Real numbers arise as equivalence classes of generative identities under the
+collapse map. The quotient of the ambient generative space by this relation is
+homeomorphic to $[0,1]$, even though its equivalence classes are rich symbolic
+subsets of a higher-dimensional space. This quotient interpretation highlights
+why classical magnitude cannot recover generative structure and motivates the
+analysis of asymptotically sensitive invariants in the next part of the
+monograph.
 \clearpage{}
 
 \chapter*{Part V Summary}
 
-Part V develops the quotient perspective that connects the generative space to
-the classical continuum.  
-The collapse map sends each generative identity to a real number by selecting
-and interpreting the digits exposed by its selector stream.  
-Although the generative space is infinite dimensional, the collapse map
-identifies many distinct identities and assigns them a single classical value.
+Part V develops the quotient perspective that connects the infinite
+dimensional generative space to the classical continuum. The collapse map
+reads the digits exposed by the selector stream of a generative identity and
+interprets them as a real number in base $b$. Although the generative space
+contains extensive symbolic structure, the collapse map identifies many
+distinct identities and assigns them the same classical value.
 
-The resulting equivalence classes are the collapse fibers.  
-Each fiber is a compact, perfect, and totally disconnected symbolic set.  
-The fibers vary widely in their internal structure, containing identities with
-selector streams of positive density, zero density, regular spacing, or large
-irregular gaps.  
-These structural differences are invisible to collapse but central to the
-behavior of observers.
+The equivalence classes of the collapse map are the collapse fibers. Each
+fiber is a closed subset of the ambient compact product space $\mathcal{X}$,
+hence compact, perfect, and totally disconnected. These fibers contain
+identities with a wide range of selector behaviors, including positive
+density, zero density, regular spacing, and large irregular gaps. These
+structural differences are invisible to collapse but play essential roles in
+the behavior of observers and in the incompleteness phenomena established in
+Part IV.
 
-The quotient space $\mathcal{X}^*/{\sim}$ obtained by identifying identities
-with the same collapsed value is homeomorphic to the interval $[0,1]$.  
-This interpretation parallels the role of names in computable analysis and the
-theory of represented spaces, where classical objects are obtained as
-equivalence classes of symbolic descriptions.  
-From this viewpoint, each real number corresponds to the entire fiber of its
-generative representations.
+The quotient of $\mathcal{X}^{*}$ by collapse equivalence is naturally
+homeomorphic to the interval $[0,1]$. This parallels the viewpoint of
+represented spaces in computable analysis, where classical objects are treated
+as equivalence classes of symbolic descriptions. In this setting, each real
+number corresponds to the entire fiber of its generative representations, not
+to a single canonical identity.
 
 Part V therefore shows that the classical continuum is a coarse image of a
-much richer symbolic structure.  
-The relation between fibers and extended invariants prepares the way for Part
-VI, where selector behavior is examined through large scale numerical and
-geometric coordinates.
- \clearpage{}\chapter{Extended Invariants: Entropy Balance and Fluctuation}
+rich symbolic space. The structure of collapse fibers, together with the
+freedom of selector behavior within them, prepares the ground for Part VI,
+where extended invariants are used to organize and analyze generative
+identities through large scale numerical and geometric coordinates.
+ \clearpage{}\chapter{Extended Invariants: Asymptotic Density and Fluctuation}
+\label{chap:invariants-eta-phi}
 
 \section{Introduction}
 
-The collapse map sends a generative identity to its classical real value, but
-two identities that collapse to the same number may differ significantly in
-their internal structure.  
-Part IV showed that no finite collection of continuous observers can recover
-this structure.  
-In this chapter we introduce two extended invariants that capture broad
-features of selector behavior: the entropy balance and the fluctuation index.
+The collapse map records the classical real value determined by a generative
+identity, but collapse does not reveal the internal structure of the selector
+stream. Part IV established that no finite collection of continuous observers
+can recover this structure. In this chapter we introduce two extended
+invariants that capture large scale features of selector behavior: the
+asymptotic density of exposed digits and the fluctuation index of successive
+gaps.
 
-Both invariants measure long term properties of the selector stream.  
-The entropy balance describes how frequently digits are exposed, while the
-fluctuation index measures the relative size of gaps between successive
-selected positions.  
-Neither invariant is continuous in the product topology, and this reflects a
-deeper fact: asymptotic statistical quantities on symbolic streams are rarely
-continuous unless they depend only on finite windows.  
-What can be proved, and what is sufficient for our purposes, is that these
-quantities satisfy natural semicontinuity properties.
+Both invariants depend only on the selector stream and measure its
+asymptotic behavior. They are tail dependent and therefore invisible to any
+fixed finite observer. Their extreme sensitivity to tail modification is a
+consequence of the product topology on $\mathcal{X}$: agreement on long
+prefixes imposes no restrictions on long term behavior. As a result, both
+invariants are discontinuous everywhere and take all admissible values inside
+any nonempty open set.
 
-\section{Entropy Balance}
+\section{Asymptotic Density}
 
-Let $G = (M, D, K)$ be a generative identity.  
-Define the indicator function
+Let $G = (M,D,K)$ be a generative identity. Define the indicator
 \[
-\chi_M(n)
-  =
+\chi_{M}(n)
+=
 \begin{cases}
-1 & M(n) = D,\\
-0 & M(n) = K.
+1 & \text{if } M(n)=D,\\[3pt]
+0 & \text{if } M(n)=K.
 \end{cases}
 \]
-
-The entropy balance (or simply the balance) of $G$ is the limit inferior
+The asymptotic density (or balance) of $G$ is the lower limit
 \[
 \eta(G)
-  = \liminf_{N \to \infty}
-      \frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n).
+=
+\liminf_{N\to\infty}
+\frac{1}{N}\sum_{n=0}^{N-1}\chi_{M}(n).
 \]
-
-This quantity measures the lower asymptotic density with which the selector
-exposes digits.  
-Hybrid identities have positive balance, while null density identities have
-balance zero.
+This invariant measures the long term frequency of exposed digits. Positive
+values correspond to selectors with sustained exposure, while $\eta(G)=0$
+indicates arbitrarily long intervals of nonselection.
 
 \subsection{Basic properties}
 
-The balance has two elementary properties.
-
+The quantity $\eta(G)$ has two simple features:
 \begin{itemize}
-    \item It is invariant under tail modification beyond finite prefixes.
-    \item It depends only on the selector stream $M$.
+    \item it depends only on the selector stream $M$,
+    \item it is invariant under modifications of $M$ beyond any finite prefix.
 \end{itemize}
-
-The balance is therefore an extended invariant that captures structural
-information invisible to the collapse map.
-
-\subsection{Lower semicontinuity}
-
-The balance is not continuous with respect to the product topology.  
-Small modifications to the selector can introduce arbitrarily large gaps or
-arbitrarily many selected positions within a long prefix, which can shift the
-density downward or upward.  
-However, balance satisfies a one sided estimate.
-
-\begin{proposition}[Lower Semicontinuity]
-Let $(G_k)$ converge to $G$ in the product topology.  
-Then
-\[
-\eta(G)
-  \le \liminf_{k \to \infty} \eta(G_k).
-\]
-\end{proposition}
-
-\begin{proof}
-Fix $\varepsilon > 0$.  
-Choose $N$ sufficiently large that
-\[
-\frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n)
-  < \eta(G) + \varepsilon.
-\]
-For all sufficiently large $k$, the identities $G_k$ agree with $G$ on the
-first $N$ symbols.  
-Hence
-\[
-\eta(G_k)
-  \ge \frac{1}{N} \sum_{n=0}^{N-1} \chi_M(n)
-  > \eta(G) - \varepsilon.
-\]
-Taking the limit inferior gives the claim.
-\end{proof}
-
-The failure of full continuity is a structural fact, but lower
-semicontinuity is sufficient for all applications.
+Thus $\eta$ is an extended invariant that captures structure outside the reach
+of the collapse map.
 
 \section{Fluctuation Index}
 
-The fluctuation index measures relative gap size between selected digit
-positions.  
 Let
 \[
-n_0 < n_1 < n_2 < \cdots
+0 \le n_{0} < n_{1} < n_{2} < \dots
 \]
-be the indices at which $M(n) = D$ and define the successive gaps
+be the positions where $M(n)=D$. Define the successive gaps
 \[
-g_j = n_{j+1} - n_j.
+g_{j} = n_{j+1} - n_{j}.
 \]
-
-The fluctuation index of $G$ is the limit superior
+The fluctuation index of $G$ is the upper limit
 \[
 \phi(G)
-  = \limsup_{j \to \infty} \frac{g_j}{n_j}.
+=
+\limsup_{j\to\infty}\frac{g_{j}}{n_{j}}.
 \]
-
-The quantity $g_j$ measures the absolute size of the gap following the
-$j$th selected position, while the ratio $g_j / n_j$ measures the gap
-relative to the position in the stream.  
-High fluctuation indicates the presence of unusually large gaps between
-selected digits, relative to scale.
+The ratio $g_{j}/n_{j}$ measures the scale adjusted size of the gap following
+the $j$th selected digit. Large values indicate that the selector permits long
+intervals of nonselection relative to position.
 
 \subsection{Basic properties}
 
-The fluctuation index depends only on the selector stream and is unaffected by
-any tail modifications that do not alter the sequence of selected positions.
+Like $\eta$, the fluctuation index depends only on the selector stream and is
+unchanged by tail modifications that preserve the selected positions. Positive
+density selectors often yield small fluctuation. Sparse selectors can produce
+arbitrarily large fluctuation.
 
-The index captures the extent to which the selector allows sparse bursts of
-digit exposure.  
-Null density selectors typically have large fluctuation, while positive
-density selectors have small fluctuation in many cases.
+\section{Asymptotic Sensitivity and Nowhere Continuity}
 
-\subsection{Upper semicontinuity}
+Asymptotic invariants on symbolic streams are almost never continuous in the
+product topology. Agreement on finite prefixes places no constraints on tail
+behavior. The invariants $\eta$ and $\phi$ illustrate this phenomenon sharply:
+both are discontinuous at every point.
 
-As with $\eta$, the fluctuation index is not continuous.  
-A single large gap introduced in the tail can immediately increase the value
-of $\phi$.  
-However, the index satisfies upper semicontinuity.
-
-\begin{proposition}[Upper Semicontinuity]
-Let $(G_k)$ converge to $G$ in the product topology.  
-Then
-\[
-\phi(G)
-  \ge \limsup_{k \to \infty} \phi(G_k).
-\]
-\end{proposition}
+\begin{theorem}[Nowhere continuity of $\eta$]
+\label{thm:eta-nowhere}
+Let $U$ be a nonempty basic open set in $\mathcal{X}$. For every $\alpha$ in
+$[0,1]$ there exists an identity $G$ in $U$ with $\eta(G)=\alpha$.
+\end{theorem}
 
 \begin{proof}
-Suppose $\phi(G) < c$ for some $c$.  
-Then there exists $J$ such that
-\[
-\frac{g_j}{n_j} < c
-\quad\text{for all}\quad j \ge J.
-\]
-The selected positions $n_j$ are determined by the selector stream.  
-Agreement of $G_k$ with $G$ on sufficiently long prefixes ensures that the
-positions of the first $J$ selected digits match, and that the ratios
-$g_j / n_j$ for $j \le J$ match exactly.  
-Therefore for all sufficiently large $k$,
-\[
-\phi(G_k) < c.
-\]
-The desired inequality follows by taking the limit superior.
+Let $U$ be determined by a prefix $w$ of length $N$. Extend $w$ by constructing
+a selector tail whose asymptotic density equals $\alpha$. For rational
+$\alpha$ one may use a periodic sequence; for irrational $\alpha$ one may use
+a Sturmian sequence. The prefix contributes a bounded amount to the average,
+which vanishes as $N\to\infty$, so the full selector has asymptotic density
+$\alpha$.
 \end{proof}
 
-Upper semicontinuity reflects the fact that introducing a large gap is a
-finite event that persists under limits, while eliminating a large gap is a
-global tail operation that is not respected by the product topology.
+\begin{theorem}[Nowhere continuity of $\phi$]
+\label{thm:phi-nowhere}
+Let $U$ be a nonempty basic open set in $\mathcal{X}$. For every $\beta$ in
+$[0,\infty]$ there exists an identity $G$ in $U$ with $\phi(G)=\beta$.
+\end{theorem}
 
-\section{Selector Structure and Extended Invariants}
+\begin{proof}
+Let $U$ be determined by a prefix of length $N$. To obtain $\phi(G)=0$ select
+every position beyond $N$. To obtain a finite $\beta>0$ place selected digits
+at positions approximately satisfying $n_{j+1}\approx(1+\beta)n_{j}$. To
+obtain $\beta=\infty$ let $n_{j}=j!$ for large $j$. In all cases the prefix is
+respected and the tail determines the fluctuation index.
+\end{proof}
 
-The invariants $\eta$ and $\phi$ reveal two complementary aspects of selector
-behavior:
-\begin{itemize}
-    \item $\eta$ measures how frequently digits are exposed in a long term
-          sense,
-    \item $\phi$ measures how irregularly they are exposed relative to scale.
-\end{itemize}
-
-These quantities need not determine one another.  
-For example, a selector may have positive density but also have occasional
-large gaps, or a selector may have density zero but exhibit extremely regular
-spacing.  
-Both invariants occur densely in the generative space.
+These results show that $\eta$ and $\phi$ vary freely inside any open set.
+The invariants are asymptotically sensitive: arbitrarily small changes in the
+prefix leave room for arbitrary changes in the tail, and therefore arbitrary
+values of the invariants.
 
 \section{Extended Invariants Inside Collapse Fibers}
 
-Extended invariants vary widely inside a collapse fiber.  
-Fix a computable real $x$.  
-The fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains identities with:
+Collapse fibers contain identities with widely varying selector behavior. Fix
+a real number $x$. The fiber $\mathcal{F}(x)$ contains identities with:
 \begin{itemize}
-    \item positive balance,
-    \item zero balance,
-    \item small fluctuation indices,
-    \item arbitrarily large fluctuation indices.
+    \item every possible asymptotic density in $[0,1]$,
+    \item every possible fluctuation index in $[0,\infty]$.
 \end{itemize}
 
-This diversity follows from the fact that extended invariants depend only on
-the selector stream and are insensitive to positions where $M(n) = K$.  
-Given any selector behavior consistent with infinite digit selection, one may
-always construct an identity in the fiber by assigning the selected positions
-the digits of $x$ in the correct order.
+This follows by combining tail freedom inside collapse fibers with the
+constructions of Theorems \texttt{\ref{thm:eta-nowhere}} and
+\texttt{\ref{thm:phi-nowhere}}. Any selector stream with infinitely many
+selected positions can be combined with the canonical digits of $x$ to create
+a valid identity in the fiber. Thus extended invariant values occur densely
+throughout the fiber.
 
-Thus the fiber contains identities with all possible behaviors permitted by
-the definitions of $\eta$ and $\phi$.
+\section{Interpretation}
+
+The extended invariants $\eta$ and $\phi$ quantify aspects of generative
+structure invisible to collapse. They are determined entirely by the tail and
+are unaffected by finite-prefix perturbations. This aligns with the
+indistinguishability principle of Chapter
+\texttt{\ref{chap:indistinguishability}}: finite observers detect only finite
+prefixes and cannot see the asymptotic features described by $\eta$ and
+$\phi$.
+
+The discontinuity of these invariants therefore reflects a deep mismatch
+between the product topology and the asymptotic geometry of the selector
+stream. The product topology governs finite observation. The extended
+invariants measure infinite scale structure.
 
 \section{Summary}
 
-The entropy balance and fluctuation index extend the collapse map by assigning
-numerical values to the selector behavior of a generative identity.  
-Both invariants are discontinuous in the product topology but satisfy natural
-semicontinuity properties.  
-These quantities illustrate the diversity of selector patterns that arise
-inside collapse fibers and provide a bridge between the collapse quotient of
-Part V and the generative geometry of the next chapter.
+The asymptotic density $\eta$ and the fluctuation index $\phi$ are extended
+invariants that describe large scale features of selector behavior. Both are
+determined by the tail of the selector stream and are discontinuous at every
+point of $\mathcal{X}$. Within any open set, all admissible invariant values
+occur.
 
-In Chapter 13 we study geometric embeddings of extended invariants and discuss
-how these quantities characterize large scale features of the generative
-space.
+These invariants illustrate the asymptotic richness that survives inside
+collapse fibers and motivate the geometric study of invariant pairs in the
+next chapter.
 \clearpage{}
 
 \chapter*{Part VI Summary}
@@ -2241,208 +2154,127 @@ with computability and randomness.
 Part VI therefore shows how generative identities can be analyzed using
 structural, asymptotic, and geometric coordinates that lie beyond collapse and
 beyond the reach of finite observers.
- \clearpage{}\chapter{Extended Invariants: Entropy Balance and Fluctuation}
+ \clearpage{}\chapter{Slice Geometry of Asymptotic Invariants}
+\label{chap:slice-geometry}
 
 \section{Introduction}
 
-Extended invariants measure large scale features of the selector stream that
-survive tail modification and reveal structure invisible to the collapse map.
-Two such invariants are the entropy balance $\eta$, which measures the lower
-asymptotic density of digit exposures, and the fluctuation index $\phi$, which
-measures the relative growth of gaps between selected positions.  
+Extended invariants provide numerical summaries of the long term behavior of
+the selector stream. Chapter \texttt{\ref{chap:invariants-eta-phi}} introduced
+the asymptotic density $\eta$ and the fluctuation index $\phi$, both of which
+depend only on the tail of the selector and therefore measure structural
+information invisible to the collapse map. These invariants are asymptotically
+sensitive and discontinuous at every point of the generative space.
 
-In this chapter we introduce these invariants, establish basic properties,
-prove semicontinuity, and place them in the slice geometry of the generative
-space.  
-Selector behavior may be analyzed through vertical slices (fixed prefixes),
-horizontal slices (fixed invariant values), and fiber slices (fixed collapsed
-value).  
-Appendix~E contains many worked examples illustrating these slices and the
-full range of possible behaviors.
+In this chapter we place the invariants in a geometric context by examining
+three natural families of slices through the generative space: vertical
+slices that fix finite prefixes, horizontal slices that fix invariant values,
+and fiber slices that fix collapsed magnitude. Together these slices describe
+how local symbolic structure, global asymptotic behavior, and classical value
+interact.
 
-\section{Entropy Balance}
-
-Let $G = (M,D,K)$ be a generative identity and write
-\[
-\chi_M(n) =
-\begin{cases}
-1 & \text{if } M(n) = D, \\
-0 & \text{otherwise}.
-\end{cases}
-\]
-
-The entropy balance is the lower asymptotic density of digit exposures:
-\[
-\eta(G)
-  = \liminf_{N\to\infty}
-      \frac{1}{N} \sum_{n < N} \chi_M(n).
-\]
-
-A selector with $\eta(G) > 0$ exposes digits frequently, while $\eta(G) = 0$
-indicates sparse exposure.  
-Balance is invariant under tail modification beyond a finite prefix and
-depends only on the selector.
-
-\subsection{Lower semicontinuity}
-
-The balance is not continuous in the product topology, but it satisfies a one
-sided bound.
-
-\begin{proposition}[Lower Semicontinuity]
-If $G_k \to G$ in the product topology, then
-\[
-\eta(G) \le \liminf_{k\to\infty} \eta(G_k).
-\]
-\end{proposition}
-
-\begin{proof}
-Fix $\varepsilon > 0$ and choose $N$ such that
-\[
-\frac{1}{N}\sum_{n<N} \chi_M(n)
-    < \eta(G) + \varepsilon.
-\]
-For $k$ large enough, $G_k$ agrees with $G$ on the first $N$ coordinates, so
-\[
-\eta(G_k)
-  \ge \frac{1}{N}\sum_{n<N} \chi_M(n)
-  > \eta(G) - \varepsilon.
-\]
-Taking the limit inferior yields the claim.
-\end{proof}
-
-\section{Fluctuation Index}
-
-Let the selection indices be
-\[
-n_0 < n_1 < n_2 < \cdots,
-\qquad
-g_j = n_{j+1} - n_j.
-\]
-
-The fluctuation index measures the growth of relative gaps:
-\[
-\phi(G)
-  = \limsup_{j\to\infty} \frac{g_j}{n_j}.
-\]
-
-Large $\phi(G)$ indicates the presence of long, infrequent bursts of digit
-exposure relative to scale.
-
-\subsection{Upper semicontinuity}
-
-\begin{proposition}[Upper Semicontinuity]
-If $G_k \to G$, then
-\[
-\phi(G) \ge \limsup_{k\to\infty} \phi(G_k).
-\]
-\end{proposition}
-
-\begin{proof}
-Suppose $\phi(G) < c$.  
-Then for sufficiently large $j$,
-\[
-g_j < c n_j.
-\]
-Agreement of $G_k$ with $G$ on a large enough prefix ensures that the first
-$J$ selected digits occur at the same positions.  
-Thus for all sufficiently large $k$,
-\[
-\phi(G_k) < c.
-\]
-Taking the limit superior proves the claim.
-\end{proof}
-
-\section{Slice Geometry of Selector Behavior}
-
-Extended invariants permit a geometric interpretation of the generative space
-through slices that constrain different aspects of selector behavior.  
-These slices provide intuition for how invariants, collapse fibers, and finite
-prefixes interact.
-
-\subsection{Vertical slices: cylinder sets}
+\section{Vertical Slices: Finite Prefix Constraints}
 
 A vertical slice fixes a finite prefix:
 \[
 \mathcal{C}(u)
-  = \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \}.
+=
+\{
+G \in \mathcal{X} : G[0..N-1]=u
+\}.
 \]
 
-These sets represent the regions observable by structural projections.  
-Dependency bounds show that each observer samples only one vertical slice at a
-time, so vertical slices encode the finite informational geometry underlying
-incompleteness.
+These sets represent the regions accessible to structural projections, since
+dependency bounds constrain each observer to examine only one vertical slice
+at a time. Vertical slices are clopen in the product topology and encode the
+finite dimensional geometry that governs observational limits and
+indistinguishability.
 
-Vertical slices impose no restriction on $\eta$ or $\phi$, and their images
-under the map $G \mapsto (\eta(G),\phi(G))$ can cover large regions of the
-invariant plane.
+Vertical slices place no constraints on the invariants $\eta$ or $\phi$. By
+the nowhere continuity results of Chapter \texttt{\ref{chap:invariants-eta-phi}},
+every value of $\eta$ and every value of $\phi$ occurs densely in each vertical
+slice.
 
-\subsection{Horizontal slices: invariant level sets}
+\section{Horizontal Slices: Invariant Level Sets}
 
-Fix $\alpha$ or $\beta$.  
-Define
+Fix $\alpha$ in $[0,1]$ or $\beta$ in $[0,\infty]$. Define the horizontal
+slices
 \[
 \mathcal{H}_{\alpha}
-  = \{ G : \eta(G) = \alpha \},
+=
+\{ G : \eta(G)=\alpha \},
 \qquad
 \mathcal{H}^{\beta}
-  = \{ G : \phi(G) = \beta \}.
+=
+\{ G : \phi(G)=\beta \}.
 \]
 
-These sets identify identities with the same long term selector behavior even
-if their finite prefixes differ.  
-Horizontal slices cut across collapse fibers and vertical slices, illustrating
-the independence of asymptotic structure from local structure.
+These sets identify identities with identical long term selector behavior even
+when their finite prefixes differ. Because $\eta$ and $\phi$ are tail
+dependent, horizontal slices cross all vertical slices densely. They cut across
+finite prefix classes and collapse fibers alike.
 
-In the invariant plane, these slices appear as vertical or horizontal lines.
+Geometrically, the map
+\[
+G \mapsto (\eta(G),\phi(G))
+\]
+projects the generative space into the invariant plane. Horizontal slices
+correspond to lines in this plane, and their dense intersection with each
+vertical slice reflects the asymptotic sensitivity of the invariants.
 
-\subsection{Fiber slices: fixing collapsed value}
+\section{Fiber Slices: Fixing Collapsed Value}
 
-Fix a real number $x$.  
-The fiber slice is
+Fix a real number $x$. The fiber slice
 \[
 \mathcal{F}(x)
-  = \{ G : \pi(G) = x \}.
+=
+\{ G : \pi(G)=x \}
 \]
+collects all identities that collapse to $x$. Since $\eta$ and $\phi$ depend
+only on the selector and not on the canonical output, the image of
+$\mathcal{F}(x)$ under the invariant map is typically a large region of the
+invariant plane.
 
-Since $\eta$ and $\phi$ depend only on the selector, not on collapse, the
-image of $\mathcal{F}(x)$ in the invariant plane typically occupies a broad
-region.  
-This illustrates how collapse conceals most of the selector structure.
+By combining tail freedom inside collapse fibers with the constructions of
+Chapter \texttt{\ref{chap:invariants-eta-phi}}, one finds that for any pair
+$(\alpha,\beta)$ with $\alpha$ in $[0,1]$ and $\beta$ in $[0,\infty]$, there
+exists an identity in $\mathcal{F}(x)$ with $\eta=\alpha$ and $\phi=\beta$.
+Thus fiber slices contain identities exhibiting the full range of invariant
+values.
 
-Appendix~E contains examples showing that for any pair $(\alpha,\beta)$, there
-exists an identity in $\mathcal{F}(x)$ with $\eta = \alpha$ and $\phi =
-\beta$.
+\section{Geometric Interpretation}
 
-\section{Selector Behavior Through Examples}
-
-Appendix~E provides detailed examples demonstrating selectors with:
+The three families of slices illustrate the independence of finite prefix
+information, asymptotic selector behavior, and collapsed magnitude.
 
 \begin{itemize}
-    \item positive balance and low fluctuation,
-    \item zero balance and bounded fluctuation,
-    \item zero balance and unbounded fluctuation,
-    \item oscillating densities,
-    \item constructed pairs $(\eta,\phi)$ with prescribed values.
+    \item Vertical slices constrain finite symbolic structure but do not
+    restrict $\eta$ or $\phi$.
+    \item Horizontal slices constrain asymptotic behavior but intersect every
+    finite prefix class.
+    \item Fiber slices constrain collapsed magnitude but allow all admissible
+    invariant values.
 \end{itemize}
 
-These examples show that extended invariants are flexible tools for describing
-large scale selector structure.  
-They also demonstrate that collapse fibers contain identities with all
-admissible invariant values.
+Together these slices show that the invariants $\eta$ and $\phi$ capture
+features orthogonal to finite observation and independent of collapse. They
+provide a geometric language for understanding which aspects of selector
+structure persist under prefix agreement and which aspects remain completely
+unobservable to continuous projections.
 
 \section{Summary}
 
-The entropy balance and fluctuation index provide numerical lenses through
-which to view long term selector behavior.  
-Their semicontinuity properties match their intuitive roles: balance is hard
-to increase by small perturbations, while fluctuation is hard to decrease.  
-Slice geometry offers a conceptual framework for understanding how vertical
-prefix constraints, horizontal invariant constraints, and fiber constraints
-interact.
+The slice geometry of vertical, horizontal, and fiber slices provides a
+geometric interpretation of the asymptotic invariants introduced in Chapter
+\texttt{\ref{chap:invariants-eta-phi}}. Vertical slices represent finite
+prefix constraints. Horizontal slices represent invariant constraints. Fiber
+slices represent collapsed value constraints. The invariants vary freely in
+all of these slices, reflecting their asymptotic nature and their insensitivity
+to prefix information.
 
-Together with the examples of Appendix~E, these tools give a geometric
-understanding of selector behavior that complements the structural and
-computational perspectives developed in earlier parts of the monograph.
+These geometric insights prepare the way for the study of joint invariant
+behavior in the next chapter. Appendix~E contains explicit examples that
+illustrate the full range of selector behaviors and invariant combinations.
 \clearpage{}
 \clearpage{}\chapter{Synthesis and Outlook}
 
@@ -2584,471 +2416,381 @@ It provides conceptual foundations and technical tools for a broader program
 of generative analysis, one that aims to understand the continuum not simply
 as a set of magnitudes but as the image of a vast symbolic space.
 \clearpage{}
-\include{chapters/chapter14}
-\include{chapters/chapter15}
-\include{chapters/chapter16}
 
 \appendix
-\clearpage{}\chapter{Type--2 Effectivity Essentials}
+\clearpage{}\chapter{Type 2 Effectivity and Computable Structure}
+\label{appendix:tte}
 
 \section{Introduction}
 
-This appendix summarizes the basic notions from Type--2 Effectivity (TTE) and
-computable analysis that are used implicitly in the main text.  
-The aim is not to give a complete treatment, but to explain the background
-needed for structural projections, dependency bounds, effective fibers, and
-the diagonalizer.  
-Standard references include Weihrauch's monograph on computable analysis, the
-work of Brattka, Hertling, and Weihrauch on represented spaces, and Pauly's
-surveys on synthetic descriptive set theory.
+This appendix summarizes the basic notions from Type 2 Effectivity (TTE) and
+computable analysis that appear throughout the monograph. The purpose is not
+to provide a complete treatment but to outline the background needed for
+structural projections, dependency bounds, effective fibers, and prefix
+indistinguishability. Standard references include the works of Weihrauch,
+Brattka, Hertling, and Pauly on represented spaces and computable analysis.
 
-We focus on three themes:
+Three themes recur in the main text:
 
 \begin{enumerate}
     \item names for real numbers and elements of product spaces,
-    \item computable functionals on sequence spaces and their moduli of continuity,
+    \item computable functionals and effective moduli of continuity,
     \item effective closed sets and $\Pi^{0}_{1}$ classes.
 \end{enumerate}
 
-Throughout, $\mathbb{N} = \{0,1,2,\ldots\}$ and sequences are indexed from
-zero.
+Throughout, $\mathbb{N}=\{0,1,2,\ldots\}$ and sequences are indexed from zero.
 
-\section{Names and Represented Spaces}
+\section{Represented Spaces and Names}
 
 \subsection{Baire space and Cantor space}
 
-\emph{Baire space} is the set $\mathbb{N}^{\mathbb{N}}$ of all infinite
-sequences of natural numbers.  
-\emph{Cantor space} is the set $\{0,1\}^{\mathbb{N}}$ of infinite binary
-sequences.  
-Both spaces carry the product topology generated by basic open sets determined
-by finite prefixes.
-
-Baire and Cantor space are the standard domains for TTE.  
-Elements of more complicated spaces, such as real numbers or continuous
-functions, are represented by infinite sequences in these spaces.
+Baire space is the sequence space $\mathbb{N}^{\mathbb{N}}$. Cantor space is
+the binary sequence space $\{0,1\}^{\mathbb{N}}$. Both carry the product
+topology generated by basic open sets determined by finite prefixes. These
+spaces serve as standard domains for TTE, and more complicated mathematical
+objects are represented by infinite sequences in them.
 
 \subsection{Represented spaces}
 
-A \emph{represented space} is a pair $(X,\delta_X)$ where $X$ is a set and
+A represented space is a pair $(X,\delta_{X})$ where $X$ is a set and
 \[
-\delta_X : \subseteq \mathbb{N}^{\mathbb{N}} \to X
+\delta_{X} : \subseteq \mathbb{N}^{\mathbb{N}} \to X
 \]
-is a partial surjective map.  
-Elements $p \in \mathbb{N}^{\mathbb{N}}$ with $\delta_X(p) = x$ are called
-\emph{names} of $x$.
+is a partial surjection. A sequence $p$ with $\delta_{X}(p)=x$ is called a
+\emph{name} of $x$. Different representation maps correspond to different
+codings of objects in $X$.
 
-Different representation maps encode different ways of describing objects in
-$X$.  
-In computable analysis, the usual Cauchy representation of real numbers is
-obtained by interpreting $p \in \mathbb{N}^{\mathbb{N}}$ as a rapidly
-converging sequence of rational approximations to a real number.
+For real numbers, the standard Cauchy representation interprets $p$ as a
+rapidly converging sequence of rational approximations to a real value.
 
 \subsection{Computable points}
 
-A point $x \in X$ is \emph{computable} if it has a computable name, that is,
-there is a computable sequence $p \in \mathbb{N}^{\mathbb{N}}$ such that
-$\delta_X(p) = x$.
+A point $x\in X$ is \emph{computable} if it has a computable name. In the
+Generative Identity Framework, the effective core
+$\mathcal{G}_{\mathrm{eff}}$ consists of identities whose mixer, digit, and
+meta streams can be encoded by computable sequences. Names can be obtained by
+interleaving these streams into a single sequence in Baire space.
 
-In the Generative Identity Framework, the effective core
-$\mathcal{G}_{\mathrm{eff}}$ of the generative space plays the role of
-computable elements.  
-Each generative identity $G = (M,D,K)$ corresponds to a name that interleaves
-the symbols of the three streams in a computable way, and vice versa.
+\section{Type 2 Machines and Computable Maps}
 
-\section{Type--2 Machines and Computable Maps}
+\subsection{Type 2 Turing machines}
 
-\subsection{Type--2 Turing machines}
-
-A Type--2 Turing machine is an abstract device that reads and writes infinite
-sequences.  
-It has:
-
-\begin{itemize}
-    \item a read only input tape containing $p \in \mathbb{N}^{\mathbb{N}}$,
-    \item a write only output tape on which it produces $q \in \mathbb{N}^{\mathbb{N}}$,
-    \item a work tape for finite internal computation.
-\end{itemize}
-
-The machine is required to produce each output symbol $q(n)$ after reading
-only finitely many symbols of the input.  
-This finite use condition ensures that the induced map on Baire space is
-continuous in the product topology.
+A Type 2 Turing machine reads an infinite input sequence, writes an infinite
+output sequence, and performs finite internal computation. The output symbol
+$q(n)$ must be produced after inspecting only finitely many input symbols.
+This finite use condition ensures the induced map on Baire space is continuous
+in the product topology.
 
 \subsection{Computable maps between represented spaces}
 
-Let $(X,\delta_X)$ and $(Y,\delta_Y)$ be represented spaces.  
-A (partial) function $f : X \to Y$ is \emph{computable} if there exists a
-Type--2 Turing machine $M$ such that, for every $p$ with $\delta_X(p) = x$,
-the output sequence $M(p)$ is defined and satisfies
-\[
-\delta_Y(M(p)) = f(x).
-\]
-
-Intuitively, given infinite access to a name of $x$, the machine produces a
-name of $f(x)$ using only finite prefixes of the input at each step.
+Let $(X,\delta_{X})$ and $(Y,\delta_{Y})$ be represented spaces. A function
+$f:X\to Y$ is computable if there exists a Type 2 Turing machine that converts
+any name of $x$ into a name of $f(x)$, respecting the representation maps.
+Intuitively, the machine computes the value of $f(x)$ to any fixed precision
+using only finite information from the name of $x$.
 
 \subsection{Continuity and computability}
 
-A basic theorem of TTE states that every computable function between
-represented spaces is continuous with respect to the induced topologies.  
-In many natural representations, the converse holds as well: any continuous
-function with an effective modulus of continuity is computable.
+A foundational theorem of TTE states that every computable function between
+represented spaces is continuous with respect to the induced topologies.
+Conversely, whenever a continuous map admits an effective modulus of
+continuity, it is computable.
 
-In this monograph, structural projections are continuous real valued
-functionals on a product space of symbolic sequences.  
-When such functionals are computable, they admit effective moduli of
-continuity that appear as dependency bounds.
+In the monograph, structural projections are continuous real valued maps on a
+product space of symbolic sequences. When these projections are computable,
+they have computable moduli of continuity, which appear as dependency bounds.
 
 \section{Moduli of Continuity and Dependency Bounds}
 
-\subsection{Moduli of continuity on sequence spaces}
+\subsection{Moduli of continuity}
 
-Let $f : \mathbb{N}^{\mathbb{N}} \to \mathbb{R}$ be continuous in the product
-topology.  
-For each $\varepsilon > 0$ there exists an $N$ such that any two sequences
-that agree on their first $N$ terms have $f$ values within $\varepsilon$.
-
-A \emph{modulus of continuity} is a function
+Let $f:\mathbb{N}^{\mathbb{N}}\to\mathbb{R}$ be continuous. For each
+$\varepsilon>0$ there exists $N$ such that agreement on the first $N$
+coordinates guarantees the values differ by less than $\varepsilon$. A
+function
 \[
-\mu : (0,1] \to \mathbb{N}
+\mu : (0,1]\to \mathbb{N}
 \]
-such that agreement on the first $\mu(\varepsilon)$ indices implies
-\[
-|f(p) - f(q)| < \varepsilon.
-\]
-If $f$ is computable, then $\mu$ can be chosen to be computable as well.
+with this property is called a modulus of continuity. If $f$ is computable,
+$\mu$ may be chosen computable.
 
-\subsection{Dependency bounds in the generative space}
+\subsection{Structural projections and dependency bounds}
 
-The generative space $\mathcal{X}^{*}$ is a product of discrete alphabets,
-equipped with the product topology.  
+The ambient generative space $\mathcal{X}$ is a product of discrete alphabets.
 A structural projection
 \[
-\Phi : \mathcal{X}^{*} \to \mathbb{R}
+\Phi:\mathcal{X}\to\mathbb{R}
 \]
-is continuous if and only if there exists a function $B_{\Phi}$ such that
-agreement of generative identities $G$ and $H$ on their first
-$B_{\Phi}(\varepsilon)$ coordinates implies
+is continuous precisely when there exists a dependency bound $B_{\Phi}$ such
+that agreement of two identities on their first $B_{\Phi}(\varepsilon)$
+coordinates implies
 \[
-|\Phi(G) - \Phi(H)| < \varepsilon.
+|\Phi(G)-\Phi(H)| < \varepsilon.
 \]
 
-In the main text, $B_{\Phi}$ is called a \emph{dependency bound}.  
-This is exactly a modulus of continuity for $\Phi$ in the sense of TTE,
-presented in a way that emphasizes its combinatorial meaning: the value of
-$\Phi(G)$ to precision $\varepsilon$ depends only on a finite prefix of the
-identity.
+Dependency bounds express the finite informational nature of continuous
+observation. They guarantee prefix stabilization: changes to the tail beyond a
+certain index do not affect the value of the observer beyond a specified
+tolerance.
 
-For a finite family of projections, a common bound is obtained by taking the
-maximum of the individual bounds.  
-This yields a uniform dependency bound that controls the entire family.
+For a finite family of projections, a uniform bound is obtained by taking the
+maximum of the individual bounds.
 
-\subsection{Prefix stabilization and tail invariance}
-
-If $B_{\Phi}$ is a dependency bound for $\Phi$, then for any $\varepsilon$,
-agreement on the prefix of length $B_{\Phi}(\varepsilon)$ guarantees that
-changes to the tail beyond this prefix cannot alter the value of $\Phi$ by
-more than $\varepsilon$.
-
-This prefix stabilization property is used repeatedly in Part~III and
-Part~IV.  
-It shows that continuous observers consume only finitely much information at
-any fixed precision, which in turn permits tail modifications that preserve
-all observations in a given finite family.
-
-\subsection{Effective fibers as \texorpdfstring{$\Pi^{0}_{1}$}{Pi01} classes}
+\section{Effective Closed Sets and \texorpdfstring{$\Pi^{0}_{1}$}{Pi01} Classes}
 
 \subsection{Effective open and closed sets}
 
-A subset $U \subseteq \mathbb{N}^{\mathbb{N}}$ is \emph{effectively open} (or
-$\Sigma^{0}_{1}$) if it is a union of a computably enumerable family of basic
-open sets.  
-The complement of an effectively open set is \emph{effectively closed}
-(or $\Pi^{0}_{1}$).
-
-In Cantor or Baire space, basic open sets are specified by finite prefixes.
-Thus an effectively closed set $F$ is one for which membership can be disproved
-by finite evidence.  
-To see that $p \notin F$, it suffices to find a finite prefix that forces
-$p$ into the complement.
+A set $U\subseteq\mathbb{N}^{\mathbb{N}}$ is \emph{effectively open} (or
+$\Sigma^{0}_{1}$) if it is a computably enumerable union of basic open sets.
+Its complement is \emph{effectively closed} (or $\Pi^{0}_{1}$). Membership in
+a $\Pi^{0}_{1}$ set can be disproved by finite evidence: observing a finite
+prefix that forces the sequence into the complement.
 
 \subsection{Effective fibers as \texorpdfstring{$\Pi^{0}_{1}$}{Pi01} classes}
 
-The effective core of the generative space,
-\[
-\mathcal{G}_{\mathrm{eff}} \subseteq \mathcal{X}^{*},
-\]
-inherits a natural representation from its presentation as a subspace of a
-finite alphabet product.  
 The effective fiber associated with a computable real $x$ is
 \[
 \mathcal{F}_{\mathrm{eff}}(x)
-  = \{ G \in \mathcal{G}_{\mathrm{eff}} : \pi(G) = x \}.
+=
+\{ G\in\mathcal{G}_{\mathrm{eff}} : \pi(G)=x \}.
 \]
+Since deviations from the canonical digit sequence of $x$ can be detected by
+finite prefixes, the set of valid identities is effectively closed. Thus
+$\mathcal{F}_{\mathrm{eff}}(x)$ is a $\Pi^{0}_{1}$ class.
 
-This set is a $\Pi^{0}_{1}$ class in the sense that $G \notin
-\mathcal{F}_{\mathrm{eff}}(x)$ can be witnessed by a finite prefix where the
-canonical output deviates from the prescribed digit sequence of $x$.
-
-In the main text, this perspective is used to justify the existence of
-computable identities inside the fiber and to support constructions that
-modify tails while preserving membership in the fiber.
+This perspective explains why computable identities exist inside each fiber
+and why tails can be modified without leaving the fiber, provided the selected
+digits remain consistent with the canonical expansion of $x$.
 
 \section{Application to the Generative Identity Framework}
 
-The TTE machinery summarized above arises in the monograph in the following
-ways.
+The concepts summarized above support the technical development of the
+framework in several ways.
 
 \begin{itemize}
-    \item The generative space $\mathcal{X}^{*}$ is a represented space whose
-          elements are generative identities.  
+    \item The ambient generative space $\mathcal{X}$ is a represented space.
           The effective core $\mathcal{G}_{\mathrm{eff}}$ corresponds to those
-          identities that admit computable names.
+          elements with computable names.
 
-    \item Structural projections are continuous real valued functionals on
-          $\mathcal{X}^{*}$.  
-          When such projections are computable, they admit computable
-          dependency bounds, which are moduli of continuity in the TTE sense.
+    \item Structural projections are continuous real valued maps with computable
+          dependency bounds. These bounds capture the prefix dependence of
+          observers and underlie the principle of prefix indistinguishability.
 
     \item Effective fibers $\mathcal{F}_{\mathrm{eff}}(x)$ are $\Pi^{0}_{1}$
-          classes of identities that collapse to a fixed real number.  
-          The nonemptiness and internal structure of these classes are used in
-          the construction of the meta diagonalizer.
+          classes. Their nonemptiness and internal flexibility permit tail
+          modification constructions inside collapse fibers.
 
-    \item Prefix stabilization and tail invariance are direct consequences of
-          continuity and the existence of dependency bounds.  
-          These properties express the finite information content of
-          observations and allow the diagonalizer to introduce divergence
-          beyond the reach of any finite family of observers.
+    \item Prefix stabilization and the finiteness of dependency bounds explain
+          why observers cannot distinguish identities that agree on observable
+          prefixes. These properties enable the indistinguishability
+          construction of Chapter \texttt{\ref{chap:indistinguishability}}.
 \end{itemize}
 
-The framework of represented spaces and Type--2 computability therefore
-provides a conceptual foundation for the generative identity framework.  
-It explains why structural projections necessarily depend on finite prefixes,
-why effective fibers admit rich internal structure, and why diagonalization
-against continuous observers is possible.
+The machinery of represented spaces and Type 2 computability therefore
+provides the formal foundation for the generative identity framework. It
+clarifies why continuous observation accesses only finite information, why
+collapse fibers admit rich internal variation, and why structural
+indistinguishability is an inherent feature of generative structure.
 \clearpage{}
 \clearpage{}\chapter{Symbolic Dynamics Essentials}
+\label{appendix:symbolic-dynamics}
 
 \section{Introduction}
 
 This appendix summarizes the symbolic dynamics concepts that appear implicitly
-throughout the monograph.  
-Although the generative identity framework uses selector streams rather than
-traditional symbol blocks, many of its structural properties are naturally
-expressed using tools from symbolic dynamics.  
-The purpose of this appendix is to describe these tools and explain how they
-interact with the generative space.
+throughout the monograph. Although the generative identity framework uses
+selector streams rather than general symbolic blocks, many structural features
+of selector behavior are naturally expressed in symbolic terms. The purpose of
+this appendix is to outline these tools and indicate how they interact with
+the generative space and with the asymptotic invariants developed in
+Part~VI.
 
-We begin with the shift map and the product topology on sequences.  
-We then describe notions of frequency, recurrence, gap statistics, and
-residual sets, all of which are used in the analysis of selector behavior.  
-The appendix concludes with a discussion of block structures and how they
-relate to extended invariants.
+We begin with full shift spaces and the product topology. We then describe
+densities, gap statistics, and block structures, and conclude with a brief
+discussion of residual sets and typicality in symbolic dynamics.
 
 \section{Shift Spaces and the Product Topology}
 
-\subsection{Full shift spaces}
+\subsection{Full shifts}
 
-Let $\mathcal{A}$ be a finite alphabet.  
-The full shift over $\mathcal{A}$ is the space
+Let $\mathcal{A}$ be a finite alphabet. The full shift is the space
 \[
-\mathcal{A}^{\mathbb{N}} = \{ x_0 x_1 x_2 \ldots : x_n \in \mathcal{A} \}.
+\mathcal{A}^{\mathbb{N}}
+=
+\{\, x_0 x_1 x_2 \cdots : x_n \in \mathcal{A} \,\}.
 \]
-This space is equipped with the product topology generated by basic open sets
-of the form
+Basic open sets are cylinders
 \[
-[x_0 x_1 \ldots x_{k-1}]
-  = \{ y \in \mathcal{A}^{\mathbb{N}} : y_i = x_i \text{ for } 0 \le i < k \},
+[x_0 x_1 \cdots x_{k-1}]
+=
+\{\, y : y_i = x_i \text{ for } 0 \le i < k \,\}.
 \]
-also called cylinder sets.
 
 The product topology makes $\mathcal{A}^{\mathbb{N}}$ compact, totally
-disconnected, and metrizable.  
-These topological properties are inherited by the generative space
-$\mathcal{X}$ and the digit selecting subspace $\mathcal{X}^{*}$.
+disconnected, and metrizable. These properties hold for the ambient generative
+space $\mathcal{X}$, which is also a full shift on a finite alphabet. The
+subspace $\mathcal{X}^{*}$, which requires infinitely many digit exposures, is
+dense but not compact. This distinction is important in the analysis of
+collapse fibers and convergence.
 
 \subsection{The shift map}
 
 The shift map
 \[
-\sigma : \mathcal{A}^{\mathbb{N}} \to \mathcal{A}^{\mathbb{N}}
+\sigma(x)_n = x_{n+1}
 \]
-is defined by $(\sigma(x))_n = x_{n+1}$.  
-It is continuous, surjective, and preserves the cylinder structure.
+is continuous, surjective, and preserves cylinder sets. Although the shift is
+not used as a dynamical map in the monograph, it provides structural
+intuition. Properties such as densities, recurrence, and gap growth are
+shift-invariant features.
 
-In the generative identity framework, one may shift the selector, digit, or
-meta stream independently.  
-The shift is not used as a dynamical map in the main text, but the structural
-intuition provided by shifting plays an important role.  
-For example, asymptotic densities and gap statistics are shift invariant
-properties.
+Selectors are sequences in $\{D,K\}^{\mathbb{N}}$, and shifting corresponds
+to advancing the decision of which positions expose digits. This perspective
+connects the generative setting to classical symbolic tools.
 
 \subsection{Subshifts}
 
-A \emph{subshift} is a closed, shift invariant subset of $\mathcal{A}^{\mathbb{N}}$.  
-Such sets are determined by specifying which finite blocks of symbols are
-allowed or forbidden.
+A subshift is a closed, shift invariant subset of $\mathcal{A}^{\mathbb{N}}$.
+Such sets arise by forbidding finite blocks. Families of selectors with
+additional constraints (such as prescribed asymptotic density or regular gap
+control) form natural subshifts. These subshifts offer a symbolic framework
+for describing structured selector behavior.
 
-Selectors may be viewed informally as elements of the subshift
-\[
-\{D,K\}^{\mathbb{N}},
-\]
-and families of selectors with additional structural constraints form natural
-subshifts within this space.
-
-\section{Density, Frequencies, and Gap Structure}
+\section{Densities and Gap Structure}
 
 \subsection{Lower and upper densities}
 
-For $x \in \mathcal{A}^{\mathbb{N}}$ and $a \in \mathcal{A}$, the lower and
-upper densities of the symbol $a$ are given by
+For $x \in \mathcal{A}^{\mathbb{N}}$ and $a \in \mathcal{A}$, define
 \[
 \underline{d}_{a}(x)
-  = \liminf_{N\to\infty}
-      \frac{1}{N} \bigl| \{ 0 \le n < N : x_n = a \} \bigr|,
+=
+\liminf_{N \to \infty}
+\frac{1}{N}
+\left|\{ 0 \le n < N : x_n = a \}\right|,
 \]
 \[
 \overline{d}_{a}(x)
-  = \limsup_{N\to\infty}
-      \frac{1}{N} \bigl| \{ 0 \le n < N : x_n = a \} \bigr|.
+=
+\limsup_{N \to \infty}
+\frac{1}{N}
+\left|\{ 0 \le n < N : x_n = a \}\right|.
 \]
 
-In selector analysis, these become:
+For selectors $M \in \{D,K\}^{\mathbb{N}}$, the asymptotic density
 \[
-\eta(G) = \underline{d}_{D}(M),
+\eta(G) = \underline{d}_{D}(M)
 \]
-the lower asymptotic density of digit exposures.
+plays the role of the lower frequency of digit exposures. Chapter
+\texttt{\ref{chap:invariants-eta-phi}} analyzes $\eta$ as an asymptotic
+invariant and shows that it is discontinuous at every point of the generative
+space.
 
 \subsection{Gap sequences}
 
-Let $x \in \mathcal{A}^{\mathbb{N}}$ and fix a symbol $a \in \mathcal{A}$.  
-List the positions at which $x_n = a$ as
+List the indices at which $x_n=a$ as
 \[
-n_0 < n_1 < n_2 < \ldots.
+n_0 < n_1 < n_2 < \cdots.
 \]
-Define the gap sequence
-\[
-g_j = n_{j+1} - n_j.
-\]
-
-The \emph{relative gap growth} is the limit superior
+The gap sequence is $g_j = n_{j+1} - n_j$. The relative gap growth is
 \[
 \phi(x)
-  = \limsup_{j\to\infty} \frac{g_j}{n_j},
+=
+\limsup_{j \to \infty}
+\frac{g_j}{n_j},
 \]
-which is the definition of the fluctuation index in the main text.
+which is the fluctuation index in the main text. Large values of $\phi$
+correspond to sporadic occurrences of $a$ relative to scale.
 
-Gap statistics are classical objects in symbolic dynamics and informally
-describe how sparsely a symbol may occur.
+Gap sequences and related statistics are classical tools for studying sparse
+occurrences in symbolic sequences. In the generative framework, they describe
+the long range behavior of selectors.
 
-\subsection{Recurrence and regularity}
+\subsection{Recurrence}
 
-A symbol $a$ is \emph{recurrent} in $x$ if it appears infinitely often.  
-Every selector in $\mathcal{X}^{*}$ has $D$ recurrent, since otherwise the
-canonical output would be finite.
-
-Selectors with positive density of $D$ are regular in the sense that their gap
-sequence is bounded above by a linear function.  
-Selectors of zero density admit much larger fluctuations.
+A symbol $a$ is recurrent in $x$ if it appears infinitely often. For selectors
+in $\mathcal{X}^{*}$, the requirement that $D$ be recurrent corresponds to the
+obligation that digits be exposed infinitely many times in order to produce a
+complete canonical expansion. Selectors of zero density admit arbitrarily long
+gaps, while positive density selectors exhibit more regular spacing.
 
 \section{Block Structures and Empirical Measures}
 
-\subsection{Blocks and patterns}
+\subsection{Blocks}
 
-A block (or word) of length $k$ over $\mathcal{A}$ is an element of
-$\mathcal{A}^{k}$.  
-The set of blocks appearing in $x \in \mathcal{A}^{\mathbb{N}}$ is
+A block of length $k$ is an element of $\mathcal{A}^{k}$. The set of blocks
+appearing in a symbolic sequence $x$ is
 \[
 \mathcal{L}(x)
-  = \bigcup_{k\ge0}
-      \{ x_n x_{n+1} \ldots x_{n+k-1} : n \in \mathbb{N} \}.
+=
+\bigcup_{k \ge 0}
+\{\, x_n x_{n+1} \cdots x_{n+k-1} : n \in \mathbb{N} \,\}.
 \]
 
-Selectors have block structures in $\{D,K\}^{k}$ that reflect which positions
-expose digits and which do not.  
-These blocks determine fine scale properties of selectors that are not
-captured by density or fluctuation alone.
+Selector block structures in $\{D,K\}^{k}$ describe finite patterns of
+exposures and suppressions. These local patterns determine fine scale features
+that are not captured by invariants such as $\eta$ or $\phi$.
 
-\subsection{Empirical frequency measures}
+\subsection{Empirical measures}
 
-For a block $u \in \mathcal{A}^{k}$, the empirical frequency up to index $N$
-is
+Given $u \in \mathcal{A}^{k}$, the empirical frequency is
 \[
 \mathrm{freq}_{N}(u,x)
-  = \frac{1}{N}
-    \bigl| \{ 0 \le n < N-k+1 : x_{n} \ldots x_{n+k-1} = u \} \bigr|.
+=
+\frac{1}{N}
+\left|
+\{\, 0 \le n < N-k+1 : x_n x_{n+1} \cdots x_{n+k-1}=u \,\}
+\right|.
 \]
 
-Empirical frequencies provide refined statistical information about symbolic
-sequences.  
-Although not used directly in the main text, these measures motivate the
-extended invariants discussed in Part VI.
+Empirical frequency ideas motivate possible higher order invariants, such as
+block frequencies or empirical measures on selector streams. These quantities
+extend the geometric framework of extended invariants discussed in Part~VI.
 
-\section{Selector Behavior in Symbolic Terms}
+\section{Residual Structure and Irregularity}
 
-Selectors are symbolic sequences in $\{D,K\}^{\mathbb{N}}$ with the additional
-constraint that $D$ must occur infinitely often.  
-Many properties of selectors are classical:
-
-\begin{itemize}
-    \item positive density selectors correspond to sequences in which $D$
-          occurs with positive lower density,
-    \item zero density selectors correspond to sparse symbol occurrences,
-    \item large fluctuation selectors correspond to sequences with large gaps.
-\end{itemize}
-
-These behaviors are well studied in the context of return times, symbolic
-recurrence, and sparse subshifts.  
-The extended invariants $\eta$ and $\phi$ adapt classical notions to the
-selector setting.
-
-\section{Residual Structure and Typicality}
-
-In classical symbolic dynamics, residual sets (dense $G_\delta$ sets) describe
-typical behavior under the Baire category notion of genericity.  
-Many selector-related properties are generic in the space $\{D,K\}^{\mathbb{N}}$:
+Residual sets, or dense $G_{\delta}$ subsets, describe typical behavior in the
+sense of Baire category. In classical symbolic dynamics, many forms of
+irregularity are residual:
 
 \begin{itemize}
-    \item irregular gap growth,
-    \item oscillating frequencies,
+    \item unbounded fluctuations in gap growth,
+    \item oscillating symbol frequencies,
     \item absence of limiting densities.
 \end{itemize}
 
-Although the generative identity framework does not rely directly on generic
-properties, the irregularity of symbolic sequences supports the observation
-that collapse fibers contain many identities with extreme or pathological
-selector patterns.
+Although the generative identity framework does not rely directly on residual
+genericity, the prevalence of irregular symbolic behavior demonstrates that
+collapse fibers contain identities with extreme or pathological selector
+patterns. This supports the structural indistinguishability results.
 
 \section{Interaction with the Generative Identity Framework}
 
-The symbolic tools summarized above enter the monograph in the following ways.
+Symbolic dynamics interacts with the generative framework in several ways.
 
 \begin{itemize}
-    \item Selector streams are symbolic sequences in a full shift
-          $\{D,K\}^{\mathbb{N}}$, and their asymptotic properties determine the
-          extended invariants $\eta$ and $\phi$.
+    \item Selector streams are symbolic sequences in a full shift space, and
+          their long term behavior determines the asymptotic invariants
+          $\eta$ and $\phi$.
 
-    \item Lower densities, gap sequences, and limsup statistics are used to
-          analyze large scale selector structure.
+    \item Density and gap statistics describe tail behavior of selectors,
+          which is central to invariant analysis and prefix indistinguishability.
 
-    \item Block structures and empirical frequency ideas motivate possible
-          higher dimensional invariants that extend the geometric picture in
-          Part VI.
+    \item Block structures and empirical frequency ideas motivate refined
+          invariants beyond those studied in the monograph and suggest future
+          directions for generative geometry.
 
     \item The product topology on symbolic sequences is the same topology used
-          to define continuity of structural projections and to derive
+          to define continuity of structural projections and to obtain
           dependency bounds.
 
-    \item Residual irregularity of symbolic sequences illustrates why collapse
-          fibers contain identities with many distinct selector patterns,
-          reinforcing the incompleteness phenomena of Part IV.
+    \item The irregularity typical of symbolic sequences helps explain why
+          collapse fibers contain identities with many distinct selector
+          patterns.
 \end{itemize}
 
-Symbolic dynamics therefore provides a conceptual and mathematical foundation
-for understanding selector behavior, extended invariants, and the geometry of
-the generative space.
+Symbolic dynamics therefore provides a natural mathematical language for
+describing selector behavior, asymptotic invariants, and the geometry of the
+generative space.
 \clearpage{}
 \clearpage{}\chapter{Alignment and Sewing: Full Technical Proofs}
 
@@ -3328,45 +3070,45 @@ These results show that:
 Together, these tools form the core technical machinery used to establish the
 Structural Incompleteness Theorem.
 \clearpage{}
-\clearpage{}\chapter{Diagonalizer Construction Details}
+\clearpage{}\chapter{Mimicry Construction Details}
+\label{appendix:mimicry}
 
 \section{Introduction}
 
-This appendix contains the full technical details of the meta diagonalizer
-constructed in the main text.  
-The purpose is to present the inductive machinery underlying the
-construction in a complete and self contained form.  
-We give precise definitions of stabilization indices, prefix bounds, and
-alignment points, and we verify the computability of the final identity.
+This appendix provides full technical details for the mimicry construction
+used in Chapter~9 to prove the Structural Indistinguishability Theorem. The
+goal is to construct a computable identity inside a collapse fiber that is
+distinct from a given reference identity but indistinguishable from it by any
+computable structural projection.
 
-Throughout, $x$ denotes a computable real number with canonical digit
-expansion $(x_j)_{j \ge 0}$, and $H$ is a fixed computable reference identity
-in the effective collapse fiber $\mathcal{F}_{\mathrm{eff}}(x)$.
+The construction uses three ingredients developed earlier in the text:
 
-We assume an enumeration of all computable structural projections
+\begin{itemize}
+    \item dependency bounds for structural projections,
+    \item alignment and sewing tools from Appendix~\ref{appendix:alignment-sewing},
+    \item the perfectness of effective collapse fibers.
+\end{itemize}
+
+Throughout, $x$ is a computable real with canonical digit expansion
+$(x_j)_{j \ge 0}$, and $H$ is a fixed computable identity in the effective
+fiber $\mathcal{F}_{\mathrm{eff}}(x)$. We assume a computable enumeration of
+all computable structural projections
 \[
 \Phi_0, \Phi_1, \Phi_2, \ldots,
 \]
-together with computable dependency bounds $B_k$ for each $\Phi_k$.
+each equipped with a computable dependency bound $B_k(\varepsilon)$.
 
 \section{Preliminaries}
 
 \subsection{Effective fibers}
 
-The set $\mathcal{F}_{\mathrm{eff}}(x)$ of computable identities that collapse
-to $x$ is a $\Pi^{0}_{1}$ class.  
-Elements of this class are represented by computable selector, digit, and meta
-streams whose canonical outputs agree with the expansion of $x$.
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is a nonempty
+$\Pi^{0}_{1}$ class containing all computable identities that collapse to $x$.
+It is perfect, so for any identity $H$ in the fiber and any finite prefix
+length $N$ there exists another computable identity $A$ in the fiber that
+agrees with $H$ on $[0..N]$ but differs at some later coordinate.
 
-\subsection{Divergent identities}
-
-For each $k$ and each rational $\varepsilon > 0$, the Divergence Lemma from
-Chapter~9 guarantees the existence of a computable identity $A \in
-\mathcal{F}_{\mathrm{eff}}(x)$ such that
-\[
-|\Phi_k(A) - \Phi_k(H)| > 3\varepsilon.
-\]
-This provides the source of divergence at stage $k$.
+This property supplies the tail variation needed for the mimicry construction.
 
 \subsection{Selection indices}
 
@@ -3374,267 +3116,250 @@ For any identity $G$, let
 \[
 n_0^{G} < n_1^{G} < n_2^{G} < \cdots
 \]
-denote the selection indices corresponding to the positions where $M(n) = D$.
+list the indices where $M(n)=D$. Sewing operations from
+Appendix~\ref{appendix:alignment-sewing} use selection indices to align the
+tails of two identities inside the same collapse fiber.
 
-\section{Inductive Construction Overview}
+\section{Overview of the Mimicry Construction}
 
 We construct a sequence
 \[
 G_0, G_1, G_2, \ldots
 \]
-of computable identities satisfying:
+with the following properties:
 
 \begin{enumerate}
     \item $G_0 = H$,
     \item $G_k \in \mathcal{F}_{\mathrm{eff}}(x)$ for all $k$,
-    \item $G_{k+1}$ extends $G_k$ on a prefix of computable length $N_{k+1}$,
-    \item $G_{k+1}$ introduces divergence on projection $\Phi_k$,
-    \item the limit identity $G^{\sharp}$ defined coordinatewise is computable.
+    \item $G_{k+1}$ extends $G_k$ on a prefix of length $N_{k+1}$,
+    \item for each $k$,
+    \[
+    |\Phi_k(G_{k+1}) - \Phi_k(H)| < \varepsilon_k,
+    \]
+    \item $G_{k+1}$ is chosen to be distinct from $H$ by varying the tail.
 \end{enumerate}
+
+The limit identity $G^{\sharp}$ will agree with $H$ on arbitrarily long
+prefixes and therefore be indistinguishable from $H$ by every computable
+projection, while still being symbolically distinct.
 
 \subsection{Tolerances}
 
-Define the sequence of tolerances
+Define the error tolerances
 \[
-\varepsilon_k = 2^{-(k+2)},
+\varepsilon_k = 2^{-(k+2)}.
 \]
-which is computable, strictly decreasing, and tends to zero.
+These form a computable, strictly decreasing sequence tending to zero.
 
 \subsection{Prefix stabilization lengths}
 
 Define
 \[
 N_0 = 0,
+\qquad
+N_{k+1} = \max \left( N_k,\, B_k(\varepsilon_k) \right) + 1.
 \]
-and inductively
-\[
-N_{k+1} = \max \left( N_k,\ B_k(\varepsilon_k) \right).
-\]
-This ensures that agreement on the first $N_{k+1}$ symbols forces
-agreement of $\Phi_k$ to within $\varepsilon_k$.
+Thus $N_{k+1}$ strictly increases and is computable. Agreement on
+$[0..N_{k+1}]$ guarantees agreement of $\Phi_k$ to within $\varepsilon_k$.
 
 \section{Inductive Step}
 
-Assume $G_k$ has been defined.  
-We construct $G_{k+1}$ in several stages.
+Assume $G_k$ has been defined.
 
-\subsection{Stage 1: Choosing the divergent identity}
+\subsection{Step 1: Preserving observer accuracy}
 
-By the Divergence Lemma, choose a computable identity
+The next identity $G_{k+1}$ must agree with $G_k$ (and therefore with $H$) on
+$[0..N_{k+1}]$. This ensures
+\[
+|\Phi_k(G_{k+1}) - \Phi_k(H)| < \varepsilon_k.
+\]
+
+\subsection{Step 2: Selecting a distinct tail inside the fiber}
+
+By perfectness of $\mathcal{F}_{\mathrm{eff}}(x)$, there exists a computable
+identity
 \[
 A_k \in \mathcal{F}_{\mathrm{eff}}(x)
 \]
 such that
 \[
-|\Phi_k(A_k) - \Phi_k(H)| > 3\varepsilon_k.
+A_k[0..N_{k+1}] = H[0..N_{k+1}]
+\quad\text{and}\quad
+A_k \neq H.
 \]
 
-The identity $A_k$ will supply the tail divergence at stage $k$.
+This identity provides controlled tail variation while preserving collapse.
 
-\subsection{Stage 2: Locating an alignment index}
+\subsection{Step 3: Locating an alignment index}
 
 Let
 \[
-n_0^{G_k} < n_1^{G_k} < n_2^{G_k} < \cdots
+n_0^{G_k} < n_1^{G_k} < \cdots,
+\qquad
+n_0^{A_k} < n_1^{A_k} < \cdots
 \]
-and
-\[
-n_0^{A_k} < n_1^{A_k} < n_2^{A_k} < \cdots
-\]
-be the respective selection indices.
-
-Since $G_k$ exposes infinitely many digits, there exists $j_k$ such that
+denote the selection indices. Since both identities have infinitely many
+exposed digits, there exists $j_k$ such that
 \[
 n_{j_k}^{G_k} \ge N_{k+1}.
 \]
 
-By alignment (Lemma C.1), the digit exposed at $n_{j_k}^{G_k}$ in $G_k$ is the
-same as the digit exposed at $n_{j_k}^{A_k}$ in $A_k$, and both coincide with
-the digit $x_{j_k}$.
+By the alignment lemma in Appendix~\ref{appendix:alignment-sewing}, the digits
+exposed at these aligned positions coincide.
 
-\subsection{Stage 3: Sewing the tail}
+\subsection{Step 4: Sewing the tail}
 
-Define $G_{k+1}$ by
+Define
 \[
-G_{k+1}(n) =
+G_{k+1}(n)=
 \begin{cases}
 G_k(n) & n \le n_{j_k}^{G_k}, \\
 A_k(n - n_{j_k}^{G_k} + n_{j_k}^{A_k}) & n > n_{j_k}^{G_k}.
 \end{cases}
 \]
 
-\begin{itemize}
-    \item By construction, $G_{k+1}$ matches $G_k$ on all indices
-          $\le n_{j_k}^{G_k} \ge N_{k+1}$.
-    \item By the sewing lemma, $G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x)$.
-    \item By dependency bounds, $\Phi_k(G_{k+1})$ differs from $\Phi_k(G_k)$
-          by less than $\varepsilon_k$.
-    \item Since $A_k$ diverges by more than $3\varepsilon_k$ from $H$, the
-          final divergence of $G_{k+1}$ from $H$ remains at least
-          $\varepsilon_k$.
-\end{itemize}
+By the Full Sewing Lemma:
 
-Thus $G_{k+1}$ satisfies all inductive requirements.
+\begin{itemize}
+    \item $G_{k+1} \in \mathcal{F}_{\mathrm{eff}}(x)$,
+    \item $G_{k+1}[0..N_{k+1}] = G_k[0..N_{k+1}]$,
+    \item $\Phi_k(G_{k+1})$ lies within $\varepsilon_k$ of $\Phi_k(H)$,
+    \item $G_{k+1}$ differs from $H$ at some tail coordinate.
+\end{itemize}
 
 \section{Existence of the Limit Identity}
 
-\subsection{Coordinate stabilization}
-
-For each index $n$, there exists a stage $k$ such that
+For each index $n$, choose $k$ such that $N_k > n$. For all $m \ge k$,
 \[
-N_k > n.
+G_m(n) = G_k(n),
 \]
-Since $G_{k+1}$ and $G_k$ agree on all indices up to $N_{k+1} \ge N_k$, it
-follows that for all $m \ge k$,
+so the coordinate stabilizes. Define
 \[
-G_m(n) = G_k(n).
+G^{\sharp}(n) = \lim_{k\to\infty} G_k(n).
 \]
-Thus every coordinate stabilizes.
-
-\subsection{Definition of the limit}
-
-Define $G^{\sharp} \in \mathcal{X}^{*}$ by
-\[
-G^{\sharp}(n) = \lim_{k\to\infty} G_k(n),
-\]
-where the limit is understood as coordinatewise stabilization.
-
-The limit exists by the preceding argument.
 
 \subsection{Membership in the effective fiber}
 
-Every $G_k$ lies in $\mathcal{F}_{\mathrm{eff}}(x)$, and sewing preserves
-membership.  
-Since each $G_k$ exposes the canonical digits of $x$ at aligned positions, the
-same holds for the limit.  
-Thus
+Each $G_k$ collapses to $x$, and sewing preserves the canonical output. Thus
 \[
 G^{\sharp} \in \mathcal{F}_{\mathrm{eff}}(x).
 \]
 
-\section{Computability of the Diagonalizer}
+\subsection{Indistinguishability}
 
-\subsection{Computability of stabilization indices}
+For any computable projection $\Phi_m$, agreement of $G^\sharp$ and $H$ on
+prefixes of length at least $B_m(\varepsilon_k)$ ensures
+\[
+|\Phi_m(G^{\sharp}) - \Phi_m(H)| < \varepsilon_k
+\quad\text{for all } k \ge m.
+\]
+Therefore
+\[
+\Phi_m(G^{\sharp}) = \Phi_m(H)
+\quad\text{for all } m.
+\]
 
-The sequence $(N_k)$ is computable because:
+\subsection{Distinctness}
 
-\begin{itemize}
-    \item $B_k$ are computable dependency bounds,  
-    \item $\varepsilon_k$ is computable,  
-    \item $N_{k+1}$ depends only on $N_k$, $B_k(\varepsilon_k)$, and basic
-          arithmetic.
-\end{itemize}
+Since at each stage the tail is chosen to differ from $H$, one can ensure that
+$G^{\sharp} \neq H$ by avoiding a fixed forbidden coordinate or pattern.
 
-Thus $N_k$ is uniformly computable.
+\section{Computability}
 
-\subsection{Computing selection indices}
+\subsection{Computability of prefix bounds}
 
-For each computable identity, the selector stream is computable, so the
-selection indices are computable by scanning until the required number of
-$D$ symbols have been seen.
+The values $N_k$ are computable because the dependency bounds $B_k$ and the
+tolerances $\varepsilon_k$ are computable.
 
-Thus the indices $n_j^{G_k}$ and $n_j^{A_k}$ are computable.
+\subsection{Computability of alignment}
 
-\subsection{Computability of the sewing operation}
+Selection indices of computable identities are computable by scanning the
+selector until the $j$th exposure is found.
 
-Given $n$ and $k$, to compute $G_{k+1}(n)$:
+\subsection{Computability of sewing}
 
-\begin{itemize}
-    \item check whether $n \le n_{j_k}^{G_k}$,  
-    \item if so, return $G_k(n)$,  
-    \item otherwise, return the aligned symbol from $A_k$.
-\end{itemize}
+The sewing operation is computable coordinatewise using the computable indices
+$n_{j_k}^{G_k}$ and $n_{j_k}^{A_k}$.
 
-All needed values are computable, so $G_{k+1}$ is computable.
+\subsection{Computability of the limit}
 
-\subsection{Computability of the limit identity}
-
-For any fixed $n$, to compute $G^{\sharp}(n)$:
-
-\begin{itemize}
-    \item find $k$ such that $N_k > n$,  
-    \item output $G_k(n)$.
-\end{itemize}
-
-Since $N_k$ is computable and increasing without bound, this procedure is
-effective.
-
-Thus $G^{\sharp}$ is computable.
+To compute $G^{\sharp}(n)$, find $k$ with $N_k > n$ and output $G_k(n)$.
+Since $N_k$ grows without bound and is computable, this procedure yields a
+computable name for $G^{\sharp}$.
 
 \section{Summary}
 
-This appendix presented the full details of the diagonalizer construction:
+This appendix provided the full technical development of the mimicry
+construction:
 
 \begin{itemize}
-    \item the inductive construction of $(G_k)$,
-    \item the stabilization lengths $N_k$,
-    \item alignment indices $j_k$,
-    \item controlled sewing of tails,
-    \item preservation of collapse fibers,
-    \item computability of each $G_k$,
-    \item computability of the limit identity $G^{\sharp}$.
+    \item computation of stabilization lengths,
+    \item selection of distinct tails inside the collapse fiber,
+    \item alignment at selection indices,
+    \item sewing of tails while preserving collapse,
+    \item preservation of observer values via dependency bounds,
+    \item coordinatewise convergence,
+    \item computability of the limit identity.
 \end{itemize}
 
-These tools establish the existence of a computable identity in the collapse
-fiber of $x$ that agrees with a reference identity on all observed prefixes
-yet diverges along every computable structural projection.
+These tools establish the existence of a computable identity in
+$\mathcal{F}_{\mathrm{eff}}(x)$ that is observationally indistinguishable from
+a given identity but symbolically distinct, proving the Structural
+Indistinguishability Theorem.
 \clearpage{}
 \clearpage{}\chapter{Extended Invariants and Selector Geometry}
 
 \section{Introduction}
 
 This appendix provides explicit examples and geometric interpretations of the
-extended invariants introduced in Part~VI.  
-These invariants measure large scale properties of the selector stream and
-reveal how generative identities distribute across the symbolic space.  
-The appendix also develops a slice based geometric viewpoint of selector
-behavior, which generalizes and formalizes earlier three dimensional intuition
-using the modern terminology of the monograph.
+robust asymptotic invariants introduced in Part~VI. These invariants measure
+large scale properties of the selector stream and illustrate how generative
+identities distribute across symbolic space. The appendix also develops a
+slice based geometric viewpoint that clarifies how finite prefix structure,
+asymptotic selector statistics, and collapse fibers interact.
 
-Throughout, $G = (M,D,K)$ denotes a generative identity with selector stream
-$M \in \{D,K\}^{\mathbb{N}}$.  
-The entropy balance is
+Throughout, $G = (M,D,K)$ is a generative identity with selector
+$M \in \{D,K\}^{\mathbb{N}}$. The robust asymptotic invariants are
+
 \[
 \eta(G)
-  = \liminf_{N\to\infty}
-      \frac{1}{N} \sum_{n<N} \chi_M(n),
-\]
-and the fluctuation index is
-\[
+    = \liminf_{N\to\infty}
+        \frac{1}{N}\sum_{n<N} \chi_M(n),
+\qquad
 \phi(G)
-  = \limsup_{j\to\infty} \frac{g_j}{n_j},
+    = \limsup_{j\to\infty} \frac{g_j}{n_j},
 \]
-where $n_j$ are the selection indices and $g_j = n_{j+1} - n_j$.
+
+where $n_j$ lists the selected positions and $g_j = n_{j+1} - n_j$.
 
 \section{Vertical, Horizontal, and Fiber Slices}
 
-Extended invariants give rise to natural geometric slices through the
-generative space.  
-These slices provide useful conceptual pictures of selector behavior and
-clarify how collapse fibers intersect large scale invariant structure.
+Extended invariants give rise to three natural types of slices through the
+generative space. These slices provide conceptual maps of selector behavior
+and explain why finite observation cannot constrain asymptotic structure.
 
 \subsection{Vertical slices: fixing a prefix}
 
-A vertical slice is a cylinder set of the form
+A vertical slice is a cylinder set
+
 \[
 \mathcal{C}(u)
   = \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \},
 \]
-where $u$ is a finite prefix of length $N$.  
-Vertical slices represent the set of identities that agree on a finite
-segment of the selector, digit, and meta streams.
 
-Vertical slices are the regions that structural projections inspect.  
-Dependency bounds imply that a projection samples only a vertical slice, and
-prefix stabilization ensures that observers ignore all tails beyond the slice
-depth.  
-This interpretation connects directly to the incompleteness phenomena of
-Part~IV.
+where $u$ is a finite prefix. Vertical slices represent the observable region
+available to any continuous projection at fixed precision. Dependency bounds
+ensure that each observer samples only a single vertical slice at a time, and
+so vertical slices encode the finite information geometry underlying
+indistinguishability.
+
+Vertical slices impose no restriction on $\eta$ or $\phi$. Invariant values
+can vary freely inside any cylinder.
 
 \subsection{Horizontal slices: fixing invariant values}
 
-Fix $\alpha \in [0,1]$ or $\beta \in [0,\infty]$.  
-The horizontal slices
+Fix $\alpha \in [0,1]$ or $\beta \in [0,\infty]$. The level sets
+
 \[
 \mathcal{H}_{\alpha}
   = \{ G : \eta(G) = \alpha \},
@@ -3642,41 +3367,40 @@ The horizontal slices
 \mathcal{H}^{\beta}
   = \{ G : \phi(G) = \beta \}
 \]
-represent level sets of extended invariants.  
-These sets group identities by long term selector behavior and cut across many
-collapse fibers.
 
-When plotted in the $(\eta,\phi)$ plane, horizontal slices correspond to
-vertical or horizontal lines.  
-They reveal the large scale organization of selector patterns and illustrate
-the diversity of possible behaviors.
+group identities by large scale selector behavior. These slices cut across
+collapse fibers and across all vertical slices. When drawn in the
+$(\eta,\phi)$ plane, horizontal slices appear as straight lines and illustrate
+how asymptotic structure is decoupled from the finite structure observed by
+continuous projections.
 
 \subsection{Fiber slices: fixing the collapsed value}
 
-Fix a real number $x$.  
-The fiber slice
+Fix a real number $x$. The fiber slice
+
 \[
 \mathcal{F}(x)
-  = \{ G \in \mathcal{X}^{*} : \pi(G) = x \}
+    = \{ G \in \mathcal{X}^{*} : \pi(G) = x \}
 \]
-represents all identities that collapse to $x$.  
-This slice is a symbolic sheet that cuts through the invariant geometry of
-the selector space.
 
-Because extended invariants depend only on the selector, not on collapse, the
-image of a fiber under the embedding
+contains all identities whose selected digits give $x$. Extended invariants
+depend only on the selector, not on collapse. Consequently, the image of
+$\mathcal{F}(x)$ under the map
+
 \[
-G \mapsto (\eta(G), \phi(G))
+G \longmapsto (\eta(G), \phi(G))
 \]
-typically fills a large region of the $(\eta,\phi)$ plane.  
-This geometric picture illustrates how collapse conceals nearly all selector
-structure.
+
+typically occupies a large subset of the invariant plane. This illustrates
+why the classical value of a real number constrains only a small portion of
+its generative structure.
 
 \section{Worked Examples of Extended Invariants}
 
 \subsection{Periodic positive density example}
 
 Let
+
 \[
 M(n) =
 \begin{cases}
@@ -3684,147 +3408,145 @@ D & \text{if } n \text{ is even},\\
 K & \text{otherwise}.
 \end{cases}
 \]
-Then half of all positions expose digits:
-\[
-\eta(G) = \frac{1}{2}.
-\]
-The selection indices are $n_j = 2j$, so $g_j = 2$ and
+
+Then $\eta(G) = 1/2$. The indices are $n_j = 2j$, so $g_j = 2$ and
+
 \[
 \phi(G) = 0.
 \]
-This identity represents regular, evenly spaced digit exposure.
+
+This selector has positive density and perfectly regular spacing.
 
 \subsection{Positive density with mild irregularity}
 
-Let $M$ be the periodic sequence obtained by repeating $DDK$.  
-Then
+Let $M$ repeat the pattern $DDK$. Then
+
 \[
-\eta(G) = \frac{2}{3},
+\eta(G) = 2/3,
 \qquad
-\phi(G) = 0,
+\phi(G) = 0.
 \]
-even though the exposure pattern is not evenly spaced.
+
+The pattern is not uniform but its gap growth is bounded.
 
 \subsection{Zero density with bounded gaps}
 
-Let $M(n) = D$ when $n$ is prime and $K$ otherwise.  
-The density of primes is zero, so
-\[
-\eta(G) = 0.
-\]
-However, gaps grow only logarithmically, so
+Let $M(n)=D$ when $n$ is prime. The density of primes is zero, so
+$\eta(G)=0$, but since gaps grow sublinearly,
+
 \[
 \phi(G) = 0.
 \]
 
 \subsection{Zero density with large fluctuations}
 
-Select digits at factorial indices
+Select digits at factorial indices:
+
 \[
 n_j = j!.
 \]
-Then $\eta(G) = 0$, but
+
+Then $\eta(G)=0$ and
+
 \[
 \frac{g_j}{n_j} = j,
-\quad
+\qquad
 \phi(G) = \infty.
 \]
 
 \subsection{Oscillating density example}
 
-Expose digits in blocks:
+Expose digits in blocks
+
 \[
 D^{2^0}K^{2^0}D^{2^1}K^{2^1}D^{2^2}K^{2^2}\cdots
 \]
-Then the density oscillates between values near $0$ and near $1$, and
+
+Then the density oscillates between near zero and near one. One obtains
+
 \[
 \eta(G) = 0,
 \qquad
 \phi(G) = \infty.
 \]
 
-\section{Semicontinuity Demonstrations}
+These examples show that $\eta$ and $\phi$ capture independent aspects of
+asymptotic selector behavior.
 
-\subsection{Lower semicontinuity of \texorpdfstring{$\eta$}{eta}}
+\section{Robustness and Discontinuity}
 
+The invariants $\eta$ and $\phi$ are robust under finite tail modifications
+beyond any fixed prefix, but they are maximally discontinuous in the product
+topology. The following examples demonstrate this behavior.
 
-Let $G$ satisfy $\eta(G) = 0$.  
-Define $G_k$ by copying the first $k$ bits of $M$ and then exposing digits
-forever.  
-Then $\eta(G_k) = 1$ for all $k$ and
+\subsection{Lower asymptotic density}
+
+Let $G$ satisfy $\eta(G)=0$. Define $G_k$ by copying the first $k$ symbols of
+$M$ and then exposing digits at all later positions. Then
+
 \[
-\eta(G)
-  \le \liminf_{k\to\infty} \eta(G_k).
+\eta(G_k) = 1
+\quad\text{for all } k,
 \]
 
-\subsection{Upper semicontinuity of \texorpdfstring{$\phi$}{phi}}
+yet $G_k \to G$ in the product topology. This shows that $\eta$ is not upper
+semicontinuous and exhibits strong discontinuity.
 
-Let $G$ have evenly spaced selected digits so $\phi(G) = 0$.  
-Modify the tail of $M$ in $G_k$ by inserting a single gap of length
-$\ell_k \to \infty$.  
-Then
+\subsection{Relative gap growth}
+
+Let $G$ have evenly spaced selected digits, so $\phi(G)=0$. Modify the tail of
+$M$ in $G_k$ by inserting a single gap of length $\ell_k \to \infty$. Then
+
 \[
-\limsup_{k\to\infty} \phi(G_k) = \infty,
-\qquad
-\phi(G) \ge \limsup_{k\to\infty} \phi(G_k).
+\phi(G_k) = \infty
+\quad\text{for all } k,
 \]
 
-\subsection{Failure of continuity}
+and again $G_k \to G$ in the product topology. This demonstrates
+discontinuity of $\phi$.
 
-Let $G_k$ select digit $D$ only at position $k$ and set $G$ to have no
-selected digits.  
-Then $G_k \to G$, but the invariants behave discontinuously.  
-This illustrates that neither $\eta$ nor $\phi$ can be continuous in the
-product topology.
+\subsection{No possibility of continuity}
+
+Consider $G_k$ selecting $D$ at a single position $k$ and $G$ selecting $D$ at
+no positions. Then $G_k \to G$, yet $\eta(G_k) = 1/k$ while
+$\eta(G)=0$, and similarly for fluctuation. Both invariants fail continuity in
+the strongest possible sense.
 
 \section{Extended Invariants Inside Collapse Fibers}
 
-Since extended invariants depend only on the selector, each collapse fiber
-contains identities with arbitrary invariant values.
+Since invariants depend only on the selector, each fiber contains identities
+with all allowable invariant values.
 
-\subsection{Arbitrary balance in a fiber}
+\subsection{Arbitrary density in a fiber}
 
-Given any $\alpha \in [0,1]$, construct a selector $M$ with
-\[
-\eta(G) = \alpha,
-\]
-assign the canonical digits of $x$ at selected positions, and choose any meta
-stream.  
-The resulting identity lies in $\mathcal{F}(x)$.
+Fix $\alpha \in [0,1]$. Construct a selector $M$ with $\eta(M)=\alpha$ and
+place the digits of $x$ at selected positions. This yields a generative
+identity in $\mathcal{F}(x)$ with invariant $\eta=\alpha$.
 
 \subsection{Arbitrary fluctuation in a fiber}
 
-Given $\beta \in [0,\infty]$, construct a selector with
-\[
-\phi(G) = \beta
-\]
-by adjusting the growth of the gap sequence.  
-Placing the digits of $x$ at selected indices yields an identity in
-$\mathcal{F}(x)$.
+Fix $\beta \in [0,\infty]$. Construct a selector with $\phi=\beta$ and again
+place the digits of $x$ at selected positions. This produces an identity with
+the desired fluctuation inside $\mathcal{F}(x)$.
 
 \subsection{Simultaneous control}
 
-Given any $(\alpha,\beta)$, selectors can be built to realize
-\[
-\eta(G) = \alpha,
-\qquad
-\phi(G) = \beta,
-\]
-and the corresponding identities lie in the collapse fiber of $x$.  
-Thus fibers map to substantial regions of the invariant plane.
+Given any $(\alpha,\beta)$ in the invariant plane, build a selector realizing
+both values and place the digits of $x$ accordingly. Thus each collapse fiber
+maps to a substantial region in $(\eta,\phi)$ space.
 
 \section{Summary}
 
 This appendix presented explicit examples illustrating the full range of
-behavior for $\eta$ and $\phi$, as well as slice based geometric
-interpretations that clarify how selectors populate the generative space.  
-Vertical slices represent finite symbolic prefixes, horizontal slices represent
-invariant level sets, and fiber slices show the richness of selector behavior
-compatible with a fixed collapsed value.  
-Together, these examples and geometric perspectives support the broader
-conclusion that collapse conceals substantial symbolic structure.
+possible values for the robust asymptotic invariants $\eta$ and $\phi$, as
+well as slice based geometric interpretations that clarify how selectors
+populate the generative space. Vertical slices represent finite symbolic
+prefixes, horizontal slices represent long term invariant values, and fiber
+slices reveal the symbolic variety compatible with a fixed collapsed value.
+These perspectives support the broader conclusion that collapse conceals the
+vast majority of generative structure.
 \clearpage{}
-\clearpage{}\clearpage{}
+
 
 \backmatter
 \bibliographystyle{plain}

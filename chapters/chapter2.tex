@@ -1,141 +1,164 @@
 \chapter{The Collapse Map}
+\label{chap:collapse-map}
 
 \section{Introduction}
 
-A generative identity contains far more symbolic structure than is visible in
-its classical magnitude.  
-The collapse map extracts a real number from a generative identity by reading
-only the digits exposed by the selector stream.  
-This operation forgets almost all of the internal generative behavior,
-producing a single value in $[0,1]$ while leaving behind a large fiber of
-distinct identities sharing the same classical output.
+A generative identity contains layers of symbolic structure that extend far
+beyond its classical magnitude.  
+The collapse map extracts a real number by reading only those digits revealed
+by the selector stream.  
+This operation discards most of the internal structure and identifies large
+families of generative identities whose collapse coordinates agree.  
+These families are the collapse fibers, and they form the central geometric
+objects of collapse theory.
 
-This chapter defines the collapse map, establishes its continuity, and shows
-that every real number---computable or otherwise---arises as the collapse of
-many different generative identities.
+This chapter defines the collapse map, establishes its continuity, and
+describes the structure of its fibers.  
+The presentation relies on the topological properties of the generative space
+introduced in Chapter~\ref{chap:generative-space} and parallels standard ideas
+in symbolic dynamics \cite{LindMarcus} and computable analysis
+\cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}.
 
-\section{Digit Selection}
+\section{Digit Extraction}
 
-Let $G = (M, D, K) \in \mathcal{X}^*$ be a digit-selecting generative identity.
-Recall that the canonical output sequence is defined by enumerating the digits
-appearing at positions where $M(n) = D$.
-
-Let
+Let $G = (M,D,K) \in \mathcal{G}^*$ be a digit-producing generative identity.
+List the indices at which the selector exposes a digit:
 \[
-n_0 < n_1 < n_2 < \cdots
-\]
-be the increasing sequence of indices with $M(n_j) = D$, and define
-\[
-d_G(j) = D(n_j).
+n_0 < n_1 < n_2 < \cdots,
+\qquad M(n_j) = D.
 \]
 
-The sequence $(d_G(j))_{j \ge 0}$ is an infinite sequence in
-$\{0,1,\ldots,b-1\}^{\mathbb{N}}$ and will serve as the base-$b$ expansion of
-the collapsed value.
+\begin{definition}[Collapse Coordinate]
+The collapse coordinate of $G$ is the sequence
+\[
+X(G) = \bigl(D(n_j)\bigr)_{j=0}^\infty
+    \in \{0,\ldots,b-1\}^{\mathbb{N}}.
+\]
+\end{definition}
+
+Only the selector and digit layers influence $X(G)$.  
+The meta-information layer does not contribute to the classical value, a fact
+that later underlies the richness of collapse fibers.
 
 \section{Definition of the Collapse Map}
 
-For every $G \in \mathcal{X}^*$, define the \emph{collapse map}
+The collapse map translates the collapse coordinate into a real number.
+
+\begin{definition}[Collapse Map]
+For each $G \in \mathcal{G}^*$,
 \[
 \pi(G)
-  = \sum_{j=0}^{\infty} \frac{d_G(j)}{b^{j+1}}.
+  = \sum_{j=0}^{\infty} \frac{X(G)_j}{b^{j+1}}.
 \]
+\end{definition}
 
-When a real number has two base-$b$ expansions (a terminating expansion and a
-repeating one), we adopt the standard convention of using the non-terminating
-representation with trailing $(b-1)$s avoided.  
-This ensures the collapse map is well defined.
+When a real number has two base-$b$ expansions, we adopt the usual convention
+of avoiding the terminating representation with trailing $(b-1)$s.  
+This ensures that $\pi$ is single-valued.
 
-The collapse map is the primary projection from the generative space to the
-unit interval.  
-It depends only on the canonical output and therefore only on the portions of
-the digit stream selected by $M$.
+\section{Continuity}
 
-\section{Continuity of Collapse}
+The collapse map is continuous with respect to the product topology on
+$\mathcal{G}^*$.
 
-The topology on $\mathcal{X}^*$ makes $\pi$ a continuous function onto
-$[0,1]$.  
-Given $\varepsilon > 0$, choosing $N$ large enough so that
-$b^{-(N+1)} < \varepsilon$ shows that the first $N$ selected digits determine
-$\pi(G)$ to within $\varepsilon$.
+\begin{proposition}
+The map $\pi : \mathcal{G}^* \to [0,1]$ is continuous.
+\end{proposition}
 
-Since selected digits appear infinitely often, the first $N$ of them arise
-within some initial prefix of $G$.  
-Thus, for every $\varepsilon > 0$, there exists an integer $L$ such that any
-two identities agreeing on their first $L$ symbols in each stream have
-collapsed values within $\varepsilon$.
+\begin{proof}
+Fix $\varepsilon > 0$ and choose $N$ so that $b^{-(N+1)} < \varepsilon$.  
+Two identities produce collapse values within $\varepsilon$ whenever their
+first $N$ selected digits agree.  
+Since $G \in \mathcal{G}^*$ selects digits infinitely often, there exists
+some $L$ such that the first $N$ selected digits lie within the first $L$
+entries of the three streams.
 
-Therefore \( \pi : \mathcal{X}^* \to [0,1] \) is continuous.
+If two identities agree on their prefixes of length $L$ in each layer, then
+their first $N$ selected digits coincide.  
+Therefore their collapse values differ by less than $\varepsilon$, proving
+continuity.
+\end{proof}
+
+The proof uses the fact that basic open sets of the product topology are
+determined by finite prefixes, a feature common to subshifts of finite type
+and other Cantor-like symbolic systems \cite{LindMarcus}.
 
 \section{Surjectivity}
 
-Every real number in $[0,1]$ arises as the collapse of many generative
-identities.  
-Fix any real number $x$ with base-$b$ expansion
-\[
-x = \sum_{j=0}^{\infty} \frac{x_j}{b^{j+1}}.
-\]
+Every real number admits many generative descriptions.
 
-Choose a selector $M$ that always selects digits:
-\[
-M(n) = D \quad \text{for all } n.
-\]
-Define the digit stream $D$ by $D(n) = x_n$ for all $n$, and let $K$ be any
-meta-information sequence.
+\begin{proposition}
+The collapse map $\pi$ is surjective.
+\end{proposition}
 
-Then $G = (M, D, K) \in \mathcal{X}^*$ satisfies $\pi(G) = x$.  
-Varying $K$ freely shows that the fiber $\pi^{-1}(\{x\})$ is uncountable.
+\begin{proof}
+Let $x \in [0,1]$ have base-$b$ expansion $(x_j)_{j\geq 0}$ in the
+non-terminating form.  
+Define the selector $M$ by $M(n)=D$ for all $n$.  
+Set $D(n)=x_n$ for all $n$ and let $K$ be any sequence in $\Sigma^{\mathbb{N}}$.
+Then $G=(M,D,K)$ lies in $\mathcal{G}^*$ and satisfies $\pi(G)=x$.
+\end{proof}
+
+By varying the meta-information layer and the unused digit positions
+arbitrarily, we see that each point of $[0,1]$ has an uncountable collapse
+fiber.
 
 \section{Effective Surjectivity}
 
-The collapse map behaves correctly on the effective core.  
-A real number $x \in [0,1]$ is computable if and only if it has a computable
-base-$b$ expansion.  
-Given such an expansion, the construction above produces a computable
-generative identity $G \in \mathcal{G}_{\mathrm{eff}}$ satisfying
-$\pi(G) = x$.
+Collapse behaves correctly on the effective core.
 
-Conversely, if $G \in \mathcal{G}_{\mathrm{eff}} \cap \mathcal{X}^*$, then the
-canonical output sequence $d_G(j)$ is computable, and so $\pi(G)$ is a
-computable real.
+\begin{proposition}
+A real number is computable if and only if it is the collapse of some
+identity in $\mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^*$.
+\end{proposition}
+
+\begin{proof}
+If $x$ is computable, then its base-$b$ expansion is computable.  
+Using the construction above with computable streams yields
+$G \in \mathcal{G}_{\mathrm{eff}}$ satisfying $\pi(G)=x$.
+
+Conversely, if $G \in \mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^*$, then
+the collapse coordinate $X(G)$ is computable, so the series defining $\pi(G)$
+computes a real number.  
+Hence $\pi(G)$ is computable.
+\end{proof}
 
 Thus
 \[
-\pi(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{X}^*)
+\pi(\mathcal{G}_{\mathrm{eff}} \cap \mathcal{G}^*)
   = \mathbb{R}_c,
 \]
-the set of computable reals.
+the set of computable real numbers.
 
-\section{Fibers and Structural Redundancy}
+\section{Collapse Fibers}
 
-The collapse map is many-to-one.  
-For any $x \in [0,1]$, the fiber
+For $x \in [0,1]$, the collapse fiber
 \[
-\mathcal{F}(x) = \pi^{-1}(\{x\})
+\mathcal{F}(x)
+  = \pi^{-1}(\{x\})
 \]
-contains identities that may share no structural similarity beyond producing
-the same output digits.
+contains all identities with collapse coordinate equal to the base-$b$
+expansion of $x$.
 
-Two identities may:
+These identities may differ arbitrarily on:
 \begin{itemize}
-    \item select digits at completely different positions,
-    \item carry unrelated meta-information streams,
-    \item differ arbitrarily on unselected digits,
+    \item the pattern of selector positions,
+    \item unselected digits,
+    \item the meta-information layer.
 \end{itemize}
-while still collapsing to the same real $x$.
 
-This structural redundancy is essential for the development of the projection
-theory and the incompleteness results of later parts.
+Only the selected digits influence the classical value.  
+This structural redundancy forms the foundation for the projection theory of
+Part~\ref{part:selector-geometry} and the incompleteness results of
+Part~\ref{part:incompleteness}.
 
 \section{Summary}
 
-The collapse map converts the symbolic structure of a generative identity into
-a classical real number by selecting and aggregating digits according to the
-selector stream.  
-It is continuous, surjective, effectively surjective on computable identities,
-and massively non-injective.  
-The fibers of $\pi$ form the central objects of study in the Generative
-Identity Framework.
-
-The next chapter analyzes the internal geometry of these fibers and the
-degrees of freedom that remain invisible after collapse.
+The collapse map projects generative identities to real numbers by reading the
+collapse coordinate determined by the selector and digit layers.  
+It is continuous, surjective, and effectively surjective onto the computable
+reals.  
+Its fibers are large symbolic families that share the same classical
+magnitude.  
+These fibers are the central geometric objects of collapse theory and will be
+analyzed in detail in the next chapter.

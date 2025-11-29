@@ -1,157 +1,180 @@
 \chapter{Structural Projections and the Projection Lattice}
+\label{chap:projections}
 
 \section{Introduction}
 
-The collapse map extracts the classical value of a generative identity while
-discarding most of its internal structure.  
-To understand which aspects of this structure can be detected by continuous
-observers, we introduce the general notion of a \emph{structural projection}.
-These projections form a lattice under pointwise comparison and represent
-effective measurements that respect the topology of the generative space.
+The collapse map extracts only the classical magnitude of a generative
+identity.  
+To understand what additional structure can be detected by continuous
+observers, we introduce the notion of a \emph{structural projection}.  
+These observers read only finitely many coordinates of the selector, digit,
+and meta-information layers to achieve any prescribed precision.  
+They capture the visible aspects of generative structure from the perspective
+of continuous measurement.
 
-The framework developed in this chapter draws on ideas from Type-2
-Effectivity, where continuous functionals on sequence spaces are understood
-through their finite information content.  
-This finite information principle, central in the work of Weihrauch and
-Pauly on represented spaces, appears here in an explicit combinatorial form.
-It allows projections to be analyzed through their dependency on finite
-prefixes and serves as the foundation for the incompleteness results proved
-later.
+The theory developed here is grounded in Type-2 Effectivity, where continuous
+functionals on Baire and Cantor spaces are analyzed through their finite
+information content  
+\cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}.  
+In the generative setting, this principle appears in a concrete combinatorial
+form: every continuous observer depends only on a finite prefix of a
+generative identity at each precision level.
+
+Structural projections will form the observational layer used in
+Part~\ref{part:incompleteness}.  
+Their dependency bounds enable the controlled constructions that lead to
+alignment, divergence, and diagonalization.
 
 \section{Structural Projections}
 
-A \emph{structural projection} is any continuous function
-\[
-\Phi : \mathcal{X}^* \to \mathbb{R},
-\]
-where $\mathcal{X}^*$ carries the product topology defined in Part I.  
-Continuity ensures that the value $\Phi(G)$ is determined to any fixed
-precision by a finite prefix of $G$.
+Let $\mathcal{G}^*$ be the digit-producing subspace of the generative space
+$\mathcal{G}$ defined in Chapter~\ref{chap:generative-space}.
 
-More precisely, for every $\varepsilon > 0$, continuity provides an integer
-$B_\Phi(\varepsilon)$ such that
+\begin{definition}[Structural Projection]
+A \emph{structural projection} is a continuous function
+\[
+\Phi : \mathcal{G}^* \to \mathbb{R}
+\]
+with respect to the product topology on $\mathcal{G}^*$.
+\end{definition}
+
+Continuity ensures that $\Phi(G)$ can be approximated using only a finite
+prefix of $G$.  
+That is, for each $\varepsilon > 0$ there exists an integer $N$ such that
+prefix agreement up to $N$ forces agreement of $\Phi$ up to $\varepsilon$.
+
+Concretely, for each $\varepsilon > 0$ there exists
+$B_\Phi(\varepsilon) \in \mathbb{N}$ such that
 \[
 G[0..B_\Phi(\varepsilon)]
-  = H[0..B_\Phi(\varepsilon)]
+   = 
+H[0..B_\Phi(\varepsilon)]
 \quad\Longrightarrow\quad
-|\Phi(G) - \Phi(H)| < \varepsilon.
+\bigl|\Phi(G) - \Phi(H)\bigr| < \varepsilon .
 \]
 
-The function $B_\Phi$ plays the role of a computable modulus of continuity in
-the sense of Type-2 computability, which is the standard framework for
-analyzing real-valued functionals on symbolic spaces.
+This finite-information property is the analogue of a modulus of continuity
+for real-valued functionals on symbolic spaces.
 
-\section{Basic Examples}
+\section{Examples of Structural Projections}
 
-Several projections arise naturally from the structure of a generative
-identity.
+Several observers arise naturally from the structure of generative identities.
 
-\subsection*{Collapse}
+\subsection*{The collapse map}
 
-The collapse $\pi$ is the foundational projection.  
-Its continuity was established in Chapter 2 and follows from the classical
-theory of real number representations.
+The collapse map $\pi(G)$ depends only on the collapse coordinate $X(G)$.  
+Its continuity was established in Chapter~\ref{chap:collapse-map}.  
+It is the archetypal structural projection.
 
-\subsection*{Digit statistics}
+\subsection*{Digit frequency observers}
 
-Fix a digit $a \in \{0,\ldots,b-1\}$.  
-Define
+Fix a digit $a\in\{0,\ldots,b-1\}$.  
+Define the lower frequency of $a$ in the collapse coordinate by
 \[
 \Phi_a(G)
-  = \liminf_{N \to \infty}
-      \frac{1}{N}
-      \sum_{j=0}^{N-1} \mathbf{1}[\, d_G(j) = a \,].
+  = 
+  \liminf_{N\to\infty}
+     \frac{1}{N} 
+     \sum_{j < N} \mathbf{1}\bigl[X(G)_j = a\bigr].
 \]
-This projection measures the lower asymptotic frequency of the digit $a$ in
-the canonical output.  
-Other variants include limsup frequency or empirical block frequencies.
 
-Such projections resemble classical invariants in symbolic dynamics, where
-frequency statistics determine measure-theoretic properties of subshifts.
-The exposition of Lind and Marcus provides many examples of these quantities
-in the context of shift spaces.
+These observers resemble classical frequency invariants in symbolic dynamics,
+where empirical digit statistics encode measure-theoretic behavior
+\cite{LindMarcus}.
 
-\subsection*{Selector statistics}
+\subsection*{Selector exposure observers}
 
 Define
 \[
 \Psi(G)
-  = \liminf_{N \to \infty}
+   =
+   \liminf_{N\to\infty}
       \frac{1}{N}
-      \sum_{n=0}^{N-1} \mathbf{1}[\, M(n) = D \,].
+      \sum_{n < N} \mathbf{1}[M(n)=D].
 \]
-This projection measures the asymptotic density with which the selector
-exposes digits.  
-It coincides with the selector density studied in Chapter 4 but now viewed as
-an observer on $\mathcal{X}^*$.
+
+This projection coincides with the selector density introduced in
+Chapter~\ref{chap:density}, now viewed as a continuous functional on
+$\mathcal{G}^*$.
 
 \section{Dependency Bounds}
 
-Dependency bounds measure the amount of information an observer requires to
-determine its output to a given precision.
+Dependency bounds quantify the finite information content of a structural
+projection.
 
 \begin{definition}[Dependency Bound]
-Let $\Phi : \mathcal{X}^* \to \mathbb{R}$ be continuous.  
-A function $B_\Phi : (0,1] \to \mathbb{N}$ is a \emph{dependency bound} for
-$\Phi$ if
+Let $\Phi:\mathcal{G}^*\to\mathbb{R}$ be continuous.  
+A function
+\[
+B_\Phi:(0,1]\to\mathbb{N}
+\]
+is a \emph{dependency bound} for $\Phi$ if for all $\varepsilon>0$,
 \[
 G[0..B_\Phi(\varepsilon)]
-  = H[0..B_\Phi(\varepsilon)]
+  =
+H[0..B_\Phi(\varepsilon)]
 \quad\Longrightarrow\quad
-|\Phi(G) - \Phi(H)| < \varepsilon
+|\Phi(G) - \Phi(H)| < \varepsilon.
 \]
-for all $\varepsilon > 0$.
 \end{definition}
 
-If $\Phi$ is computable, classical results from Type-2 Effectivity imply that
-$B_\Phi$ can be chosen to be computable as well.  
-This follows from the fact that computable functionals on Baire space admit
-computable moduli of continuity.
+Dependency bounds describe the number of coordinates an observer must read to
+produce an $\varepsilon$-accurate estimate.  
+If $\Phi$ is computable, classical results in Type-2 computability imply that
+$B_\Phi$ can be chosen to be computable  
+\cite{WeihrauchComputableAnalysis}.
 
-Dependency bounds quantify the finite information content of observers and
-provide the mechanism by which projections can be frozen at finite stages in
-the diagonalizer construction of Part IV.
+These bounds play a central role in prefix stabilization and in the
+construction of the meta-diagonalizer in Part~\ref{part:incompleteness}.
 
 \section{The Projection Lattice}
 
-Given two projections $\Phi$ and $\Psi$, define
+Observers can be compared according to how much structure they distinguish.
+
+\begin{definition}[Informational Dominance]
+For structural projections $\Phi$ and $\Psi$ define
 \[
-\Phi \le \Psi
+\Phi \leq \Psi
 \quad\Longleftrightarrow\quad
-\Phi(G) = \Phi(H) \text{ whenever } \Psi(G) = \Psi(H).
+\Phi(G)=\Phi(H)
+\ \text{whenever}\ 
+\Psi(G)=\Psi(H).
 \]
-This relation expresses that $\Psi$ distinguishes at least as much structure
-as $\Phi$.
+\end{definition}
+
+Thus $\Psi$ distinguishes at least as much structure as $\Phi$: any pair of
+identities indistinguishable to $\Psi$ must also be indistinguishable to
+$\Phi$.
 
 \begin{proposition}
-The set of structural projections on $\mathcal{X}^*$ ordered by $\le$ forms a
-complete lattice.
+The set of structural projections on $\mathcal{G}^*$ ordered by $\leq$
+forms a complete lattice.
 \end{proposition}
 
 \begin{proof}
-For any family of projections $(\Phi_i)$, the pointwise supremum
+Given a family $(\Phi_i)$, define the pointwise supremum
 \[
-\Phi(G) = \sup_i \Phi_i(G)
+\Phi(G) = \sup_i \Phi_i(G).
 \]
-is still continuous and therefore a structural projection.  
-This projection is the least upper bound with respect to $\le$.  
-Similarly, pointwise infima provide greatest lower bounds.
+Pointwise suprema of continuous functions are continuous, so $\Phi$ is again
+a structural projection.  
+This function is the least upper bound of the family.  
+A similar argument shows that pointwise infima give greatest lower bounds.
 \end{proof}
 
-This algebraic structure parallels the lattice of continuous real-valued
-functionals on represented spaces and has been extensively studied in the
-context of Weihrauch degrees.  
-Here it provides the organizational framework for understanding how different
-projections capture different aspects of generative structure.
+This lattice structure parallels the order-theoretic organization of
+continuous functionals on represented spaces and is closely related to the
+hierarchies appearing in the study of Weihrauch degrees.
 
 \section{Summary}
 
-Structural projections are continuous observers on the generative space.  
-Their finite dependency on prefixes gives rise to computable dependency
-bounds, and their collective structure forms a complete lattice.  
-These properties reflect classical results from Type-2 computability and
-symbolic dynamics but are here adapted to the generative identity setting.
+Structural projections are continuous real-valued observers on the
+digit-producing generative space.  
+Their finite dependency on prefixes yields computable dependency bounds, and
+their informational structure forms a complete lattice.  
+These features provide the analytical and combinatorial tools required for the
+prefix stabilization and incompleteness phenomena that follow.
 
-In the next chapter we formalize prefix stabilization and show how the finite
-dependency of observers enables the controlled constructions that drive the
-incompleteness phenomena in Part IV.
+In the next chapter we develop prefix stabilization and show how dependency
+bounds allow continuous observers to be controlled at finite stages during
+alignment and diagonalization.

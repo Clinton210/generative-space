@@ -3,116 +3,129 @@
 
 \section{The Ambient Generative Space}
 
-Let $\Sigma$ denote the finite alphabet used to encode the mixer, digit, and
-meta streams of a generative identity. The full generative space is the
-product
+The ambient generative space consists of three independent symbolic layers:
+the selector layer, the digit layer, and the meta-information layer.
+Let $\Sigma$ be a finite alphabet for the meta-information layer and fix a
+base $b\geq 2$.  
+The ambient space is the product
 \[
-\mathcal{X} = \Sigma^{\mathbb{N}}
+\mathcal{G}
+  =
+  \{D,K\}^{\mathbb{N}}
+  \times
+  \{0,\ldots,b-1\}^{\mathbb{N}}
+  \times
+  \Sigma^{\mathbb{N}},
 \]
-equipped with the product topology induced by the discrete topology on
-$\Sigma$. By Tychonoff's theorem, $\mathcal{X}$ is compact and metrizable. A
-convenient metric is
+equipped with the product topology induced by the discrete topology on each
+alphabet.  
+By Tychonoff's theorem, $\mathcal{G}$ is compact, metrizable, and totally
+disconnected.  
+A standard compatible ultrametric is
 \[
-d(G,G') = 2^{-N},
+d(G,H) = 2^{-N},
 \]
-where $N$ is the least index at which $G$ and $G'$ differ. This metric
-generates the product topology.
+where $N$ is the least index at which $G$ and $H$ differ.  
+This is the classical metric used in Cantor space and shift spaces
+\cite{LindMarcus, Kechris}.
 
-We will often work with the subspace
+\section{Digit-Producing Subspace}
+
+A generative identity $G=(M,D,K)$ produces an infinite collapse coordinate when
+the selector exposes digits infinitely often.  
+The digit-producing subspace is
 \[
-\mathcal{X}^{*}
+\mathcal{G}^{*}
 =
-\bigl\{
-G \in \mathcal{X} :
-M_G(n) = D \text{ for infinitely many } n
-\bigr\},
+\{\, G \in \mathcal{G} : M(n)=D
+     \text{ for infinitely many } n \,\}.
 \]
-consisting of identities that select infinitely many digits. The set
-$\mathcal{X}^{*}$ is a dense $G_{\delta}$ subset of $\mathcal{X}$ (see
-\cite{Kechris} or \cite{Weihrauch}). It is not closed, and therefore not
-compact.
 
-The distinction between $\mathcal{X}$ and $\mathcal{X}^{*}$ is important.
-Compactness arguments must take place in the ambient space $\mathcal{X}$.
+The subspace $\mathcal{G}^{*}$ is dense in $\mathcal{G}$ and closed under
+finite modifications of any layer.  
+It is not closed and therefore not compact.  
+Its density reflects the fact that any initial prefix of a generative identity
+can later be extended to expose infinitely many digits.
 
-\section{Collapse Map and Closedness of Fibers}
+\section{Collapse Map and Compact Fibers}
 
 The collapse map
 \[
-\pi : \mathcal{X} \to [0,1]
+\pi : \mathcal{G}^{*} \to [0,1]
 \]
-was defined in Chapter \texttt{\ref{chap:collapse}} by interpreting each identity
-as an instruction to select digits of the output real number. Since the output
-of $\pi$ depends only on the selected digits and these digits depend on finitely
-many coordinates of the generative identity when viewed at any fixed precision,
-the following fact is standard in symbolic dynamics.
+was defined in Chapter~\ref{chap:collapse-map} by selecting digits at the
+positions where the selector layer takes the value $D$ and interpreting them
+as a base-$b$ expansion.
+
+Continuity of $\pi$ follows from the prefix topology: the value of $\pi(G)$
+at precision $b^{-(N+1)}$ depends only on the first $N$ selected digits, and
+these appear within some finite prefix of $G$.  
+This is the standard argument for continuity of evaluation maps on symbolic
+product spaces \cite{LindMarcus, WeihrauchComputableAnalysis}.
 
 \begin{proposition}
 \label{prop:collapse-continuous}
-The collapse map $\pi$ is continuous with respect to the product topology on
-$\mathcal{X}$.
+The collapse map $\pi$ is continuous.
 \end{proposition}
 
-A proof may be found, for example, in Chapter 1 of \cite{LindMarcus} for shift
-spaces and in Section 6 of \cite{Weihrauch} for continuous operators on Cantor
-space.
-
-Since singletons in $[0,1]$ are closed, the collapse fiber
-\[
-\mathcal{F}(x) = \pi^{-1}(\{x\})
-\]
-is a closed subset of the ambient generative space $\mathcal{X}$.
+Fibers of a continuous map into the Hausdorff space $[0,1]$ are closed.
 
 \begin{corollary}
 \label{cor:fiber-compact}
-For every $x \in [0,1]$, the collapse fiber $\mathcal{F}(x)$ is compact.
+For every $x \in [0,1]$, the collapse fiber
+\[
+\mathcal{F}(x)
+  = \pi^{-1}(\{x\})
+\]
+is a compact subset of $\mathcal{G}$.
 \end{corollary}
 
 \begin{proof}
-The ambient space $\mathcal{X}$ is compact and $\mathcal{F}(x)$ is closed in
-$\mathcal{X}$, so $\mathcal{F}(x)$ is compact.
+The fiber is closed in the compact space $\mathcal{G}$ and is therefore
+compact.
 \end{proof}
 
-This corrects the earlier intuition that compactness arises from
-$\mathcal{X}^{*}$. The effective subspace $\mathcal{X}^{*}$ is not compact.
-Compactness of the fiber is inherited from the ambient space $\mathcal{X}$.
+\section{The Effective Fiber}
 
-\section{The Effective Fiber and Its Position in the Ambient Space}
-
-Define the effective fiber by
+The effective generative space
+\[
+\mathcal{G}_{\mathrm{eff}}
+=
+\{\, G \in \mathcal{G} :
+     M, D, K \text{ are computable sequences} \,\}
+\]
+defines the computational core of the framework.  
+The effective fiber of $x$ is
 \[
 \mathcal{F}_{\mathrm{eff}}(x)
-=
-\mathcal{F}(x) \cap \mathcal{X}^{*}.
+   =
+\mathcal{F}(x) \cap \mathcal{G}^{*}.
 \]
-This is the set of identities that collapse to $x$ and select infinitely many
-digits. It is a dense subset of $\mathcal{F}(x)$ in the subspace topology.
 
-The following subtlety is important.
+Since $\mathcal{G}^{*}$ is dense in $\mathcal{G}$, every basic open set
+intersecting a full fiber also intersects the effective fiber.  
+However, the effective fiber is never closed.
 
 \begin{proposition}
 \label{prop:efffiber-not-closed}
-The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is not closed in
-$\mathcal{X}$ and is not closed in $\mathcal{X}^{*}$.
+For any $x \in [0,1]$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is
+not closed in $\mathcal{G}$ and not closed in $\mathcal{G}^{*}$.
 \end{proposition}
 
 \begin{proof}
-Consider a sequence of identities $G_k \in \mathcal{X}^{*}$ whose selectors
-place the $j$th selected digit at position $n_j^{(k)}$ with
-$n_j^{(k)} \to \infty$ as $k \to \infty$ for each fixed $j$. Pointwise limits
-of such sequences may select only finitely many digits, so the limit lies in
-$\mathcal{X} \setminus \mathcal{X}^{*}$. Since $\mathcal{F}(x)$ is closed, the
-same phenomenon occurs inside fibers.
+Construct a sequence of identities whose $j$th selected digit is pushed
+farther and farther out.  
+For fixed $j$, let the position $n_{j}^{(k)}$ satisfying $M(n_{j}^{(k)})=D$
+tend to infinity as $k\to\infty$.  
+Each identity lies in $\mathcal{F}_{\mathrm{eff}}(x)$, but the limit selects
+only finitely many digits and therefore lies outside $\mathcal{G}^{*}$.  
+The same construction can be performed inside any fiber $\mathcal{F}(x)$.
 \end{proof}
 
-Despite this lack of closedness, the effective fiber retains the same
-topological richness as the full fiber.
+\section{Cantor Geometry of Collapse Fibers}
 
-\section{Perfectness and Cantor Geometry of the Fiber}
-
-The collapse fiber $\mathcal{F}(x)$ is totally disconnected and has no
-isolated points. This follows from standard arguments in Cantor space (see
-\cite{LindMarcus} or \cite{Kechris}). We state the result here for reference.
+Collapse fibers inherit the structural properties of Cantor-type spaces.
+They are uncountable, totally disconnected, and contain no isolated points.
 
 \begin{proposition}
 \label{prop:fiber-perfect}
@@ -121,65 +134,71 @@ totally disconnected, and uncountable.
 \end{proposition}
 
 \begin{proof}
-Total disconnectedness follows from the product structure of $\mathcal{X}$.
-Perfectness follows because arbitrary changes in the unselected coordinates or
-in the meta-information stream after any finite index preserve the collapsed
-value. Details are standard and may be found in the references above.
+Total disconnectedness follows from the product structure of $\mathcal{G}$.
+To show perfectness, fix $G\in\mathcal{F}(x)$ and a finite prefix length $N$.
+Modify $G$ beyond index $N$ by altering unselected digits or the meta layer.
+These changes do not affect the collapse coordinate, so the resulting points
+remain in $\mathcal{F}(x)$ and can be made arbitrarily close to $G$.  
+Thus no point is isolated.  
+Uncountability follows from the existence of infinitely many independent
+choices in the unobserved coordinates, which mirrors classical arguments for
+Cantor sets \cite{Kechris}.
 \end{proof}
 
-Since the effective subspace $\mathcal{X}^{*}$ is dense in $\mathcal{X}$, the
-effective fiber inherits these properties.
+The effective fiber inherits these geometric properties through density.
 
 \begin{corollary}
 \label{cor:efffiber-perfect}
-The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is dense in the full fiber
-and contains no isolated points.
+The effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ is dense in the full
+fiber and has no isolated points.
 \end{corollary}
 
-\section{Tail Freedom Inside Collapse Fibers}
+\section{Tail Freedom}
 
-For any identity in the fiber and any finite prefix, there exist distinct
-extensions in the fiber that share the prefix and differ afterward. This
-property will be essential in later chapters.
+Collapse depends only on the sequence of selected digits, not on the positions
+at which they occur or on the values of unselected digits and meta symbols.
+This leads to complete freedom to modify the symbolic structure after any
+finite prefix.
 
 \begin{proposition}
 \label{prop:tail-freedom}
-Let $x \in [0,1]$ and let $G \in \mathcal{F}(x)$. For every $N$ there exist
-distinct identities $G'$ and $G''$ in $\mathcal{F}(x)$ such that
+Let $G \in \mathcal{F}(x)$ and let $N\in\mathbb{N}$.  
+There exist distinct $G'$ and $G''$ in $\mathcal{F}(x)$ such that
 \[
 G' \upharpoonright N
-=
-G'' \upharpoonright N
-=
-G \upharpoonright N.
+  = G'' \upharpoonright N
+  = G \upharpoonright N.
 \]
 \end{proposition}
 
 \begin{proof}
-Modify the unselected digits or the meta stream beyond index $N$. These
-changes do not alter the collapsed value. The resulting identities remain in
-the fiber and are distinct.
+Make two different modifications to either the unselected digits or the
+meta-information layer beyond index $N$.  
+Neither modification affects the collapse coordinate, so both identities
+remain in $\mathcal{F}(x)$.
 \end{proof}
 
-Tail freedom is one of the central sources of nondeterminacy in the generative
-framework and forms the geometric basis for the indistinguishability
-construction in Chapter \texttt{\ref{chap:indistinguishability}}.
+Tail freedom is the structural foundation for the alignment and sewing
+constructions developed in Part~\ref{part:incompleteness}, where fiber
+geometry interacts with observer behavior.
 
 \section{Summary}
 
-This chapter clarified the topological setting of the collapse fibers. The key
-points are:
+Collapse fibers display the following geometric features.
 
 \begin{itemize}
-    \item The ambient generative space $\mathcal{X}$ is compact.
-    \item The effective subspace $\mathcal{X}^{*}$ is dense and not compact.
-    \item Collapse fibers $\mathcal{F}(x)$ are closed subsets of $\mathcal{X}$
-    and are therefore compact.
-    \item The effective fiber is dense inside the fiber and contains no
-    isolated points.
-    \item Tail freedom allows arbitrary variations after finite prefixes.
+    \item The ambient generative space $\mathcal{G}$ is compact and totally
+    disconnected.
+    \item The digit-producing subspace $\mathcal{G}^{*}$ is dense but not
+    compact.
+    \item Each collapse fiber $\mathcal{F}(x)$ is compact, perfect, and
+    uncountable.
+    \item The effective fiber is dense in the full fiber and has no isolated
+    points.
+    \item Symbolic structure may vary freely beyond any finite prefix without
+    altering collapse.
 \end{itemize}
 
-These properties form the foundation for the structural indistinguishability
-results in Chapter \texttt{\ref{chap:indistinguishability}}.
-
+These properties form the geometric backbone of collapse theory and prepare
+the ground for the alignment and indistinguishability phenomena studied in
+later chapters.

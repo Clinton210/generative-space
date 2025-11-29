@@ -1,168 +1,176 @@
 \chapter{Selector Patterns and Density Regimes}
+\label{chap:density}
 
 \section{Introduction}
 
-Generative identities differ not only in the symbols they carry but also in
-the \emph{rate} at which their selectors expose digits from the underlying
-digit stream.  
-This rate---the asymptotic density of positions where $M(n) = D$---governs both
-the structure of the canonical output and the degree of freedom present inside
-the collapse fiber.
+The selector stream governs how a generative identity exposes digits to the
+collapse coordinate.  
+Although collapse depends only on the ordered sequence of selected digits, the
+long term behavior of the selector layer shapes the internal structure of
+collapse fibers and influences what continuous observers can detect.
 
-This chapter analyzes two fundamental regimes of selector behavior:
-\begin{itemize}
-    \item \emph{Hybrid selectors}, which expose digits with positive
-          asymptotic density, and
-    \item \emph{Null-density selectors}, which expose digits at vanishing
-          density.
-\end{itemize}
-
-Although these two extremes lie on opposite ends of a broad spectrum, both
-occur densely in the generative space.  
-Understanding these regimes clarifies how generative identities with sharply
-different internal behaviors can collapse to the same real number.
+This chapter introduces two coarse exposure regimes for selector streams:
+positive density and null density.  
+They represent opposite ends of the symbolic spectrum, yet both appear densely
+in the ambient generative space and inside every collapse fiber.  
+Selector density provides the first large scale invariant used to understand
+selector geometry before finer structural projections are introduced in the
+next chapter.
 
 \section{Selector Density}
 
-For a selector stream $M \in \{D,K\}^{\mathbb{N}}$, define the indicator
-function
+For a selector stream $M \in \{D,K\}^{\mathbb{N}}$, define
 \[
-\chi_M(n) =
+\chi_M(n)
+=
 \begin{cases}
-1 & M(n) = D,\\[4pt]
-0 & M(n) = K.
+1 & \text{if } M(n)=D,\\
+0 & \text{if } M(n)=K.
 \end{cases}
 \]
 
-The \emph{selector density} of $M$ is the lower asymptotic density
+\begin{definition}[Selector Density]
+The lower asymptotic density of digit exposures is
 \[
 \eta(M)
-  = \liminf_{N \to \infty}
-      \frac{1}{N}
-      \sum_{n=0}^{N-1} \chi_M(n).
+=
+\liminf_{N\to\infty}
+\frac{1}{N}\sum_{n<N}\chi_M(n).
 \]
+\end{definition}
 
-If $\eta(M) > 0$, the selector exposes digits at a positive rate; if
-$\eta(M)=0$, exposure becomes increasingly sparse.
-
-This density measures only the frequency of digit selections, not their
-spacing; a selector may have dense clusters of selections followed by long
-voids while still having positive or zero density.
+The value $\eta(M)$ measures how frequently digits are exposed relative to the
+full stream.  
+It does not constrain local regularity or gap growth.  
+Selectors with identical density may differ dramatically in the placement of
+exposures.
 
 \section{Hybrid Selectors}
 
 \subsection{Definition}
 
-A generative identity $G = (M,D,K)$ is \emph{hybrid} if $\eta(M) > 0$.
-Equivalently, the indices $n$ with $M(n)=D$ have positive asymptotic density.
+A generative identity $G=(M,D,K)$ has a \emph{hybrid selector} if
+\[
+\eta(M) > 0.
+\]
+Hybrid selectors expose digits at a sustained rate.  
+A positive fraction of positions contribute to the collapse coordinate.
 
-Hybrid identities expose digits regularly enough that, in the long run, a
-non-negligible portion of the total stream contributes to the classical
-output.
+\subsection{Topological Abundance}
 
-\subsection{Topological density}
-
-Hybrid selectors occur densely in the generative space.
+Hybrid selectors are dense in the ambient generative space
+\[
+\mathcal{G}
+  = \{D,K\}^{\mathbb{N}}
+    \times \{0,\ldots,b-1\}^{\mathbb{N}}
+    \times \Sigma^{\mathbb{N}}.
+\]
 
 \begin{proposition}
-For every nonempty basic open set in $\mathcal{X}$, there exists a hybrid
-identity contained in it.
+Every nonempty basic open set in $\mathcal{G}$ contains a hybrid selector.
 \end{proposition}
 
 \begin{proof}
-Let the open set be determined by finite prefixes of $(M, D, K)$.  
-Extend these prefixes by placing $M(n) = D$ for all $n$ beyond the given
-prefix.  
-Then the extended identity is hybrid and remains inside the open set.  
-Thus hybrid selectors form a dense subset of $\mathcal{X}$.
+A basic open set specifies only finitely many coordinates of $M$, $D$, and
+$K$.  
+Extend the specified prefix by setting $M(n)=D$ for all larger $n$.  
+The resulting selector has density $1$ and the identity remains inside the
+open set.
 \end{proof}
+
+This parallels standard arguments in symbolic dynamics where dense families of
+sequences are constructed by extending finite prefixes in shift spaces
+\cite{LindMarcus, Kechris}.
 
 \subsection{Interpretation}
 
-Hybrid identities distribute their observed digits steadily throughout the
-total stream.  
-They represent the ``typical'' behavior of selectors when little is known
-about their structure.
+Hybrid selectors capture the regime of sustained, regular exposure.  
+They represent identities in which the collapse coordinate is drawn from a
+digit stream that remains frequently accessible.
 
-\section{Null-Density Selectors}
+\section{Null Density Selectors}
 
 \subsection{Definition}
 
-A generative identity is \emph{null-density} if its selector satisfies
-$\eta(M) = 0$.
-
-These selectors still expose infinitely many digits (since $G \in
-\mathcal{X}^*$), but they do so with asymptotically negligible frequency.
+A generative identity has a \emph{null density} selector when
+\[
+\eta(M) = 0.
+\]
+Such identities still lie in the digit-producing subspace $\mathcal{G}^*$,
+because they expose infinitely many digits, but the relative frequency of
+exposures tends to zero.
 
 \subsection{Examples}
 
-A standard example uses the perfect squares:
+A classical example is exposure at the perfect squares:
 \[
-M(n) =
+M(n)
+=
 \begin{cases}
-D & \text{if } n = k^2 \text{ for some } k,\\
+D & \text{if } n=k^2 \text{ for some } k,\\
 K & \text{otherwise}.
 \end{cases}
 \]
-Since the number of squares below $N$ is $\lfloor \sqrt{N} \rfloor$, the
-density of $D$-positions is $N^{-1/2} \to 0$.
+Since the number of squares less than $N$ grows like $N^{1/2}$, the density of
+exposures is $N^{-1/2}$, which tends to zero.
 
-More intricate examples use rapidly growing computable sequences such as
-$n_k = k!$, $n_k = 2^{2^k}$, or sparse polynomial-time patterns.
+More extreme sparse selectors arise from sequences such as $n_j=j!$ or
+$n_j=2^{2^j}$, which create gap growth far beyond any polynomial rate.  
+Such constructions are common in the study of sparse symbolic sequences and
+recurrence behavior \cite{LindMarcus}.
 
-\subsection{Existence in every fiber}
-
-Null-density selectors appear in every collapse fiber.
+\subsection{Existence in Every Collapse Fiber}
 
 \begin{proposition}
-For every $x \in [0,1]$, there exists a null-density generative identity
-$G \in \mathcal{F}_{\mathrm{eff}}(x)$.
+For each $x \in [0,1]$, the effective fiber
+$\mathcal{F}_{\mathrm{eff}}(x)$ contains identities with null density
+selectors.
 \end{proposition}
 
 \begin{proof}
-Fix the canonical expansion $(x_j)$ of $x$ and define a selector that exposes
-digits only at perfect-square positions.  
-At each such position $n_j$, set $D(n_j) = x_j$; elsewhere set $D$ arbitrarily.
-Let $K$ be any computable meta-stream.  
-This identity lies in $\mathcal{F}_{\mathrm{eff}}(x)$ and has density zero by
-construction.
+Let $(x_j)$ be the collapse coordinate of $x$.  
+Expose $x_j$ at the $j$th square $n_j=j^2$.  
+Fill unselected digit positions arbitrarily and choose any computable
+meta-information stream.  
+The resulting identity collapses to $x$ and has density zero.
 \end{proof}
 
 \subsection{Interpretation}
 
-Null-density selectors exhibit extreme sparsity.  
-They expose infinitely many digits but at a rate too small to influence the
-asymptotic distribution of symbols in the overall generative space.  
-Such identities show that collapse fibers contain elements of dramatically
-different structural complexity.
+Null density selectors emphasize that collapse imposes no restraint on the
+rate of exposure.  
+A collapse fiber can contain identities whose internal timing of exposures is
+extremely sparse or irregular without affecting the classical value.
 
-\section{Selector Diversity Inside a Fiber}
+\section{Selector Diversity Inside a Collapse Fiber}
 
-Hybrid and null-density identities coexist inside the same collapse fiber,
-demonstrating that the classical output $x$ places almost no restrictions on
-the internal rate of digit revelation.
+Collapse fibers are closed under arbitrary changes to unobserved structure.
+As a consequence, selector streams within a single fiber may display an
+extremely wide range of long term behaviors.  
+For fixed $x \in [0,1]$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$
+contains selectors that are:
 
-Given any $x$, the effective fiber $\mathcal{F}_{\mathrm{eff}}(x)$ contains:
 \begin{itemize}
-    \item identities selecting digits frequently,
-    \item identities selecting digits sparsely,
-    \item identities with periodic or chaotic selection patterns,
-    \item identities with arbitrary meta-information streams.
+    \item hybrid,
+    \item null density,
+    \item periodic or quasiperiodic,
+    \item irregular with highly variable gap growth,
+    \item influenced by arbitrary choices in the meta-information layer.
 \end{itemize}
 
-This freedom underscores the essential distinction between internal
-generative structure and classical magnitude.
+This diversity reflects the fact that collapse depends only on the sequence of
+exposed digits, not on the rate or structure by which exposure occurs.
 
 \section{Summary}
 
-Selector density provides the first structural coordinate for generative
-identities.  
-Hybrid selectors expose digits with positive asymptotic density, whereas
-null-density selectors do so sparsely.  
-Both behaviors occur densely in the generative space and both appear in every
-effective collapse fiber.  
-The coexistence of such radically different regimes within a single fiber
-illustrates the vast internal variability hidden beneath the collapse.
+Selector density provides a fundamental coarse descriptor of selector
+behavior.  
+Hybrid selectors expose digits at a positive rate, while null density
+selectors expose digits sparsely.  
+Both appear densely in the ambient generative space and inside every collapse
+fiber.  
+Their coexistence illustrates that classical magnitude places almost no
+constraint on large scale selector behavior.
 
-The next chapter introduces structural projections, continuous observers that
-measure generative properties without disrupting the underlying identity.
+The next chapter develops structural projections, which describe how
+continuous observers extract finite information from generative identities.

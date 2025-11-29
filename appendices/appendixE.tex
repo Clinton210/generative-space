@@ -1,238 +1,243 @@
 \chapter{Extended Invariants and Selector Geometry}
+\label{appendix:extended-invariants}
 
 \section{Introduction}
 
-This appendix provides explicit examples and geometric interpretations of the
-robust asymptotic invariants introduced in Part~VI. These invariants measure
-large scale properties of the selector stream and illustrate how generative
-identities distribute across symbolic space. The appendix also develops a
-slice based geometric viewpoint that clarifies how finite prefix structure,
-asymptotic selector statistics, and collapse fibers interact.
+This appendix develops worked examples and geometric interpretations of the
+extended asymptotic invariants used in the selector geometry tier. These
+invariants describe long range behavior of the selector stream and clarify how
+finite prefixes, asymptotic statistics, and collapse fibers interact.
 
-Throughout, $G = (M,D,K)$ is a generative identity with selector
-$M \in \{D,K\}^{\mathbb{N}}$. The robust asymptotic invariants are
-
+For a generative identity $G = (M,D,K)$ with selector $M \in \{D,K\}^{\mathbb{N}}$,
+the extended invariants are
 \[
 \eta(G)
-    = \liminf_{N\to\infty}
-        \frac{1}{N}\sum_{n<N} \chi_M(n),
+= \liminf_{N\to\infty}
+\frac{1}{N}\sum_{n<N} \chi_{M}(n),
 \qquad
 \phi(G)
-    = \limsup_{j\to\infty} \frac{g_j}{n_j},
+= \limsup_{j\to\infty} \frac{g_j}{n_j},
 \]
+where $(n_j)$ lists the selected positions and $g_j = n_{j+1} - n_j$.
+The invariant $\eta$ records the lower asymptotic density of exposed digits,
+while $\phi$ records the relative gap growth and thus the scale of fluctuation.
 
-where $n_j$ lists the selected positions and $g_j = n_{j+1} - n_j$.
+The aim of this appendix is threefold:
+
+\begin{itemize}
+    \item to give a slice based geometric interpretation of the invariants,
+    \item to present examples spanning the full range of selector behaviors,
+    \item to explain why invariants are robust under tail changes but
+          discontinuous in the product topology.
+\end{itemize}
+
+These ideas support the structural projection results and the
+indistinguishability constructions of later chapters.
 
 \section{Vertical, Horizontal, and Fiber Slices}
 
-Extended invariants give rise to three natural types of slices through the
-generative space. These slices provide conceptual maps of selector behavior
-and explain why finite observation cannot constrain asymptotic structure.
+The invariants $\eta$ and $\phi$ determine natural geometric slices through
+the generative space. These slices illustrate how finite and infinite scale
+structures relate to each other.
 
 \subsection{Vertical slices: fixing a prefix}
 
-A vertical slice is a cylinder set
-
+For a finite word $u$ of length $N$, the cylinder
 \[
 \mathcal{C}(u)
-  = \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \},
+= \{ G \in \mathcal{X}^{*} : G[0..N-1] = u \}
 \]
+is a vertical slice of the generative space. Dependency bounds for structural
+projections imply that any continuous observer can inspect only a single
+vertical slice at a given precision. Thus vertical slices encode the finite
+information geometry that drives prefix indistinguishability.
 
-where $u$ is a finite prefix. Vertical slices represent the observable region
-available to any continuous projection at fixed precision. Dependency bounds
-ensure that each observer samples only a single vertical slice at a time, and
-so vertical slices encode the finite information geometry underlying
-indistinguishability.
-
-Vertical slices impose no restriction on $\eta$ or $\phi$. Invariant values
-can vary freely inside any cylinder.
+Vertical slices impose no restriction on $\eta$ or $\phi$. Any invariant
+values compatible with symbolic structure can occur inside any cylinder.
 
 \subsection{Horizontal slices: fixing invariant values}
 
-Fix $\alpha \in [0,1]$ or $\beta \in [0,\infty]$. The level sets
-
+For $\alpha \in [0,1]$ and $\beta \in [0,\infty]$, the horizontal slices
 \[
 \mathcal{H}_{\alpha}
-  = \{ G : \eta(G) = \alpha \},
+= \{ G : \eta(G) = \alpha \},
 \qquad
 \mathcal{H}^{\beta}
-  = \{ G : \phi(G) = \beta \}
+= \{ G : \phi(G) = \beta \}
 \]
+sort identities according to large scale selector behavior.
+These slices cut across all vertical slices and all collapse fibers. When
+projected to the invariant plane, horizontal slices appear as straight lines
+that reflect asymptotic behavior independent of any finite prefix.
 
-group identities by large scale selector behavior. These slices cut across
-collapse fibers and across all vertical slices. When drawn in the
-$(\eta,\phi)$ plane, horizontal slices appear as straight lines and illustrate
-how asymptotic structure is decoupled from the finite structure observed by
-continuous projections.
+This illustrates a central theme of selector geometry: continuous observation
+captures only local structure, while $\eta$ and $\phi$ record global structure.
 
 \subsection{Fiber slices: fixing the collapsed value}
 
-Fix a real number $x$. The fiber slice
-
+Fix a real number $x$. The fiber
 \[
 \mathcal{F}(x)
-    = \{ G \in \mathcal{X}^{*} : \pi(G) = x \}
+= \{ G \in \mathcal{X}^{*} : \pi(G) = x \}
 \]
+records all generative identities that produce $x$ under collapse.
 
-contains all identities whose selected digits give $x$. Extended invariants
-depend only on the selector, not on collapse. Consequently, the image of
-$\mathcal{F}(x)$ under the map
-
+Extended invariants depend only on the selector stream and not on the exposed
+digits. The map
 \[
 G \longmapsto (\eta(G), \phi(G))
 \]
+thus sends $\mathcal{F}(x)$ to a large subset of the invariant plane.
+This shows that the classical real number $x$ constrains only the symbolic
+content of selected digits and leaves the selector free to vary widely.
 
-typically occupies a large subset of the invariant plane. This illustrates
-why the classical value of a real number constrains only a small portion of
-its generative structure.
+\section{Worked Examples of Invariants}
 
-\section{Worked Examples of Extended Invariants}
+The following examples illustrate the full range of behaviors of $\eta$ and
+$\phi$. Each example describes a selector stream; the digit stream may be
+assigned arbitrarily to place the identity in any desired collapse fiber.
 
-\subsection{Periodic positive density example}
+\subsection{Periodic positive density}
 
-Let
-
+Let $M(n)=D$ for even $n$ and $M(n)=K$ for odd $n$. Then
 \[
-M(n) =
-\begin{cases}
-D & \text{if } n \text{ is even},\\
-K & \text{otherwise}.
-\end{cases}
+\eta(G)=\frac{1}{2},
+\qquad
+n_j = 2j,
+\qquad
+g_j = 2,
 \]
-
-Then $\eta(G) = 1/2$. The indices are $n_j = 2j$, so $g_j = 2$ and
-
+so
 \[
-\phi(G) = 0.
+\phi(G)=0.
 \]
-
-This selector has positive density and perfectly regular spacing.
+This is an example of positive density with bounded gaps.
 
 \subsection{Positive density with mild irregularity}
 
-Let $M$ repeat the pattern $DDK$. Then
-
+Let $M$ repeat the block $DDK$. Then
 \[
-\eta(G) = 2/3,
+\eta(G)=\frac{2}{3},
 \qquad
-\phi(G) = 0.
+\phi(G)=0.
 \]
-
-The pattern is not uniform but its gap growth is bounded.
+Although the pattern is nonuniform, gap growth remains bounded.
 
 \subsection{Zero density with bounded gaps}
 
-Let $M(n)=D$ when $n$ is prime. The density of primes is zero, so
-$\eta(G)=0$, but since gaps grow sublinearly,
-
+Let $M(n)=D$ when $n$ is prime. The prime density is zero, so
 \[
-\phi(G) = 0.
+\eta(G)=0.
+\]
+Since prime gaps grow sublinearly,
+\[
+\phi(G)=0.
 \]
 
 \subsection{Zero density with large fluctuations}
 
-Select digits at factorial indices:
-
-\[
-n_j = j!.
-\]
-
-Then $\eta(G)=0$ and
-
+Select positions at factorial indices $n_j=j!$. Then $\eta(G)=0$ and
 \[
 \frac{g_j}{n_j} = j,
 \qquad
-\phi(G) = \infty.
+\phi(G)=\infty.
 \]
+This is the canonical example of zero density with unbounded relative gaps.
 
-\subsection{Oscillating density example}
+\subsection{Oscillating density}
 
-Expose digits in blocks
-
+Select digits in alternating blocks of growing size:
 \[
-D^{2^0}K^{2^0}D^{2^1}K^{2^1}D^{2^2}K^{2^2}\cdots
+D^{2^0} K^{2^0} D^{2^1} K^{2^1} D^{2^2} K^{2^2} \cdots.
 \]
-
-Then the density oscillates between near zero and near one. One obtains
-
+The density oscillates between values near $0$ and $1$, yielding
 \[
-\eta(G) = 0,
+\eta(G)=0,
 \qquad
-\phi(G) = \infty.
+\phi(G)=\infty.
 \]
-
-These examples show that $\eta$ and $\phi$ capture independent aspects of
-asymptotic selector behavior.
+These examples demonstrate that $\eta$ and $\phi$ capture fundamentally
+different aspects of long range selector behavior.
 
 \section{Robustness and Discontinuity}
 
-The invariants $\eta$ and $\phi$ are robust under finite tail modifications
-beyond any fixed prefix, but they are maximally discontinuous in the product
-topology. The following examples demonstrate this behavior.
+The invariants $\eta$ and $\phi$ are invariant under tail changes that occur
+beyond any fixed prefix. This robustness follows from their asymptotic
+definitions. At the same time, both invariants are maximally discontinuous
+with respect to the product topology.
 
-\subsection{Lower asymptotic density}
+\subsection{Robustness}
 
-Let $G$ satisfy $\eta(G)=0$. Define $G_k$ by copying the first $k$ symbols of
-$M$ and then exposing digits at all later positions. Then
-
+If $G$ and $G'$ agree on all sufficiently large indices, then
 \[
-\eta(G_k) = 1
-\quad\text{for all } k,
+\eta(G)=\eta(G'),
+\qquad
+\phi(G)=\phi(G').
 \]
+Thus both invariants depend only on the tail of the selector.
 
-yet $G_k \to G$ in the product topology. This shows that $\eta$ is not upper
-semicontinuous and exhibits strong discontinuity.
+\subsection{Discontinuity of density}
 
-\subsection{Relative gap growth}
-
-Let $G$ have evenly spaced selected digits, so $\phi(G)=0$. Modify the tail of
-$M$ in $G_k$ by inserting a single gap of length $\ell_k \to \infty$. Then
-
+Let $G$ satisfy $\eta(G)=0$. Define $G_k$ by matching $G$ on $[0..k]$ and
+setting $M(n)=D$ for all $n>k$. Then $G_k \to G$ in the product topology, yet
 \[
-\phi(G_k) = \infty
-\quad\text{for all } k,
+\eta(G_k)=1.
 \]
+Thus $\eta$ is not upper semicontinuous and is discontinuous at every point.
 
-and again $G_k \to G$ in the product topology. This demonstrates
-discontinuity of $\phi$.
+\subsection{Discontinuity of relative gap growth}
+
+Let $G$ have bounded gaps so that $\phi(G)=0$. Modify $G_k$ by inserting a
+single gap of length $\ell_k \to \infty$ beyond index $k$. Then $G_k \to G$
+but
+\[
+\phi(G_k)=\infty.
+\]
+Thus $\phi$ is also maximally discontinuous.
 
 \subsection{No possibility of continuity}
 
-Consider $G_k$ selecting $D$ at a single position $k$ and $G$ selecting $D$ at
-no positions. Then $G_k \to G$, yet $\eta(G_k) = 1/k$ while
-$\eta(G)=0$, and similarly for fluctuation. Both invariants fail continuity in
-the strongest possible sense.
+If $G_k$ selects $D$ at a single position $k$ and $G$ selects $D$ nowhere, then
+$G_k\to G$ yet
+\[
+\eta(G_k)=\frac{1}{k},
+\qquad
+\eta(G)=0.
+\]
+Similar discontinuities occur for $\phi$. Both invariants therefore exhibit the
+strongest possible failure of continuity in the product topology.
 
 \section{Extended Invariants Inside Collapse Fibers}
 
-Since invariants depend only on the selector, each fiber contains identities
-with all allowable invariant values.
+Because invariants depend only on the selector, every collapse fiber contains
+identities with the full range of invariant values permitted by symbolic
+constraints.
 
-\subsection{Arbitrary density in a fiber}
+\subsection{Arbitrary density inside a fiber}
 
-Fix $\alpha \in [0,1]$. Construct a selector $M$ with $\eta(M)=\alpha$ and
-place the digits of $x$ at selected positions. This yields a generative
-identity in $\mathcal{F}(x)$ with invariant $\eta=\alpha$.
+For any $\alpha \in [0,1]$, construct a selector with $\eta(G)=\alpha$ and
+place the canonical digits of $x$ at selected positions. The resulting identity
+lies in $\mathcal{F}(x)$ with density $\alpha$.
 
-\subsection{Arbitrary fluctuation in a fiber}
+\subsection{Arbitrary fluctuation inside a fiber}
 
-Fix $\beta \in [0,\infty]$. Construct a selector with $\phi=\beta$ and again
-place the digits of $x$ at selected positions. This produces an identity with
-the desired fluctuation inside $\mathcal{F}(x)$.
+For any $\beta \in [0,\infty]$, construct a selector with $\phi(G)=\beta$ and
+assign the digits of $x$ at selected indices. This yields an identity in
+$\mathcal{F}(x)$ with fluctuation $\beta$.
 
 \subsection{Simultaneous control}
 
-Given any $(\alpha,\beta)$ in the invariant plane, build a selector realizing
-both values and place the digits of $x$ accordingly. Thus each collapse fiber
-maps to a substantial region in $(\eta,\phi)$ space.
+Given any pair $(\alpha,\beta)$ in the invariant plane, build a selector
+realizing both $\eta=\alpha$ and $\phi=\beta$, and place the digits of $x$
+accordingly. Collapse fibers therefore project onto substantial regions of the
+invariant plane.
 
 \section{Summary}
 
-This appendix presented explicit examples illustrating the full range of
-possible values for the robust asymptotic invariants $\eta$ and $\phi$, as
-well as slice based geometric interpretations that clarify how selectors
-populate the generative space. Vertical slices represent finite symbolic
-prefixes, horizontal slices represent long term invariant values, and fiber
-slices reveal the symbolic variety compatible with a fixed collapsed value.
-These perspectives support the broader conclusion that collapse conceals the
-vast majority of generative structure.
+This appendix illustrated the geometry of the extended invariants
+$\eta$ and $\phi$ and their interaction with vertical slices, horizontal
+slices, and collapse fibers. Vertical slices capture finite prefix structure,
+horizontal slices capture asymptotic selector behavior, and fiber slices reveal
+the symbolic variety compatible with a fixed collapsed value. These viewpoints
+explain why collapse reveals only a small part of a generative identity and
+why finite observation cannot constrain its asymptotic structure.

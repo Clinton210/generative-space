@@ -1,31 +1,30 @@
 \chapter*{Part III Summary}
 
 Part III develops the theory of structural projections, which formalize how
-continuous observers extract information from generative identities.  
-A structural projection is any continuous real valued functional on the
-generative space.  
-Such observers depend only on finite prefixes of an identity at any fixed
-precision, and this finite information principle is captured by computable
-dependency bounds.
+continuous observers extract information from generative identities. A
+structural projection is a continuous real valued functional on the generative
+space. Such observers depend only on finite symbolic information at any fixed
+precision, and this finite information principle is expressed through
+computable dependency bounds.
 
-Dependency bounds provide explicit control over the amount of symbolic data
-required to determine the value of an observer within a given error.  
-This leads to prefix stabilization, which states that once two identities
-agree on a sufficiently long prefix, all observers in a finite family must
-agree on their values to within any chosen tolerance.  
-Tail modification beyond this prefix has no effect on the output of the
-observers.
+A dependency bound specifies how long a prefix must be inspected in order to
+guarantee a desired accuracy. This yields prefix stabilization. Whenever two
+identities agree on a prefix that is long enough for a family of observers,
+their values under all observers in that family differ by less than the
+prescribed tolerance. Changes made beyond that prefix are invisible to every
+observer in the family.
 
-Different observers impose different finite constraints on generative
-identities.  
-These constraints may conflict in a single prefix, producing projective
-incompatibility.  
-For example, one observer may require frequent digit exposures, while another
-requires long gaps.  
-Such conflicts show that no finite prefix can simultaneously satisfy all
-structural demands and provide the combinatorial mechanism that allows
-controlled divergence inside collapse fibers.
+Different projections impose different prefix requirements. These requirements
+may be incompatible when combined. One observer may force exposure of digits
+at regular intervals, while another may require periods of suppression to
+achieve its value. Such incompatibilities demonstrate that finite prefix
+constraints cannot fully control the internal structure of identities inside a
+collapse fiber. The symbolic freedom that remains outside these constraints is
+what allows controlled divergence of identities while preserving classical
+value.
 
-Part III therefore establishes the observational limits imposed by
-continuity, provides the finite information tools that govern the behavior of
-observers, and sets the stage for the diagonalizer construction in Part IV.
+Part III establishes the fundamental limits of continuous observation. It
+presents the dependency bound machinery, develops prefix stabilization, and
+identifies the sources of projective incompatibility. These tools form the
+technical foundation for the mimicry and diagonalization arguments carried out
+in Part IV.

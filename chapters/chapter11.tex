@@ -3,25 +3,33 @@
 
 \section{Introduction}
 
-The collapse map records the classical real value determined by a generative
-identity, but collapse does not reveal the internal structure of the selector
-stream. Part IV established that no finite collection of continuous observers
-can recover this structure. In this chapter we introduce two extended
-invariants that capture large scale features of selector behavior: the
-asymptotic density of exposed digits and the fluctuation index of successive
-gaps.
+The collapse map records only the classical real value determined by a
+generative identity.  
+It does not reveal the large scale structure of the selector stream.  
+Part II established that continuous observers depend on finite prefixes at any
+fixed precision, and Part IV showed that this restriction prevents observers
+from detecting tail-dependent behavior.
 
-Both invariants depend only on the selector stream and measure its
-asymptotic behavior. They are tail dependent and therefore invisible to any
-fixed finite observer. Their extreme sensitivity to tail modification is a
-consequence of the product topology on $\mathcal{X}$: agreement on long
-prefixes imposes no restrictions on long term behavior. As a result, both
-invariants are discontinuous everywhere and take all admissible values inside
-any nonempty open set.
+In this chapter we introduce two extended invariants that describe global
+aspects of selector geometry:
+
+\begin{itemize}
+    \item the asymptotic density $\eta(G)$ of selected digits, and
+    \item the fluctuation index $\phi(G)$, which measures the relative scale of
+    successive gaps between selected positions.
+\end{itemize}
+
+Both invariants depend only on the selector layer.  
+They ignore finite prefixes and are sensitive only to tail behavior.  
+Consequently they are discontinuous everywhere in the product topology of
+$\mathcal{G}$ and take all admissible values inside every nonempty open set.
+These invariants illustrate the asymptotic freedom that survives inside collapse
+fibers and that remains invisible to any finite observer.
 
 \section{Asymptotic Density}
 
-Let $G = (M,D,K)$ be a generative identity. Define the indicator
+Let $G=(M,D,K)$ be a generative identity.  
+Define the indicator
 \[
 \chi_{M}(n)
 =
@@ -30,134 +38,150 @@ Let $G = (M,D,K)$ be a generative identity. Define the indicator
 0 & \text{if } M(n)=K.
 \end{cases}
 \]
-The asymptotic density (or balance) of $G$ is the lower limit
+The asymptotic density of $G$ is the lower limit
 \[
 \eta(G)
 =
 \liminf_{N\to\infty}
 \frac{1}{N}\sum_{n=0}^{N-1}\chi_{M}(n).
 \]
-This invariant measures the long term frequency of exposed digits. Positive
-values correspond to selectors with sustained exposure, while $\eta(G)=0$
-indicates arbitrarily long intervals of nonselection.
+
+This quantity measures how frequently digits are exposed in the long run.
+Positive density indicates persistent exposure, while $\eta(G)=0$ signals that
+arbitrarily long intervals of nonexposure occur.
 
 \subsection{Basic properties}
 
-The quantity $\eta(G)$ has two simple features:
+The invariant $\eta(G)$ has two basic features:
+
 \begin{itemize}
     \item it depends only on the selector stream $M$,
-    \item it is invariant under modifications of $M$ beyond any finite prefix.
+    \item it is unchanged by modifying $M$ beyond any finite index.
 \end{itemize}
-Thus $\eta$ is an extended invariant that captures structure outside the reach
-of the collapse map.
+
+Thus $\eta$ is a tail invariant.  
+It captures large scale structure that cannot be detected by collapse or by any
+finite family of continuous observers.
 
 \section{Fluctuation Index}
 
 Let
 \[
-0 \le n_{0} < n_{1} < n_{2} < \dots
+0 \le n_0 < n_1 < n_2 < \cdots
 \]
-be the positions where $M(n)=D$. Define the successive gaps
+be the indices at which $M$ exposes digits.  
+Define the successive gaps
 \[
-g_{j} = n_{j+1} - n_{j}.
+g_j = n_{j+1} - n_j.
 \]
-The fluctuation index of $G$ is the upper limit
+
+The fluctuation index of $G$ is the quantity
 \[
 \phi(G)
 =
-\limsup_{j\to\infty}\frac{g_{j}}{n_{j}}.
+\limsup_{j\to\infty} \frac{g_j}{n_j}.
 \]
-The ratio $g_{j}/n_{j}$ measures the scale adjusted size of the gap following
-the $j$th selected digit. Large values indicate that the selector permits long
-intervals of nonselection relative to position.
+
+The ratio $g_j/n_j$ measures the size of the next gap relative to position.
+A large value indicates that the selector allows long stretches of inactivity.
+Finite values arise when gaps grow at most linearly, while $\phi(G)=\infty$
+occurs when gaps grow superlinearly.
 
 \subsection{Basic properties}
 
-Like $\eta$, the fluctuation index depends only on the selector stream and is
-unchanged by tail modifications that preserve the selected positions. Positive
-density selectors often yield small fluctuation. Sparse selectors can produce
-arbitrarily large fluctuation.
+Like $\eta$, the invariant $\phi$ depends only on the selector layer.
+Tail modification that preserves the selected positions eventually leaves
+$\phi$ unchanged.  
+Sparse selectors (for example $n_j = j!$ or $n_j = 2^{2^j}$) can produce
+arbitrarily large fluctuation indices.
 
 \section{Asymptotic Sensitivity and Nowhere Continuity}
 
-Asymptotic invariants on symbolic streams are almost never continuous in the
-product topology. Agreement on finite prefixes places no constraints on tail
-behavior. The invariants $\eta$ and $\phi$ illustrate this phenomenon sharply:
-both are discontinuous at every point.
+The product topology on $\mathcal{G}$ constrains only finite prefixes.  
+The tail may vary arbitrarily inside any nonempty open set.  
+As a result, asymptotic invariants such as $\eta$ and $\phi$ are discontinuous
+everywhere.
 
 \begin{theorem}[Nowhere continuity of $\eta$]
 \label{thm:eta-nowhere}
-Let $U$ be a nonempty basic open set in $\mathcal{X}$. For every $\alpha$ in
-$[0,1]$ there exists an identity $G$ in $U$ with $\eta(G)=\alpha$.
+Let $U$ be a nonempty basic open set in $\mathcal{G}$.  
+For every $\alpha\in[0,1]$ there exists an identity $G\in U$ such that
+$\eta(G)=\alpha$.
 \end{theorem}
 
 \begin{proof}
-Let $U$ be determined by a prefix $w$ of length $N$. Extend $w$ by constructing
-a selector tail whose asymptotic density equals $\alpha$. For rational
-$\alpha$ one may use a periodic sequence; for irrational $\alpha$ one may use
-a Sturmian sequence. The prefix contributes a bounded amount to the average,
-which vanishes as $N\to\infty$, so the full selector has asymptotic density
-$\alpha$.
+Let $U$ be determined by a selector prefix $w$ of length $N$.  
+Extend $w$ by appending a tail with asymptotic density $\alpha$.  
+A periodic tail yields rational $\alpha$; a Sturmian or balanced sequence yields
+irrational $\alpha$.  
+The prefix contributes $O(1/N)$ to the average, which vanishes in the limit.
+Thus the full selector has density $\alpha$.
 \end{proof}
 
 \begin{theorem}[Nowhere continuity of $\phi$]
 \label{thm:phi-nowhere}
-Let $U$ be a nonempty basic open set in $\mathcal{X}$. For every $\beta$ in
-$[0,\infty]$ there exists an identity $G$ in $U$ with $\phi(G)=\beta$.
+Let $U$ be a nonempty basic open set in $\mathcal{G}$.  
+For every $\beta\in[0,\infty]$ there exists an identity $G\in U$ with
+$\phi(G)=\beta$.
 \end{theorem}
 
 \begin{proof}
-Let $U$ be determined by a prefix of length $N$. To obtain $\phi(G)=0$ select
-every position beyond $N$. To obtain a finite $\beta>0$ place selected digits
-at positions approximately satisfying $n_{j+1}\approx(1+\beta)n_{j}$. To
-obtain $\beta=\infty$ let $n_{j}=j!$ for large $j$. In all cases the prefix is
-respected and the tail determines the fluctuation index.
+Let $U$ be determined by a prefix of length $N$.  
+To obtain $\phi(G)=0$, expose every position beyond $N$.  
+For finite $\beta>0$, choose $(n_j)$ satisfying
+$n_{j+1}\approx(1+\beta)n_j$.  
+To obtain $\beta=\infty$, set $n_j=j!$ for large $j$.  
+In each case the prefix is preserved and the tail determines the fluctuation
+index.
 \end{proof}
 
-These results show that $\eta$ and $\phi$ vary freely inside any open set.
-The invariants are asymptotically sensitive: arbitrarily small changes in the
-prefix leave room for arbitrary changes in the tail, and therefore arbitrary
-values of the invariants.
+Both invariants therefore realize all admissible values inside any nonempty
+open set.  
+Their sensitivity to tail structure reflects the fundamental disconnect between
+finite-prefix topology and asymptotic geometry.
 
 \section{Extended Invariants Inside Collapse Fibers}
 
-Collapse fibers contain identities with widely varying selector behavior. Fix
-a real number $x$. The fiber $\mathcal{F}(x)$ contains identities with:
+Collapse fibers contain identities with arbitrarily varied selector behavior.
+Fix $x\in[0,1]$.  
+The fiber $\mathcal{F}(x)$ contains identities with:
+
 \begin{itemize}
-    \item every possible asymptotic density in $[0,1]$,
-    \item every possible fluctuation index in $[0,\infty]$.
+    \item every asymptotic density $\alpha\in[0,1]$,
+    \item every fluctuation index $\beta\in[0,\infty]$.
 \end{itemize}
 
-This follows by combining tail freedom inside collapse fibers with the
-constructions of Theorems \texttt{\ref{thm:eta-nowhere}} and
-\texttt{\ref{thm:phi-nowhere}}. Any selector stream with infinitely many
-selected positions can be combined with the canonical digits of $x$ to create
-a valid identity in the fiber. Thus extended invariant values occur densely
-throughout the fiber.
+To see this, combine tail freedom inside the fiber
+(Chapter~\ref{chap:alignment-sewing}) with the constructions of
+Theorems~\ref{thm:eta-nowhere} and \ref{thm:phi-nowhere}.  
+Given any selector tail achieving the desired invariant value, alignment and
+tail sewing allow it to be combined with the collapse coordinate of $x$ while
+preserving membership in the fiber.
+
+Thus extended invariants vary freely inside collapse fibers.
 
 \section{Interpretation}
 
-The extended invariants $\eta$ and $\phi$ quantify aspects of generative
-structure invisible to collapse. They are determined entirely by the tail and
-are unaffected by finite-prefix perturbations. This aligns with the
-indistinguishability principle of Chapter
-\texttt{\ref{chap:indistinguishability}}: finite observers detect only finite
-prefixes and cannot see the asymptotic features described by $\eta$ and
-$\phi$.
+The invariants $\eta$ and $\phi$ measure large scale selector behavior and are
+invisible to finite observers.  
+They depend exclusively on tail geometry.  
+Their nowhere continuity expresses the fact that the product topology governs
+finite observation, while these invariants measure infinite scale structure.
 
-The discontinuity of these invariants therefore reflects a deep mismatch
-between the product topology and the asymptotic geometry of the selector
-stream. The product topology governs finite observation. The extended
-invariants measure infinite scale structure.
+This aligns with the indistinguishability theorem of
+Chapter~\ref{chap:indistinguishability}.  
+Finite observers see only finite prefixes and cannot detect the asymptotic
+features encoded by $\eta$ and $\phi$.
 
 \section{Summary}
 
-The asymptotic density $\eta$ and the fluctuation index $\phi$ are extended
-invariants that describe large scale features of selector behavior. Both are
-determined by the tail of the selector stream and are discontinuous at every
-point of $\mathcal{X}$. Within any open set, all admissible invariant values
-occur.
+The asymptotic density $\eta$ and fluctuation index $\phi$ are extended
+invariants that detect global selector geometry beyond the reach of collapse
+and continuous observation.  
+Both are tail dependent, both are discontinuous everywhere, and both take all
+admissible values inside any open set.  
+Collapse fibers contain identities with arbitrary extended invariant values,
+demonstrating the asymptotic richness of generative structure.
 
-These invariants illustrate the asymptotic richness that survives inside
-collapse fibers and motivate the geometric study of invariant pairs in the
-next chapter.
+These invariants prepare the ground for the geometric study of invariant pairs
+developed in the next chapter.

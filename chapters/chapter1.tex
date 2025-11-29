@@ -2,23 +2,24 @@
 
 \section{Introduction}
 
-The Generative Identity Framework begins by treating real numbers not as
-primitive points on the continuum, but as the collapsed shadows of richer
-symbolic mechanisms.  
-A \emph{generative identity} consists of three infinite sequences working in
-parallel: a selector stream, a digit stream, and a meta-information stream.
-Only fragments of these sequences determine the classical real number; the
-remainder encode additional structure that becomes invisible after collapse.
+The Generative Identity Framework begins with an ambient symbolic space in
+which each real number is realized as the collapse of a richer internal
+structure.  
+A generative identity is not a single sequence but a triple of coordinated
+layers.  
+Only one of these layers contributes directly to the classical real number
+obtained after collapse.  
+The remaining layers encode additional structure that becomes invisible to
+classical observers.
 
-The purpose of this chapter is to formally describe the ambient space in
-which these identities live.  
-We define the generative space as a Cantor-like product of symbolic layers,
-introduce its effective (computable) core, and establish the topological
-principles that underlie collapse, reconstruction, and structural
-incompleteness.
+This chapter introduces the generative space, establishes its topological
+properties, and identifies its effective core.  
+These foundations form the geometric setting for the collapse map developed
+in Chapter~\ref{chap:collapse-map}, where classical magnitude is extracted
+from internal symbolic data.
 
-Throughout, we fix a base $b \ge 2$ for numeral expansion, and we assume
-$\Sigma$ is a finite meta-alphabet.
+Throughout, we fix a base $b \geq 2$ for numeral expansions and a finite
+meta-alphabet $\Sigma$.
 
 \section{Definition of the Generative Space}
 
@@ -28,143 +29,137 @@ G = (M, D, K),
 \]
 where:
 \begin{itemize}
-    \item $M \in \{D,K\}^{\mathbb{N}}$ is the \emph{selector stream},
-          indicating at each position whether the mechanism exposes a digit
-          or a meta-symbol;
-
-    \item $D \in \{0,1,\ldots,b-1\}^{\mathbb{N}}$ is the \emph{digit stream},
-          an infinite reservoir from which classical digits are selected when
-          $M(n) = D$;
-
-    \item $K \in \Sigma^{\mathbb{N}}$ is the \emph{meta-information stream},
-          carrying auxiliary symbolic structure not visible to the classical
-          collapse.
+    \item $M \in \{D,K\}^{\mathbb{N}}$ is the \emph{selector stream};
+    \item $D \in \{0,1,\ldots,b-1\}^{\mathbb{N}}$ is the \emph{digit stream};
+    \item $K \in \Sigma^{\mathbb{N}}$ is the \emph{meta-information stream}.
 \end{itemize}
 
-Each coordinate is a sequence over a finite alphabet equipped with the
-discrete topology.  
-The generative space is the product
+Each layer is equipped with the discrete topology on its alphabet, and the
+ambient generative space is the product
 \[
-\mathcal{X}
+\mathcal{G}
   = \{D,K\}^{\mathbb{N}}
     \times \{0,1,\ldots,b-1\}^{\mathbb{N}}
-    \times \Sigma^{\mathbb{N}},
+    \times \Sigma^{\mathbb{N}}
 \]
-endowed with the product (Cantor) topology.  
-Basic open sets are determined by finite prefixes of the three streams.
+with the product (Cantor) topology.  
+Basic open sets are determined by finite prefixes of the three layers.
+This aligns with the usual treatment of represented spaces and infinite
+symbolic products in computable analysis  
+\cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}.
 
-This topology reflects the principle that every observation of a generative
-identity accesses only finitely many symbols from each layer.
+The topology reflects the principle that an observer may inspect only
+finitely many symbols from each coordinate.
 
-\section{The Canonical Output}
+\section{Digit-Producing Identities}
 
-Although a generative identity contains three infinite sequences, only the
-selector and digit layers contribute to the production of the classical digit
-sequence.  
-Define the \emph{canonical output} of $G$ as the infinite sequence
+Collapse will be defined through the positions at which $M$ selects digits.
+For this mechanism to produce an infinite classical expansion, the selector
+layer must designate digit positions infinitely often.
+
+\begin{definition}[Digit-Producing Identity]
+A generative identity $G$ is \emph{digit-producing} if
 \[
-X(G) = (d_G(j))_{j=0}^\infty,
+\{\, n : M(n) = D \,\}
 \]
-where $d_G(j)$ is the $j$th digit encountered among the positions $n$ with
-$M(n) = D$, read in order.
+is infinite.
+\end{definition}
 
-Formally, let
+The set of digit-producing identities is the subspace
 \[
-n_0 < n_1 < n_2 < \cdots
+\mathcal{G}^*
+  = \{\, G \in \mathcal{G} : M(n) = D \text{ for infinitely many } n \,\}.
 \]
-be the increasing sequence of indices at which $M(n_k) = D$.  
-Then
+
+It is closed under finite modification of any layer, and it is dense in each
+cylinder defined by the meta and digit streams.  
+Every element of $\mathcal{G}^*$ generates an infinite sequence of classical
+digits and therefore a well-defined real number once the collapse map is
+introduced.
+
+\section{The Collapse Coordinate}
+
+Let $G = (M, D, K) \in \mathcal{G}^*$.  
+List the positions at which the selector exposes a digit:
 \[
-d_G(j) = D(n_j).
+n_0 < n_1 < n_2 < \cdots,
+\qquad M(n_j) = D.
 \]
 
-If $M$ selects digits only finitely often, the canonical output is finite.
-Since classical real numbers require infinite expansions, we restrict our
-attention to a natural subspace.
-
-\section{The Digit-Selecting Subspace}
-
-Define the \emph{digit-selecting subspace}
+\begin{definition}[Collapse Coordinate]
+The collapse coordinate of $G$ is the infinite sequence
 \[
-\mathcal{X}^*
-  = \{\, G \in \mathcal{X} : M \text{ selects } D \text{ infinitely often}\,\}.
+X(G) = \bigl(D(n_j)\bigr)_{j=0}^\infty \in \{0,\ldots,b-1\}^{\mathbb{N}}.
 \]
+\end{definition}
 
-This subspace is closed under finite modifications and is topologically large
-within $\mathcal{X}$.  
-Every element of $\mathcal{X}^*$ yields an infinite canonical output sequence
-and therefore a well-defined classical real number after collapse.
+Only the selector and digit layers influence the collapse coordinate.  
+The meta-information layer plays no direct role in determining the classical
+value.  
+In later chapters, this asymmetry between the visible and invisible layers
+drives the phenomena of structural incompleteness.
 
 \section{The Effective Core}
 
-The framework distinguishes between arbitrary symbolic identities and those
-that are computably generated.  
-A generative identity $G = (M,D,K)$ is \emph{computable} if each of the
-streams $M$, $D$, and $K$ is a computable function
-$\mathbb{N} \to \{D,K\}$, $\mathbb{N} \to \{0,\ldots,b-1\}$,
-and $\mathbb{N} \to \Sigma$, respectively.
+Computable analysis views infinite symbolic objects as functions
+$\mathbb{N} \to \Gamma$ for a finite alphabet $\Gamma$.  
+Following standard conventions  
+\cite{WeihrauchComputableAnalysis, PaulyRepresentedSpaces}, each layer of a
+generative identity may be treated as a point of Baire or Cantor space.
 
-The \emph{effective core} of the generative space is the set
+\begin{definition}[Effective Core]
+The \emph{effective core} of the generative space is
 \[
 \mathcal{G}_{\mathrm{eff}}
-  = \{\, G \in \mathcal{X} : M,D,K \text{ are computable}\,\}.
+  = \{\, G = (M,D,K) \in \mathcal{G} :
+        M, D, K \text{ are computable sequences} \,\}.
 \]
+\end{definition}
 
-This subset plays a central role in the diagonalization and incompleteness
-results developed later.  
-It forms the computational analogue of the ambient space $\mathcal{X}$ and is
-countable in contrast to the uncountable full product.
+The effective core is countable and forms the computational counterpart to
+the uncountable ambient space $\mathcal{G}$.  
+It plays a central role in selector geometry and in the diagonalization
+arguments developed in Part~\ref{part:incompleteness}.
 
-\section{Worked Examples}
+\section{Examples}
 
-Although the space $\mathcal{X}$ is infinite-dimensional, simple examples
-illustrate the fundamental ideas.
+The following examples illustrate how different internal structures give rise
+to the same or different collapse coordinates.  
+They also demonstrate that the meta-information layer does not influence
+classical magnitude.
 
-\subsection*{Example 1: Alternating Selector}
+\subsection{Uniform Alternation}
 
-Let $M$ alternate deterministically:
+Let
 \[
 M = D,K,D,K,D,K,\ldots,
 \]
-and let $D$ be the digit expansion of a real number $x$ in base $b$ repeated
-infinitely, while $K$ carries arbitrary meta-symbols.
+and let $D$ be the base-$b$ expansion of a real number $x$, repeated
+infinitely often.  
+The meta-layer $K$ is unrestricted.
 
-Then:
-\begin{itemize}
-    \item the canonical output $X(G)$ contains every other digit of $D$,  
-    \item the collapse $\pi(G)$ produces a real number whose expansion consists
-          of the even-indexed digits of $x$.
-\end{itemize}
+Then $X(G)$ is obtained by reading every other digit from $D$.  
+Many distinct choices of the meta-layer and the unused digit positions lead
+to generative identities with the same collapse coordinate.
 
-Different choices of the meta-layer $K$ yield distinct generative identities,
-all collapsing to the same classical value.
+\subsection{Sparse Digit Selection}
 
-\subsection*{Example 2: Null-Density Selector}
-
-Fix a sequence of perfect squares $1,4,9,16,\ldots$ and define
-\[
-M(n) =
-\begin{cases}
-D & \text{if } n \text{ is a perfect square},\\
-K & \text{otherwise}.
-\end{cases}
-\]
-
-The selector exposes digit positions with asymptotic density~$0$.  
-The canonical output still produces an infinite digit sequence, but only at a
-slowly growing rate.  
-This identity collapses to the same real number as the sequence of selected
-digits, despite its extremely sparse structure.
+Let $M(n)=D$ when $n$ is a perfect square and $M(n)=K$ otherwise.  
+The set of digit positions has asymptotic density zero, yet it is infinite.
+Thus $G$ lies in $\mathcal{G}^*$ and produces the classical digit sequence
+formed by sampling $D$ along the perfect squares.  
+The meta-layer again contributes no information to the value of $X(G)$.
 
 \section{Summary}
 
-The generative space $\mathcal{X}$ is a symbolic product space rich enough to
-encode both the visible and invisible structure of real numbers.  
-Its effective core $\mathcal{G}_{\mathrm{eff}}$ provides a computationally
-tractable subspace with deep descriptive complexity.  
-Every generative identity in $\mathcal{X}^*$ yields a canonical output and,
-through it, a classical real number.
+The generative space $\mathcal{G}$ is a Cantor-like symbolic product capable
+of encoding deep internal structure.  
+Its digit-producing subspace $\mathcal{G}^*$ supports a well-defined collapse
+coordinate for each identity.  
+The effective core $\mathcal{G}_{\mathrm{eff}}$ identifies those structures
+that are computably realizable and forms the basis for the computational
+arguments developed later.
 
-In the next chapter, we define the collapse map that translates these
-identities into points of the continuum, initiating the central dichotomy
-between internal structure and classical magnitude.
+In Chapter~\ref{chap:collapse-map} we introduce the collapse map itself and
+describe how classical real numbers arise as projections of generative
+identities.

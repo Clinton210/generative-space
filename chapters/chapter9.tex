@@ -4,171 +4,182 @@
 \section{Introduction}
 
 Collapse fibers $\mathcal{F}(x)$ contain uncountably many generative identities
-that encode the same classical real number. Earlier chapters established that
-computable structural projections---the observers of the framework---depend
-only on finitely many generative coordinates when queried at any fixed
-precision. Each observer sees only a finite window into an identity.
+that share the same collapse coordinate.  
+Earlier chapters established that each computable structural projection depends
+only on a finite prefix of an identity when queried at any fixed precision.
+Thus every observer sees only a bounded initial window of the generative
+structure.
 
-This chapter proves the central incompleteness phenomenon of the generative
-framework: \emph{finite observation cannot recover generative structure}.
-We construct a computable identity inside the effective fiber of a computable
-real $x$ that is generically different from a fixed reference identity, yet
-simulates it so precisely that no computable structural projection can
-distinguish them.
+In this chapter we prove the central incompleteness phenomenon of the
+generative framework:
 
-Unlike classical diagonalization---which builds an object designed to
-\emph{evade} a list of properties---our construction builds an object that
-\emph{mimics} a given reference. By satisfying the finite-prefix requirements
-of every observer in an effective enumeration, we show that internal
-generative information (selector geometry, meta-information, tail structure)
-is fundamentally invisible to finitary analysis.
+\begin{quote}
+\emph{Finite continuous observation cannot recover generative structure.}
+\end{quote}
+
+We show that for any computable identity $H$ in the effective fiber of a
+computable real $x$, there exists another computable identity $G^\sharp$ in the
+same fiber such that no computable structural projection can distinguish them.
+The identity $G^\sharp$ differs from $H$ on infinitely many coordinates, yet
+simulates $H$ so closely that every computable observer assigns them the same
+value.
+
+Unlike classical diagonalization, which constructs an object that avoids a list
+of properties, our method imitates a reference identity.  
+For every observer in an effective enumeration, the construction freezes
+agreement on a sufficiently long prefix, then modifies the tail to enforce
+distinctness while remaining inside the collapse fiber.
 
 \section{Setup}
 
-Fix a computable real number $x$ and a computable identity
+Fix a computable real $x$ and choose a computable reference identity
 \[
-H \in \mathcal{F}_{\mathrm{eff}}(x)
+H \in \mathcal{F}_{\mathrm{eff}}(x).
 \]
-that will serve as our reference.  
+
 Let
 \[
-\{\Phi_k\}_{k \in \mathbb{N}}
+\{\Phi_k\}_{k\in\mathbb{N}}
 \]
-be an effective enumeration of all computable secondary projections on
-$\mathcal{G}_{\mathrm{eff}}$, each equipped with a computable dependency bound
-$B_k(\varepsilon)$ as in Chapter~\ref{chap:dependency-bounds}.
+be an effective enumeration of all computable structural projections on
+$\mathcal{G}_{\mathrm{eff}}$, each with a computable dependency bound
+$B_k(\varepsilon)$ as described in Chapter~\ref{chap:prefix-stabilization}.
 
 Our goal is to construct a computable identity
 \[
-G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x),
-\qquad
-G^\sharp \neq H,
+G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x), \qquad G^\sharp \neq H,
 \]
 such that for every $k$,
 \[
-\lim_{k \to \infty}
-\bigl|\Phi_k(G^\sharp) - \Phi_k(H)\bigr| = 0.
+\Phi_k(G^\sharp) = \Phi_k(H).
 \]
 
-In fact, we will achieve the stronger property
+We achieve this by ensuring the stronger condition
 \[
-\bigl|\Phi_k(G^\sharp) - \Phi_k(H)\bigr|
-< \varepsilon_k,
+|\Phi_k(G^\sharp) - \Phi_k(H)| < \varepsilon_k,
 \qquad
-\varepsilon_k = 2^{-(k+1)},
+\varepsilon_k = 2^{-(k+1)}.
 \]
-for each $k$.
 
-Thus $G^\sharp$ lies arbitrarily close to $H$ from the perspective of every
-computable observer, yet differs from $H$ at infinitely many positions.
+\section{Effective Non-Isolation in the Fiber}
 
-\section{Distinctness in the Effective Fiber}
-
-A key structural fact is that collapse fibers have no isolated points.
+The construction requires the ability to modify the tail of a computable
+identity while remaining inside the same collapse fiber.
 
 \begin{lemma}[Effective Non-Isolation]
-\label{lem:distinct}
-For every computable identity $H \in \mathcal{F}_{\mathrm{eff}}(x)$ and every
-prefix length $N$, there exists a computable identity $A \in \mathcal{F}_{\mathrm{eff}}(x)$ such that
+\label{lem:distinct-effective}
+Let $H \in \mathcal{F}_{\mathrm{eff}}(x)$ be computable and let $N$ be any
+integer.  
+There exists a computable identity $A \in \mathcal{F}_{\mathrm{eff}}(x)$ such
+that
 \[
 A \upharpoonright N = H \upharpoonright N
-\quad\text{and}\quad
+\qquad\text{and}\qquad
 A \neq H.
 \]
 \end{lemma}
 
 \begin{proof}
-Collapse fibers are closed subsets of the ambient Cantor product space, and by
-the alignment and sewing lemmata from Chapter~\ref{chap:alignment}, one may
-modify any generative tail beyond index $N$ while preserving membership in
-$\mathcal{F}(x)$. Since the modifications can be carried out effectively,
-$A$ may be chosen computable.
+Collapse fibers are closed and perfect subsets of the ambient space
+$\mathcal{G}$ (Chapter~\ref{chap:fibers}).  
+By alignment and the tail-sewing constructions of
+Chapter~\ref{chap:alignment-sewing}, the tail of $H$ beyond $N$ may be replaced
+with the tail of any computable identity $A'$ in $\mathcal{F}_{\mathrm{eff}}(x)$
+after a suitable alignment point.  
+This tail replacement preserves membership in the fiber and can be performed
+effectively.  
+Choosing any $A' \neq H$ yields a computable $A$ with the desired properties.
 \end{proof}
 
-This lemma guarantees that we can always introduce genuine generative
-differences beyond any fixed prefix while keeping the collapse value $x$
-unchanged.
+This lemma guarantees that for every finite prefix, there is an effectively
+computable way to enforce divergence beyond that prefix without altering the
+collapse value.
 
 \section{Mimicry Construction}
 
-We construct a sequence
+Define a sequence of computable identities
 \[
-G_0, G_1, G_2, \dots
+G_0, G_1, G_2, \ldots
 \]
-of identities in $\mathcal{F}_{\mathrm{eff}}(x)$ converging to the desired
-limit identity $G^\sharp$.
+that stabilizes coordinatewise.
 
 \subsection{Initialization}
 
-Let $G_0 = H$ and $N_0 = 0$.  
-Set $\varepsilon_k = 2^{-(k+1)}$.
+Let $G_0 = H$ and $N_0 = 0$, and define
+\[
+\varepsilon_k = 2^{-(k+1)}.
+\]
 
 \subsection{Inductive Step}
 
-Assume $G_k$ and $N_k$ are defined.
+Assume $G_k$ and $N_k$ are known.
 
-\paragraph{Step 1: Update the dependency horizon.}
-To ensure that $G_{k+1}$ and $H$ agree with respect to observer $\Phi_k$ at
-precision $\varepsilon_k$, compute
+\paragraph{Step 1: Extend the dependency horizon.}
+
+To ensure agreement on $\Phi_k$ within $\varepsilon_k$, compute
 \[
 L_k = B_k(\varepsilon_k),
 \qquad
 N_{k+1} = \max(N_k, L_k) + 1.
 \]
 
-\paragraph{Step 2: Freeze the prefix.}
-Require
+\paragraph{Step 2: Freeze agreement on the prefix.}
+
+We require
 \[
 G_{k+1} \upharpoonright N_{k+1}
-=
-H \upharpoonright N_{k+1}.
+  = H \upharpoonright N_{k+1}.
 \]
 Any extension of this prefix automatically satisfies
 \[
-\bigl|\Phi_k(G_{k+1}) - \Phi_k(H)\bigr| < \varepsilon_k.
+|\Phi_k(G_{k+1}) - \Phi_k(H)| < \varepsilon_k.
 \]
 
-\paragraph{Step 3: Force distinctness.}
-Apply Lemma~\ref{lem:distinct} to obtain a computable identity
-$A_k \in \mathcal{F}_{\mathrm{eff}}(x)$ with the same prefix but
-$A_k \neq H$.  
+\paragraph{Step 3: Force divergence.}
+
+Apply Lemma~\ref{lem:distinct-effective} to obtain a computable identity
+$A_k \in \mathcal{F}_{\mathrm{eff}}(x)$ with
+\[
+A_k \upharpoonright N_{k+1} = H \upharpoonright N_{k+1},
+\qquad
+A_k \neq H.
+\]
 Set $G_{k+1} = A_k$.
 
-This ensures both conditions:
+Thus:
 \[
-G_{k+1} \upharpoonright N_{k+1} =
-H \upharpoonright N_{k+1},
+G_{k+1} \upharpoonright N_{k+1} = H \upharpoonright N_{k+1},
 \qquad
 G_{k+1} \neq H.
 \]
 
 \subsection{Existence of the Limit}
 
-Since $N_{k+1} > N_k$ and $G_{k+1}$ agrees with $G_k$ on coordinates
-$0,\dots,N_k$, the sequence $(G_k)$ stabilizes coordinatewise and therefore
-converges in the product topology to a limit identity $G^\sharp$.
+Since $G_{k+1}$ and $G_k$ agree on $[0..N_k]$ and $N_{k+1} > N_k$, the sequence
+$(G_k)$ stabilizes coordinatewise.  
+Thus it converges in the product topology of $\mathcal{G}$ to an identity
+$G^\sharp$.
 
-Each $G_k$ belongs to $\mathcal{F}_{\mathrm{eff}}(x)$, and the fiber is closed
-in the ambient product, so
+Each $G_k$ belongs to $\mathcal{F}_{\mathrm{eff}}(x)$ and the fiber is closed,
+so
 \[
 G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x).
 \]
 
-By construction, $G^\sharp$ differs from $H$ at infinitely many coordinates.
+By construction, differences between $G^\sharp$ and $H$ occur on infinitely
+many coordinates.
 
 \section{The Structural Indistinguishability Theorem}
 
 \begin{theorem}[Structural Indistinguishability]
 \label{thm:indistinguishability}
-Let $x$ be a computable real number and $H \in \mathcal{F}_{\mathrm{eff}}(x)$
-a fixed computable identity.  
+Let $x$ be a computable real and let $H \in \mathcal{F}_{\mathrm{eff}}(x)$ be
+computable.  
 Then there exists a computable identity
 \[
-G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x),
-\qquad
-G^\sharp \neq H,
+G^\sharp \in \mathcal{F}_{\mathrm{eff}}(x), \qquad G^\sharp \neq H,
 \]
-such that for every computable secondary projection $\Phi$,
+such that for every computable structural projection $\Phi$,
 \[
 \Phi(G^\sharp) = \Phi(H).
 \]
@@ -176,47 +187,45 @@ such that for every computable secondary projection $\Phi$,
 
 \begin{proof}
 Fix any computable projection $\Phi_m$.  
-For every $k \ge m$, the construction guarantees that
+For all $k\ge m$, the construction ensures that
 \[
 G_k \upharpoonright N_k = H \upharpoonright N_k
-\quad\text{with}\quad
+\quad\text{and}\quad
 N_k \ge B_m(\varepsilon_k).
 \]
-Hence
+Thus
 \[
-\bigl|\Phi_m(G_k) - \Phi_m(H)\bigr| < \varepsilon_k.
+|\Phi_m(G_k) - \Phi_m(H)| < \varepsilon_k.
 \]
-Taking limits yields
+Taking limits as $k\to\infty$ gives
 \[
 \Phi_m(G^\sharp) = \Phi_m(H).
 \]
-Since $m$ was arbitrary, this equality holds for every computable observer.
-Distinctness follows from the fact that the disagreement positions were forced
-to diverge to infinity.
+Since $m$ was arbitrary, equality holds for all computable structural
+projections.
+Distinctness holds because $G^\sharp$ was forced to disagree with $H$ at
+infinitely many coordinates.
 \end{proof}
 
 \section{Interpretation}
 
-The theorem shows that collapse fibers contain identities that are
-\emph{observationally indistinguishable} from one another under any finite or
-computably infinite battery of observers.
+The theorem establishes that classical observation cannot recover generative
+structure.  
+Continuous observers see only finite prefixes, and any such prefix can be
+simulated perfectly while allowing the tail to diverge arbitrarily.  
+No computable structural projection---no matter how refined its dependence on
+finitely many coordinates—can reconstruct the selector geometry or
+meta-information hidden in the tail.
 
-Observers operate through finite windows; generative differences appear only in
-tails. Thus no finite observation protocol---no matter how extensive the menu
-of computable structural projections---can recover the full generative
-structure of an identity.
-
-In classical analysis, the slogan is:
+In classical descriptive set theory, continuous maps on compact spaces often
+separate points.  
+In the generative framework, the situation is reversed:
 \[
-\text{continuous observers separate points.}
+\text{finite observers distinguish only finite prefixes}.
 \]
-In the generative framework, the slogan is reversed:
-\[
-\text{finite observers see only finite prefixes.}
-\]
-The collapse map destroys structure; structure can be \emph{simulated}
-arbitrarily well inside the fiber.
+Collapse destroys structure, and tail freedom inside the fiber allows
+structure to be imitated.
 
-This establishes the fundamental incompleteness principle of the framework:
-generative information exists in a strict sense but lies beyond the reach of
-classical analytic observation.
+This is the fundamental incompleteness principle of the framework: generative
+information exists, is stable under collapse, but lies permanently beyond the
+reach of computable continuous observation.
